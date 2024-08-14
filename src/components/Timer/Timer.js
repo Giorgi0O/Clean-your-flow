@@ -28,11 +28,7 @@ function Timer() {
     }
   }, [isActive,flowTime, restTime, flow]); 
 
-  const minutes = Math.floor((timeRemaining % 3600) / 60);
-  const seconds = timeRemaining % 60;
-
   const formatTime = () => {
-    const totalSeconds = Math.floor(timeRemaining / 1000);
     const minutes = Math.floor(timeRemaining / 60);
     const seconds = timeRemaining % 60;
   
