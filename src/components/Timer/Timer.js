@@ -40,13 +40,13 @@ function Timer() {
       
       return () => clearInterval(interval);
     }
-  }, [isActive,flowTime, restTime, flow]); 
+  }, [isActive,flowTime, restTime, autoStart,flow]); 
 
   useEffect(() => {
     if (!flow && isRealTime) {
       setTimeOfFlow((prevTime) => prevTime + flowTime);
     }
-  }, [flow, flowTime]);
+  }, [flow, flowTime, isRealTime]);
 
   const formatTime = (milliseconds) => {
     const minutes = Math.floor(milliseconds / 60);
@@ -74,7 +74,7 @@ function Timer() {
   return (
     <div className='timer'>
       {
-        timeOfFlow != 0 &&
+        timeOfFlow !== 0 &&
         <p> tempo di focus : {formatTime(timeOfFlow)} </p>
       }
       {
@@ -89,7 +89,7 @@ function Timer() {
       
       <div>
         { 
-          timeRemaining != flowTime &&
+          timeRemaining !== flowTime &&
           <button className="refresh-button" onClick={refresh}>
             <FaSync size={24} ></FaSync>
           </button>
