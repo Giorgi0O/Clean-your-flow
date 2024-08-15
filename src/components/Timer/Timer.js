@@ -8,11 +8,16 @@ function Timer() {
 
   const flowTime = 15;
   const restTime = 5;
+
+  /* STATE */
   const [isActive, setIsActive] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(flowTime);
-  const [autoStart, setAutoStart] = useState(false);
-
   const [flow, setFlow] = useState(true);
+  const [autoStart, setAutoStart] = useState(false);
+  const [timeOfFlow, setTimeOfFlow] = useState(0);
+  const [isRealTime, setIsRealTime] = useState(false);
+
+
 
   useEffect(() => {
     if( isActive ){
@@ -20,6 +25,7 @@ function Timer() {
         setTimeRemaining( (secondsLeft) => {
           if(secondsLeft === 0){
             setFlow(!flow);
+            setIsRealTime(true);
             var nextTime  = flow ? restTime: flowTime;
             if( !autoStart ){
               setIsActive(false);
@@ -36,9 +42,15 @@ function Timer() {
     }
   }, [isActive,flowTime, restTime, flow]); 
 
-  const formatTime = () => {
-    const minutes = Math.floor(timeRemaining / 60);
-    const seconds = timeRemaining % 60;
+  useEffect(() => {
+    if (!flow && isRealTime) {
+      setTimeOfFlow((prevTime) => prevTime + flowTime);
+    }
+  }, [flow, flowTime]);
+
+  const formatTime = (milliseconds) => {
+    const minutes = Math.floor(milliseconds / 60);
+    const seconds = milliseconds % 60;
   
     // Aggiungi uno zero iniziale se i secondi sono meno di 10
     const formattedMinutes = minutes.toString().padStart(2, '0');
@@ -56,17 +68,24 @@ function Timer() {
   const next = () => {
     setTimeRemaining( flow ? restTime : flowTime);
     setFlow(!flow);
+    setIsRealTime(false);
   }
 
   return (
     <div className='timer'>
-      
-      <p> tempo di focus </p>
-      <button className= {autoStart ? 'auto-start-on' : 'auto-start-off'} onClick={ () => setAutoStart(!autoStart)}  >
-        <span> Autostart : { autoStart ? 'on' : 'off' }</span>
+      {
+        timeOfFlow != 0 &&
+        <p> tempo di focus : {formatTime(timeOfFlow)} </p>
+      }
+      {
+        !isActive &&
+        <button className= {autoStart ? 'auto-start-on' : 'auto-start-off'} onClick={ () => setAutoStart(!autoStart)}  >
+          <span> Autostart : { autoStart ? 'on' : 'off' }</span>
       </button>
+      }
 
-      <p className='count-down'>{`${formatTime()}`}</p>
+
+      <p className='count-down'>{`${formatTime(timeRemaining)}`}</p>
       
       <div>
         { 
