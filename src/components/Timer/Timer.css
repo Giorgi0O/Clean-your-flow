@@ -7,16 +7,32 @@
     width: 80%;
     height: 80%;
 }
-
 .count-down{
     font-size: 128px;
 }
-
 #start-button{
     width: 150px;
     font-size: 32px;
     background-color: red;
     color: white;
     border: none;
-
+}
+/* stile pulsante di refresh */
+.refresh-button {
+    background: none; 
+    border: none;
+    color: black; 
+    margin-right: 10px;
+}
+.auto-start-off{
+    background-color: black;
+    color: white;
+    width: 150px;
+    height: 30px;
+}
+.auto-start-on{
+    background-color: red;
+    color: black;
+    width: 150px;
+    height: 30px;
 }

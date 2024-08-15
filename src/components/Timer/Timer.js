@@ -1,14 +1,18 @@
 import './Timer.css';
 import React, {useState,useEffect} from 'react';
+import { FaSync } from 'react-icons/fa'; 
+import { MdSkipNext } from "react-icons/md";
+
 
 function Timer() {
 
-  const flowTime = 15*60;
-  const restTime = 5*60;
+  const flowTime = 15;
+  const restTime = 5;
   const [isActive, setIsActive] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(flowTime);
+  const [autoStart, setAutoStart] = useState(false);
 
-  const [flow, setFlow] = useState(false);
+  const [flow, setFlow] = useState(true);
 
   useEffect(() => {
     if( isActive ){
@@ -16,7 +20,11 @@ function Timer() {
         setTimeRemaining( (secondsLeft) => {
           if(secondsLeft === 0){
             setFlow(!flow);
-            return flow ? flowTime: restTime;
+            var nextTime  = flow ? restTime: flowTime;
+            if( !autoStart ){
+              setIsActive(false);
+            }
+            return nextTime;
           }
           else{
             return secondsLeft -1;
@@ -39,12 +47,42 @@ function Timer() {
     return `${formattedMinutes}:${formattedSeconds}`;
   };
 
+  const refresh = () => {
+    setIsActive(false);
+    setTimeRemaining(flowTime);
+    setFlow(true);
+  }
+
+  const next = () => {
+    setTimeRemaining( flow ? restTime : flowTime);
+    setFlow(!flow);
+  }
+
   return (
     <div className='timer'>
-      <p className='count-down'>{`${formatTime()}`}</p>
-      <button id='start-button' onClick={() => setIsActive(!isActive)} >
-        { isActive? 'Stop' :  'Start' } 
+      
+      <p> tempo di focus </p>
+      <button className= {autoStart ? 'auto-start-on' : 'auto-start-off'} onClick={ () => setAutoStart(!autoStart)}  >
+        <span> Autostart : { autoStart ? 'on' : 'off' }</span>
       </button>
+
+      <p className='count-down'>{`${formatTime()}`}</p>
+      
+      <div>
+        { 
+          timeRemaining != flowTime &&
+          <button className="refresh-button" onClick={refresh}>
+            <FaSync size={24} ></FaSync>
+          </button>
+        }
+        <button id='start-button' onClick={() => setIsActive(!isActive)} >
+          { isActive? 'Stop' :  'Start' } 
+        </button>
+        <button className="refresh-button" onClick={next} >
+          <MdSkipNext size={32} ></MdSkipNext>
+        </button>
+      </div>
+    
     </div>
   );
 }
