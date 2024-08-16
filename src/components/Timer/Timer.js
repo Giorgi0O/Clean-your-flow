@@ -1,22 +1,17 @@
-import './Timer.css';
+import '../Timer/Timer.css';
 import React, {useState,useEffect} from 'react';
-import { FaSync } from 'react-icons/fa'; 
-import { MdSkipNext } from "react-icons/md";
-import { CiEdit } from "react-icons/ci";
+import AutoStartToggle from '../AutoStartToggle/AutoStartToggle';
+import CountDown from '../CountDown/CountDown';
+import TimerForm from '../TimerForm/TimerForm';
+import TimerControls from '../TimerControls/TimerControls';
 
 
-
-function Timer() {
+function TimerV2() {
 
   const [flowTime, setFlowTime] = useState(25*60);
   const [restTime, setRestTime] = useState(5*60);
   const [longRestTime, setLongRestTime] = useState(15*60);
 
-  const [tempFlowTime, setTempFlowTime] = useState(flowTime);
-  const [tempRestTime, setTempRestTime] = useState(restTime);
-  const [tempLongRestTime, setTempLongRestTime] = useState(longRestTime);
-
-  /* STATE */
   const [isActive, setIsActive] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(flowTime);
   const [flow, setFlow] = useState(true);
@@ -25,6 +20,7 @@ function Timer() {
   const [countAllFlow, setCountAllFlow] = useState(0);
   const [isRealTime, setIsRealTime] = useState(0);
   const [inputTime, setInputTime] = useState(false);
+  const [isLongRest, setIsLongRest] = useState(false);
 
   useEffect(() => {
     if( isActive ){
@@ -37,7 +33,7 @@ function Timer() {
 
             var nextTime  = flow ? restTime: flowTime;
             
-            if( (countAllFlow+1) % 4 === 0 && flow ){
+            if( isLongRest && flow ){
               nextTime = longRestTime;
             } 
             if( !autoStart ){
@@ -54,14 +50,19 @@ function Timer() {
       
       return () => clearInterval(interval);
     }
-  }, [isActive,flowTime, restTime, autoStart,flow, timeRemaining]); 
+  }, [isActive,flowTime, restTime, autoStart,flow, timeRemaining, isLongRest,longRestTime]); 
 
   useEffect(() => {
     if (!flow ) {
-      setCountAllFlow((prevTime) => prevTime + 1);
-      if( isRealTime ){
-        setCountOfFlow((prevTime) => prevTime + 1);
-      }
+        setCountAllFlow((prev) => {
+            setIsLongRest( (prev+1)%4 === 0 ? true : false );
+
+            return prev + 1
+        });
+
+        if( isRealTime ){
+            setCountOfFlow((prev) => prev + 1);
+        }
     }
   }, [flow, isRealTime]);
 
@@ -69,147 +70,70 @@ function Timer() {
     const minutes = Math.floor(milliseconds / 60);
     const seconds = milliseconds % 60;
   
-    // Aggiungi uno zero iniziale se i secondi sono meno di 10
     const formattedMinutes = minutes.toString().padStart(2, '0');
     const formattedSeconds = seconds.toString().padStart(2, '0');
   
     return `${formattedMinutes}:${formattedSeconds}`;
   };
 
-  const refresh = () => {
-    setIsActive(false);
-    setTimeRemaining(flowTime);
-    setFlow(true);
-  }
-
-  const next = () => {
-    setFlow(!flow);
-
-    var nextTime  = flow ? restTime: flowTime;
-    if( (countAllFlow+1) % 4 === 0 && flow ){
-      nextTime = longRestTime;
-    } 
-    setTimeRemaining( nextTime );
-    
-    setIsRealTime(false);
-    
-  }
-
-  const handleFlowTimeChange = (event) => {
-    setTempFlowTime(+event.target.value*60);
-  };
-
-  const handleRestTimeChange = (event) => {
-    setTempRestTime(+event.target.value*60);
-  };
-
-  const handleLongRestTimeChange = (event) => {
-    setTempLongRestTime(+event.target.value*60);
-  };
-
-  const handleSave = () => {
-    setFlowTime( prev => {
-      if( flow ){
-        var timeRem = tempFlowTime - ( prev - timeRemaining) ;
-        setTimeRemaining(timeRem > 0 ? timeRem : 0);
-      }
-      return tempFlowTime;
-    });
-    setRestTime( prev => {
-      if( !flow ){
-        var timeRem = tempRestTime - ( prev - timeRemaining) ;
-        setTimeRemaining(timeRem > 0 ? timeRem : 0);
-      }
-      return tempRestTime;
-    });
-    setLongRestTime( prev => {
-      if( !flow  && (countAllFlow+1) % 4 === 0 ){
-        var timeRem = tempLongRestTime - ( prev - timeRemaining) ;
-        setTimeRemaining(timeRem > 0 ? timeRem : 0);
-      }
-      return tempRestTime;
-    });
-
-    
-    setInputTime(!inputTime)
-  }
-
 
   return (
     <div className={ flow ? 'timer-bg-red timer' : 'timer-bg-blue timer' } >
-      {
-        countOfFlow !== 0 &&
-        <p> tempo di focus : { formatTime(flowTime*countOfFlow) } </p>
-      }
-      {
-        !isActive && !inputTime &&
-        <button className= {autoStart ? 'auto-start-on' : 'auto-start-off'} onClick={ () => setAutoStart(!autoStart)}  >
-          <span> Autostart : { autoStart ? 'on' : 'off' }</span>
-        </button>
-      }
-      <div className='count-down'>
         {
-          !inputTime &&
-          <p>{`${formatTime(timeRemaining)}`}</p>
+            countOfFlow !== 0 &&
+            <p> tempo di focus : { formatTime(flowTime*countOfFlow) } </p>
         }
         {
-          inputTime &&
-          <form className='form-input'>
-            <div>
-            <label htmlFor="flow-time">Flow time:</label>
-            <input
-              type="number"
-              id="flow-time"
-              value={tempFlowTime/60}
-              onChange={handleFlowTimeChange}
-              placeholder={formatTime(flowTime)}
+            !isActive && !inputTime &&
+            <AutoStartToggle 
+                autoStart={autoStart}
+                setAutoStart={setAutoStart} 
             />
-            <label htmlFor="rest-time">rest time:</label>
-            <input
-              type="number"
-              id="rest-time"
-              value={tempRestTime/60}
-              onChange={handleRestTimeChange}
-              placeholder={formatTime(restTime)}
-            />
-            <label htmlFor="long-rest-time">rest time:</label>
-            <input
-              type="number"
-              id="long-rest-time"
-              value={tempLongRestTime/60}
-              onChange={handleLongRestTimeChange}
-              placeholder={formatTime(longRestTime)}
-            />
-            </div>
-            <button type="button" onClick={handleSave}>Salva</button>
-          </form>
         }
-        {
-          !isActive &&
-          <button className="base-button-icon" onClick={() => setInputTime(!inputTime)} >
-            <CiEdit size={32} />
-          </button>
+        <CountDown 
+            timeRemaining = {timeRemaining}
+            inputTime = {inputTime}
+            setInputTime = {setInputTime}
+            isActive = {isActive}
+        />
+        { 
+            inputTime ?
+            (
+                <TimerForm
+                    flowTime = {flowTime}
+                    restTime = {restTime}
+                    longRestTime = {longRestTime}
+                    flow = {flow}
+                    timeRemaining = {timeRemaining} 
+                    inputTime = {inputTime}
+                    isLongRest={isLongRest}
+                    setFlowTime = {setFlowTime }
+                    setRestTime = {setRestTime}   
+                    setLongRestTime = {setLongRestTime}
+                    setTimeRemaining = {setTimeRemaining}
+                    setInputTime = {setInputTime}    
+                />
+            )
+            :
+            (
+                <TimerControls 
+                    flowTime={flowTime}
+                    restTime={restTime}
+                    longRestTime={longRestTime}
+                    isActive={isActive}
+                    flow={flow}
+                    countAllFlow={countAllFlow}
+                    inputTime={inputTime}
+                    setTimeRemaining={setTimeRemaining}
+                    setIsActive={setIsActive}
+                    setFlow={setFlow}
+                    setIsRealTime={setIsRealTime}
+                    setInputTime={setInputTime}
+                />
+            )
         }
-      </div>
-      {
-        !inputTime &&
-        <div>
-          { 
-            timeRemaining !== flowTime &&
-            <button className="base-button-icon" onClick={refresh}>
-              <FaSync size={24} ></FaSync>
-            </button>
-          }
-          <button id='start-button' onClick={() => setIsActive(!isActive)} >
-            { isActive? 'Stop' :  'Start' } 
-          </button>
-          <button className="base-button-icon" onClick={next} >
-            <MdSkipNext size={32} ></MdSkipNext>
-          </button>
-        </div>
-      }
     </div>
   );
 }
 
-export default Timer;
+export default TimerV2;
