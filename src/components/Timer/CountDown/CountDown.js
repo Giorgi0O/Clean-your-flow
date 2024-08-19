@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import {formatTime} from "../../../utils/Common"
 
 
-function CountDown({ timeRemaining, inputTime, bgPink, bgCiano }) {
+function CountDown({ timeRemaining, bgPink, bgCiano }) {
 
     const [color, setColor] = useState('color-dark-ciano');
 
@@ -19,10 +19,7 @@ function CountDown({ timeRemaining, inputTime, bgPink, bgCiano }) {
 
     return (
         <div>
-            {
-                !inputTime &&
-                <p className={`font-number ${color}`}>{formatTime(timeRemaining)}</p>
-            }
+            <p className={`font-number ${color}`}>{formatTime(timeRemaining)}</p>
         </div>
     );
 }

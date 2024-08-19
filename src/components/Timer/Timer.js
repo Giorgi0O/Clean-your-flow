@@ -1,8 +1,6 @@
 import './Timer.css';
 import React, {useState,useEffect} from 'react';
-import AutoStartToggle from './AutoStartToggle/AutoStartToggle';
 import CountDown from './CountDown/CountDown';
-import TimerForm from './TimerForm/TimerForm';
 import TimerControls from './TimerControls/TimerControls';
 
 
@@ -23,17 +21,25 @@ function Timer( { bgPink, bgCiano, setBgPink, setBgCiano }) {
   const [countOfFlow, setCountOfFlow] = useState(0);
   const [countAllFlow, setCountAllFlow] = useState(0);
   const [isRealTime, setIsRealTime] = useState(0);
-  const [inputTime, setInputTime] = useState(false);
   const [isLongRest, setIsLongRest] = useState(false);
 
-  const clampValue = (value, min, max) => Math.min(Math.max(value, min), max);
 
-  const updateBackgrounds = (isFlow, bgMoving) => {
-    setBgCiano(prev => clampValue(prev + (isFlow ? -bgMoving : bgMoving), 15, 100));
-    setBgPink(prev => clampValue(prev + (isFlow ? bgMoving : -bgMoving), 15, 100));
-  };
+  const unused = () =>{
+    setFlowTime(10);
+    setRestTime(10);
+    setLongRestTime(10);
+    setAutoStart(false);
+  }
 
   useEffect(() => {
+
+    const clampValue = (value, min, max) => Math.min(Math.max(value, min), max);
+
+    const updateBackgrounds = (isFlow, bgMoving) => {
+      setBgCiano(prev => clampValue(prev + (isFlow ? -bgMoving : bgMoving), 15, 100));
+      setBgPink(prev => clampValue(prev + (isFlow ? bgMoving : -bgMoving), 15, 100));
+    };
+  
     if( isActive ){
       const interval = setInterval(() => {
         setTimeRemaining( (secondsLeft) => {
@@ -70,7 +76,7 @@ function Timer( { bgPink, bgCiano, setBgPink, setBgCiano }) {
       
       return () => clearInterval(interval);
     }
-  }, [isActive,flowTime, restTime, autoStart,flow, timeRemaining, isLongRest,longRestTime]); 
+  }, [isActive,flowTime, restTime, autoStart,flow, timeRemaining, isLongRest,longRestTime, bgMoving, countAllFlow ,setBgCiano, setBgPink]); 
 
   useEffect(() => {
     if (!flow ) {
@@ -92,7 +98,6 @@ function Timer( { bgPink, bgCiano, setBgPink, setBgCiano }) {
         <div className='timer-center'>
           <CountDown 
               timeRemaining = {timeRemaining}
-              inputTime = {inputTime}
               bgCiano={bgCiano}
               bgPink={bgPink}
           />
@@ -115,6 +120,7 @@ function Timer( { bgPink, bgCiano, setBgPink, setBgCiano }) {
             setBgCiano={setBgCiano}
             setBgPink={setBgPink}
         />
+        <button style={{display: 'none'}} onClick={unused} ></button>
     </div>
   );
 }
