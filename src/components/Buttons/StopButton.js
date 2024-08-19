@@ -1,9 +1,5 @@
 import '../Timer/Timer.css';
 import React from 'react';
-import icon from '../../assets/Icons/pause.svg'
-
-
-
 
 function StopButton({ iconName, operation}) {
 

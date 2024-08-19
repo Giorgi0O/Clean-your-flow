@@ -1,9 +1,5 @@
 import '../Timer/Timer.css';
 import React from 'react';
-import icon from '../../assets/Icons/play.svg'
-
-
-
 
 function StartButton({ operation, type }) {
 
@@ -11,7 +7,7 @@ function StartButton({ operation, type }) {
     return (
         <button className={`primary-button bg-start`} onClick={operation}>
             {
-                type == 1 ?
+                type === 1 ?
                 (
                     <svg 
                         width="28"
@@ -61,7 +57,7 @@ function StartButton({ operation, type }) {
                     </svg>
                 )
             }
-            <span> { type == 1 ? "Start" : "Restart"} </span>
+            <span> { type === 1 ? "Start" : "Restart"} </span>
         </button>
     );
 }

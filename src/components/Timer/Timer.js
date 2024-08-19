@@ -105,12 +105,10 @@ function Timer( { bgPink, bgCiano, setBgPink, setBgCiano }) {
             flow={flow}
             countOfFlow={countOfFlow}
             countAllFlow={countAllFlow}
-            inputTime={inputTime}
             setTimeRemaining={setTimeRemaining}
             setIsActive={setIsActive}
             setFlow={setFlow}
             setIsRealTime={setIsRealTime}
-            setInputTime={setInputTime}
             bgCiano={bgCiano}
             bgPink={bgPink}
             setBgMoving={setBgMoving}

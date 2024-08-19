@@ -1,11 +1,8 @@
 import '../Timer.css';
 import './TimerControls.css'
-import React, {useState} from 'react';
-import { CiEdit } from "react-icons/ci";
-import { MdSkipNext } from "react-icons/md";
+import React from 'react';
 import StopButton from '../../Buttons/StopButton'
 import StartButton from '../../Buttons/StartButton'
-import Button from '../../Buttons/Button'
 import CircleButton from '../../Buttons/CircleButton'
 
 
@@ -17,12 +14,10 @@ function TimerControls({
       flow,
       countOfFlow,
       countAllFlow,
-      inputTime,
       setTimeRemaining,
       setIsActive,
       setFlow,
       setIsRealTime,
-      setInputTime,
       bgPink,
       bgCiano,    
       setBgPink,
@@ -45,13 +40,6 @@ function TimerControls({
     setBgMoving( 65 / nextTime);
     
     setIsRealTime(false);
-  }
-
-  const [hideEditButton, setHideEditButton] = useState(false);
-
-  const edit = function(){
-    setInputTime(!inputTime);
-    setHideEditButton(true);
   }
 
   return (

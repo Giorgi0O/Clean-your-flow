@@ -1,10 +1,6 @@
 import '../Timer/Timer.css';
 import React from 'react';
-import icon from '../../assets/Icons/play.svg'
 import {hexToFilter} from '../../utils/Common'
-
-
-
 
 function Button({ text, iconName, color, shadow, operation}) {
 
@@ -21,7 +17,7 @@ function Button({ text, iconName, color, shadow, operation}) {
                 width="24"
                 height="24"
                 style={{
-                    filter: color == 'ciano' ? hexToFilter('0D5355') : hexToFilter('7A335E')
+                    filter: color === 'ciano' ? hexToFilter('0D5355') : hexToFilter('7A335E')
                 }}
             />
             <span>{text}</span>
