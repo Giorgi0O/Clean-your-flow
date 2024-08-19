@@ -5,7 +5,6 @@
     height: 100vh;
     align-items: center;
 }
-
 .bg-moving-blur{
     background-color:rgba(255, 255, 255, 0.1); /* Colore di sfondo semi-trasparente */
     backdrop-filter: blur(80px); /* Effetto blur */
@@ -16,7 +15,6 @@
     left: 0;
     z-index: 1;
 }
-
 .bg-moving-pink{
     background-color: var(--pink);
     height: 40%;

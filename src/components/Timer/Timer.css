@@ -5,8 +5,26 @@
     justify-content: space-evenly;
     vertical-align: baseline;
     width: 80%;
-    height: 80%;
+    height: 92%;
     z-index: 100;
+}
+
+.timer-center{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.modal{
+    position: absolute;
+    top: 15%;
+    right: 10%;
+    z-index: 101;
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    border-radius: 8px;
+    border: 2px solid var(--dark-ciano);
 }
 
 .count-down{
@@ -63,4 +81,8 @@
 .input-style{
     display: flex;
     flex-direction: column;
+}
+
+.count-flow{
+    text-align: center;
 }

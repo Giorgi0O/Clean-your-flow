@@ -15,7 +15,7 @@
 
   --pink : rgba(219, 91, 169, 1);
   --dark-pink : rgba(122, 51, 94, 1);
-  --litgth-pink : rgba(251,209,235);
+  --ligth-pink : rgba(251,209,235);
   
   --green : rgba(100, 172, 82, 1);
   --dark-green : rgba(30, 52, 25, 1);
@@ -68,6 +68,10 @@ body {
   font-size: 13px;
 }
 
+.default-font{
+  @include font-corpo1();
+}
+
 /* box-shadow */
 .box-shadow-button{
   box-shadow: 15px 25px 40px rgba(0, 0, 0, 0.05);
@@ -110,7 +114,6 @@ body {
   height: 24px;
   width: 24px;
 }
-
 .primary-button{
   background-size: cover;
   background-repeat: no-repeat;
@@ -120,6 +123,8 @@ body {
   display: flex;
   align-items: center ;
   justify-content: center;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 .primary-button svg{
   margin-right: 8px;
@@ -154,6 +159,16 @@ body {
 .bg-ciano:active{
   background-color: var(--ligth-ciano);
 }
+.bg-ligth-ciano{
+  background-color: var(--ligth-ciano);
+  border: 1.5px solid var(--dark-ciano);
+  color: var(--dark-ciano);
+
+  @include font-corpo1();
+}
+.bg-ligth-ciano:active{
+  background-color: var(--ciano);
+}
 .bg-pink {
   background-color: var(--pink);
   border: 1.5px solid var(--dark-pink);
@@ -164,6 +179,16 @@ body {
 .bg-pink:active{
   background-color: var(--litgth-pink);
 }
+.bg-ligth-pink {
+  background-color: var(--ligth-pink);
+  border: 1.5px solid var(--dark-pink);
+  color: var(--dark-pink);
+
+  @include font-corpo1();
+}
+.bg-pink:active{
+  background-color: var(--pink);
+}
 .bg-green{
   background-color: var(--green);
   border: 1.5px solid var(--dark-green);
@@ -173,4 +198,23 @@ body {
 }
 .bg-green:active{
   background-color: var(--ligth-green);
+}
+.bg-ligth-green{
+  background-color: var(--ligth-green);
+  border: 1.5px solid var(--dark-green);
+  color: var(--dark-green);
+
+  @include font-corpo1();
+}
+.bg-ligth-green:active{
+  background-color: var(--green);
+}
+.color-ligth-pink{
+  color: var(--ligth-pink) ;
+}
+.color-dark-ciano{
+  color: var(--dark-ciano) ;
+}
+.color-dark-pink{
+  color: var(--dark-pink) ;
 }

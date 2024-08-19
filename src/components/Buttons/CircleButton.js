@@ -12,7 +12,7 @@ function CircleButton({ tooltip, iconName, color, shadow, operation}) {
     const iconUrl = require(`../../assets/Icons/${iconName}.svg`);
 
     return (
-        <button className={`circle-button bg-${color} ${isShadow}`} onClick={operation} tooltip={tooltip}>
+        <button className={`circle-button bg-${color} ${isShadow}`} onClick={operation} title={tooltip}>
              <img 
                 src={iconUrl}
                 width="24"

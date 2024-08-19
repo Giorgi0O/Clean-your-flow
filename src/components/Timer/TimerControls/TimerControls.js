@@ -1,4 +1,5 @@
 import '../Timer.css';
+import './TimerControls.css'
 import React, {useState} from 'react';
 import { CiEdit } from "react-icons/ci";
 import { MdSkipNext } from "react-icons/md";
@@ -14,6 +15,7 @@ function TimerControls({
       longRestTime,
       isActive,
       flow,
+      countOfFlow,
       countAllFlow,
       inputTime,
       setTimeRemaining,
@@ -53,21 +55,30 @@ function TimerControls({
   }
 
   return (
-    <div>
-      {
-        !isActive && !hideEditButton &&
-        (
-          <button className="base-button-icon" onClick={edit}>
-            <CiEdit size={32} />
-          </button>
-        )
-      }
-      <Button text={'cliccami'} iconName={'pause'} color={'ciano'} > </Button>
-      <CircleButton color={'ciano'} tooltip={'next'} iconName={'next'} shadow={true} operation={next}></CircleButton>
-      <StopButton operation={() => setIsActive(!isActive)}></StopButton>
-      <StartButton operation={() => setIsActive(!isActive)} type={1} ></StartButton>
-      <StartButton operation={() => setIsActive(!isActive)} type={2} ></StartButton>
+    <div className='timer-controls-container'>
+       
+      <p className='default-font count-flow color-ligth-pink'> #{countOfFlow} </p>
+      <div className='timer-controls-keys'>
 
+        {
+          countAllFlow > 0 &&
+          (
+            <CircleButton tooltip={'End session'} iconName={'x'} color={'ligth-pink'} operation={() => console.log('ended')} ></CircleButton>
+          )
+        }
+        {
+          !isActive ?
+          (
+            <StartButton operation={() => setIsActive(!isActive)} type={1} ></StartButton>
+          )
+          :
+          (
+            <StopButton operation={() => setIsActive(!isActive)}></StopButton>
+          )
+        }
+        {/* <Button text={'cliccami'} iconName={'pause'} color={'ciano'} > </Button> */}
+        <CircleButton color={'ligth-pink'} tooltip={'next'} iconName={'next'} operation={next}></CircleButton>
+      </div>
     </div>
   );
     

@@ -20,6 +20,7 @@ function App() {
         className='bg-moving-ciano'
         style={{width: `${bgCiano}%` }}
       ></div>
+      
       <Title />
       <Timer bgCiano={bgCiano} bgPink={bgPink} setBgCiano={setBgCiano} setBgPink={setBgPink}/>
     </div>  );

@@ -1,5 +1,17 @@
-.title {
-    text-align: center;
+.title{
+    z-index: 100;
+    width: 80%;
+    height: 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    vertical-align: center;
+    padding: 8px;
+}
 
 
+.button-modal{
+    display: flex;
+    width: 7%;
+    justify-content: space-between;
 }

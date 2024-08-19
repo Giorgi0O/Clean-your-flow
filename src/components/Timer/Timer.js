@@ -9,9 +9,9 @@ import TimerControls from './TimerControls/TimerControls';
 function Timer( { bgPink, bgCiano, setBgPink, setBgCiano }) {
 
 
-  const [flowTime, setFlowTime] = useState(25);
-  const [restTime, setRestTime] = useState(5);
-  const [longRestTime, setLongRestTime] = useState(15);
+  const [flowTime, setFlowTime] = useState(25*60);
+  const [restTime, setRestTime] = useState(5*60);
+  const [longRestTime, setLongRestTime] = useState(15*60);
   
   //start
   const [bgMoving, setBgMoving] = useState(60 / flowTime );
@@ -86,77 +86,37 @@ function Timer( { bgPink, bgCiano, setBgPink, setBgCiano }) {
     }
   }, [flow, isRealTime]);
 
-  const formatTime = (milliseconds) => {
-    const minutes = Math.floor(milliseconds / 60);
-    const seconds = milliseconds % 60;
-  
-    const formattedMinutes = minutes.toString().padStart(2, '0');
-    const formattedSeconds = seconds.toString().padStart(2, '0');
-  
-    return `${formattedMinutes}:${formattedSeconds}`;
-  };
-
 
   return (
     <div className={ 'timer' } >
-        {
-            countOfFlow !== 0 &&
-            <p> tempo di focus : { formatTime(flowTime*countOfFlow) } </p>
-        }
-        {
-            !isActive && !inputTime &&
-            <AutoStartToggle 
-                autoStart={autoStart}
-                setAutoStart={setAutoStart} 
-            />
-        }
-        <CountDown 
-            timeRemaining = {timeRemaining}
-            inputTime = {inputTime}
-            setInputTime = {setInputTime}
-            isActive = {isActive}
+        <div className='timer-center'>
+          <CountDown 
+              timeRemaining = {timeRemaining}
+              inputTime = {inputTime}
+              bgCiano={bgCiano}
+              bgPink={bgPink}
+          />
+        </div>
+        <TimerControls 
+            flowTime={flowTime}
+            restTime={restTime}
+            longRestTime={longRestTime}
+            isActive={isActive}
+            flow={flow}
+            countOfFlow={countOfFlow}
+            countAllFlow={countAllFlow}
+            inputTime={inputTime}
+            setTimeRemaining={setTimeRemaining}
+            setIsActive={setIsActive}
+            setFlow={setFlow}
+            setIsRealTime={setIsRealTime}
+            setInputTime={setInputTime}
+            bgCiano={bgCiano}
+            bgPink={bgPink}
+            setBgMoving={setBgMoving}
+            setBgCiano={setBgCiano}
+            setBgPink={setBgPink}
         />
-        { 
-            inputTime ?
-            (
-                <TimerForm
-                    flowTime = {flowTime}
-                    restTime = {restTime}
-                    longRestTime = {longRestTime}
-                    flow = {flow}
-                    timeRemaining = {timeRemaining} 
-                    inputTime = {inputTime}
-                    isLongRest={isLongRest}
-                    setFlowTime = {setFlowTime }
-                    setRestTime = {setRestTime}   
-                    setLongRestTime = {setLongRestTime}
-                    setTimeRemaining = {setTimeRemaining}
-                    setInputTime = {setInputTime}    
-                />
-            )
-            :
-            (
-                <TimerControls 
-                    flowTime={flowTime}
-                    restTime={restTime}
-                    longRestTime={longRestTime}
-                    isActive={isActive}
-                    flow={flow}
-                    countAllFlow={countAllFlow}
-                    inputTime={inputTime}
-                    setTimeRemaining={setTimeRemaining}
-                    setIsActive={setIsActive}
-                    setFlow={setFlow}
-                    setIsRealTime={setIsRealTime}
-                    setInputTime={setInputTime}
-                    bgCiano={bgCiano}
-                    bgPink={bgPink}
-                    setBgMoving={setBgMoving}
-                    setBgCiano={setBgCiano}
-                    setBgPink={setBgPink}
-                />
-            )
-        }
     </div>
   );
 }
