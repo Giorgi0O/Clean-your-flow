@@ -1,6 +1,6 @@
-import '../Timer/Timer.css';
+import '../Timer.css';
 import React from 'react';
-import {formatTime} from "../../utils/Common"
+import {formatTime} from "../../../utils/Common"
 
 
 function CountDown({ timeRemaining, inputTime, setInputTime, isActive }) {

@@ -1,9 +1,9 @@
-import '../Timer/Timer.css';
+import './Timer.css';
 import React, {useState,useEffect} from 'react';
-import AutoStartToggle from '../AutoStartToggle/AutoStartToggle';
-import CountDown from '../CountDown/CountDown';
-import TimerForm from '../TimerForm/TimerForm';
-import TimerControls from '../TimerControls/TimerControls';
+import AutoStartToggle from './AutoStartToggle/AutoStartToggle';
+import CountDown from './CountDown/CountDown';
+import TimerForm from './TimerForm/TimerForm';
+import TimerControls from './TimerControls/TimerControls';
 
 
 function Timer( { bgPink, bgCiano, setBgPink, setBgCiano }) {
@@ -51,7 +51,7 @@ function Timer( { bgPink, bgCiano, setBgPink, setBgCiano }) {
               setIsActive(false);
             }
 
-            setBgMoving( 60 / nextTime);
+            setBgMoving( 65 / nextTime);
             
             return nextTime;
           }
@@ -149,6 +149,11 @@ function Timer( { bgPink, bgCiano, setBgPink, setBgCiano }) {
                     setFlow={setFlow}
                     setIsRealTime={setIsRealTime}
                     setInputTime={setInputTime}
+                    bgCiano={bgCiano}
+                    bgPink={bgPink}
+                    setBgMoving={setBgMoving}
+                    setBgCiano={setBgCiano}
+                    setBgPink={setBgPink}
                 />
             )
         }

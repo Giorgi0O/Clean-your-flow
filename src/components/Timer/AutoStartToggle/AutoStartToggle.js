@@ -1,4 +1,4 @@
-import '../Timer/Timer.css';
+import '../Timer.css';
 import React from 'react';
 
 

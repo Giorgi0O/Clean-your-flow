@@ -1,11 +1,11 @@
-import '../Timer/Timer.css';
+import '../Timer.css';
 import React, {useState} from 'react';
 import { CiEdit } from "react-icons/ci";
 import { MdSkipNext } from "react-icons/md";
-import StopButton from '../Buttons/StopButton'
-import StartButton from '../Buttons/StartButton'
-import Button from '../Buttons/Button'
-import CircleButton from '../Buttons/CircleButton'
+import StopButton from '../../Buttons/StopButton'
+import StartButton from '../../Buttons/StartButton'
+import Button from '../../Buttons/Button'
+import CircleButton from '../../Buttons/CircleButton'
 
 
 function TimerControls({ 
@@ -20,7 +20,12 @@ function TimerControls({
       setIsActive,
       setFlow,
       setIsRealTime,
-      setInputTime,      
+      setInputTime,
+      bgPink,
+      bgCiano,    
+      setBgPink,
+      setBgCiano,
+      setBgMoving 
     }) 
   {
 
@@ -32,6 +37,10 @@ function TimerControls({
       nextTime = longRestTime;
     } 
     setTimeRemaining( nextTime );
+
+    setBgCiano( bgPink );
+    setBgPink( bgCiano );
+    setBgMoving( 65 / nextTime);
     
     setIsRealTime(false);
   }
