@@ -6,10 +6,10 @@ import {formatTime} from "../../utils/Common"
 function CountDown({ timeRemaining, inputTime, setInputTime, isActive }) {
 
     return (
-        <div className='count-down'>
+        <div>
             {
                 !inputTime &&
-                <p>{formatTime(timeRemaining)}</p>
+                <p className='font-number'>{formatTime(timeRemaining)}</p>
             }
         </div>
     );

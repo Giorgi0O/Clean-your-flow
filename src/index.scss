@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root{
+  /*font family*/
+  --number: 'Inter', sans-serif;
+  --titolo: "Spectral", serif;
+  --corpo: "Cabin", sans-serif;
+
+  /*Color*/
+  --ciano : rgba(30, 186, 192, 1);
+  --dark-ciano :rgba(13, 83, 85, 1);
+  --ligth-ciano : rgba(166, 236, 238, 1);
+
+  --pink : rgba(219, 91, 169, 1);
+  --dark-pink : rgba(122, 51, 94, 1);
+  --litgth-pink : rgba(251,209,235);
+  
+  --green : rgba(100, 172, 82, 1);
+  --dark-green : rgba(30, 52, 25, 1);
+  --ligth-green : rgba(193,222,186);
+
+  --opacity-ciano : rgba(166,236,238,0.4);
+  --opacity-pink : rgba(251,209,235,0.4);
+  --opacity-green : rgba(193,222,186,0.4);
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* font style*/
+@mixin font-number{
+  font-family: var(--number);
+  font-weight: bold;
+  font-size: 128px;
+}
+.font-number{
+  @include font-number();
+  font-size: 128px;
+}
+@mixin font-titolo2{
+  font-family: var(--titolo);
+  font-weight: bold;
+  font-size: 28px;
+}
+@mixin font-titolo3{
+  font-family: var(--titolo);
+  font-weight: bold;
+  font-size: 24px;
+}
+@mixin font-corpo1{
+  font-family: var(--corpo);
+  font-weight:600;
+  font-size: 18px;
+}
+@mixin font-corpo2{
+  font-family: var(--corpo);
+  font-weight:600;
+  font-size: 16px;
+}
+@mixin font-sub-corpo{
+  font-family: var(--corpo);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* box-shadow */
+.box-shadow-button{
+  box-shadow: 15px 25px 40px rgba(0, 0, 0, 0.10);
+}
+.box-shadow-button:hover{
+  box-shadow: 0 50px 30px rgba(0, 0, 0, 0.15);
+}
+
+
+/*Button*/
+.default-button{
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center ;
+  color: white;
+}
+.default-button span{
+  margin-left: 8px;
+}
+.default-button img{
+  width: 24px;
+  height: 24px;
+}
+
+/*color*/
+.bg-ciano{
+  background-color: var(--ciano);
+  border: 1.5px solid var(--dark-ciano);
+  color: var(--dark-ciano);
+
+  @include font-corpo1();
+}
+.bg-ciano:active{
+  background-color: var(--ligth-ciano);
+}
+.bg-pink {
+  background-color: var(--pink);
+  border: 1.5px solid var(--dark-pink);
+  color: var(--dark-pink);
+
+  @include font-corpo1();
+}
+.bg-pink:hover{
+  background-color: var(--litgth-pink);
+}
+.bg-green{
+  background-color: var(--green);
+  border: 1.5px solid var(--dark-green);
+  color: var(--dark-green);
+
+  @include font-corpo1();
+}
+.bg-green:hover{
+  background-color: var(--ligth-green);
+}
