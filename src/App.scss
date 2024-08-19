@@ -1,0 +1,37 @@
+.app{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+}
+
+.bg-moving-blur{
+    background-color:rgba(255, 255, 255, 0.1); /* Colore di sfondo semi-trasparente */
+    backdrop-filter: blur(80px); /* Effetto blur */
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.bg-moving-pink{
+    background-color: var(--pink);
+    height: 40%;
+    border-radius: 10%;
+    position: absolute;
+    top: 15%;
+    left: -10%;
+    z-index: 0;
+}
+.bg-moving-ciano{
+    background-color: var(--ciano);
+    height: 40%;
+    border-radius: 10%;
+    position: absolute;
+    top: 15%;
+    right: -10%;
+    z-index: 0;
+}

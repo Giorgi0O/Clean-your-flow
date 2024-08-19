@@ -6,13 +6,9 @@
     vertical-align: baseline;
     width: 80%;
     height: 80%;
+    z-index: 100;
 }
-.timer-bg-red{
-    background-color: lightcoral;
-}
-.timer-bg-blue{
-    background-color: aqua;
-}
+
 .count-down{
     height: 35%;
     margin: 20px;

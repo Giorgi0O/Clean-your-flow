@@ -6,11 +6,15 @@ import TimerForm from '../TimerForm/TimerForm';
 import TimerControls from '../TimerControls/TimerControls';
 
 
-function TimerV2() {
+function Timer( { bgPink, bgCiano, setBgPink, setBgCiano }) {
 
-  const [flowTime, setFlowTime] = useState(25*60);
-  const [restTime, setRestTime] = useState(5*60);
-  const [longRestTime, setLongRestTime] = useState(15*60);
+
+  const [flowTime, setFlowTime] = useState(25);
+  const [restTime, setRestTime] = useState(5);
+  const [longRestTime, setLongRestTime] = useState(15);
+  
+  //start
+  const [bgMoving, setBgMoving] = useState(60 / flowTime );
 
   const [isActive, setIsActive] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(flowTime);
@@ -22,6 +26,13 @@ function TimerV2() {
   const [inputTime, setInputTime] = useState(false);
   const [isLongRest, setIsLongRest] = useState(false);
 
+  const clampValue = (value, min, max) => Math.min(Math.max(value, min), max);
+
+  const updateBackgrounds = (isFlow, bgMoving) => {
+    setBgCiano(prev => clampValue(prev + (isFlow ? -bgMoving : bgMoving), 15, 100));
+    setBgPink(prev => clampValue(prev + (isFlow ? bgMoving : -bgMoving), 15, 100));
+  };
+
   useEffect(() => {
     if( isActive ){
       const interval = setInterval(() => {
@@ -32,17 +43,26 @@ function TimerV2() {
             setIsRealTime(true);
 
             var nextTime  = flow ? restTime: flowTime;
-            
-            if( isLongRest && flow ){
+
+            if( (countAllFlow+1)%4 === 0 && flow ){
               nextTime = longRestTime;
             } 
             if( !autoStart ){
               setIsActive(false);
             }
+
+            setBgMoving( 60 / nextTime);
             
             return nextTime;
           }
           else{
+            //modifico la dimensione del background
+            if (flow) {
+              updateBackgrounds(true, bgMoving);
+            } else {
+              updateBackgrounds(false, bgMoving);
+            }
+
             return secondsLeft -1;
           }
         });
@@ -78,7 +98,7 @@ function TimerV2() {
 
 
   return (
-    <div className={ flow ? 'timer-bg-red timer' : 'timer-bg-blue timer' } >
+    <div className={ 'timer' } >
         {
             countOfFlow !== 0 &&
             <p> tempo di focus : { formatTime(flowTime*countOfFlow) } </p>
@@ -136,4 +156,4 @@ function TimerV2() {
   );
 }
 
-export default TimerV2;
+export default Timer;
