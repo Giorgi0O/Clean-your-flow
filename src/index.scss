@@ -69,10 +69,10 @@ body {
 
 /* box-shadow */
 .box-shadow-button{
-  box-shadow: 15px 25px 40px rgba(0, 0, 0, 0.10);
+  box-shadow: 15px 25px 40px rgba(0, 0, 0, 0.05);
 }
 .box-shadow-button:hover{
-  box-shadow: 0 50px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 25px 30px rgba(0, 0, 0, 0.10);
 }
 
 
@@ -90,11 +90,56 @@ body {
 }
 .default-button span{
   margin-left: 8px;
+
+  @include font-corpo1()
 }
 .default-button img{
   width: 24px;
   height: 24px;
 }
+.circle-button{
+  padding: 8px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center ;
+  color: white;
+}
+.circle-button img{
+  height: 24px;
+  width: 24px;
+}
+
+.primary-button{
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 180px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center ;
+  justify-content: center;
+}
+.primary-button svg{
+  margin-right: 8px;
+}
+
+/*background*/
+.bg-start{
+  background-image: url('./assets/Background/bg-ligthC-PG.png');
+  border: 1.5px solid var(--dark-ciano);
+  color: var(--dark-ciano);
+
+  @include font-titolo3()
+}
+.bg-stop{
+  background-image: url('./assets/Background/bg-ligthP-CG.jpg');
+  border: 1.5px solid var(--dark-pink);
+  color: var(--dark-pink);
+
+  @include font-titolo3()
+}
+
 
 /*color*/
 .bg-ciano{
@@ -114,7 +159,7 @@ body {
 
   @include font-corpo1();
 }
-.bg-pink:hover{
+.bg-pink:active{
   background-color: var(--litgth-pink);
 }
 .bg-green{
@@ -124,6 +169,6 @@ body {
 
   @include font-corpo1();
 }
-.bg-green:hover{
+.bg-green:active{
   background-color: var(--ligth-green);
 }

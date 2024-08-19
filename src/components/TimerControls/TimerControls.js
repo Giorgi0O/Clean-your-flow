@@ -2,6 +2,10 @@ import '../Timer/Timer.css';
 import React, {useState} from 'react';
 import { CiEdit } from "react-icons/ci";
 import { MdSkipNext } from "react-icons/md";
+import StopButton from '../Buttons/StopButton'
+import StartButton from '../Buttons/StartButton'
+import Button from '../Buttons/Button'
+import CircleButton from '../Buttons/CircleButton'
 
 
 function TimerControls({ 
@@ -49,12 +53,12 @@ function TimerControls({
           </button>
         )
       }
-      <button id='start-button' onClick={() => setIsActive(!isActive)} >
-        {isActive ? 'Stop' : 'Start'} 
-      </button>
-      <button className="base-button-icon" onClick={next}>
-        <MdSkipNext size={32} />
-      </button>
+      <Button text={'cliccami'} iconName={'pause'} color={'ciano'} > </Button>
+      <CircleButton color={'ciano'} tooltip={'next'} iconName={'next'} shadow={true} operation={next}></CircleButton>
+      <StopButton operation={() => setIsActive(!isActive)}></StopButton>
+      <StartButton operation={() => setIsActive(!isActive)} type={1} ></StartButton>
+      <StartButton operation={() => setIsActive(!isActive)} type={2} ></StartButton>
+
     </div>
   );
     
