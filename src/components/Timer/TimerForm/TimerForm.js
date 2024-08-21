@@ -24,7 +24,7 @@ function TimerForm({
         const value = event.target.value;
 
         if (!isNaN(value) && value.trim() !== '') {
-            if( value != 0 ){
+            if( value !== 0 ){
                 setTempFlowTime(+event.target.value*60);
             }
         }
@@ -34,7 +34,7 @@ function TimerForm({
         const value = event.target.value;
 
         if (!isNaN(value) && value.trim() !== '') {
-            if( value != 0 ){
+            if( value !== 0 ){
                 setTempRestTime(+event.target.value*60);
             }
         }
@@ -44,7 +44,7 @@ function TimerForm({
         const value = event.target.value;
 
         if (!isNaN(value) && value.trim() !== '') {
-            if( value != 0 ){
+            if( value !== 0 ){
                 setTempLongRestTime(+event.target.value*60);
             }
         }

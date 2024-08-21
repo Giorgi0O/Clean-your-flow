@@ -22,7 +22,10 @@ function TimerControls({
       bgCiano,    
       setBgPink,
       setBgCiano,
-      setBgMoving 
+      setBgMoving,
+      setEndSessionRequest,
+      endSession,
+      restart
     }) 
   {
 
@@ -49,23 +52,35 @@ function TimerControls({
       <div className='timer-controls-keys'>
 
         {
-          countAllFlow > 0 &&
-          (
-            <CircleButton tooltip={'End session'} iconName={'x'} color={'ligth-pink'} operation={() => console.log('ended')} ></CircleButton>
-          )
+          !endSession &&
+          <CircleButton tooltip={'End session'} iconName={'x'} color={'ligth-pink'} 
+            operation={() => {
+              setEndSessionRequest(true)
+              setIsActive(false);
+            }} 
+          ></CircleButton>
         }
         {
-          !isActive ?
+          !endSession ?
           (
-            <StartButton operation={() => setIsActive(!isActive)} type={1} ></StartButton>
+            !isActive ?
+            (
+              <StartButton operation={() => setIsActive(!isActive)} type={1} ></StartButton>
+            )
+            :
+            (
+              <StopButton operation={() => setIsActive(!isActive)}></StopButton>
+            )
           )
           :
           (
-            <StopButton operation={() => setIsActive(!isActive)}></StopButton>
+            <StartButton operation={restart} type={2} ></StartButton>
           )
         }
-        {/* <Button text={'cliccami'} iconName={'pause'} color={'ciano'} > </Button> */}
-        <CircleButton color={'ligth-pink'} tooltip={'next'} iconName={'next'} operation={next}></CircleButton>
+        {
+          !endSession &&
+          <CircleButton color={'ligth-pink'} tooltip={'next'} iconName={'next'} operation={next}></CircleButton>
+        }
       </div>
     </div>
   );

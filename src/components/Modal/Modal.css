@@ -80,3 +80,45 @@
     overflow: hidden;
     position: relative;
 }
+
+/*END MODAL*/
+.bg-end-request{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 105;
+    background-color: rgba(0,0,0,0.15);
+}
+.end-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    max-height: 80%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 30px;
+    gap: 13px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.062);
+    overflow-y: auto;
+}
+.end-card p{
+    text-align: center;
+}
+.end-button{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.default-button{
+    width: 45%;
+}

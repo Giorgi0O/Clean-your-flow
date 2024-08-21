@@ -4,6 +4,7 @@ import CountDown from './CountDown/CountDown';
 import TimerControls from './TimerControls/TimerControls';
 import Settings from '../Modal/Settings';
 import TaskList from '../Modal/TaskList';
+import EndModal from '../Modal/EndModal'
 
 
 function Timer( { 
@@ -14,10 +15,14 @@ function Timer( {
   setBgPink, 
   setBgCiano,
   modalSetting,
+  setModalSetting,
   modalTask,
+  setModalTask,
   taskList,
   setTaskList,
-  timeGoal
+  timeGoal,
+  endSession,
+  setEndSession
 }) {
 
 
@@ -25,7 +30,6 @@ function Timer( {
   const [restTime, setRestTime] = useState(5*60);
   const [longRestTime, setLongRestTime] = useState(15*60);
   
-  //start
   const [bgMoving, setBgMoving] = useState(60 / flowTime );
 
   const [timeRemaining, setTimeRemaining] = useState(flowTime);
@@ -36,13 +40,7 @@ function Timer( {
   const [isRealTime, setIsRealTime] = useState(0);
   const [isLongRest, setIsLongRest] = useState(false);
 
-
-  const unused = () =>{
-    setFlowTime(10);
-    setRestTime(10);
-    setLongRestTime(10);
-    setAutoStart(false);
-  }
+  const [endSessionRequest, setEndSessionRequest] = useState(false);
 
   useEffect(() => {
 
@@ -89,7 +87,7 @@ function Timer( {
       
       return () => clearInterval(interval);
     }
-  }, [isActive,flowTime, restTime, autoStart,flow, timeRemaining, isLongRest,longRestTime, bgMoving, countAllFlow ,setBgCiano, setBgPink]); 
+  }, [isActive,setIsActive, flowTime, restTime, autoStart,flow, timeRemaining, isLongRest,longRestTime, bgMoving, countAllFlow ,setBgCiano, setBgPink]); 
 
   useEffect(() => {
     if (!flow ) {
@@ -105,38 +103,70 @@ function Timer( {
     }
   }, [flow, isRealTime]);
 
+  const restart = () => {
+    setEndSessionRequest(false);
+    setTimeRemaining(flowTime);
+    setCountAllFlow(0);
+    setCountOfFlow(0);
+    setEndSession(false);
+    setEndSessionRequest(false);
+    setFlow(true);
+    setTimeRemaining(flowTime);
+    setBgPink(15);
+    setBgCiano(100);
+    setBgMoving(60/timeRemaining);
+    setModalSetting(false);
+    setModalTask(false);
+  }
 
   return (
     <div className={ 'timer' } >
-        <div className='timer-center'>
-          <CountDown 
-              timeRemaining = {timeRemaining}
-              bgCiano={bgCiano}
-              bgPink={bgPink}
-          />
-          {
-            modalSetting && !isActive && !modalTask &&
-            (
-              <Settings
-                flowTime = {flowTime}
-                restTime= {restTime}
-                longRestTime= {longRestTime}
-                timeRemaining  = {timeRemaining} 
-                flow  = {flow}
-                isLongRest= {isLongRest}
-                autoStart={autoStart}
-                setBgMoving = {setBgMoving}
-                setAutoStart  = {setAutoStart} 
-                setFlowTime   = {setFlowTime} 
-                setRestTime   = {setRestTime}
-                setLongRestTime = {setLongRestTime}
-                setTimeRemaining= {setTimeRemaining}
-              ></Settings>
-            )
-          }
-          {
-            modalTask && !modalSetting &&
-            (
+        {
+          !endSession ?
+          (
+            <div className='timer-center'>
+              <CountDown 
+                  timeRemaining = {timeRemaining}
+                  bgCiano={bgCiano}
+                  bgPink={bgPink}
+              />
+              {
+                modalSetting && !isActive && !modalTask &&
+                (
+                  <Settings
+                    flowTime = {flowTime}
+                    restTime= {restTime}
+                    longRestTime= {longRestTime}
+                    timeRemaining  = {timeRemaining} 
+                    flow  = {flow}
+                    isLongRest= {isLongRest}
+                    autoStart={autoStart}
+                    setBgMoving = {setBgMoving}
+                    setAutoStart  = {setAutoStart} 
+                    setFlowTime   = {setFlowTime} 
+                    setRestTime   = {setRestTime}
+                    setLongRestTime = {setLongRestTime}
+                    setTimeRemaining= {setTimeRemaining}
+                  ></Settings>
+                )
+              }
+              {
+                modalTask && !modalSetting &&
+                (
+                  <TaskList
+                    taskList={taskList}
+                    timeGoal={timeGoal}
+                    setTaskList={setTaskList}
+                    countOfFlow={countOfFlow}
+                    flowTime={flowTime}
+                  ></TaskList>
+                )
+              }
+            </div>
+          )
+          :
+          (
+            <div className='timer-end'>
               <TaskList
                 taskList={taskList}
                 timeGoal={timeGoal}
@@ -144,9 +174,10 @@ function Timer( {
                 countOfFlow={countOfFlow}
                 flowTime={flowTime}
               ></TaskList>
-            )
-          }
-        </div>
+            </div>
+
+          )
+        }
         <TimerControls 
           flowTime={flowTime}
           restTime={restTime}
@@ -164,8 +195,11 @@ function Timer( {
           setBgMoving={setBgMoving}
           setBgCiano={setBgCiano}
           setBgPink={setBgPink}
+          setEndSessionRequest={setEndSessionRequest}
+          endSession={endSession}
+          restart={restart}
         />
-        <button style={{display: 'none'}} onClick={unused} ></button>
+        <EndModal endSessionRequest={endSessionRequest} setEndSessionRequest={setEndSessionRequest}  setEndSession={setEndSession}></EndModal>
     </div>
   );
 }

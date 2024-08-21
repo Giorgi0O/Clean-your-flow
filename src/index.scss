@@ -86,13 +86,11 @@ body {
 
 /*Button*/
 .default-button{
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  min-width: 120px;;
+  padding: 8px 16px 8px 16px;
   border-radius: 8px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center ;
   color: white;
 }
@@ -256,7 +254,9 @@ body {
 }
 .color-pink{
   color: var(--pink) ;
-
+}
+.color-white{
+  color: white;
 }
 
 /* MODAL */
