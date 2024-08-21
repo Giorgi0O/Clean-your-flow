@@ -38,10 +38,6 @@ body {
   font-weight: bold;
   font-size: 128px;
 }
-.font-number{
-  @include font-number();
-  font-size: 128px;
-}
 @mixin font-titolo2{
   font-family: var(--titolo);
   font-weight: bold;
@@ -68,12 +64,15 @@ body {
   font-size: 13px;
 }
 
-.font-corpo1{
+.font-corpo2{
   @include font-corpo1()
 }
-
 .default-font{
   @include font-corpo1();
+}
+.font-number{
+  @include font-number();
+  font-size: 128px;
 }
 
 /* box-shadow */
@@ -113,6 +112,7 @@ body {
   justify-content: space-between;
   align-items: center ;
   color: white;
+  margin: 4px;
 }
 .circle-button img{
   height: 24px;

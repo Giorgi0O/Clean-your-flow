@@ -3,9 +3,22 @@ import React, {useState,useEffect} from 'react';
 import CountDown from './CountDown/CountDown';
 import TimerControls from './TimerControls/TimerControls';
 import Settings from '../Modal/Settings';
+import TaskList from '../Modal/TaskList';
 
 
-function Timer( { isActive, setIsActive, bgPink, bgCiano, setBgPink, setBgCiano, modalSetting, setModalSetting }) {
+function Timer( { 
+  isActive, 
+  setIsActive, 
+  bgPink, 
+  bgCiano, 
+  setBgPink, 
+  setBgCiano,
+  modalSetting,
+  modalTask,
+  taskList,
+  setTaskList,
+  timeGoal
+}) {
 
 
   const [flowTime, setFlowTime] = useState(25*60);
@@ -102,7 +115,7 @@ function Timer( { isActive, setIsActive, bgPink, bgCiano, setBgPink, setBgCiano,
               bgPink={bgPink}
           />
           {
-            modalSetting && !isActive &&
+            modalSetting && !isActive && !modalTask &&
             (
               <Settings
                 flowTime = {flowTime}
@@ -119,7 +132,18 @@ function Timer( { isActive, setIsActive, bgPink, bgCiano, setBgPink, setBgCiano,
                 setLongRestTime = {setLongRestTime}
                 setTimeRemaining= {setTimeRemaining}
               ></Settings>
-
+            )
+          }
+          {
+            modalTask && !modalSetting &&
+            (
+              <TaskList
+                taskList={taskList}
+                timeGoal={timeGoal}
+                setTaskList={setTaskList}
+                countOfFlow={countOfFlow}
+                flowTime={flowTime}
+              ></TaskList>
             )
           }
         </div>

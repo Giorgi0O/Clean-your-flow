@@ -41,7 +41,7 @@ function Settings( {
 
       <div className='setting-list'>
         <div className='list-component'>
-          <span className='font-corpo1'> Auto start </span>
+          <span className='default-font'> Auto start </span>
           <AutoStart autoStart={autoStart} setAutoStart={setAutoStart}></AutoStart>
         </div>
       </div>

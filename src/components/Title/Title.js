@@ -3,7 +3,7 @@ import './Title.css';
 import React from 'react';
 import Switch from '../Switch/Switch'
 
-function Title({ isActive, selectedMode, setSelectedMode, modalSetting, setModalSetting }) {
+function Title({ isActive, selectedMode, setSelectedMode, modalSetting, setModalSetting, modalTask, setModalTask }) {
   return (
     <div className='title'>
       <div className='switch-mode'>
@@ -28,21 +28,56 @@ function Title({ isActive, selectedMode, setSelectedMode, modalSetting, setModal
       </div>
 
 
-      <div >
+      <div className='button-modal'>
+        {
+          modalTask ?
+            <CircleButton 
+              color={'ciano'} 
+              tooltip={'task'} 
+              iconName={'task-list'} 
+              operation={() => {
+                setModalTask(!modalTask)
+                setModalSetting(false);
+              }} 
+            ></CircleButton>
+          :
+            <CircleButton 
+              color={'ligth-ciano'} 
+              tooltip={'task'} 
+              iconName={'task-list'} 
+              operation={() => {
+                setModalTask(!modalTask)
+                setModalSetting(false);
+              }} 
+            ></CircleButton>
+        }
         {
           !isActive &&
           (
-            <div className='button-modal'>
-              <CircleButton color={'ligth-ciano'} tooltip={'task'} iconName={'task-list'}  ></CircleButton>
-              {
-                modalSetting ?
-                  <CircleButton color={'green'} tooltip={'settings'} iconName={'settings'} operation={() => setModalSetting(!modalSetting)}  ></CircleButton>
-                :
-                  <CircleButton color={'ligth-green'} tooltip={'settings'} iconName={'settings'} operation={() => setModalSetting(!modalSetting)}  ></CircleButton>
-              }
-            </div>
+            modalSetting ? (
+              <CircleButton 
+                color={'green'} 
+                tooltip={'settings'} 
+                iconName={'settings'} 
+                operation={() => {
+                  setModalSetting(!modalSetting);
+                  setModalTask(false);
+                }} 
+              />
+            ) : (
+              <CircleButton 
+                color={'ligth-green'} 
+                tooltip={'settings'} 
+                iconName={'settings'} 
+                operation={() => {
+                  setModalSetting(!modalSetting);
+                  setModalTask(false);
+                }} 
+              />
+            )
           )
         }
+        
       </div>
     </div>
   );

@@ -8,7 +8,6 @@
     vertical-align: center;
     padding: 8px;
 }
-
 .logo {
     position: absolute;
     left: 50%; 
@@ -17,10 +16,5 @@
 
 .button-modal{
     display: flex;
-    width: 7%;
     justify-content: space-between;
-}
-
-.switch-mode{
-    width: 10%;
 }

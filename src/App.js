@@ -14,6 +14,11 @@ function App() {
 
   const [modalSetting, setModalSetting] = useState(false);
 
+  const [modalTask, setModalTask] = useState(false);
+  const [taskList, setTaskList] = useState([]);
+  const [timeGoal, setTimeGoal] = useState(3*60);
+
+
   return (
     <div className="app bg-moving">
       <div className='bg-moving-blur'></div>
@@ -32,6 +37,8 @@ function App() {
         setSelectedMode={setSelectedMode}
         modalSetting={modalSetting}
         setModalSetting={setModalSetting}
+        modalTask={modalTask}
+        setModalTask={setModalTask}
       />
       <Timer 
         isActive={isActive}
@@ -41,7 +48,10 @@ function App() {
         setBgCiano={setBgCiano}
         setBgPink={setBgPink}
         modalSetting={modalSetting}
-        setModalSetting={setModalSetting}
+        modalTask={modalTask}
+        taskList={taskList}
+        setTaskList={setTaskList}
+        timeGoal={timeGoal}
       />
     </div>  );
 }
