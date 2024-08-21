@@ -9,6 +9,11 @@
     padding: 8px;
 }
 
+.logo {
+    position: absolute;
+    left: 50%; 
+    transform: translateX(-50%); 
+}
 
 .button-modal{
     display: flex;

@@ -10,6 +10,7 @@ function App() {
   const [bgCiano, setBgCiano] = useState(100);
 
   const [selectedMode, setSelectedMode] = useState('pomodoro');
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <div className="app bg-moving">
@@ -23,8 +24,8 @@ function App() {
         style={{width: `${bgCiano}%` }}
       ></div>
       
-      <Title selectedMode={selectedMode} setSelectedMode={setSelectedMode} />
-      <Timer bgCiano={bgCiano} bgPink={bgPink} setBgCiano={setBgCiano} setBgPink={setBgPink}/>
+      <Title isActive={isActive} selectedMode={selectedMode} setSelectedMode={setSelectedMode} />
+      <Timer isActive={isActive} setIsActive={setIsActive} bgCiano={bgCiano} bgPink={bgPink} setBgCiano={setBgCiano} setBgPink={setBgPink}/>
     </div>  );
 }
 

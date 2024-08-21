@@ -4,7 +4,7 @@ import CountDown from './CountDown/CountDown';
 import TimerControls from './TimerControls/TimerControls';
 
 
-function Timer( { bgPink, bgCiano, setBgPink, setBgCiano }) {
+function Timer( { isActive, setIsActive, bgPink, bgCiano, setBgPink, setBgCiano }) {
 
 
   const [flowTime, setFlowTime] = useState(25*60);
@@ -14,7 +14,6 @@ function Timer( { bgPink, bgCiano, setBgPink, setBgCiano }) {
   //start
   const [bgMoving, setBgMoving] = useState(60 / flowTime );
 
-  const [isActive, setIsActive] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(flowTime);
   const [flow, setFlow] = useState(true);
   const [autoStart, setAutoStart] = useState(true);
