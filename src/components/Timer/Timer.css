@@ -63,25 +63,6 @@
     width: 150px;
     height: 30px;
 }
-/* form style */
-.form-input{
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.form-input button{
-    width: 150px;
-    height: 30px;
-    margin: 20px;
-}
-.form-input label{
-    margin: 10px;
-}
-.input-style{
-    display: flex;
-    flex-direction: column;
-}
 
 .count-flow{
     text-align: center;

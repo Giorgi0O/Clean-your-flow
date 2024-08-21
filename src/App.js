@@ -12,6 +12,8 @@ function App() {
   const [selectedMode, setSelectedMode] = useState('pomodoro');
   const [isActive, setIsActive] = useState(false);
 
+  const [modalSetting, setModalSetting] = useState(false);
+
   return (
     <div className="app bg-moving">
       <div className='bg-moving-blur'></div>
@@ -24,8 +26,23 @@ function App() {
         style={{width: `${bgCiano}%` }}
       ></div>
       
-      <Title isActive={isActive} selectedMode={selectedMode} setSelectedMode={setSelectedMode} />
-      <Timer isActive={isActive} setIsActive={setIsActive} bgCiano={bgCiano} bgPink={bgPink} setBgCiano={setBgCiano} setBgPink={setBgPink}/>
+      <Title 
+        isActive={isActive}
+        selectedMode={selectedMode} 
+        setSelectedMode={setSelectedMode}
+        modalSetting={modalSetting}
+        setModalSetting={setModalSetting}
+      />
+      <Timer 
+        isActive={isActive}
+        setIsActive={setIsActive}
+        bgCiano={bgCiano}
+        bgPink={bgPink}
+        setBgCiano={setBgCiano}
+        setBgPink={setBgPink}
+        modalSetting={modalSetting}
+        setModalSetting={setModalSetting}
+      />
     </div>  );
 }
 

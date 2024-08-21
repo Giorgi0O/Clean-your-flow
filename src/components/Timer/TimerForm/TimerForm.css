@@ -1,0 +1,22 @@
+.form-input{
+    padding: 20px;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.slot{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.slot input{
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    height: 30px;
+    padding: 8px;
+    margin: 4px;
+    text-align: center;
+}

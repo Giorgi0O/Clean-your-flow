@@ -3,7 +3,7 @@ import './Title.css';
 import React from 'react';
 import Switch from '../Switch/Switch'
 
-function Title({ isActive, selectedMode, setSelectedMode }) {
+function Title({ isActive, selectedMode, setSelectedMode, modalSetting, setModalSetting }) {
   return (
     <div className='title'>
       <div className='switch-mode'>
@@ -34,7 +34,12 @@ function Title({ isActive, selectedMode, setSelectedMode }) {
           (
             <div className='button-modal'>
               <CircleButton color={'ligth-ciano'} tooltip={'task'} iconName={'task-list'}  ></CircleButton>
-              <CircleButton color={'ligth-green'} tooltip={'settings'} iconName={'settings'}  ></CircleButton>
+              {
+                modalSetting ?
+                  <CircleButton color={'green'} tooltip={'settings'} iconName={'settings'} operation={() => setModalSetting(!modalSetting)}  ></CircleButton>
+                :
+                  <CircleButton color={'ligth-green'} tooltip={'settings'} iconName={'settings'} operation={() => setModalSetting(!modalSetting)}  ></CircleButton>
+              }
             </div>
           )
         }

@@ -2,9 +2,10 @@ import './Timer.css';
 import React, {useState,useEffect} from 'react';
 import CountDown from './CountDown/CountDown';
 import TimerControls from './TimerControls/TimerControls';
+import Settings from '../Modal/Settings';
 
 
-function Timer( { isActive, setIsActive, bgPink, bgCiano, setBgPink, setBgCiano }) {
+function Timer( { isActive, setIsActive, bgPink, bgCiano, setBgPink, setBgCiano, modalSetting, setModalSetting }) {
 
 
   const [flowTime, setFlowTime] = useState(25*60);
@@ -100,24 +101,45 @@ function Timer( { isActive, setIsActive, bgPink, bgCiano, setBgPink, setBgCiano 
               bgCiano={bgCiano}
               bgPink={bgPink}
           />
+          {
+            modalSetting && !isActive &&
+            (
+              <Settings
+                flowTime = {flowTime}
+                restTime= {restTime}
+                longRestTime= {longRestTime}
+                timeRemaining  = {timeRemaining} 
+                flow  = {flow}
+                isLongRest= {isLongRest}
+                autoStart={autoStart}
+                setBgMoving = {setBgMoving}
+                setAutoStart  = {setAutoStart} 
+                setFlowTime   = {setFlowTime} 
+                setRestTime   = {setRestTime}
+                setLongRestTime = {setLongRestTime}
+                setTimeRemaining= {setTimeRemaining}
+              ></Settings>
+
+            )
+          }
         </div>
         <TimerControls 
-            flowTime={flowTime}
-            restTime={restTime}
-            longRestTime={longRestTime}
-            isActive={isActive}
-            flow={flow}
-            countOfFlow={countOfFlow}
-            countAllFlow={countAllFlow}
-            setTimeRemaining={setTimeRemaining}
-            setIsActive={setIsActive}
-            setFlow={setFlow}
-            setIsRealTime={setIsRealTime}
-            bgCiano={bgCiano}
-            bgPink={bgPink}
-            setBgMoving={setBgMoving}
-            setBgCiano={setBgCiano}
-            setBgPink={setBgPink}
+          flowTime={flowTime}
+          restTime={restTime}
+          longRestTime={longRestTime}
+          isActive={isActive}
+          flow={flow}
+          countOfFlow={countOfFlow}
+          countAllFlow={countAllFlow}
+          setTimeRemaining={setTimeRemaining}
+          setIsActive={setIsActive}
+          setFlow={setFlow}
+          setIsRealTime={setIsRealTime}
+          bgCiano={bgCiano}
+          bgPink={bgPink}
+          setBgMoving={setBgMoving}
+          setBgCiano={setBgCiano}
+          setBgPink={setBgPink}
         />
         <button style={{display: 'none'}} onClick={unused} ></button>
     </div>

@@ -1,0 +1,28 @@
+.card {
+    width: 300px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 30px;
+    gap: 13px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.062);
+}
+
+/*SETTINGS*/
+.setting-list{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+.list-component{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

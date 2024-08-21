@@ -1,6 +1,6 @@
 
-
-export function formatTime(milliseconds){
+export function formatTime(milliseconds)
+{
     const minutes = Math.floor(milliseconds / 60);
     const seconds = milliseconds % 60;
     
@@ -11,7 +11,8 @@ export function formatTime(milliseconds){
     return `${formattedMinutes}:${formattedSeconds}`;
 };
 
-export function hexToFilter(hex){
+export function hexToFilter(hex)
+{
     hex = hex.replace('#', '');
     
     // Converti in RGB
@@ -26,3 +27,5 @@ export function hexToFilter(hex){
 
     return `brightness(0) saturate(100%) invert(${brightness}) sepia(1) saturate(${saturate}%) hue-rotate(${hueRotate}deg)`;
 };
+
+

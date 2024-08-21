@@ -68,6 +68,10 @@ body {
   font-size: 13px;
 }
 
+.font-corpo1{
+  @include font-corpo1()
+}
+
 .default-font{
   @include font-corpo1();
 }
@@ -209,6 +213,27 @@ body {
 .bg-ligth-green:active{
   background-color: var(--green);
 }
+
+.bg-opacity-ciano{
+  background-color: var(--opacity-ciano);
+  color: var(--dark-green);
+
+  @include font-corpo1();
+}
+.bg-opacity-pink{
+  background-color: var(--opacity-pink);
+  color: var(--dark-green);
+
+  @include font-corpo1();
+}
+.bg-opacity-green{
+  background-color: var(--opacity-green);
+  color: var(--dark-green);
+
+  @include font-corpo1();
+}
+
+/*font color*/
 .color-ligth-pink{
   color: var(--ligth-pink) ;
 }
@@ -217,4 +242,24 @@ body {
 }
 .color-dark-pink{
   color: var(--dark-pink) ;
+}
+.color-dark-green{
+  color: var(--dark-green) ;
+}
+.color-ciano{
+  color: var(--ciano) ;
+
+}
+.color-green{
+  color: var(--green) ;
+
+}
+.color-pink{
+  color: var(--pink) ;
+
+}
+
+/* MODAL */
+.input-font{
+  @include font-corpo1()
 }

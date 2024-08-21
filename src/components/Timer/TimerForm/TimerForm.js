@@ -1,6 +1,5 @@
-import '../Timer.css';
+import './TimerForm.css';
 import React, {useState} from 'react';
-import {formatTime} from "../../../utils/Common"
 
 function TimerForm({ 
         flowTime, 
@@ -8,9 +7,8 @@ function TimerForm({
         longRestTime,
         timeRemaining,     
         flow,              
-        inputTime,
         isLongRest,
-        setInputTime,      
+        setBgMoving,
         setFlowTime,       
         setRestTime,       
         setLongRestTime,   
@@ -23,15 +21,33 @@ function TimerForm({
     const [tempLongRestTime, setTempLongRestTime] = useState(longRestTime);
 
     const handleFlowTimeChange = (event) => {
-        setTempFlowTime(+event.target.value*60);
+        const value = event.target.value;
+
+        if (!isNaN(value) && value.trim() !== '') {
+            if( value != 0 ){
+                setTempFlowTime(+event.target.value*60);
+            }
+        }
     };
     
     const handleRestTimeChange = (event) => {
-        setTempRestTime(+event.target.value*60);
+        const value = event.target.value;
+
+        if (!isNaN(value) && value.trim() !== '') {
+            if( value != 0 ){
+                setTempRestTime(+event.target.value*60);
+            }
+        }
     };
     
     const handleLongRestTimeChange = (event) => {
-        setTempLongRestTime(+event.target.value*60);
+        const value = event.target.value;
+
+        if (!isNaN(value) && value.trim() !== '') {
+            if( value != 0 ){
+                setTempLongRestTime(+event.target.value*60);
+            }
+        }
     };
 
     const handleSave = () => {
@@ -39,6 +55,7 @@ function TimerForm({
             if( flow ){
                 var timeRem = tempFlowTime - (prev - timeRemaining) ;
                 setTimeRemaining(timeRem > 0 ? timeRem : 0);
+                setBgMoving(60/timeRem);
             }
             return tempFlowTime;
         });
@@ -47,6 +64,7 @@ function TimerForm({
             if( !flow ){
                 var timeRem = tempRestTime - (prev - timeRemaining) ;
                 setTimeRemaining(timeRem > 0 ? timeRem : 0);
+                setBgMoving(60/timeRem);
             }
             return tempRestTime;
         });
@@ -55,48 +73,49 @@ function TimerForm({
             if( !flow  && isLongRest ){
                 var timeRem = tempLongRestTime - (prev - timeRemaining) ;
                 setTimeRemaining(timeRem > 0 ? timeRem : 0);
+                setBgMoving(60/timeRem);
             }
             return tempLongRestTime;
         });
-    
-        setInputTime(!inputTime)
     }
     
     return(
-        <div className='count-down'>
-            <form className='form-input'>
-                <div className='input-style'>
-                    <label htmlFor="flow-time">Flow :</label>
-                    <input
-                        type="number"
-                        id="flow-time"
-                        value={tempFlowTime/60}
-                        onChange={handleFlowTimeChange}
-                        placeholder={formatTime(flowTime)}
-                    />
-                    <label htmlFor="rest-time">Rest :</label>
-                    <input
-                        type="number"
-                        id="rest-time"
-                        value={tempRestTime/60}
-                        onChange={handleRestTimeChange}
-                        placeholder={formatTime(restTime)}
-                    />
-                    <label htmlFor="long-rest-time">Long rest:</label>
-                    <input
-                        type="number"
-                        id="long-rest-time"
-                        value={tempLongRestTime/60}
-                        onChange={handleLongRestTimeChange}
-                        placeholder={formatTime(longRestTime)}
-                    />
-                </div>
-                <div>
-                    <button type="button" onClick={() => setInputTime(false)}> Chiudi </button>
-                    <button type="submit" onClick={handleSave}> Salva </button>
-                </div>
-            </form>
-        </div>
+        <form className='form-input'>
+            <div className='slot'>
+                <label htmlFor="flow-time" className='color-dark-ciano input-font' >Flow</label>
+                <input
+                    id="flow-time"
+                    className='bg-opacity-ciano'
+                    value={tempFlowTime/60}
+                    onChange={handleFlowTimeChange}
+                    onBlur={() => handleSave()}
+                    placeholder={tempFlowTime/60}
+                />
+            </div>
+            <div className='slot'>
+
+                <label htmlFor="rest-time" className='color-dark-pink input-font'>Breath</label>
+                <input
+                    id="rest-time"
+                    value={tempRestTime/60}
+                    className='bg-opacity-pink'
+                    onChange={handleRestTimeChange}
+                    onBlur={() => handleSave()}
+                    placeholder={tempRestTime/60}
+                />
+            </div>
+            <div className='slot'>
+                <label htmlFor="long-rest-time" className='color-dark-green input-font'>Break</label>
+                <input
+                    id="long-rest-time"
+                    value={tempLongRestTime/60}
+                    className='bg-opacity-green'
+                    onChange={handleLongRestTimeChange}
+                    onBlur={() => handleSave()}
+                    placeholder={tempLongRestTime/60}
+                />
+            </div>
+        </form>
     );
 }
 
