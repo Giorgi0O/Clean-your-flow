@@ -9,6 +9,8 @@ function App() {
   const [bgPink, setBgPink] = useState(15);
   const [bgCiano, setBgCiano] = useState(100);
 
+  const [selectedMode, setSelectedMode] = useState('pomodoro');
+
   return (
     <div className="app bg-moving">
       <div className='bg-moving-blur'></div>
@@ -21,7 +23,7 @@ function App() {
         style={{width: `${bgCiano}%` }}
       ></div>
       
-      <Title />
+      <Title selectedMode={selectedMode} setSelectedMode={setSelectedMode} />
       <Timer bgCiano={bgCiano} bgPink={bgPink} setBgCiano={setBgCiano} setBgPink={setBgPink}/>
     </div>  );
 }
