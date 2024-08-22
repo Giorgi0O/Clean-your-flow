@@ -46,6 +46,10 @@ function App() {
       setBgPink(50);
       setBgCiano(50);
     }
+    if( !initSession ){
+      setBgPink(15);
+      setBgCiano(100);
+    }
 
   }, [endSession, initSession] );
 
@@ -96,6 +100,7 @@ function App() {
               taskList={taskList}
               setTaskList={setTaskList}
               timeGoal={timeGoal}
+              setTimeGoal={setTimeGoal}
               endSession={endSession}
               setEndSession={setEndSession}
               setInitSession={setInitSession}

@@ -21,6 +21,7 @@ function Timer( {
   taskList,
   setTaskList,
   timeGoal,
+  setTimeGoal,
   endSession,
   setEndSession,
   setInitSession
@@ -120,6 +121,7 @@ function Timer( {
     setModalTask(false);
     setInitSession(true);
     setTaskList([]);
+    setTimeGoal(0);
     setTimeRemaining(0);
   }
 
