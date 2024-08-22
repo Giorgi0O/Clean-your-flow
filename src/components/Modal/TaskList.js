@@ -24,8 +24,25 @@ function TaskList( {
             {
                 actionType === 'action' &&
                 <div className='container'>
-                    <Task text={'completare il task 1,2 '} completed={false} />
-                    <DivisorOrizontal/>
+                    {
+                        taskList.length > 0 ? 
+                            (
+                                taskList.map((task, index) => (
+                                    <>
+                                        <Task 
+                                            key={index}
+                                            id={index}
+                                            text={task.action}       
+                                            completed={task.completed}
+                                            setTaskList={setTaskList}
+                                        />
+                                        <DivisorOrizontal></DivisorOrizontal>
+                                    </>
+                                ))
+                            )
+                        :
+                            <div className="task-empty"> <p className="sub-font"> Action list is empty </p> </div>
+                    }
                 </div>
             }
             {

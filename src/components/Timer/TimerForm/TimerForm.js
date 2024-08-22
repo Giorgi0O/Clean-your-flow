@@ -82,7 +82,7 @@ function TimerForm({
     return(
         <form className='form-input'>
             <div className='slot'>
-                <label htmlFor="flow-time" className='color-dark-ciano input-font' >Flow</label>
+                <label htmlFor="flow-time" className='color-dark-ciano default-font' >Flow</label>
                 <input
                     id="flow-time"
                     className='bg-opacity-ciano'
@@ -94,7 +94,7 @@ function TimerForm({
             </div>
             <div className='slot'>
 
-                <label htmlFor="rest-time" className='color-dark-pink input-font'>Breath</label>
+                <label htmlFor="rest-time" className='color-dark-pink default-font'>Breath</label>
                 <input
                     id="rest-time"
                     value={tempRestTime/60}
@@ -105,7 +105,7 @@ function TimerForm({
                 />
             </div>
             <div className='slot'>
-                <label htmlFor="long-rest-time" className='color-dark-green input-font'>Break</label>
+                <label htmlFor="long-rest-time" className='color-dark-green default-font'>Break</label>
                 <input
                     id="long-rest-time"
                     value={tempLongRestTime/60}

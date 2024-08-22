@@ -7,7 +7,6 @@ function EndModal( {
     endSessionRequest,
     setEndSessionRequest,
     setEndSession
-
 }) {
     return (
         <div className='bg-end-request' style={{ display: `${endSessionRequest ? '' : 'none'}`}} >
@@ -18,9 +17,7 @@ function EndModal( {
                     <Button text={'Continue'} iconName={'play-end'} color={'ciano'} operation={() => setEndSessionRequest(false)} fixedWidth={50}></Button>
                     <Button text={'End'} iconName={'x-circle'} color={'pink'} fixedWidth={50} operation={() =>{ setEndSession(true); setEndSessionRequest(false); }}></Button>
                 </div>
-
             </div>
-
         </div>
     );
 }

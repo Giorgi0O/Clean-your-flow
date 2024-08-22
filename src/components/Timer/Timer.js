@@ -22,7 +22,8 @@ function Timer( {
   setTaskList,
   timeGoal,
   endSession,
-  setEndSession
+  setEndSession,
+  setInitSession
 }) {
 
 
@@ -117,6 +118,9 @@ function Timer( {
     setBgMoving(60/timeRemaining);
     setModalSetting(false);
     setModalTask(false);
+    setInitSession(true);
+    setTaskList([]);
+    setTimeRemaining(0);
   }
 
   return (
@@ -199,7 +203,7 @@ function Timer( {
           endSession={endSession}
           restart={restart}
         />
-        <EndModal endSessionRequest={endSessionRequest} setEndSessionRequest={setEndSessionRequest}  setEndSession={setEndSession}></EndModal>
+        <EndModal endSessionRequest={endSessionRequest} setEndSessionRequest={setEndSessionRequest} setEndSession={setEndSession}></EndModal>
     </div>
   );
 }
