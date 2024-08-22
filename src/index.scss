@@ -65,14 +65,20 @@ body {
 }
 
 .font-corpo2{
-  @include font-corpo1()
+  @include font-corpo2()
 }
 .default-font{
   @include font-corpo1();
 }
+.sub-font{
+  @include font-sub-corpo();
+}
 .font-number{
   @include font-number();
   font-size: 128px;
+}
+.titolo-font{
+  @include font-titolo2();
 }
 
 /* box-shadow */
@@ -231,6 +237,13 @@ body {
   @include font-corpo1();
 }
 
+.bg-gray{
+  background-color: gray;
+  color: var(--dark-ciano);
+
+  @include font-corpo1();
+}
+
 /*font color*/
 .color-ligth-pink{
   color: var(--ligth-pink) ;
@@ -246,11 +259,9 @@ body {
 }
 .color-ciano{
   color: var(--ciano) ;
-
 }
 .color-green{
   color: var(--green) ;
-
 }
 .color-pink{
   color: var(--pink) ;
@@ -258,8 +269,30 @@ body {
 .color-white{
   color: white;
 }
+.color-ligth-ciano{
+  color: var(--ligth-ciano);
+}
 
 /* MODAL */
-.input-font{
-  @include font-corpo1()
+.card {
+  width: 300px;
+  max-height: 80%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 30px;
+  gap: 13px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.062);
+  overflow-y: auto;
+}
+
+.task-input::placeholder {
+  color: var(--ligth-ciano);
+
+  @include font-corpo2();
 }
