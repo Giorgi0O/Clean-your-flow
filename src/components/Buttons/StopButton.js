@@ -17,8 +17,8 @@ function StopButton({ iconName, operation}) {
                     d="M13.3333 20V12M18.6667 20V12M29.3333 16C29.3333 23.3638 23.3638 29.3334 16 29.3334C8.63619 29.3334 2.66666 23.3638 2.66666 16C2.66666 8.63622 8.63619 2.66669 16 2.66669C23.3638 2.66669 29.3333 8.63622 29.3333 16Z" 
                     stroke="#7A335E" 
                     strokeWidth="1.5px" 
-                    stroke-linecap="round" 
-                    stroke-linejoin="round"
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
                 />
             </svg>
             <span>Stop</span>
