@@ -1,8 +1,7 @@
+import '../Switch/Switch.css'
 import React from "react";
 import Button from '../Buttons/Button';
 import DivisorOrizontal from '../Divisor/DivisorOrizontal';
-import TimeGoalBar from "./TimeGoalBar";
-import '../Switch/Switch.css'
 
 function ModeSetting({
     selectedMode,
