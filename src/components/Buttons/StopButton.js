@@ -1,7 +1,7 @@
 import '../Timer/Timer.css';
 import React from 'react';
 
-function StopButton({ iconName, operation}) {
+function StopButton({ iconName, operation, type}) {
 
 
     return (
@@ -21,7 +21,7 @@ function StopButton({ iconName, operation}) {
                     strokeLinejoin="round"
                 />
             </svg>
-            <span>Stop</span>
+            <span>{type === 2 ? 'Breath' : 'Stop' }</span>
         </button>
     );
 }

@@ -14,7 +14,10 @@ function TimerControls({
       flow,
       countOfFlow,
       countAllFlow,
+      timeRemaning,
       setTimeRemaining,
+      setFlowmodoroCount,
+      selectedMode,
       setIsActive,
       setFlow,
       setIsRealTime,
@@ -25,9 +28,12 @@ function TimerControls({
       setBgMoving,
       setEndSessionRequest,
       endSession,
-      restart
+      restart,
+      autoStart,
+      setFlowTotalTime
     }) 
   {
+
 
   const next = () => {
     setFlow(!flow);
@@ -45,6 +51,27 @@ function TimerControls({
     setIsRealTime(false);
   }
 
+  const flowmodoroBreath = () => {
+    setFlowTotalTime( prev => prev + timeRemaning );
+    const breath = Math.ceil( timeRemaning / 5 );
+
+    setFlow(false);
+    setTimeRemaining(breath);
+    
+    if( !autoStart ){
+      setIsActive(false);
+    }
+  
+  }
+
+  const flowmodoroStart = () => {
+    if( flow ){
+      setTimeRemaining(0);
+      setFlow(true);
+    }
+    setIsActive(true);
+  }
+
   return (
     <div className='timer-controls-container'>
        
@@ -53,15 +80,33 @@ function TimerControls({
 
         {
           !endSession &&
-          <CircleButton tooltip={'End session'} iconName={'x'} color={'ligth-pink'} 
-            operation={() => {
-              setEndSessionRequest(true)
-              setIsActive(false);
-            }} 
-          ></CircleButton>
+            <CircleButton tooltip={'End session'} iconName={'x'} color={'ligth-pink'} 
+              operation={() => {
+                setEndSessionRequest(true)
+                setIsActive(false);
+              }} 
+            ></CircleButton>
         }
         {
-          !endSession ?
+          endSession &&
+          (
+            <StartButton operation={restart} type={2} ></StartButton>
+          )
+        }
+        {
+          !endSession && selectedMode === 2 &&
+          (
+            !isActive ?
+              <StartButton operation={flowmodoroStart} type={3} ></StartButton>
+            :
+              <>
+                <StopButton operation={flowmodoroBreath} type={2} ></StopButton>
+                <CircleButton iconName={'pause'} color={'ligth-green'} operation={() => setIsActive(false)} ></CircleButton>
+              </>
+          )
+        }
+        {
+          !endSession && selectedMode === 1 &&
           (
             !isActive ?
             (
@@ -69,16 +114,12 @@ function TimerControls({
             )
             :
             (
-              <StopButton operation={() => setIsActive(!isActive)}></StopButton>
+              <StopButton operation={() => setIsActive(!isActive)} type={1}></StopButton>
             )
-          )
-          :
-          (
-            <StartButton operation={restart} type={2} ></StartButton>
           )
         }
         {
-          !endSession &&
+          !endSession && selectedMode === 1 &&
           <CircleButton color={'ligth-pink'} tooltip={'next'} iconName={'next'} operation={next}></CircleButton>
         }
       </div>

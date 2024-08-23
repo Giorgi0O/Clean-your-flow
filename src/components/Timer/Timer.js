@@ -24,27 +24,70 @@ function Timer( {
   setTimeGoal,
   endSession,
   setEndSession,
-  setInitSession
+  setInitSession,
+  selectedMode,
+  autoStart,
+  setAutoStart
 }) {
 
 
   const [flowTime, setFlowTime] = useState(25*60);
   const [restTime, setRestTime] = useState(5*60);
   const [longRestTime, setLongRestTime] = useState(15*60);
+  const [flowmodoroCount, setFlowmodoroCount] = useState(0);
   
   const [bgMoving, setBgMoving] = useState(60 / flowTime );
-
-  const [timeRemaining, setTimeRemaining] = useState(flowTime);
+  const [timeRemaining, setTimeRemaining] = useState( selectedMode === 1 ? flowTime : flowmodoroCount);
   const [flow, setFlow] = useState(true);
-  const [autoStart, setAutoStart] = useState(true);
   const [countOfFlow, setCountOfFlow] = useState(0);
+  const [flowTotalTime, setFlowTotalTime] = useState(0);
   const [countAllFlow, setCountAllFlow] = useState(0);
-  const [isRealTime, setIsRealTime] = useState(0);
+  const [isRealTime, setIsRealTime] = useState(true);
   const [isLongRest, setIsLongRest] = useState(false);
 
   const [endSessionRequest, setEndSessionRequest] = useState(false);
 
-  useEffect(() => {
+  const pomodoroTimer = () => {
+    const clampValue = (value, min, max) => Math.min(Math.max(value, min), max);
+
+    const updateBackgrounds = (isFlow, bgMoving) => {
+      setBgCiano(prev => clampValue(prev + (isFlow ? -bgMoving : bgMoving), 15, 100));
+      setBgPink(prev => clampValue(prev + (isFlow ? bgMoving : -bgMoving), 15, 100));
+    };
+
+    setTimeRemaining( (secondsLeft) => {
+      if(secondsLeft === 0){
+        
+        var nextTime;
+
+        setFlow(!flow);
+        setIsRealTime(true);
+
+        nextTime  = flow ? restTime: flowTime;
+
+        if( (countAllFlow+1)%4 === 0 && flow ){
+          nextTime = longRestTime;
+        } 
+        if( !autoStart ){
+          setIsActive(false);
+        }
+        setBgMoving( 65 / nextTime);
+
+        return nextTime;
+      }
+      else{
+        if (flow) {
+          updateBackgrounds(true, bgMoving);
+        } else {
+          updateBackgrounds(false, bgMoving);
+        }
+
+        return secondsLeft -1;
+      }
+    });
+  }
+
+  const flowmodoroTimer = () => {
 
     const clampValue = (value, min, max) => Math.min(Math.max(value, min), max);
 
@@ -52,41 +95,38 @@ function Timer( {
       setBgCiano(prev => clampValue(prev + (isFlow ? -bgMoving : bgMoving), 15, 100));
       setBgPink(prev => clampValue(prev + (isFlow ? bgMoving : -bgMoving), 15, 100));
     };
-  
-    if( isActive ){
-      const interval = setInterval(() => {
-        setTimeRemaining( (secondsLeft) => {
-          if(secondsLeft === 0){
-            
-            setFlow(!flow);
-            setIsRealTime(true);
 
-            var nextTime  = flow ? restTime: flowTime;
+    setTimeRemaining( prev => {
 
-            if( (countAllFlow+1)%4 === 0 && flow ){
-              nextTime = longRestTime;
-            } 
-            if( !autoStart ){
-              setIsActive(false);
-            }
-
-            setBgMoving( 65 / nextTime);
-            
-            return nextTime;
-          }
-          else{
-            //modifico la dimensione del background
-            if (flow) {
-              updateBackgrounds(true, bgMoving);
-            } else {
-              updateBackgrounds(false, bgMoving);
-            }
-
-            return secondsLeft -1;
-          }
-        });
-      }, 1000)
+      updateBackgrounds(flow, bgMoving);
       
+      if( timeRemaining === 0 && !flow ){
+        setFlow(true);
+        setIsActive(false);
+      
+        return 0;
+      }
+      
+      if( !flow ){
+        return timeRemaining -1;
+      }
+      
+      return timeRemaining +1
+    } );
+  }
+
+  useEffect(() => {
+    if( isActive ){
+      const interval = setInterval( () => {
+        if( selectedMode === 1 ){
+          pomodoroTimer();
+        }
+  
+        if( selectedMode === 2 ){
+          flowmodoroTimer();
+        }
+      }, 1000)
+
       return () => clearInterval(interval);
     }
   }, [isActive,setIsActive, flowTime, restTime, autoStart,flow, timeRemaining, isLongRest,longRestTime, bgMoving, countAllFlow ,setBgCiano, setBgPink]); 
@@ -107,13 +147,11 @@ function Timer( {
 
   const restart = () => {
     setEndSessionRequest(false);
-    setTimeRemaining(flowTime);
     setCountAllFlow(0);
     setCountOfFlow(0);
     setEndSession(false);
     setEndSessionRequest(false);
     setFlow(true);
-    setTimeRemaining(flowTime);
     setBgPink(15);
     setBgCiano(100);
     setBgMoving(60/timeRemaining);
@@ -165,6 +203,8 @@ function Timer( {
                     setTaskList={setTaskList}
                     countOfFlow={countOfFlow}
                     flowTime={flowTime}
+                    selectedMode={selectedMode}
+                    flowTotalTime={flowTotalTime}
                   ></TaskList>
                 )
               }
@@ -179,6 +219,8 @@ function Timer( {
                 setTaskList={setTaskList}
                 countOfFlow={countOfFlow}
                 flowTime={flowTime}
+                selectedMode={selectedMode}
+                flowTotalTime={flowTotalTime}
               ></TaskList>
             </div>
 
@@ -192,7 +234,11 @@ function Timer( {
           flow={flow}
           countOfFlow={countOfFlow}
           countAllFlow={countAllFlow}
+          timeRemaning={timeRemaining}
           setTimeRemaining={setTimeRemaining}
+          flowmodoroCount={flowmodoroCount}
+          setFlowmodoroCount={setFlowmodoroCount}
+          selectedMode={selectedMode}
           setIsActive={setIsActive}
           setFlow={setFlow}
           setIsRealTime={setIsRealTime}
@@ -204,6 +250,8 @@ function Timer( {
           setEndSessionRequest={setEndSessionRequest}
           endSession={endSession}
           restart={restart}
+          autoStart= {autoStart}
+          setFlowTotalTime={setFlowTotalTime}
         />
         <EndModal endSessionRequest={endSessionRequest} setEndSessionRequest={setEndSessionRequest} setEndSession={setEndSession}></EndModal>
     </div>

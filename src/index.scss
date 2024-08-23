@@ -140,14 +140,24 @@ body {
 
 /*background*/
 .bg-start{
-  background-image: url('./assets/Background/bg-ligthC-PG.png');
+  //background-image: url('./assets/Background/bg-ligthC-PG.png');
+  background-color: var(--ligth-ciano);
   border: 1.5px solid var(--dark-ciano);
   color: var(--dark-ciano);
 
   @include font-titolo3()
 }
+.bg-flowmodoro-start{
+  background-color: var(--ligth-green);
+  backdrop-filter: blur(100px);
+  border: 1.5px solid var(--dark-green);
+  color: var(--dark-green);
+
+  @include font-titolo3()
+}
 .bg-stop{
-  background-image: url('./assets/Background/bg-ligthP-CG.jpg');
+  //background-image: url('./assets/Background/bg-ligthP-CG.jpg');
+  background-color: var(--ligth-pink);
   border: 1.5px solid var(--dark-pink);
   color: var(--dark-pink);
 

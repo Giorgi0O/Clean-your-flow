@@ -6,7 +6,7 @@ function AutoStartToggle({ autoStart, setAutoStart }) {
 
     return (
         <label className="switch">
-            <input type="checkbox" onChange={() => setAutoStart(!autoStart)} />
+            <input type="checkbox" checked={autoStart} onChange={() => setAutoStart(!autoStart)} />
             <span className="slider" />
         </label>
     );

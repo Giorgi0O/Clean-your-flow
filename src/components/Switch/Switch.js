@@ -10,13 +10,13 @@ function Switch({selectedMode, setSelectedMode }){
 
     return (
         <div className='radio-inputs'>
-            <label className={`radio bg-pomodoro ${selectedMode === 'pomodoro' ? 'bg-pomodoro-active' : ' '}`}>
+            <label className={`radio bg-pomodoro ${selectedMode === 1 ? 'bg-pomodoro-active' : ' '}`}>
                 <input 
                     type="radio"
                     name="radio"
                     value='pomodoro'
-                    checked={selectedMode === 'pomodoro'}
-                    onChange={() => handleRadioChange('pomodoro')} 
+                    checked={selectedMode === 1}
+                    onChange={() => handleRadioChange(1)} 
                 />
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_38_617)">
@@ -31,13 +31,13 @@ function Switch({selectedMode, setSelectedMode }){
                 </svg>
 
             </label>
-            <label className={`radio bg-pomodoro ${selectedMode === 'flowmodoro' ? 'bg-flowmodoro-active' : ''}`}>
+            <label className={`radio bg-pomodoro ${selectedMode === 2 ? 'bg-flowmodoro-active' : ''}`}>
                 <input 
                     type="radio"
                     name="radio"
                     value='flowmodoro'
-                    checked={selectedMode === 'flowmodoro'}
-                    onChange={() => handleRadioChange('flowmodoro')} 
+                    checked={selectedMode === 2}
+                    onChange={() => handleRadioChange(2)} 
                 />
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_38_592)">

@@ -7,15 +7,30 @@ import InitSession from './components/InitSession/InitSession';
 
 function App() {
 
+  /*NON SALVATI IN LOCAL STAORAGE*/
   const [bgPink, setBgPink] = useState(15);
   const [bgCiano, setBgCiano] = useState(100);
-
-  const [selectedMode, setSelectedMode] = useState('pomodoro');
   const [isActive, setIsActive] = useState(false);
-
   const [modalSetting, setModalSetting] = useState(false);
   const [modalTask, setModalTask] = useState(false);
+  const [endSession, setEndSession] = useState(false);
 
+  /*STATE SALVATI IN LOCAL STORAGE*/
+  const [selectedMode, setSelectedMode] = useState(() => {
+      const mode = localStorage.getItem('mode');
+      return mode ? JSON.parse(mode) : 1;
+    }
+  );
+  const[initSession, setInitSession] = useState(() => {
+      const initSession = localStorage.getItem('initSession');
+      return initSession ? JSON.parse(initSession) : true;
+    }
+  );
+  const[pageNumber, setPageNumber] = useState(() => {
+      const pageNumber = localStorage.getItem('pageNumber');
+      return pageNumber ? JSON.parse(pageNumber) : 0;
+    }
+  );
   const [taskList, setTaskList] = useState(() => {
       const savedTasks = localStorage.getItem('taskList');
       return savedTasks ? JSON.parse(savedTasks) : [];
@@ -26,18 +41,24 @@ function App() {
       return timeGoal ? JSON.parse(timeGoal) : 0;
     }
   );
-
-  const[endSession, setEndSession] = useState(false);
-  const[initSession, setInitSession] = useState(() => {
-      const initSession = localStorage.getItem('initSession');
-      return initSession ? JSON.parse(initSession) : true;
+  const [autoStart, setAutoStart] = useState( () => {
+      const autoStart = localStorage.getItem('autoStart');
+      return autoStart ? JSON.parse(autoStart) : 0;
     }
   );
-  const[pageNumber, setPageNumber] = useState(() => {
-    const pageNumber = localStorage.getItem('pageNumber');
-    return pageNumber ? JSON.parse(pageNumber) : 0;
-  }
-);
+
+  const loadLocalStorage = () => {
+    localStorage.setItem('taskList', JSON.stringify(taskList));
+    localStorage.setItem('timeGoal', JSON.stringify(timeGoal));
+    localStorage.setItem('initSession', JSON.stringify(initSession));
+    localStorage.setItem('pageNumber', JSON.stringify(pageNumber));
+    localStorage.setItem('selectedMode', JSON.stringify(selectedMode));
+    localStorage.setItem('autoStart', JSON.stringify(autoStart));
+  };
+
+  useEffect( () => {
+    loadLocalStorage();
+  }, [taskList,timeGoal,pageNumber,initSession, selectedMode] ) 
 
 
   useEffect( () => {
@@ -50,26 +71,19 @@ function App() {
       setBgPink(15);
       setBgCiano(100);
     }
-
   }, [endSession, initSession] );
 
-  useEffect( () => {
-    localStorage.setItem('taskList', JSON.stringify(taskList));
-    localStorage.setItem('timeGoal', JSON.stringify(timeGoal));
-    localStorage.setItem('initSession', JSON.stringify(initSession));
-    localStorage.setItem('pageNumber', JSON.stringify(pageNumber));
-  }, [taskList,timeGoal,pageNumber,initSession] ) 
 
   return (
     <div className="app bg-moving">
       <button onClick={() => setTimeGoal} style={{display:'none'}}></button>
       <div className='bg-moving-blur'></div>
       <div 
-        className='bg-moving-pink'
+        className={` bg-moving-rigth bg-color-pink `}
         style={{width: `${bgPink}%` }}
       ></div>
       <div 
-        className='bg-moving-ciano'
+        className={`bg-moving-left ${selectedMode === 1 ? 'bg-color-ciano' : 'bg-color-green'}`}
         style={{width: `${bgCiano}%` }}
       ></div>
       
@@ -77,15 +91,23 @@ function App() {
         !initSession ?
         (
           <>
-            <Title 
-              isActive={isActive}
-              selectedMode={selectedMode} 
-              setSelectedMode={setSelectedMode}
-              modalSetting={modalSetting}
-              setModalSetting={setModalSetting}
-              modalTask={modalTask}
-              setModalTask={setModalTask}
-            />
+            {
+              endSession ? 
+              <Title 
+                onlylogo={true}
+              />
+              :
+              <Title 
+                isActive={isActive}
+                selectedMode={selectedMode} 
+                setSelectedMode={setSelectedMode}
+                modalSetting={modalSetting}
+                setModalSetting={setModalSetting}
+                modalTask={modalTask}
+                setModalTask={setModalTask}
+                endSession={endSession}
+              />
+            }
             <Timer 
               isActive={isActive}
               setIsActive={setIsActive}
@@ -104,6 +126,9 @@ function App() {
               endSession={endSession}
               setEndSession={setEndSession}
               setInitSession={setInitSession}
+              selectedMode={selectedMode}
+              autoStart={autoStart}
+              setAutoStart={setAutoStart}
             />
           </>
         )
@@ -123,6 +148,7 @@ function App() {
               setPageNumber={setPageNumber}
               selectedMode={selectedMode}
               setSelectedMode={setSelectedMode}
+              setAutoStart={setAutoStart}
             />
           </>
         )

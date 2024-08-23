@@ -42,8 +42,9 @@
     all: unset;
 }
 
+/*TIME GOAL*/
 .number-size{
-    font-size: 64px;
+    font-size: 24px;
 }
 .timeg-number{
     width: 100%;
@@ -61,7 +62,7 @@
 }
 
 .progress-bar {
-    height: 15px;  
+    height: 10px;  
     background-color: var(--ciano); 
     border-radius: 20px;
     overflow: hidden;

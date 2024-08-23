@@ -5,9 +5,9 @@ function StartButton({ operation, type }) {
 
 
     return (
-        <button className={`primary-button bg-start`} onClick={operation}>
+        <button className={`primary-button ${type === 1 || type === 2 ? 'bg-start' : 'bg-flowmodoro-start'}`} onClick={operation}>
             {
-                type === 1 ?
+                type === 1 || type === 3 &&
                 (
                     <svg 
                         width="28"
@@ -30,7 +30,9 @@ function StartButton({ operation, type }) {
                         />
                     </svg>
                 )
-                :
+            }
+            {
+                type === 2 &&
                 (
                     <svg 
                         width="28" 
@@ -57,7 +59,7 @@ function StartButton({ operation, type }) {
                     </svg>
                 )
             }
-            <span> { type === 1 ? "Start" : "Restart"} </span>
+            <span> { type === 1 ? "Start" : ''} { type === 2 ? "Restart" : ''} { type === 3 ? "Start" : ''} </span>
         </button>
     );
 }

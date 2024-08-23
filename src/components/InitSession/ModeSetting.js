@@ -7,14 +7,15 @@ function ModeSetting({
     selectedMode,
     setSelectedMode,
     setPageNumber,
-    setInitSession
+    setInitSession,
+    setAutoStart
 }) {
 
     const handleRadioChange = (value) => {
         setSelectedMode(value);
-    };
-  
-
+        setAutoStart(value === 2 ? false : true);
+    }
+    
     return(
         <div className='card'>
             <h2 className='titolo-font color-dark-ciano'> Pomodoro or Flowmodoro </h2>
@@ -24,13 +25,13 @@ function ModeSetting({
             <DivisorOrizontal></DivisorOrizontal>
 
             <div className='task-creator mode-setting radio-inputs'>
-                <label className={`radio ${selectedMode === 'pomodoro' ? 'bg-ciano' : 'bg-opacity-ciano'}`}>
+                <label className={`radio ${selectedMode === 1 ? 'bg-ciano' : 'bg-opacity-ciano'}`}>
                     <input 
                         type="radio"
                         name="radio"
                         value='pomodoro'
-                        checked={selectedMode === 'pomodoro'}
-                        onChange={() => handleRadioChange('pomodoro')} 
+                        checked={selectedMode === 1}
+                        onChange={() => handleRadioChange(1)} 
                     />
 
                     <svg width="120" height="120" viewBox="0 0 72 76" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,15 +48,15 @@ function ModeSetting({
                         <path d="M35.2929 56.7071C35.6834 57.0976 36.3166 57.0976 36.7071 56.7071L43.0711 50.3431C43.4616 49.9526 43.4616 49.3195 43.0711 48.9289C42.6805 48.5384 42.0474 48.5384 41.6569 48.9289L36 54.5858L30.3431 48.9289C29.9526 48.5384 29.3195 48.5384 28.9289 48.9289C28.5384 49.3195 28.5384 49.9526 28.9289 50.3431L35.2929 56.7071ZM35 45V56H37V45H35Z" fill="#A6ECEE"/>
                     </svg>
 
-                    <span className={`default-font ${selectedMode === 'pomodoro' ? 'color-dark-ciano' : 'color-ligth-ciano'}`} > Pomodoro </span>
+                    <span className={`default-font ${selectedMode === 1 ? 'color-dark-ciano' : 'color-ligth-ciano'}`} > Pomodoro </span>
                 </label>
-                <label className={`radio ${selectedMode === 'flowmodoro' ? 'bg-green' : 'bg-opacity-green'}`}>
+                <label className={`radio ${selectedMode === 2 ? 'bg-green' : 'bg-opacity-green'}`}>
                     <input 
                         type="radio"
                         name="radio"
                         value='flowmodoro'
-                        checked={selectedMode === 'flowmodoro'}
-                        onChange={() => handleRadioChange('flowmodoro')} 
+                        checked={selectedMode === 2}
+                        onChange={() => handleRadioChange(2)} 
                     />
                     <svg width="110" height="110" viewBox="0 0 77 94" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clipPath="url(#clip0_196_697)">
@@ -89,7 +90,7 @@ function ModeSetting({
                     </svg>
 
 
-                    <span className={`default-font ${selectedMode === 'flowmodoro' ? 'color-dark-green' : 'color-ligth-green'}`} > Flowmodoro </span>
+                    <span className={`default-font ${selectedMode === 2 ? 'color-dark-green' : 'color-ligth-green'}`} > Flowmodoro </span>
                 </label>
             </div>
 

@@ -57,8 +57,8 @@ function CreateAction({
                                 taskList.map((task, index) => (
                                     <div className="action-content">
                                         <Task 
-                                            key={index}
-                                            id={index}
+                                            key={Date.now()}
+                                            id={Date.now()}
                                             text={task.action}       
                                             completed={task.completed}
                                             setTaskList={setTaskList}
