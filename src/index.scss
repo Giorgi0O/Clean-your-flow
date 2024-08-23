@@ -246,6 +246,11 @@ body {
 
   @include font-corpo1();
 }
+.bg-none{
+  border: none;
+  background: none;
+  color: var(--dark-ciano );
+}
 
 .bg-gray{
   background-color: gray;

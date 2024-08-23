@@ -13,7 +13,7 @@ function CreateAction({
         const value = event.target.value.trim();
         if (value) { 
             setTaskList(prev => {
-                const newTask = { action: value, completed: false };
+                const newTask = { id: taskList.length, action: value, completed: false };
                 return [...prev, newTask]; 
             });
             event.target.value = ''; 
@@ -55,15 +55,15 @@ function CreateAction({
                         taskList.length > 0 ? 
                             (
                                 taskList.map((task, index) => (
-                                    <div className="action-content">
+                                    <div className="action-content" key={index}>
                                         <Task 
-                                            key={Date.now()}
-                                            id={Date.now()}
-                                            text={task.action}       
+                                            id={task.id}
+                                            action={task.action}       
                                             completed={task.completed}
                                             setTaskList={setTaskList}
+                                            isCompleted={false}
                                         />
-                                        <DivisorOrizontal></DivisorOrizontal>
+                                        <DivisorOrizontal/>
                                     </div>
                                 ))
                             )

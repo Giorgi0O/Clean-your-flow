@@ -8,16 +8,14 @@ import InitSession from './components/InitSession/InitSession';
 function App() {
 
   /*NON SALVATI IN LOCAL STAORAGE*/
-  const [bgPink, setBgPink] = useState(15);
-  const [bgCiano, setBgCiano] = useState(100);
+
   const [isActive, setIsActive] = useState(false);
   const [modalSetting, setModalSetting] = useState(false);
   const [modalTask, setModalTask] = useState(false);
-  const [endSession, setEndSession] = useState(false);
 
   /*STATE SALVATI IN LOCAL STORAGE*/
   const [selectedMode, setSelectedMode] = useState(() => {
-      const mode = localStorage.getItem('mode');
+      const mode = localStorage.getItem('selectedMode');
       return mode ? JSON.parse(mode) : 1;
     }
   );
@@ -46,19 +44,34 @@ function App() {
       return autoStart ? JSON.parse(autoStart) : 0;
     }
   );
+  const [bgPink, setBgPink] = useState( () => {
+      const bgPink = localStorage.getItem('bgPink');
+      return bgPink ? JSON.parse(bgPink) : 15;
+    }
+  );
+  const [bgCiano, setBgCiano] = useState( () => {
+      const bgCiano = localStorage.getItem('bgCiano');
+      return bgCiano ? JSON.parse(bgCiano) : 15;
+    }
+  );
+  const [endSession, setEndSession] = useState( () => {
+      const endSession = localStorage.getItem('endSession');
+      return endSession ? JSON.parse(endSession) : false;
+    }
+  );
 
-  const loadLocalStorage = () => {
+
+  useEffect( () => {
     localStorage.setItem('taskList', JSON.stringify(taskList));
     localStorage.setItem('timeGoal', JSON.stringify(timeGoal));
     localStorage.setItem('initSession', JSON.stringify(initSession));
     localStorage.setItem('pageNumber', JSON.stringify(pageNumber));
     localStorage.setItem('selectedMode', JSON.stringify(selectedMode));
     localStorage.setItem('autoStart', JSON.stringify(autoStart));
-  };
-
-  useEffect( () => {
-    loadLocalStorage();
-  }, [taskList,timeGoal,pageNumber,initSession, selectedMode] ) 
+    localStorage.setItem('bgPink', JSON.stringify(bgPink));
+    localStorage.setItem('bgCiano', JSON.stringify(bgCiano));
+    localStorage.setItem('endSession', JSON.stringify(endSession));
+  }, [taskList,timeGoal,pageNumber,initSession, selectedMode,autoStart,bgPink, bgCiano,endSession] ) 
 
 
   useEffect( () => {
@@ -79,7 +92,7 @@ function App() {
       <button onClick={() => setTimeGoal} style={{display:'none'}}></button>
       <div className='bg-moving-blur'></div>
       <div 
-        className={` bg-moving-rigth bg-color-pink `}
+        className={` bg-moving-rigth ${selectedMode === 1 ? 'bg-color-pink' : 'bg-color-ciano'} `}
         style={{width: `${bgPink}%` }}
       ></div>
       <div 

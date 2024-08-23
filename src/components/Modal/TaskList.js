@@ -48,20 +48,21 @@ function TaskList( {
                         taskList.length > 0 ? 
                             (
                                 taskList.map((task, index) => (
-                                    <>
+                                    <div key={index}>
                                         <Task 
                                             key={index}
                                             id={index}
-                                            text={task.action}       
+                                            action={task.action} 
                                             completed={task.completed}
                                             setTaskList={setTaskList}
+                                            isCompleted={true}
                                         />
                                         <DivisorOrizontal></DivisorOrizontal>
-                                    </>
+                                    </div>
                                 ))
                             )
                         :
-                            <div className="task-empty"> <p className="sub-font"> Action list is empty </p> </div>
+                        <div className="task-empty"> <p className="sub-font"> Action list is empty </p> </div>
                     }
                 </div>
             }

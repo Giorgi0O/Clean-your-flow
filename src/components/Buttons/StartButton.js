@@ -7,7 +7,7 @@ function StartButton({ operation, type }) {
     return (
         <button className={`primary-button ${type === 1 || type === 2 ? 'bg-start' : 'bg-flowmodoro-start'}`} onClick={operation}>
             {
-                type === 1 || type === 3 &&
+                (type === 1 || type === 3) &&
                 (
                     <svg 
                         width="28"

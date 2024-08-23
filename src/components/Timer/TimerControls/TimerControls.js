@@ -65,7 +65,7 @@ function TimerControls({
   }
 
   const flowmodoroStart = () => {
-    if( flow ){
+    if( !flow ){
       setTimeRemaining(0);
       setFlow(true);
     }
@@ -99,10 +99,18 @@ function TimerControls({
             !isActive ?
               <StartButton operation={flowmodoroStart} type={3} ></StartButton>
             :
+            (
+              flow ?
               <>
                 <StopButton operation={flowmodoroBreath} type={2} ></StopButton>
                 <CircleButton iconName={'pause'} color={'ligth-green'} operation={() => setIsActive(false)} ></CircleButton>
               </>
+              :
+              <>
+                <StopButton operation={() => setIsActive(false)} type={2} ></StopButton>
+              </>
+            )
+              
           )
         }
         {

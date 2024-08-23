@@ -16,9 +16,13 @@
 .task{
     width: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: left;
     margin: 8px 0 8px 0;
+}
+.task-icon-action{
+    display: flex;
+    align-items: center;
 }
 .task-content{
     margin: 0 0 0 8px;
@@ -41,6 +45,7 @@
 .button-only-icon{
     all: unset;
 }
+
 
 /*TIME GOAL*/
 .number-size{
