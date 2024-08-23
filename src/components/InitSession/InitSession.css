@@ -41,6 +41,7 @@
     width: 100%;
     margin-left: 4px;
     text-align: start;
+    font-size: 18px;
 }
 .task-input:focus{
     border: none;
