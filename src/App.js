@@ -63,7 +63,7 @@ function App() {
   const [isActive, setIsActive] = useState(false);
   const [modalSetting, setModalSetting] = useState(false);
   const [modalTask, setModalTask] = useState(false);
-  const [timeRemaining, setTimeRemaining] = useState( selectedMode === 1 ? 25*60 : 0);
+  const [timeRemaining, setTimeRemaining] = useState( 25*60);
 
 
   useEffect( () => {
@@ -152,6 +152,7 @@ function App() {
               setEndSession={setEndSession}
               setInitSession={setInitSession}
               selectedMode={selectedMode}
+              setSelectedMode={setSelectedMode}
               autoStart={autoStart}
               setAutoStart={setAutoStart}
               timeRemaining={timeRemaining}
