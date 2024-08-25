@@ -7,12 +7,6 @@ import InitSession from './components/InitSession/InitSession';
 
 function App() {
 
-  /*NON SALVATI IN LOCAL STAORAGE*/
-
-  const [isActive, setIsActive] = useState(false);
-  const [modalSetting, setModalSetting] = useState(false);
-  const [modalTask, setModalTask] = useState(false);
-
   /*STATE SALVATI IN LOCAL STORAGE*/
   const [selectedMode, setSelectedMode] = useState(() => {
       const mode = localStorage.getItem('selectedMode');
@@ -59,6 +53,17 @@ function App() {
       return endSession ? JSON.parse(endSession) : false;
     }
   );
+  const [flow, setFlow] = useState( () => {
+      const flow = localStorage.getItem('flow');
+      return flow ? JSON.parse(flow) : true;
+    }
+  )
+
+  /*NON SALVATI IN LOCAL STAORAGE*/
+  const [isActive, setIsActive] = useState(false);
+  const [modalSetting, setModalSetting] = useState(false);
+  const [modalTask, setModalTask] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState( selectedMode === 1 ? 25*60 : 0);
 
 
   useEffect( () => {
@@ -71,7 +76,8 @@ function App() {
     localStorage.setItem('bgPink', JSON.stringify(bgPink));
     localStorage.setItem('bgCiano', JSON.stringify(bgCiano));
     localStorage.setItem('endSession', JSON.stringify(endSession));
-  }, [taskList,timeGoal,pageNumber,initSession, selectedMode,autoStart,bgPink, bgCiano,endSession] ) 
+    localStorage.setItem('flow', JSON.stringify(flow));
+  }, [taskList,timeGoal,pageNumber,initSession, selectedMode,autoStart,bgPink, bgCiano,endSession,flow] ) 
 
 
   useEffect( () => {
@@ -119,6 +125,12 @@ function App() {
                 modalTask={modalTask}
                 setModalTask={setModalTask}
                 endSession={endSession}
+                timeRemaining={timeRemaining}
+                setTimeRemaining={setTimeRemaining}
+                setAutoStart={setAutoStart}
+                setFlow={setFlow}
+                setBgPink={setBgPink}
+                setBgCiano={setBgCiano}
               />
             }
             <Timer 
@@ -142,6 +154,10 @@ function App() {
               selectedMode={selectedMode}
               autoStart={autoStart}
               setAutoStart={setAutoStart}
+              timeRemaining={timeRemaining}
+              setTimeRemaining={setTimeRemaining}
+              flow={flow}
+              setFlow={setFlow}
             />
           </>
         )
@@ -162,6 +178,7 @@ function App() {
               selectedMode={selectedMode}
               setSelectedMode={setSelectedMode}
               setAutoStart={setAutoStart}
+              setTimeRemaining={setTimeRemaining}
             />
           </>
         )

@@ -27,9 +27,12 @@ function Timer( {
   setInitSession,
   selectedMode,
   autoStart,
-  setAutoStart
+  setAutoStart,
+  timeRemaining,
+  setTimeRemaining,
+  flow,
+  setFlow
 }) {
-
 
   const [flowTime, setFlowTime] = useState(25*60);
   const [restTime, setRestTime] = useState(5*60);
@@ -37,8 +40,6 @@ function Timer( {
   const [flowmodoroCount, setFlowmodoroCount] = useState(0);
   
   const [bgMoving, setBgMoving] = useState(60 / flowTime );
-  const [timeRemaining, setTimeRemaining] = useState( selectedMode === 1 ? flowTime : flowmodoroCount);
-  const [flow, setFlow] = useState(true);
   const [countOfFlow, setCountOfFlow] = useState(0);
   const [flowTotalTime, setFlowTotalTime] = useState(0);
   const [countAllFlow, setCountAllFlow] = useState(0);
@@ -46,10 +47,6 @@ function Timer( {
   const [isLongRest, setIsLongRest] = useState(false);
 
   const [endSessionRequest, setEndSessionRequest] = useState(false);
-
-
-
-
 
   useEffect(() => {
     const flowmodoroTimer = () => {
@@ -119,7 +116,6 @@ function Timer( {
       });
     }
 
-
     if( isActive ){
       const interval = setInterval( () => {
         if( selectedMode === 1 ){
@@ -133,7 +129,7 @@ function Timer( {
 
       return () => clearInterval(interval);
     }
-  }, [isActive,setIsActive, flowTime, restTime, autoStart,flow, timeRemaining, isLongRest,longRestTime, bgMoving, countAllFlow ,setBgCiano, setBgPink, flowmodoroCount, selectedMode]); 
+  }, [isActive,setIsActive, flowTime, restTime, autoStart,flow, timeRemaining, isLongRest,longRestTime, bgMoving, countAllFlow ,setBgCiano, setBgPink, flowmodoroCount, selectedMode, setTimeRemaining, setFlow]); 
 
   useEffect(() => {
     if (!flow ) {

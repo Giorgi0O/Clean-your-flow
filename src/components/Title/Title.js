@@ -3,13 +3,36 @@ import './Title.css';
 import React from 'react';
 import Switch from '../Switch/Switch'
 
-function Title({ isActive, selectedMode, setSelectedMode, modalSetting, setModalSetting, modalTask, setModalTask, onlylogo }) {
+function Title({ 
+  isActive,
+  selectedMode,
+  setSelectedMode,
+  modalSetting,
+  setModalSetting,
+  modalTask,
+  setModalTask, 
+  onlylogo,
+  timeRemaining,
+  setTimeRemaining,
+  setAutoStart,
+  setFlow,
+  setBgPink,
+  setBgCiano
+ }) {
   return (
     <div className='title'>
       <div className='switch-mode'>
         {
-          !isActive && !onlylogo &&
-          <Switch selectedMode={selectedMode} setSelectedMode={setSelectedMode} ></Switch>
+          !isActive && !onlylogo && ( (selectedMode === 1 && timeRemaining === 25* 60) || (selectedMode === 2 && timeRemaining === 0) ) &&
+          <Switch 
+            selectedMode={selectedMode} 
+            setSelectedMode={setSelectedMode} 
+            setTimeRemaning={setTimeRemaining} 
+            setAutoStart={setAutoStart}
+            setFlow={setFlow}
+            setBgPink={setBgPink}
+            setBgCiano={setBgCiano}
+          />
         }
       </div>
 

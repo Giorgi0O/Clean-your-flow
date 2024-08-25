@@ -45,7 +45,7 @@ function Task( {
                             <CircleButton iconName={'task'} color={'none'}  operation={completeTask} ></CircleButton>
                     )
                 }
-                <span className='default-font task-content float-rigth' > {completed ? <s>{action}</s> : action } </span>
+                <span className='default-font task-content' > {completed ? <s style={{ color: "gray"}}>{action}</s> : action } </span>
             </div>
             <button className={`button-only-icon`} onClick={deleteTask}> 
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

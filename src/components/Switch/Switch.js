@@ -1,11 +1,26 @@
 import React from "react";
 import './Switch.css'
 
-function Switch({selectedMode, setSelectedMode }){
+function Switch({
+    selectedMode, 
+    setSelectedMode,
+    setTimeRemaning,
+    setAutoStart,
+    setFlow,
+    setBgPink,
+    setBgCiano
+}){
 
 
     const handleRadioChange = (value) => {
       setSelectedMode(value);
+      setTimeRemaning(value === 1 ? 25*60 : 0)
+      if( value === 2 ){
+        setAutoStart(false);
+      }
+      setFlow(true);
+      setBgPink(15);
+      setBgCiano(100);
     };
 
     return (
