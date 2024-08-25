@@ -11,19 +11,23 @@
     height: 80%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 /* COMMON */
 .subject{
-    margin: 4px;
+    margin: 8px;
     color: var(--ciano);
+
 }
 
 /* TASK CREATOR */
 .task-creator-title{
     width: 100%;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .task-creator{
     width: 100%;
@@ -77,6 +81,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    align-items: center;
 }
 
 /*TIME GOAL*/
@@ -91,10 +96,6 @@
     display: flex;
     justify-content: space-evenly;
 }
-.default-button{
-    width: 20%;
-}
-
 
 /*TIME GOAL BAR*/
 .PB-range-slider {
@@ -179,8 +180,4 @@
         width: 40%;
         height: 80%;
     }
-}
-
-@media only screen and (min-width: 600px) {
-
 }

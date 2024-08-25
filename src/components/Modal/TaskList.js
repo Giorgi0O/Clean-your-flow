@@ -44,7 +44,7 @@ function TaskList( {
                         taskList.length > 0 ? 
                             (
                                 taskList.map((task, index) => (
-                                    <div key={index}>
+                                    <div className='tasks' key={index}>
                                         <Task 
                                             key={index}
                                             id={index}

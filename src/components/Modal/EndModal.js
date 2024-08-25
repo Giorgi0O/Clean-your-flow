@@ -19,8 +19,15 @@ function EndModal( {
                         iconName={'play-end'} 
                         color={'ciano'} 
                         operation={() => setEndSessionRequest(false)} 
-                        fixedWidth={50}></Button>
-                    <Button text={'End'} iconName={'x-circle'} color={'pink'} fixedWidth={50} operation={() =>{ setEndSession(true); setEndSessionRequest(false); }}></Button>
+                        fixedWidth={50}
+                    ></Button>
+                    <Button 
+                        text={'End'} 
+                        iconName={'x-circle'} 
+                        color={'pink'} 
+                        fixedWidth={50} 
+                        operation={() =>{ setEndSession(true); setEndSessionRequest(false); }}
+                    ></Button>
                 </div>
             </div>
         </div>
