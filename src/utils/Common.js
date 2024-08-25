@@ -11,6 +11,12 @@ export function formatTime(milliseconds)
     return `${formattedMinutes}:${formattedSeconds}`;
 };
 
+export function restart(){
+    localStorage.clear();
+    window.location.reload();
+    //navigate(0);
+}
+
 export function hexToFilter(hex)
 {
     hex = hex.replace('#', '');

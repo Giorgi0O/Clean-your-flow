@@ -4,8 +4,8 @@
     align-items: center;
     justify-content: space-evenly;
     vertical-align: baseline;
-    width: 80%;
-    height: 92%;
+    width: 90%;
+    height: 90%;
     z-index: 100;
 }
 
@@ -16,6 +16,16 @@
     width: 100%;
     height: 50%;
 }
+.time-count-down{
+    width: 45%;
+}
+.modal-space{
+    width: 55%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .timer-end{
     display: flex;
     align-items: center;
@@ -23,55 +33,30 @@
     width: 100%;
     height: 50%;
 }
-.modal{
-    position: absolute;
-    top: 15%;
-    right: 10%;
-    z-index: 101;
-    width: 300px;
-    height: 400px;
-    background-color: white;
-    border-radius: 8px;
-    border: 2px solid var(--dark-ciano);
-}
-
 .count-down{
     height: 35%;
     margin: 20px;
     display: flex;
     align-items:start;
 }
-.count-down p{
+.font-number{
     font-size: 128px;
-    margin: 0;
 }
-#start-button{
-    width: 150px;
-    font-size: 32px;
-    background-color: red;
-    color: white;
-    border: none;
+/* stile controlli */
+.start-stop-buttons{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-/* stile pulsante di refresh */
-.base-button-icon {
-    background: none; 
-    border: none;
-    color: black; 
-    margin-right: 10px;
+.timer-controls{
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-.auto-start-off{
-    background-color: black;
-    color: white;
-    width: 150px;
-    height: 30px;
-}
-.auto-start-on{
-    background-color: red;
-    color: black;
-    width: 150px;
-    height: 30px;
-}
-
 .count-flow{
     text-align: center;
 }
+
+

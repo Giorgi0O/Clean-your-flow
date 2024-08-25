@@ -7,8 +7,6 @@ function Switch({
     setTimeRemaning,
     setAutoStart,
     setFlow,
-    setBgPink,
-    setBgCiano
 }){
 
 
@@ -19,8 +17,6 @@ function Switch({
         setAutoStart(false);
       }
       setFlow(true);
-      setBgPink(15);
-      setBgCiano(100);
     };
 
     return (

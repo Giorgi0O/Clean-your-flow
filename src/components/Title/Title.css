@@ -1,9 +1,9 @@
 .title{
     z-index: 100;
     width: 80%;
-    height: 8%;
+    height: 10%;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
     vertical-align: center;
     padding: 8px;
@@ -12,9 +12,4 @@
     position: absolute;
     left: 50%; 
     transform: translateX(-50%); 
-}
-
-.button-modal{
-    display: flex;
-    justify-content: space-between;
 }

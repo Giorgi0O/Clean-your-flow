@@ -1,40 +1,15 @@
 import CircleButton from '../Buttons/CircleButton';
 import './Title.css';
 import React from 'react';
-import Switch from '../Switch/Switch'
 
 function Title({ 
-  isActive,
-  selectedMode,
-  setSelectedMode,
-  modalSetting,
-  setModalSetting,
-  modalTask,
-  setModalTask, 
-  onlylogo,
-  timeRemaining,
-  setTimeRemaining,
-  setAutoStart,
-  setFlow,
-  setBgPink,
-  setBgCiano
+  setIsActive,
+  setEndSessionRequest,
+  initSession,
+  endSession
  }) {
   return (
     <div className='title'>
-      <div className='switch-mode'>
-        {
-          !isActive && !onlylogo && ( (selectedMode === 1 && timeRemaining === 25* 60) || (selectedMode === 2 && timeRemaining === 0) ) &&
-          <Switch 
-            selectedMode={selectedMode} 
-            setSelectedMode={setSelectedMode} 
-            setTimeRemaning={setTimeRemaining} 
-            setAutoStart={setAutoStart}
-            setFlow={setFlow}
-            setBgPink={setBgPink}
-            setBgCiano={setBgCiano}
-          />
-        }
-      </div>
 
       <div className='logo'>
         <svg width="240" height="40" viewBox="0 0 267 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,61 +25,15 @@ function Title({
         </svg>
       </div>
 
-
-      <div className='button-modal'>
-        {
-          !onlylogo &&
-          (
-            modalTask ?
-              <CircleButton 
-                color={'ciano'} 
-                tooltip={'task'} 
-                iconName={'task-list'} 
-                operation={() => {
-                  setModalTask(!modalTask)
-                  setModalSetting(false);
-                }} 
-              ></CircleButton>
-            :
-              <CircleButton 
-                color={'ligth-ciano'} 
-                tooltip={'task'} 
-                iconName={'task-list'} 
-                operation={() => {
-                  setModalTask(!modalTask)
-                  setModalSetting(false);
-                }} 
-              ></CircleButton>
-          ) 
-        }
-        {
-          !isActive && !onlylogo &&
-          (
-            modalSetting ? (
-              <CircleButton 
-                color={'green'} 
-                tooltip={'settings'} 
-                iconName={'settings'} 
-                operation={() => {
-                  setModalSetting(!modalSetting);
-                  setModalTask(false);
-                }} 
-              />
-            ) : (
-              <CircleButton 
-                color={'ligth-green'} 
-                tooltip={'settings'} 
-                iconName={'settings'} 
-                operation={() => {
-                  setModalSetting(!modalSetting);
-                  setModalTask(false);
-                }} 
-              />
-            )
-          )
-        }
-        
-      </div>
+      {
+        !initSession && !endSession &&
+          <CircleButton tooltip={'End session'} iconName={'x'} color={'opacity-pink'} 
+            operation={() => {
+              setEndSessionRequest(true)
+              setIsActive(false);
+            }} 
+          ></CircleButton>
+      }
     </div>
   );
 }

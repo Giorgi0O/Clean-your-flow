@@ -2,6 +2,7 @@ import React from "react";
 import Button from '../Buttons/Button';
 import Task from '../Modal/Task';
 import DivisorOrizontal from '../Divisor/DivisorOrizontal';
+import './InitSession.css';
 
 function CreateAction({
     taskList,
@@ -27,12 +28,12 @@ function CreateAction({
     };
 
     return(
-        <div className='card'>
-            <h2 className='titolo-font color-dark-ciano'> Before starting, set your action </h2>
-            <span className='subject default-font' > To stay focused, break down larger tasks into smaller, manageable steps. </span>
-            <span className='subject default-font' >  This makes tracking progress easier and keeps you motivated </span>
-
-            <DivisorOrizontal></DivisorOrizontal>
+        <div className='card card-dim'>
+            <div className="task-creator-title">
+                <h2 className='titolo-font color-dark-ciano'> Before starting, set your action </h2>
+                <p className='subject default-font' > To stay focused, break down larger tasks into smaller, manageable steps. </p>
+                <p className='subject default-font' >  This makes tracking progress easier and keeps you motivated </p>
+            </div>
 
             <div className='task-creator'>
                 <div className='creator'>
@@ -50,7 +51,8 @@ function CreateAction({
                         placeholder={'Write here to create new action'}
                     />
                 </div>
-                <div className='task-list font-corpo2'>
+                <DivisorOrizontal></DivisorOrizontal>
+                <div className='task-list'>
                     {
                         taskList.length > 0 ? 
                             (
@@ -68,7 +70,9 @@ function CreateAction({
                                 ))
                             )
                         :
-                            <div className="task-empty"> <p className="sub-font"> Action list is empty </p> </div>
+                            (
+                                <div className="task-empty"> <p className="sub-font"> Action list is empty </p> </div>
+                            )
                     }
                 </div>
             </div>

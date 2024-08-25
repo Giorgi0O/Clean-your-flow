@@ -20,7 +20,7 @@ function InitSession({
     
 
     return (
-        <div className="task-list-container" >
+        <div className="card-container" >
             {
                 pageNumber === 0 && 
                 <CreateAction

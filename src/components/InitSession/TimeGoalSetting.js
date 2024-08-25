@@ -10,11 +10,12 @@ function TimeGoalSetting({
 }) {
 
     return(
-        <div className='card'>
-            <h2 className='titolo-font color-dark-ciano'> Set time goal </h2>
-            <span className='subject default-font' > Set a time goal to stay on track. Having a clear endpoint </span>
-            <span className='subject default-font' > helps you maintain focus and boosts your productivity. </span>
-
+        <div className='card card-dim'>
+            <div className="task-creator-title">
+                <h2 className='titolo-font color-dark-ciano'> Set time goal </h2>
+                <p className='subject default-font' > Set a time goal to stay on track. Having a clear endpoint </p>
+                <p className='subject default-font' > helps you maintain focus and boosts your productivity. </p>
+            </div>
             <DivisorOrizontal></DivisorOrizontal>
 
             <div className='task-creator time-goal-set'>

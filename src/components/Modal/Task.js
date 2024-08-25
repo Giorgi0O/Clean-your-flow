@@ -28,24 +28,31 @@ function Task( {
         );
     };
 
+    const capitalizeFirstLetter = (sentence) => {
+      if (!sentence) return '';
+      return sentence.charAt(0).toUpperCase() + sentence.slice(1);
+    }
+
     return (
         <div className="task">
             <div className='task-icon-action'>
-                {
-                    !isCompleted ?
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="0.5" y="0.5" width="23" height="23" rx="11.5" stroke="#1E3419"/>
-                            <circle cx="12" cy="12" r="6.5" stroke="#1E3419"/>
-                        </svg>
-                    :
-                    (
-                        done ?
-                            <CircleButton iconName={'task-completed'} color={'none'} operation={completeTask}></CircleButton>
+                <div className='task-icon'>
+                    {
+                        !isCompleted ?
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0.5" y="0.5" width="23" height="23" rx="11.5" stroke="#1E3419"/>
+                                <circle cx="12" cy="12" r="6.5" stroke="#1E3419"/>
+                            </svg>
                         :
-                            <CircleButton iconName={'task'} color={'none'}  operation={completeTask} ></CircleButton>
-                    )
-                }
-                <span className='default-font task-content' > {completed ? <s style={{ color: "gray"}}>{action}</s> : action } </span>
+                        (
+                            done ?
+                                <CircleButton iconName={'task-completed'} color={'none'} operation={completeTask}></CircleButton>
+                            :
+                                <CircleButton iconName={'task'} color={'none'}  operation={completeTask} ></CircleButton>
+                        )
+                    }
+                </div>
+                <span className='default-font task-content' > {completed ? <s style={{ color: "gray"}}>{capitalizeFirstLetter(action)}</s> : capitalizeFirstLetter(action) } </span>
             </div>
             <button className={`button-only-icon`} onClick={deleteTask}> 
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

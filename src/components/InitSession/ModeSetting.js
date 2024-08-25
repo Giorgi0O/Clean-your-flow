@@ -1,4 +1,5 @@
 import '../Switch/Switch.css'
+import './InitSession.css'
 import React from "react";
 import Button from '../Buttons/Button';
 import DivisorOrizontal from '../Divisor/DivisorOrizontal';
@@ -18,7 +19,7 @@ function ModeSetting({
     }
     
     return(
-        <div className='card'>
+        <div className='card card-dim'>
             <h2 className='titolo-font color-dark-ciano'> Pomodoro or Flowmodoro </h2>
             <span className='subject default-font' > Pomodoro uses short work intervals with breaks, while </span>
             <span className='subject default-font' >  Flomodoro adapts to your natural focus flow, allowing longer work periods. </span>

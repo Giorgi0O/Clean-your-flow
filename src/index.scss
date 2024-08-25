@@ -41,7 +41,7 @@ body {
 @mixin font-titolo2{
   font-family: var(--titolo);
   font-weight: bold;
-  font-size: 28px;
+  font-size: 2.8vh;
 }
 @mixin font-titolo3{
   font-family: var(--titolo);
@@ -50,13 +50,13 @@ body {
 }
 @mixin font-corpo1{
   font-family: var(--corpo);
-  font-weight:600;
-  font-size: 18px;
+  font-weight:400;
+  font-size: 2vh;
 }
 @mixin font-corpo2{
   font-family: var(--corpo);
-  font-weight:600;
-  font-size: 16px;
+  font-weight:400;
+  font-size: 1.8;
 }
 @mixin font-sub-corpo{
   font-family: var(--corpo);
@@ -75,7 +75,6 @@ body {
 }
 .font-number{
   @include font-number();
-  font-size: 128px;
 }
 .titolo-font{
   @include font-titolo2();
@@ -236,7 +235,8 @@ body {
 }
 .bg-opacity-pink{
   background-color: var(--opacity-pink);
-  color: var(--dark-green);
+  color: var(--dark-pink);
+  border: 1.5px solid var(--ligth-pink);
 
   @include font-corpo1();
 }
@@ -293,20 +293,16 @@ body {
 
 /* MODAL */
 .card {
-  width: 300px;
-  max-height: 80%;
   background-color: rgb(255, 255, 255);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
+  justify-content: start;
   align-items: center;
-  justify-content: center;
   padding: 20px 30px;
   gap: 13px;
-  position: relative;
   overflow: hidden;
   box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.062);
-  overflow-y: auto;
 }
 
 .task-input::placeholder {

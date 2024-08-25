@@ -1,8 +1,10 @@
 import './App.scss';
-import Timer from './components/Timer/Timer';
+import TimerPomodoro from './components/Timer/TimerPomodoro'
+import TimerFlowmodoro from './components/Timer/TimerFlowmodoro'
 import Title from './components/Title/Title';
 import {useEffect, useState} from 'react';
 import InitSession from './components/InitSession/InitSession';
+import EndModal from './components/Modal/EndModal';
 
 
 function App() {
@@ -58,12 +60,28 @@ function App() {
       return flow ? JSON.parse(flow) : true;
     }
   )
+  const [flowTotalTime, setFlowTotalTime] = useState( () => {
+      const flowTotalTime = localStorage.getItem('flowTotalTime');
+      return flowTotalTime ? JSON.parse(flowTotalTime) : 0;
+    }
+  )
+  const [countAllFlow, setCountAllFlow] = useState( () => {
+    const countAllFlow = localStorage.getItem('countAllFlow');
+    return countAllFlow ? JSON.parse(countAllFlow) : 0;
+  }
+)
+
 
   /*NON SALVATI IN LOCAL STAORAGE*/
   const [isActive, setIsActive] = useState(false);
-  const [modalSetting, setModalSetting] = useState(false);
-  const [modalTask, setModalTask] = useState(false);
-  const [timeRemaining, setTimeRemaining] = useState( 25*60);
+  const [timeRemaining, setTimeRemaining] = useState( selectedMode === 1 ? 25*60 : 0 );
+  const [endSessionRequest, setEndSessionRequest] = useState(false);
+
+  const [flowTime, setFlowTime] = useState(25*60);
+  const [restTime, setRestTime] = useState(5*60);
+  const [longRestTime, setLongRestTime] = useState(15*60);
+  
+  const [bgMoving, setBgMoving] = useState(60 / flowTime );
 
 
   useEffect( () => {
@@ -77,7 +95,9 @@ function App() {
     localStorage.setItem('bgCiano', JSON.stringify(bgCiano));
     localStorage.setItem('endSession', JSON.stringify(endSession));
     localStorage.setItem('flow', JSON.stringify(flow));
-  }, [taskList,timeGoal,pageNumber,initSession, selectedMode,autoStart,bgPink, bgCiano,endSession,flow] ) 
+    localStorage.setItem('flowTotalTime', JSON.stringify(flowTotalTime));
+    localStorage.setItem('countAllFlow', JSON.stringify(countAllFlow));
+  }, [taskList,timeGoal,pageNumber,initSession, selectedMode,autoStart,bgPink, bgCiano,endSession,flow, flowTotalTime, countAllFlow] ) 
 
 
   useEffect( () => {
@@ -92,6 +112,22 @@ function App() {
     }
   }, [endSession, initSession] );
 
+  useEffect(() =>{
+    const clampValue = (value, min, max) => Math.min(Math.max(value, min), max);
+  
+    const updateBackgrounds = (isFlow, bgMoving) => {
+      setBgCiano(prev => clampValue(prev + (isFlow ? -bgMoving : bgMoving), 15, 100));
+      setBgPink(prev => clampValue(prev + (isFlow ? bgMoving : -bgMoving), 15, 100));
+    };
+
+    setBgMoving(60/flowTime);
+
+    if (flow) {
+      updateBackgrounds(true, bgMoving);
+    } else {
+      updateBackgrounds(false, bgMoving);
+    }
+  },[timeRemaining, flowTime, bgMoving,flow]);
 
   return (
     <div className="app bg-moving">
@@ -105,85 +141,97 @@ function App() {
         className={`bg-moving-left ${selectedMode === 1 ? 'bg-color-ciano' : 'bg-color-green'}`}
         style={{width: `${bgCiano}%` }}
       ></div>
-      
+
+      <Title 
+        setIsActive={setIsActive}
+        setEndSessionRequest={setEndSessionRequest}
+        initSession={initSession}
+        endSession={endSession}
+      />
+
       {
-        !initSession ?
+        initSession ?
         (
-          <>
-            {
-              endSession ? 
-              <Title 
-                onlylogo={true}
-              />
-              :
-              <Title 
-                isActive={isActive}
-                selectedMode={selectedMode} 
-                setSelectedMode={setSelectedMode}
-                modalSetting={modalSetting}
-                setModalSetting={setModalSetting}
-                modalTask={modalTask}
-                setModalTask={setModalTask}
-                endSession={endSession}
-                timeRemaining={timeRemaining}
-                setTimeRemaining={setTimeRemaining}
-                setAutoStart={setAutoStart}
-                setFlow={setFlow}
-                setBgPink={setBgPink}
-                setBgCiano={setBgCiano}
-              />
-            }
-            <Timer 
-              isActive={isActive}
-              setIsActive={setIsActive}
-              bgCiano={bgCiano}
-              bgPink={bgPink}
-              setBgCiano={setBgCiano}
-              setBgPink={setBgPink}
-              modalSetting={modalSetting}
-              setModalSetting={setModalSetting}
-              modalTask={modalTask}
-              setModalTask={setModalTask}
-              taskList={taskList}
-              setTaskList={setTaskList}
-              timeGoal={timeGoal}
-              setTimeGoal={setTimeGoal}
-              endSession={endSession}
-              setEndSession={setEndSession}
-              setInitSession={setInitSession}
-              selectedMode={selectedMode}
-              setSelectedMode={setSelectedMode}
-              autoStart={autoStart}
-              setAutoStart={setAutoStart}
-              timeRemaining={timeRemaining}
-              setTimeRemaining={setTimeRemaining}
-              flow={flow}
-              setFlow={setFlow}
-            />
-          </>
+          <InitSession 
+            taskList={taskList}
+            setTaskList={setTaskList}
+            timeGoal={timeGoal}
+            setTimeGoal={setTimeGoal}
+            setInitSession={setInitSession}
+            pageNumber={pageNumber}
+            setPageNumber={setPageNumber}
+            selectedMode={selectedMode}
+            setSelectedMode={setSelectedMode}
+            setAutoStart={setAutoStart}
+            setTimeRemaining={setTimeRemaining}
+          />
         )
         :
         (
-          <>
-            <Title 
-              onlylogo={true}
-            />
-            <InitSession 
-              taskList={taskList}
-              setTaskList={setTaskList}
-              timeGoal={timeGoal}
-              setTimeGoal={setTimeGoal}
-              setInitSession={setInitSession}
-              pageNumber={pageNumber}
-              setPageNumber={setPageNumber}
-              selectedMode={selectedMode}
-              setSelectedMode={setSelectedMode}
-              setAutoStart={setAutoStart}
-              setTimeRemaining={setTimeRemaining}
-            />
-          </>
+          (
+            selectedMode === 1 ?
+            (
+              <TimerPomodoro 
+                flowTime={flowTime}
+                setFlowTime={setFlowTime}
+                restTime={restTime}
+                setRestTime={setRestTime}
+                longRestTime={longRestTime}
+                setLongRestTime={setLongRestTime}
+                isActive={isActive}
+                setIsActive={setIsActive}
+                flow={flow}
+                setFlow={setFlow}
+                timeRemaining={timeRemaining}
+                setTimeRemaining={setTimeRemaining}
+
+                selectedMode={selectedMode}
+                setSelectedMode={setSelectedMode}
+                autoStart={autoStart}
+                setAutoStart={setAutoStart}
+
+                taskList={taskList}
+                setTaskList={setTaskList}
+                timeGoal={timeGoal}
+                endSession={endSession}
+                flowTotalTime={flowTotalTime}
+                setFlowTotalTime={setFlowTotalTime}
+                countAllFlow={countAllFlow}
+                setCountAllFlow={setCountAllFlow}
+              />
+            )
+            :
+            (
+              <TimerFlowmodoro 
+                isActive={isActive}
+                setIsActive={setIsActive}
+                timeRemaining={timeRemaining}
+                setTimeRemaining={setTimeRemaining}
+                flow={flow}
+                setFlow={setFlow}
+
+                taskList={taskList}
+                setTaskList={setTaskList}
+                timeGoal={timeGoal}
+                endSession={endSession}
+                selectedMode={selectedMode}
+                setSelectedMode={setSelectedMode}
+                autoStart={autoStart}
+                setAutoStart={setAutoStart}
+                flowTotalTime={flowTotalTime}
+                setFlowTotalTime={setFlowTotalTime}
+                countAllFlow={countAllFlow}
+                setCountAllFlow={setCountAllFlow}
+              />
+            )
+          )
         )
       }
+      <EndModal 
+        endSessionRequest={endSessionRequest} 
+        setEndSessionRequest={setEndSessionRequest} 
+        setEndSession={setEndSession} 
+      />
     </div>  );
 }
 

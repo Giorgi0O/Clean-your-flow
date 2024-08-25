@@ -13,7 +13,7 @@ function TimeGoalBar({
         if (time < 60) {
             return (
                 <>
-                    {time} <span className='sub-font'>minutes</span>
+                    <p> <span className="number font-number"> {time} </span> <span className="default-font">minutes</span> </p>
                 </>
             );
         } else {
@@ -21,7 +21,7 @@ function TimeGoalBar({
             const minutes = time % 60;
             return (
                 <>
-                    {hours}:{minutes.toString().padStart(2, '0')} <span className='sub-font'>hours</span>
+                    <p> <span className="number font-number"> {hours}:{minutes.toString().padStart(2, '0')} </span> <span className="default-font">hours</span> </p>
                 </>
             );
         }
@@ -37,6 +37,9 @@ function TimeGoalBar({
 
     return(
         <div className="PB-range-slider-div">
+            <p className="color-green">
+                {formatTime(value)}
+            </p>
             <input
                 type="range"
                 min="0"
@@ -47,9 +50,6 @@ function TimeGoalBar({
                 className="PB-range-slider test"
                 id="myRange"
             />
-            <p className="default-font color-dark-green">
-                {formatTime(value)}
-            </p>
         </div>
     );
 }

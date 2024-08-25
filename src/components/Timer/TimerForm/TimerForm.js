@@ -8,7 +8,6 @@ function TimerForm({
         timeRemaining,     
         flow,              
         isLongRest,
-        setBgMoving,
         setFlowTime,       
         setRestTime,       
         setLongRestTime,   
@@ -55,7 +54,6 @@ function TimerForm({
             if( flow ){
                 var timeRem = tempFlowTime - (prev - timeRemaining) ;
                 setTimeRemaining(timeRem > 0 ? timeRem : 0);
-                setBgMoving(60/timeRem);
             }
             return tempFlowTime;
         });
@@ -64,7 +62,6 @@ function TimerForm({
             if( !flow ){
                 var timeRem = tempRestTime - (prev - timeRemaining) ;
                 setTimeRemaining(timeRem > 0 ? timeRem : 0);
-                setBgMoving(60/timeRem);
             }
             return tempRestTime;
         });
@@ -73,7 +70,6 @@ function TimerForm({
             if( !flow  && isLongRest ){
                 var timeRem = tempLongRestTime - (prev - timeRemaining) ;
                 setTimeRemaining(timeRem > 0 ? timeRem : 0);
-                setBgMoving(60/timeRem);
             }
             return tempLongRestTime;
         });

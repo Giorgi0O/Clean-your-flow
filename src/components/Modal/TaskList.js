@@ -9,10 +9,7 @@ import Progress from './Progress';
 function TaskList( { 
     taskList,
     setTaskList,
-    countOfFlow,
     timeGoal,
-    flowTime,
-    selectedMode,
     flowTotalTime
 }) {
 
@@ -36,14 +33,13 @@ function TaskList( {
         }
     }
 
-
     return (
-        <div className="card">
+        <div className="card modal-card-dim">
 
             <TaskTab actionType={actionType} setActionType={setActionType} ></TaskTab>
             {
                 actionType === 'action' &&
-                <div className='container'>
+                <div className='task-list-container'>
                     {
                         taskList.length > 0 ? 
                             (
@@ -68,35 +64,16 @@ function TaskList( {
             }
             {
                 actionType === 'time-goal' &&
-                <div className='container time-goal-content'>
+                <div className='task-list-container time-goal-content'>
                     <div className='timeg-number'>
-                        {
-                            selectedMode === 1 ?
-                            (
-                                <>
-                                <span className='font-number color-ciano number-size'> {formatTime(countOfFlow * flowTime)} </span>
-                                <DivisorVertical/>
-                                <span className='font-number color-green number-size'> {formatTime(timeGoal)} </span>
-                                </>
-                            )
-                            :
-                            (
-                                <>
-                                <span className='font-number color-ciano number-size'> { formatTime( Math.ceil(flowTotalTime/60)) } </span>
-                                <DivisorVertical/>
-                                <span className='font-number color-green number-size'> { formatTime( timeGoal )} </span>
-                                </>
-                            )
-                        }
-
-
+                        <span className='font-number color-ciano number-size'> { formatTime( Math.ceil(flowTotalTime/60)) } </span>
+                        <DivisorVertical/>
+                        <span className='font-number color-green number-size'> { formatTime( timeGoal )} </span>
                     </div>
-
                     <Progress
-                        flowTime={selectedMode === 1 ? (countOfFlow * flowTime)/60 : flowTotalTime/60 }
+                        flowTime={flowTotalTime/60}
                         timeGoal={timeGoal}
                     ></Progress>
-
                 </div>
             }
         </div>

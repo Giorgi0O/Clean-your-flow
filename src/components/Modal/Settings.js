@@ -3,6 +3,7 @@ import React from 'react';
 import TimerForm from '../Timer/TimerForm/TimerForm'
 import AutoStart from '../Timer/AutoStartToggle/AutoStartToggle'
 import DivisorOrizontal from '../Divisor/DivisorOrizontal';
+import Switch from '../Switch/Switch'
 
 
 function Settings( { 
@@ -11,39 +12,59 @@ function Settings( {
   longRestTime,
   timeRemaining,     
   flow,
-  bgMoving,        
   isLongRest,
   autoStart,
-  setBgMoving,
   setAutoStart,
   setFlowTime,       
   setRestTime,       
   setLongRestTime,   
-  setTimeRemaining
+  setTimeRemaining,
+  isActive,
+  selectedMode,
+  setSelectedMode,
+  setFlow,
+
 }) {
 
   return (
-    <div className="card">
-      <TimerForm
-          flowTime = {flowTime}
-          restTime= {restTime}
-          longRestTime= {longRestTime}
-          timeRemaining  = {timeRemaining} 
-          flow  = {flow}
-          isLongRest= {isLongRest}
-          setBgMoving={setBgMoving} 
-          setFlowTime   = {setFlowTime}
-          setRestTime   = {setRestTime}
-          setLongRestTime = {setLongRestTime}
-          setTimeRemaining= {setTimeRemaining}
-      ></TimerForm>
-      <DivisorOrizontal></DivisorOrizontal>
-
+    <div className="card modal-card-dim">
+      {
+        selectedMode === 1 &&
+        <>
+          <TimerForm
+              flowTime = {flowTime}
+              restTime= {restTime}
+              longRestTime= {longRestTime}
+              timeRemaining  = {timeRemaining} 
+              flow  = {flow}
+              isLongRest= {isLongRest}
+              setFlowTime   = {setFlowTime}
+              setRestTime   = {setRestTime}
+              setLongRestTime = {setLongRestTime}
+              setTimeRemaining= {setTimeRemaining}
+          ></TimerForm>
+          <DivisorOrizontal></DivisorOrizontal>
+        </>
+      }
+      
       <div className='setting-list'>
         <div className='list-component'>
           <span className='default-font'> Auto start </span>
           <AutoStart autoStart={autoStart} setAutoStart={setAutoStart}></AutoStart>
         </div>
+        {
+          !isActive && ( (selectedMode === 1 && timeRemaining === flowTime) || (selectedMode === 2 && timeRemaining === 0) ) &&
+          <div className='list-component'>
+            <span className='default-font'> Mode </span>
+            <Switch 
+              selectedMode={selectedMode} 
+              setSelectedMode={setSelectedMode} 
+              setTimeRemaning={setTimeRemaining} 
+              setAutoStart={setAutoStart}
+              setFlow={setFlow}
+            />
+          </div>
+        }
       </div>
     </div>
   );
