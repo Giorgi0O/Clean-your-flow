@@ -15,8 +15,8 @@ function TimeGoalSetting({
                 <h2 className='titolo-font color-dark-ciano'> Set time goal </h2>
                 <p className='subject default-font' > Set a time goal to stay on track. Having a clear endpoint </p>
                 <p className='subject default-font' > helps you maintain focus and boosts your productivity. </p>
+                <DivisorOrizontal></DivisorOrizontal>
             </div>
-            <DivisorOrizontal></DivisorOrizontal>
 
             <div className='task-creator time-goal-set'>
                 <TimeGoalBar

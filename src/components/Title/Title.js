@@ -9,7 +9,7 @@ function Title({
   endSession
  }) {
   return (
-    <div className='title'>
+    <div className='title only-logo'>
 
       <div className='logo'>
         <svg width="240" height="40" viewBox="0 0 267 50" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -9,12 +9,13 @@
 .bg-moving-blur{
     background-color:rgba(255, 255, 255, 0.1); /* Colore di sfondo semi-trasparente */
     backdrop-filter: blur(80px); /* Effetto blur */
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1;
+    overflow: hidden;
 }
 .bg-color-pink{
     background-color: var(--ligth-pink);
@@ -40,4 +41,20 @@
     top: 15%;
     right: -10%;
     z-index: 0;
+}
+
+/*SMARTPHONE VIEW*/
+@media only screen and (max-width: 600px) {
+    .bg-moving-left{
+        border-radius: 10% 0 0 10%;
+        right: 0%;
+    }
+    .app{
+        overflow: hidden;
+    }
+
+}
+
+@media only screen and (min-width: 600px) {
+
 }

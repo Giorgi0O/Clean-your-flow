@@ -39,9 +39,7 @@
     display: flex;
     align-items:start;
 }
-.font-number{
-    font-size: 128px;
-}
+
 /* stile controlli */
 .start-stop-buttons{
     width: 100%;
@@ -59,4 +57,31 @@
     text-align: center;
 }
 
+/*SMARTPHONE VIEW*/
+@media only screen and (max-width: 1000px) {
+    .modal-space-none{
+       display: none;
+    }
+    .modal-space{
+        width: 100%;
+    }
+    .hide-timer{
+        display: none;
+    }
+    .show-timer{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .time-count-down{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
 
+@media only screen and (min-width: 600px) {
+
+}

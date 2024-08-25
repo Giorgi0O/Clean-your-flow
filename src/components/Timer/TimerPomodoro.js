@@ -42,7 +42,7 @@ function TimerPomodoro( {
   const [countOfFlow, setCountOfFlow] = useState(0);
   const [isRealTime, setIsRealTime] = useState(true);
   const [isLongRest, setIsLongRest] = useState(false);
-
+  const isMobile = useState(window.innerWidth < 1000);
 
   useEffect(() => {
     if( isActive ){
@@ -109,14 +109,16 @@ function TimerPomodoro( {
         {
           !endSession ?
           (
-            <div className='timer-center'>
-              <CountDown 
-                  timeRemaining = {timeRemaining}
-                  restTime = {restTime}
-                  longRestTime={longRestTime}
-                  selectedMode={selectedMode}
-              />
-              <div className='modal-space'>
+            <div className={`timer-center`}>
+              <div className={`${isMobile && ( modalSetting || modalTask ) ? 'hide-timer' : 'show-timer' } `}>
+                <CountDown 
+                    timeRemaining = {timeRemaining}
+                    restTime = {restTime}
+                    longRestTime={longRestTime}
+                    selectedMode={selectedMode}
+                />
+              </div>
+              <div className={` ${ (isMobile && (modalSetting || modalTask)) ? 'modal-space' : 'modal-space-none' }`}>
                 {
                   modalSetting && !isActive && !modalTask &&
                   (

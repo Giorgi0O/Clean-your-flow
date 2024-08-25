@@ -33,7 +33,9 @@ function CreateAction({
                 <h2 className='titolo-font color-dark-ciano'> Before starting, set your action </h2>
                 <p className='subject default-font' > To stay focused, break down larger tasks into smaller, manageable steps. </p>
                 <p className='subject default-font' >  This makes tracking progress easier and keeps you motivated </p>
+                <DivisorOrizontal></DivisorOrizontal>
             </div>
+
 
             <div className='task-creator'>
                 <div className='creator'>
@@ -48,7 +50,7 @@ function CreateAction({
                         className='task-input color-dark-ciano font-corpo1'
                         onBlur={handleSave}
                         onKeyDown={handleKeyPress} 
-                        placeholder={'Write here to create new action'}
+                        placeholder={'Write and press enter'}
                     />
                 </div>
                 <DivisorOrizontal></DivisorOrizontal>

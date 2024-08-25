@@ -13,3 +13,23 @@
     left: 50%; 
     transform: translateX(-50%); 
 }
+
+/*SMARTPHONE VIEW*/
+@media only screen and (max-width: 600px) {
+    .title{
+        justify-content: space-between;
+    }
+    .only-logo{
+        justify-content: center;
+    }
+    .logo{
+        position: relative;
+        left: 0;
+        transform: translate(0);
+    }
+
+}
+
+@media only screen and (min-width: 600px) {
+
+}

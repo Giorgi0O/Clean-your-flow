@@ -30,13 +30,17 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
 }
 /* font style*/
 @mixin font-number{
   font-family: var(--number);
   font-weight: bold;
   font-size: 128px;
+}
+@mixin font-number-sm{
+  font-family: var(--number);
+  font-weight: bold;
+  font-size: 86px;
 }
 @mixin font-titolo2{
   font-family: var(--titolo);
@@ -309,4 +313,17 @@ body {
   color: var(--ligth-ciano);
 
   @include font-corpo2();
+}
+
+/*SMARTPHONE VIEW*/
+@media only screen and (max-width: 600px) {
+
+  .font-number{
+    @include font-number-sm();
+  }
+
+}
+
+@media only screen and (min-width: 600px) {
+
 }
