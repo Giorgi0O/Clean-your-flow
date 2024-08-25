@@ -31,7 +31,7 @@ function TimerFlowmodoro( {
 
   const [modalSetting, setModalSetting] = useState(false);
   const [modalTask, setModalTask] = useState(false);
-
+  const isMobile = useState(window.innerWidth < 1000);
 
   useEffect(() => {
 
@@ -72,11 +72,13 @@ function TimerFlowmodoro( {
           !endSession ?
           (
             <div className='timer-center'>
-              <CountDown 
-                timeRemaining = {timeRemaining}
-                selectedMode={selectedMode}
-              />
-              <div className='modal-space'>
+              <div className={`${isMobile && ( modalSetting || modalTask ) ? 'hide-timer' : 'show-timer' } `}>
+                <CountDown 
+                  timeRemaining = {timeRemaining}
+                  selectedMode={selectedMode}
+                />
+              </div>
+              <div className={` ${ (isMobile && (modalSetting || modalTask)) ? 'modal-space' : 'modal-space-none' }`}>
                 {
                   modalSetting && !isActive && !modalTask &&
                   (
