@@ -44,30 +44,42 @@ function TimerPomodoro( {
   const [isLongRest, setIsLongRest] = useState(false);
   const isMobile = useState(window.innerWidth < 1000);
 
+
+
   useEffect(() => {
+
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    const executeEffect = async () => {
+        await sleep(4000);
+    };
+
     if( isActive ){
       const interval = setInterval( () => {
         setTimeRemaining( (secondsLeft) => {
             if(secondsLeft === 0){
             
-            var nextTime;
-    
-            setFlow(!flow);
-            setIsRealTime(true);
-    
-            nextTime  = flow ? restTime: flowTime;
-    
-            if( (countAllFlow+1)%4 === 0 && flow ){
-                nextTime = longRestTime;
-            } 
-            if( !autoStart ){
-                setIsActive(false);
-            }
-    
-            return nextTime;
+              var nextTime;
+      
+              setFlow(!flow);
+              setIsRealTime(true);
+      
+              nextTime  = flow ? restTime: flowTime;
+      
+              if( (countAllFlow+1)%4 === 0 && flow ){
+                  nextTime = longRestTime;
+              } 
+              if( !autoStart ){
+                  setIsActive(false);
+              }
+              else{
+                executeEffect();
+              }
+      
+              return nextTime;
             }
             else{
-            return secondsLeft -1;
+              return secondsLeft -1;
             }
         });
       }, 1000)
@@ -80,14 +92,12 @@ function TimerPomodoro( {
     if (!flow ) {
         setCountAllFlow((prev) => {
             setIsLongRest( (prev+1)%4 === 0 ? true : false );
-
-            setFlowTotalTime( prev => prev + flowTime);
-
             return prev + 1
         });
 
         if( isRealTime ){
             setCountOfFlow((prev) => prev + 1);
+            setFlowTotalTime( prev => prev + flowTime);
         }
     }
   }, [flow, isRealTime,setCountAllFlow, setIsLongRest , flowTime, setFlowTotalTime]);

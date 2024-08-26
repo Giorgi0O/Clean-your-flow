@@ -5,7 +5,7 @@ import Title from './components/Title/Title';
 import {useEffect, useState} from 'react';
 import InitSession from './components/InitSession/InitSession';
 import EndModal from './components/Modal/EndModal';
-
+import startRestAudio from './assets/sounds/start-rest.wav'
 
 function App() {
 
@@ -66,22 +66,33 @@ function App() {
     }
   )
   const [countAllFlow, setCountAllFlow] = useState( () => {
-    const countAllFlow = localStorage.getItem('countAllFlow');
-    return countAllFlow ? JSON.parse(countAllFlow) : 0;
-  }
-)
+      const countAllFlow = localStorage.getItem('countAllFlow');
+      return countAllFlow ? JSON.parse(countAllFlow) : 0;
+    }
+  )
 
 
   /*NON SALVATI IN LOCAL STAORAGE*/
   const [isActive, setIsActive] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState( selectedMode === 1 ? 25*60 : 0 );
   const [endSessionRequest, setEndSessionRequest] = useState(false);
-
   const [flowTime, setFlowTime] = useState(25*60);
   const [restTime, setRestTime] = useState(5*60);
   const [longRestTime, setLongRestTime] = useState(15*60);
-  
   const [bgMoving, setBgMoving] = useState(60 / flowTime );
+
+  /* AUDIO */
+  useEffect( () => {
+    const startRest = new Audio(startRestAudio);
+
+    if( timeRemaining === 0 && selectedMode === 1 ){
+      startRest.play();
+    }
+    if( timeRemaining === 0 && selectedMode === 2 && !flow){
+      startRest.play();
+    }
+
+  },[timeRemaining,flow,selectedMode])
 
 
   useEffect( () => {

@@ -4,6 +4,7 @@ import React from 'react';
 import StopButton from '../../Buttons/StopButton'
 import StartButton from '../../Buttons/StartButton'
 import CircleButton from '../../Buttons/CircleButton'
+import startFlowAudio from '../../../assets/sounds/start-click.wav'
 
 
 function FlowmodoroControls({ 
@@ -18,24 +19,30 @@ function FlowmodoroControls({
   }) 
 {
 
-  const flowmodoroBreath = () => {
-    setFlowTotalTime( prev => prev + timeRemaning );
-    const breath = Math.ceil( timeRemaning / 5 );
+  const buttonSound = new Audio(startFlowAudio);
 
+  const flowmodoroBreath = () => {
+    buttonSound.play();
     setFlow(false);
-    setTimeRemaining(breath);
-    
+    setFlowTotalTime( prev => prev + timeRemaning );
+
+    var breathTime = Math.ceil( timeRemaning/5 );
+
     if( !autoStart ){
       setIsActive(false);
     }
-  
+
+    setTimeRemaining(breathTime);
   }
 
   const flowmodoroStart = () => {
-    if( flow ){
-      setTimeRemaining(0);
-      setFlow(true);
-    }
+    buttonSound.play();
+    setFlow(true);
+    setIsActive(true);
+  }
+
+  const flowmodoroStartBreath = () => {
+    buttonSound.play();
     setIsActive(true);
   }
 
@@ -44,17 +51,22 @@ function FlowmodoroControls({
       <div className='timer-controls-keys'>
         {
           !isActive ?
-            <StartButton operation={flowmodoroStart} type={3} ></StartButton>
+            (
+              flow ?
+                <StartButton operation={flowmodoroStart} type={3} ></StartButton>
+              :
+                <StartButton operation={flowmodoroStartBreath} type={3} ></StartButton>
+            )
           :
           (
             flow ?
             <>
               <StopButton operation={flowmodoroBreath} type={2} ></StopButton>
-              <CircleButton iconName={'pause'} color={'ligth-green'} operation={() => setIsActive(false)} ></CircleButton>
+              <CircleButton iconName={'pause'} color={'ligth-green'} operation={() => {setIsActive(false); buttonSound.play();}} ></CircleButton>
             </>
             :
             <>
-              <StopButton operation={() => setIsActive(false)} type={2} ></StopButton>
+              <StopButton operation={() => {setIsActive(false); buttonSound.play();}} type={1} ></StopButton>
             </>
           )
         }
