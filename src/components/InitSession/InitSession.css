@@ -41,7 +41,7 @@
 .creator{
     width: 90%;
     display: flex;
-    justify-content: left;
+    justify-content: start;
     align-items: center;
     margin: 0 0 8px 0;
 }

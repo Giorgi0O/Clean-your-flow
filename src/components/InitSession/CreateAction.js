@@ -50,7 +50,7 @@ function CreateAction({
                         className='task-input color-dark-ciano font-corpo1'
                         onBlur={handleSave}
                         onKeyDown={handleKeyPress} 
-                        placeholder={'Write and press enter'}
+                        placeholder={'Write your task and press enter'}
                     />
                 </div>
                 <DivisorOrizontal></DivisorOrizontal>
