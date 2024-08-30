@@ -35,6 +35,7 @@
 }
 .timer-end .modal-card-dim{
     width: 50%;
+    height: 100%;
 }
 .count-down{
     height: 35%;
@@ -87,6 +88,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .timer-end .modal-card-dim{
+        width: 100%;
     }
 }
 

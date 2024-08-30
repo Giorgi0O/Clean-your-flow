@@ -1,10 +1,8 @@
 .radio-inputs {
-    width: 50%;
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     border-radius: 10px;
-    background-color: var(--opacity-ciano);
     box-sizing: border-box;
 }
 
@@ -35,7 +33,7 @@
 }
 
 .bg-flowmodoro{
-    background-color: var(--opacity-green);
+    background-color: var(--ligth-green);
     border: 1.5px solid var(--dark-gre);
 }
 

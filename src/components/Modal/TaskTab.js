@@ -1,7 +1,7 @@
 import React from "react";
 import './TaskTab.css'
 
-function TaskTab({actionType, setActionType }){
+function TaskTab({actionType, setActionType, isTimeGoal }){
 
 
     const handleRadioChange = (value) => {
@@ -21,17 +21,20 @@ function TaskTab({actionType, setActionType }){
                 <span className={`name font-corpo2 ${actionType === 'action' ? 'underline' : 'not-selected'} `}> Action </span>
 
             </label>
-            <label className={`tt-radio`}>
-                <input 
-                    type="radio"
-                    name="radio"
-                    value='flowmodoro'
-                    checked={actionType === 'time-goal'}
-                    onChange={() => handleRadioChange('time-goal')} 
-                />
-                <span className={`name font-corpo2 ${actionType === 'time-goal' ? 'underline' : 'not-selected'} `}> Time goal </span>
+            {
+                isTimeGoal && 
+                <label className={`tt-radio`}>
+                    <input 
+                        type="radio"
+                        name="radio"
+                        value='flowmodoro'
+                        checked={actionType === 'time-goal'}
+                        onChange={() => handleRadioChange('time-goal')} 
+                    />
+                    <span className={`name font-corpo2 ${actionType === 'time-goal' ? 'underline' : 'not-selected'} `}> Time goal </span>
 
-            </label>
+                </label>
+            }
         </div>
     );
 };

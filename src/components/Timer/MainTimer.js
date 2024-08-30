@@ -8,6 +8,7 @@ import PomodoroControls from './TimerControls/PomodoroControls';
 import FlowmodoroControls from "./TimerControls/FlowmodoroControls";
 import startFlowSound from '../../assets/sounds/start-flow.wav';
 import clicksound from '../../assets/sounds/start-click.wav';
+import './Timer.css';
 
 function MainTimer({
     selectedMode,
@@ -20,6 +21,7 @@ function MainTimer({
     setBgRigth,
     setBgLeft,
     endSession,
+    setEndSessionRequest,
     restart
 }){
 
@@ -300,8 +302,8 @@ function MainTimer({
                                     timeGoal={timeGoal}
                                     setTaskList={setTaskList}
                                     flowTime={flowTime}
-                                    selectedMode={selectedMode}
                                     flowTotalTime={flowTotalTime}
+                                    endSession={endSession}
                                 />
                             )
                             }
@@ -316,9 +318,9 @@ function MainTimer({
                             timeGoal={timeGoal}
                             setTaskList={setTaskList}
                             flowTime={flowTime}
-                            selectedMode={selectedMode}
                             flowTotalTime={flowTotalTime}
-                        ></TaskList>
+                            endSession={endSession}
+                        />
                     </div>
                 )
             }
@@ -380,7 +382,17 @@ function MainTimer({
                             />
                         )
                     }
-
+                    {
+                        !endSession &&
+                        <CircleButton tooltip={'End session'} 
+                            iconName={'x'} 
+                            color={'ligth-pink'} 
+                            operation={() => {
+                                setEndSessionRequest(true)
+                            }} 
+                            activeColor={'pink'}
+                        ></CircleButton>
+                    }
                 </div>
             </div>
         </div>

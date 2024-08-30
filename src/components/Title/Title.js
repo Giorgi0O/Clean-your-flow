@@ -1,13 +1,7 @@
-import CircleButton from '../Buttons/CircleButton';
 import './Title.css';
 import React from 'react';
 
-function Title({ 
-  setIsActive,
-  setEndSessionRequest,
-  initSession,
-  endSession
- }) {
+function Title() {
   return (
     <div className='title only-logo'>
 
@@ -24,15 +18,6 @@ function Title({
           </defs>
         </svg>
       </div>
-
-      {
-        !initSession && !endSession &&
-          <CircleButton tooltip={'End session'} iconName={'x'} color={'opacity-pink'} 
-            operation={() => {
-              setEndSessionRequest(true)
-            }} 
-          ></CircleButton>
-      }
     </div>
   );
 }

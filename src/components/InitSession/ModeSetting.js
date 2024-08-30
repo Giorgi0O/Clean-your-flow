@@ -23,7 +23,7 @@ function ModeSetting({
 
             <DivisorOrizontal></DivisorOrizontal>
 
-            <div className='task-creator mode-setting radio-inputs'>
+            <div className='mode-setting radio-inputs'>
                 <label className={`radio ${selectedMode === 1 ? 'bg-ciano' : 'bg-opacity-ciano'}`}>
                     <input 
                         type="radio"
@@ -87,7 +87,6 @@ function ModeSetting({
                         </clipPath>
                         </defs>
                     </svg>
-
 
                     <span className={`default-font ${selectedMode === 2 ? 'color-dark-green' : 'color-ligth-green'}`} > Flowmodoro </span>
                 </label>

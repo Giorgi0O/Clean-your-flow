@@ -27,7 +27,7 @@ function Settings( {
 }) {
 
   return (
-    <div className="card modal-card-dim">
+    <div className="card modal-card-dim modal-card-setting">
       {
         selectedMode === 1 &&
         <>

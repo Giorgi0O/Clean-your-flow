@@ -10,7 +10,7 @@ function TaskList( {
     taskList,
     setTaskList,
     timeGoal,
-    flowTotalTime
+    flowTotalTime,
 }) {
 
     const [actionType, setActionType] = useState('action')
@@ -36,7 +36,11 @@ function TaskList( {
     return (
         <div className="card modal-card-dim">
 
-            <TaskTab actionType={actionType} setActionType={setActionType} ></TaskTab>
+            <TaskTab 
+                actionType={actionType} 
+                setActionType={setActionType}
+                isTimeGoal={timeGoal !== 0}
+            />
             {
                 actionType === 'action' &&
                 <div className='task-list-container'>
@@ -58,7 +62,7 @@ function TaskList( {
                                 ))
                             )
                         :
-                        <div className="task-empty"> <p className="sub-font"> Action list is empty </p> </div>
+                            <div className="task-empty"> <p className="sub-font"> Action list is empty </p> </div>
                     }
                 </div>
             }
@@ -68,7 +72,7 @@ function TaskList( {
                     <div className='timeg-number'>
                         <span className='font-number color-ciano number-size'> { formatTime( Math.ceil(flowTotalTime/60)) } </span>
                         <DivisorVertical/>
-                        <span className='font-number color-green number-size'> { formatTime( timeGoal )} </span>
+                        <span className='font-number color-green number-size'> { formatTime( timeGoal/60 )} </span>
                     </div>
                     <Progress
                         flowTime={flowTotalTime/60}

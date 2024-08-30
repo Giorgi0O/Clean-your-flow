@@ -32,7 +32,7 @@ function TimeGoalBar({
     }
 
     const HandleSave = () =>{
-        setTimeGoal(value);
+        setTimeGoal(value*60);
     }
 
     return(

@@ -40,8 +40,8 @@ function App() {
     }
   );
 
-  const [bgLeft, setBgLeft] = useState( 15 );
-  const [bgRigth, setBgRigth] = useState( 100 );
+  const [bgLeft, setBgLeft] = useState( 50 );
+  const [bgRigth, setBgRigth] = useState( 50 );
   const [endSessionRequest, setEndSessionRequest] = useState(false);
 
   useEffect( () => {
@@ -52,6 +52,15 @@ function App() {
     localStorage.setItem('selectedMode', JSON.stringify(selectedMode));
     localStorage.setItem('endSession', JSON.stringify(endSession));
   }, [taskList,timeGoal,pageNumber,initSession, selectedMode,endSession] ) 
+
+  useEffect(() => { 
+    if(!initSession) {
+      setBgLeft(15); setBgRigth(100);
+    }
+    if(endSession){
+      setBgLeft(50); setBgRigth(50);
+    }
+  },[ initSession, endSession, setBgLeft, setBgRigth])
 
   return (
     <div className="app bg-moving">
@@ -66,12 +75,7 @@ function App() {
         style={{width: `${bgRigth}%` }}
       ></div>
 
-      <Title 
-        setEndSessionRequest={setEndSessionRequest}
-        initSession={initSession}
-        endSession={endSession}
-      />
-
+      <Title />
       {
         initSession ?
         (
@@ -100,6 +104,7 @@ function App() {
             setBgRigth={setBgRigth}
             setBgLeft={setBgLeft}
             endSession={endSession}
+            setEndSessionRequest={setEndSessionRequest}
             restart = {restart}
           />
         )

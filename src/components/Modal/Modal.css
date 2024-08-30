@@ -3,6 +3,10 @@
     height: 80%;
 }
 
+.modal-card-setting{
+    justify-content: center;
+}
+
 /*SETTINGS*/
 .setting-list{
     display: flex;
@@ -23,10 +27,15 @@
 /*TASK*/
 .task-list-container{
     width: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 .tasks{
+    width: 100%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
