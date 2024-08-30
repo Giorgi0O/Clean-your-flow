@@ -14,14 +14,11 @@ function App() {
       return mode ? JSON.parse(mode) : 1;
     }
   );
-  const [bgPink, setBgPink] = useState( 15 );
-  const [bgCiano, setBgCiano] = useState( 100 );
   const [endSession, setEndSession] = useState( () => {
       const endSession = localStorage.getItem('endSession');
       return endSession ? JSON.parse(endSession) : false;
     }
   );
-  const [endSessionRequest, setEndSessionRequest] = useState(false);
   const[initSession, setInitSession] = useState(() => {
     const initSession = localStorage.getItem('initSession');
     return initSession ? JSON.parse(initSession) : true;
@@ -43,6 +40,10 @@ function App() {
     }
   );
 
+  const [bgLeft, setBgLeft] = useState( 15 );
+  const [bgRigth, setBgRigth] = useState( 100 );
+  const [endSessionRequest, setEndSessionRequest] = useState(false);
+
   useEffect( () => {
     localStorage.setItem('taskList', JSON.stringify(taskList));
     localStorage.setItem('timeGoal', JSON.stringify(timeGoal));
@@ -57,12 +58,12 @@ function App() {
       <button onClick={() => setTimeGoal} style={{display:'none'}}></button>
       <div className='bg-moving-blur'></div>
       <div 
-        className={` bg-moving-rigth ${selectedMode === 1 ? 'bg-color-pink' : 'bg-color-ciano'} `}
-        style={{width: `${bgPink}%` }}
+        className={`bg-moving-rigth  bg-color-pink`}
+        style={{width: `${bgLeft}%` }}
       ></div>
       <div 
         className={`bg-moving-left ${selectedMode === 1 ? 'bg-color-ciano' : 'bg-color-green'}`}
-        style={{width: `${bgCiano}%` }}
+        style={{width: `${bgRigth}%` }}
       ></div>
 
       <Title 
@@ -94,8 +95,10 @@ function App() {
             taskList={taskList}
             setTaskList={setTaskList}
             timeGoal={timeGoal}
-            setBgCiano={setBgCiano}
-            setBgPink={setBgPink}
+            bgRigth={bgRigth}
+            bgLeft={bgLeft}
+            setBgRigth={setBgRigth}
+            setBgLeft={setBgLeft}
             endSession={endSession}
             restart = {restart}
           />

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import CountDown from "./CountDown/CountDown";
 import Settings from "../Modal/Settings";
 import TaskList from "../Modal/TaskList";
@@ -6,7 +6,6 @@ import CircleButton from "../Buttons/CircleButton";
 import StartButton from "../Buttons/StartButton";
 import PomodoroControls from './TimerControls/PomodoroControls';
 import FlowmodoroControls from "./TimerControls/FlowmodoroControls";
-import { useCallback } from "react";
 import startFlowSound from '../../assets/sounds/start-flow.wav';
 import clicksound from '../../assets/sounds/start-click.wav';
 
@@ -16,8 +15,10 @@ function MainTimer({
     taskList,
     setTaskList,
     timeGoal,
-    setBgCiano,
-    setBgPink,
+    bgRigth,
+    bgLeft,
+    setBgRigth,
+    setBgLeft,
     endSession,
     restart
 }){
@@ -33,25 +34,28 @@ function MainTimer({
         return flowTotalTime ? JSON.parse(flowTotalTime) : 0;
       }
     )
-
-    useEffect( () => {
-        localStorage.setItem('autoStart', JSON.stringify(autoStart));
-        localStorage.setItem('flowTotalTime', JSON.stringify(flowTotalTime));
-    }, [autoStart,flowTotalTime] ) 
     
-    const [flowTime, setFlowTime] = useState(25);
-    const [restTime, setRestTime] = useState(5);
-    const [longRestTime, setLongRestTime] = useState(15); 
+    const [flowTime, setFlowTime] = useState(25*60);
+    const [restTime, setRestTime] = useState(5*60);
+    const [longRestTime, setLongRestTime] = useState(15*60); 
 
     const [TimerCount, setTimerCount] = useState(0);
     const flow = TimerCount % 2 === 0;
-    const [currentTime,setCurrentTime] = useState(flow ? flowTime : (TimerCount%7 === 0 ) ? longRestTime : restTime);
-
+    const [flowmoFlow, setFlowmoFlow] = useState(false);
+    const calculateInitialTime = () => {
+        if (selectedMode === 1) {
+            return flow ? flowTime : (TimerCount % 7 === 0) ? longRestTime : restTime;
+        } else {
+            return 0;
+        }
+    };
+    const [currentTime,setCurrentTime] = useState(calculateInitialTime);
+    const [timeRemaining, setTimeRemaining] = useState(calculateInitialTime);
     const [isActive, setIsActive] = useState(false);
-    const [timeRemaining, setTimeRemaining] = useState(flow ? flowTime : (TimerCount%7 === 0 ) ? longRestTime : restTime);
+    const [startAutomation, setStartAutomation] = useState(false);
+
     const [modalSetting, setModalSetting] = useState(false);
     const [modalTask, setModalTask] = useState(false);
-    const [startAutomation, setStartAutomation] = useState(false);
 
     const isMobile = useState(window.innerWidth < 1000);
 
@@ -59,115 +63,168 @@ function MainTimer({
     const endTimeRef = useRef(null);
     const interval = useRef(null);
 
+    useEffect( () => {
+        localStorage.setItem('autoStart', JSON.stringify(autoStart));
+        localStorage.setItem('flowTotalTime', JSON.stringify(flowTotalTime));
+    }, [autoStart,flowTotalTime] ) 
+
     /* POMODORO TIMER */
-        const handleTimerCompletion = useCallback( () =>{
-            const newTimerCount = (TimerCount + 1) % 8;
-            const newFlow = newTimerCount % 2 === 0;
-            
-            let newTime;
-            if (newFlow) newTime = flowTime;
-            else newTime = (newTimerCount % 7 === 0) ? longRestTime : restTime;
+    const handleTimerCompletion = useCallback( () =>{
+        const newTimerCount = (TimerCount + 1) % 8;
+        const newFlow = newTimerCount % 2 === 0;
+        
+        let newTime;
+        if (newFlow) newTime = flowTime;
+        else newTime = (newTimerCount % 7 === 0) ? longRestTime : restTime;
 
-            setCurrentTime(newTime);
-            setTimeRemaining(newTime);
-            if(flow) setFlowTotalTime(prev => prev + flowTime);
-            setTimerCount(newTimerCount);
+        setCurrentTime(newTime);
+        setTimeRemaining(newTime);
+        if(flow) setFlowTotalTime(prev => prev + flowTime);
+        setTimerCount(newTimerCount);
 
-            if (!autoStart) {
-                setIsActive(false);
-                clearInterval(interval.current);
-            }
-            else{
-                setStartAutomation(true);
-            }
-        }, [TimerCount,autoStart, flow, flowTime, longRestTime, restTime]);
+        if (!autoStart) {
+            setIsActive(false);
+            clearInterval(interval.current);
+        }
+        else{
+            setStartAutomation(true);
+        }
+    }, [TimerCount,autoStart, flow, flowTime, longRestTime, restTime]);
 
-        const pomodoroStart = useCallback(() => {
-            setIsActive(true);
-            setModalSetting(false);
-            setModalTask(false);
+    const pomodoroStart = useCallback(() => {
+        setIsActive(true);
+        setModalSetting(false);
+        setModalTask(false);
 
-            startTimeRef.current = Date.now();
-            endTimeRef.current = startTimeRef.current + currentTime * 1000;
+        startTimeRef.current = Date.now();
+        endTimeRef.current = startTimeRef.current + currentTime * 1000;
+
+        
+        if (interval.current) clearInterval(interval.current);
+        
+        interval.current = setInterval(() => {
+
+            const now = Date.now();
+            const remainingTime = Math.max(0, Math.round((endTimeRef.current - now) / 1000));
+            setTimeRemaining(remainingTime);
 
             let bgMoving = (75/currentTime);
+            setBgRigth(prev => flow ? Math.max(15, prev-bgMoving) : Math.min(100, prev+bgMoving) );
+            setBgLeft(prev => flow ? Math.min(100, prev+bgMoving) : Math.max(15, prev-bgMoving) );
+        
+            if (remainingTime <= 0) {
+                const startSound = new Audio(startFlowSound);
+                startSound.play();
+                handleTimerCompletion();
+            }
+
+        }, 1000);
+    }, [currentTime, flow, handleTimerCompletion,setBgRigth, setBgLeft]);
+
+    const pomodoroPause = () => {
+        setIsActive(false);
+
+        clearInterval(interval.current);
+
+        const remainingTime = currentTime - (currentTime - timeRemaining);
+        setCurrentTime(remainingTime);
+        setTimeRemaining(remainingTime);
+    }
+    /* END */
+
+
+    /* FLOWMODORO TIMER */
+        const flowmodoroStart = useCallback( () =>{
+            setIsActive(true);
+            setFlowmoFlow(true);
+
+            setModalSetting(false);
+            setModalTask(false);
+            setBgRigth(100);
+            setBgLeft(15);
+
+            startTimeRef.current = Date.now();
+            if( timeRemaining > 0 ) startTimeRef.current = startTimeRef.current - timeRemaining *1000
             
+            if( interval ) clearInterval(interval);
+
+            interval.current = setInterval( () => {
+
+                let now = Date.now();
+                const elapsed = Math.round((now - startTimeRef.current)/1000);
+
+                var bgMoving = (85/(25*60));
+                setBgRigth(prev => Math.min(100, prev+bgMoving) );
+                setBgLeft(prev => Math.max(15, prev-bgMoving) );
+                
+                setTimeRemaining(elapsed);
+            },1000)
+        }, [ setBgRigth, setBgLeft, timeRemaining ]);
+
+        const flowmodoroPause = () => {
+            setIsActive(false);
+            clearInterval(interval.current);
+        }
+
+        const flowmodoroBreath = () =>{
+            setIsActive(true);
+            setFlowmoFlow(false);
+            
+            setModalSetting(false);
+            setModalTask(false);
+            setBgRigth(15);
+            setBgLeft(100);
+
+            setFlowTotalTime(prev => prev + timeRemaining);
+
+            var breathTime = Math.ceil(timeRemaining/5);
+            setTimeRemaining(breathTime);
+
+            startTimeRef.current = Date.now();
+            endTimeRef.current = startTimeRef.current + breathTime * 1000;
+
             if (interval.current) clearInterval(interval.current);
             
             interval.current = setInterval(() => {
 
                 const now = Date.now();
                 const remainingTime = Math.max(0, Math.round((endTimeRef.current - now) / 1000));
+
                 setTimeRemaining(remainingTime);
 
-                setBgCiano(prev => flow ? Math.max(15, prev-bgMoving) : Math.min(100, prev+bgMoving) );
-                setBgPink(prev => flow ? Math.min(100, prev+bgMoving) : Math.max(15, prev-bgMoving) );
+                var bgMoving = (85/breathTime);
+                setBgRigth(prev => Math.min( 100, prev+bgMoving ) );
+                setBgLeft(prev => Math.max(15, prev-bgMoving) );
             
                 if (remainingTime <= 0) {
                     const startSound = new Audio(startFlowSound);
                     startSound.play();
-                    handleTimerCompletion();
+
+                    clearInterval(interval.current);
+
+                    if(!autoStart){
+                        setIsActive(false);
+                    }
+                    else{
+                        setStartAutomation(true);
+                    }
                 }
 
             }, 1000);
-        }, [currentTime, flow, handleTimerCompletion,setBgCiano, setBgPink]);
-
-   
-        useEffect(()=>{
-            if(startAutomation){
-                pomodoroStart();
-                const buttonSound = new Audio(clicksound);
-                buttonSound.play();
-                setStartAutomation(false);
-            }
-        },[startAutomation, pomodoroStart])
-
-        const pomodoroPause = () => {
-            setIsActive(false);
-
-            clearInterval(interval.current);
-
-            const remainingTime = currentTime - (currentTime - timeRemaining);
-            setCurrentTime(remainingTime);
-            setTimeRemaining(remainingTime);
         }
     /* END */
 
+    useEffect(()=>{
+        if(startAutomation){
+            if(selectedMode === 1 ) pomodoroStart();
+            if(selectedMode === 2 ) flowmodoroStart();
 
+            const buttonSound = new Audio(clicksound);
+            buttonSound.play();
 
-    const flowmodoroStart = () =>{
-        startTimeRef.current = Date.now();
-        endTimeRef.current = startTimeRef.current + currentTime * 1000;
-
-        if( interval ) clearInterval(interval);
-        interval.current = setInterval( () => {
-            let now = Date.now();
-            const elapsed = Math.round((now - startTimeRef.current) / 1000);
-            
-            setTimeRemaining(elapsed);  
-        },1000)
-    }
-
-    const flowmodoroBreath = () =>{
-        startTimeRef.current = Date.now();
-        endTimeRef.current = startTimeRef.current + currentTime * 1000;
-
-        if( interval ) clearInterval(clearInterval);
-        interval.current = setInterval( () => {
-            let now = Date.now();
-
-            const remaningTime = Math.max(0, Math.round((endTimeRef.current - now ) /1000) );
-            setTimeRemaining(remaningTime);
-
-            if(remaningTime <= 0){
-                setFlowTotalTime(prev => prev+flowTime)
-                setTimerCount( prev => (prev + 1) % 8);
-                if( !autoStart ){
-                    setIsActive(false);
-                }
-            }
-        },1000)
-    }
+            setStartAutomation(false);
+        }
+    },[startAutomation, selectedMode, pomodoroStart, flowmodoroStart])
 
     const next = () => {
         if (interval.current) {
@@ -182,12 +239,12 @@ function MainTimer({
             let newTime;
             console.log(nextFlow);
             if (nextFlow) {
-                setBgCiano(100);
-                setBgPink(15);
+                setBgRigth(100);
+                setBgLeft(15);
                 newTime = flowTime;
             } else {
-                setBgCiano(15);
-                setBgPink(100);
+                setBgRigth(15);
+                setBgLeft(100);
                 newTime = (newTimerCount % 7 === 0) ? longRestTime : restTime;
             }
     
@@ -208,8 +265,8 @@ function MainTimer({
                         <div className={`${isMobile && ( modalSetting || modalTask ) ? 'hide-timer' : 'show-timer' } `}>
                             <CountDown 
                                 timeRemaining = {timeRemaining}
-                                restTime = {restTime}
-                                longRestTime={longRestTime}
+                                bgRigth = {bgRigth}
+                                bgLeft = {bgLeft}
                                 selectedMode={selectedMode}
                             />
                         </div>
@@ -266,7 +323,9 @@ function MainTimer({
                 )
             }
             <div className='timer-controls'>
-                <p className='default-font count-flow color-ligth-pink count-flow'> #{flowTotalTime/flowTime} </p>
+                {   selectedMode === 1 &&
+                    <p className='default-font count-flow color-ligth-pink count-flow'> #{Math.ceil(flowTotalTime/flowTime)} </p>
+                }
                 <div className='start-stop-buttons'>
                     {
                         !endSession &&
@@ -314,15 +373,10 @@ function MainTimer({
                             :
                             <FlowmodoroControls
                                 isActive={isActive}
-                                setIsActive={setIsActive}
-                                setTimerCount={setTimerCount}
-                                flow={flow}
-                                timeRemaining={timeRemaining}
-                                setTimeRemaining={setTimeRemaining}
-                                setCurrentTime={setCurrentTime}
-                                handleStart={flowmodoroStart}
-                                handleBreath={flowmodoroBreath}
-                                interval={interval}
+                                flow={flowmoFlow}
+                                flowmodoroStart={flowmodoroStart}
+                                flowmodoroBreath={flowmodoroBreath}
+                                flowmodoroPause={flowmodoroPause}
                             />
                         )
                     }

@@ -9,39 +9,29 @@ import startFlowAudio from '../../../assets/sounds/start-click.wav'
 
 function FlowmodoroControls({ 
     isActive,
-    setIsActive,
     flow,
-    setTimerCount,
-    timeRemaining,
-    setTimeRemaining,
-    setCurrentTime,
-    handleStart,
-    handleBreath,
-    interval
+    flowmodoroStart,
+    flowmodoroBreath,
+    flowmodoroPause,
+
   }) 
 {
 
   const buttonSound = new Audio(startFlowAudio);
 
-  const flowmodoroPause = () => {
+  const handleStart = () => {
     buttonSound.play();
-    setIsActive(false);
+    flowmodoroStart();
   }
 
-  const flowmodoroStart = () => {
+  const handleBreath = () => {
     buttonSound.play();
-    setIsActive(true);
-    handleStart();
+    flowmodoroBreath();
   }
 
-  const flowmodoroStartBreath = () => {
+  const handlePause = () => {
     buttonSound.play();
-    setIsActive(false);
-    clearInterval(interval);
-    setTimerCount(prev => prev +1 );
-    setCurrentTime(Math.ceil(timeRemaining/5));
-    setTimeRemaining(prev => Math.ceil(prev/5));
-    handleBreath();
+    flowmodoroPause();
   }
 
   return (
@@ -49,18 +39,18 @@ function FlowmodoroControls({
       <div className='timer-controls-keys'>
         {
           !isActive ?
-            <StartButton operation={flowmodoroStart} type={3} ></StartButton>
+            <StartButton operation={handleStart} type={3} ></StartButton>
           :
           (
             (
               flow ?            
               <>             
-                <StopButton operation={flowmodoroStartBreath} type={2} ></StopButton>
-                <CircleButton iconName={'pause'} color={'ligth-green'} operation={flowmodoroPause} ></CircleButton>
+                <StopButton operation={handleBreath} type={2} ></StopButton>
+                <CircleButton iconName={'pause'} color={'ligth-green'} operation={handlePause} ></CircleButton>
               </>
               :
               <>
-                <StopButton operation={flowmodoroStartBreath} type={1} ></StopButton>
+                <StopButton operation={handlePause} type={1} ></StopButton>
               </>
             )
           )

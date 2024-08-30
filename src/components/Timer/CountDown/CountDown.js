@@ -5,31 +5,22 @@ import {formatTime} from "../../../utils/Common"
 
 function CountDown({
     timeRemaining,
-    restTime,
-    longRestTime,
+    bgRigth,
+    bgLeft,
     selectedMode
 }) {
 
-    const [color, setColor] = useState('color-dark-ciano');
+    const [color, setColor] = useState('');
 
     useEffect(() => {
         if( selectedMode === 1 ){
-            if(timeRemaining/60 > longRestTime){
-                setColor('color-dark-pink');
-            }
-            if( timeRemaining/60 < restTime){
-                setColor('color-dark-ciano')
-            }
+            if( bgRigth > 50 ) setColor('color-dark-ciano');
+            if( bgLeft > 50 ) setColor('color-dark-pink');
         }
         else{
-            if(timeRemaining/60 > 15){
-                setColor('color-dark-ciano');
-            }
-            if( timeRemaining/60 < 15){
-                setColor('color-dark-green')
-            }
+            setColor('color-dark-green');
         }
-    }, [timeRemaining,restTime,longRestTime,selectedMode]);
+    }, [timeRemaining,selectedMode,bgLeft, bgRigth]);
 
 
     return (
