@@ -41,12 +41,12 @@ function MainTimer({
     const [restTime, setRestTime] = useState(5*60);
     const [longRestTime, setLongRestTime] = useState(15*60); 
 
-    const [TimerCount, setTimerCount] = useState(0);
-    const flow = TimerCount % 2 === 0;
+    const [timerCount, setTimerCount] = useState(0);
+    const flow = timerCount % 2 === 0;
     const [flowmoFlow, setFlowmoFlow] = useState(false);
     const calculateInitialTime = () => {
         if (selectedMode === 1) {
-            return flow ? flowTime : (TimerCount % 7 === 0) ? longRestTime : restTime;
+            return flow ? flowTime : (timerCount % 7 === 0) ? longRestTime : restTime;
         } else {
             return 0;
         }
@@ -72,7 +72,7 @@ function MainTimer({
 
     /* POMODORO TIMER */
     const handleTimerCompletion = useCallback( () =>{
-        const newTimerCount = (TimerCount + 1) % 8;
+        const newTimerCount = (timerCount + 1) % 8;
         const newFlow = newTimerCount % 2 === 0;
         
         let newTime;
@@ -91,7 +91,7 @@ function MainTimer({
         else{
             setStartAutomation(true);
         }
-    }, [TimerCount,autoStart, flow, flowTime, longRestTime, restTime]);
+    }, [timerCount,autoStart, flow, flowTime, longRestTime, restTime]);
 
     const pomodoroStart = useCallback(() => {
         setIsActive(true);
@@ -239,7 +239,6 @@ function MainTimer({
             const nextFlow = newTimerCount % 2 === 0;
             
             let newTime;
-            console.log(nextFlow);
             if (nextFlow) {
                 setBgRigth(100);
                 setBgLeft(15);
@@ -257,6 +256,32 @@ function MainTimer({
             return newTimerCount;
         });
     };
+
+    const saveTimerForm = (tempFlowTime, tempRestTime, tempLongRestTime) => {
+        if( interval.current ){
+            clearInterval(interval.current);
+            interval.current = null;
+        }
+
+        var remaningTime;
+        if( flow ) {
+            remaningTime = tempFlowTime - (flowTime - timeRemaining);
+        }
+        if ( timerCount%7 === 0 ) {
+            remaningTime = tempLongRestTime - (longRestTime - timeRemaining);
+        }
+        if( !flow ) {
+            remaningTime = tempRestTime - (restTime - timeRemaining);
+        }
+
+        remaningTime = Math.max(0,remaningTime);
+
+        setFlowTime(tempFlowTime);
+        setRestTime(tempRestTime);
+        setLongRestTime(tempLongRestTime);
+        setTimeRemaining(remaningTime);
+        setCurrentTime(flow ? tempFlowTime : (timerCount % 7 === 0 ? tempLongRestTime : tempRestTime));
+    }
 
     return (
         <div className={ 'timer' } >
@@ -277,17 +302,14 @@ function MainTimer({
                             modalSetting && !isActive && !modalTask &&
                             (
                                 <Settings
+                                    saveForm = {saveTimerForm}
                                     flowTime = {flowTime}
                                     restTime= {restTime}
                                     longRestTime= {longRestTime}
                                     timeRemaining  = {timeRemaining} 
-                                    flow  = {flow}
                                     autoStart={autoStart}
                                     setAutoStart  = {setAutoStart} 
                                     setFlowTime   = {setFlowTime} 
-                                    setRestTime   = {setRestTime}
-                                    setLongRestTime = {setLongRestTime}
-                                    setTimeRemaining= {setTimeRemaining}
                                     selectedMode={selectedMode}
                                     setSelectedMode={setSelectedMode}
                                     setTimerCount={setTimerCount}

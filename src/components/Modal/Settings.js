@@ -7,17 +7,13 @@ import Switch from '../Switch/Switch'
 
 
 function Settings( { 
+  saveForm,
   flowTime, 
   restTime, 
   longRestTime,
   timeRemaining,     
-  flow,
-  isLongRest,
   autoStart,
   setAutoStart,
-  setFlowTime,       
-  setRestTime,       
-  setLongRestTime,   
   setTimeRemaining,
   isActive,
   selectedMode,
@@ -35,13 +31,7 @@ function Settings( {
               flowTime = {flowTime}
               restTime= {restTime}
               longRestTime= {longRestTime}
-              timeRemaining  = {timeRemaining} 
-              flow  = {flow}
-              isLongRest= {isLongRest}
-              setFlowTime   = {setFlowTime}
-              setRestTime   = {setRestTime}
-              setLongRestTime = {setLongRestTime}
-              setTimeRemaining= {setTimeRemaining}
+              saveForm={saveForm}
           ></TimerForm>
           <DivisorOrizontal></DivisorOrizontal>
         </>

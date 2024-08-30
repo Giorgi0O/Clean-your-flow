@@ -5,13 +5,7 @@ function TimerForm({
         flowTime, 
         restTime, 
         longRestTime,
-        timeRemaining,     
-        flow,              
-        isLongRest,
-        setFlowTime,       
-        setRestTime,       
-        setLongRestTime,   
-        setTimeRemaining
+        saveForm
     })
 {
 
@@ -50,29 +44,7 @@ function TimerForm({
     };
 
     const handleSave = () => {
-        setFlowTime( prev => {
-            if( flow ){
-                var timeRem = tempFlowTime - (prev - timeRemaining) ;
-                setTimeRemaining(timeRem > 0 ? timeRem : 0);
-            }
-            return tempFlowTime;
-        });
-    
-        setRestTime( prev => {
-            if( !flow ){
-                var timeRem = tempRestTime - (prev - timeRemaining) ;
-                setTimeRemaining(timeRem > 0 ? timeRem : 0);
-            }
-            return tempRestTime;
-        });
-    
-        setLongRestTime( prev => {
-            if( !flow  && isLongRest ){
-                var timeRem = tempLongRestTime - (prev - timeRemaining) ;
-                setTimeRemaining(timeRem > 0 ? timeRem : 0);
-            }
-            return tempLongRestTime;
-        });
+        saveForm(tempFlowTime, tempRestTime, tempLongRestTime);
     }
     
     return(
@@ -84,7 +56,7 @@ function TimerForm({
                     className='bg-opacity-ciano'
                     value={tempFlowTime/60}
                     onChange={handleFlowTimeChange}
-                    onBlur={() => handleSave()}
+                    onBlur={handleSave}
                     placeholder={tempFlowTime/60}
                 />
             </div>
@@ -96,7 +68,7 @@ function TimerForm({
                     value={tempRestTime/60}
                     className='bg-opacity-pink'
                     onChange={handleRestTimeChange}
-                    onBlur={() => handleSave()}
+                    onBlur={handleSave}
                     placeholder={tempRestTime/60}
                 />
             </div>
@@ -107,7 +79,7 @@ function TimerForm({
                     value={tempLongRestTime/60}
                     className='bg-opacity-green'
                     onChange={handleLongRestTimeChange}
-                    onBlur={() => handleSave()}
+                    onBlur={handleSave}
                     placeholder={tempLongRestTime/60}
                 />
             </div>
