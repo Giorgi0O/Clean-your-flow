@@ -6,7 +6,7 @@ function Switch({
     setSelectedMode,
     setTimeRemaning,
     setAutoStart,
-    setFlow,
+    setTimerCount,
 }){
 
 
@@ -16,7 +16,7 @@ function Switch({
       if( value === 2 ){
         setAutoStart(false);
       }
-      setFlow(true);
+      setTimerCount(0);
     };
 
     return (

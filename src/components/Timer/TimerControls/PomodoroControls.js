@@ -3,15 +3,34 @@ import './TimerControls.css'
 import React from 'react';
 import StopButton from '../../Buttons/StopButton'
 import StartButton from '../../Buttons/StartButton'
-import startFlowAudio from '../../../assets/sounds/start-click.wav'
+import clicksound from '../../../assets/sounds/start-click.wav'
+import CircleButton from '../../Buttons/CircleButton';
 
 function PomodoroControls({ 
     isActive,
-    setIsActive,
+    endSession,
+    pomodoroStart,
+    pomodoroPause,
+    next,
   }) 
 {
 
-    const buttonSound = new Audio(startFlowAudio);
+    const buttonSound = new Audio(clicksound);
+
+    const handleStart = () => {
+        buttonSound.play();
+        pomodoroStart();
+    }
+
+    const handlePause = () => {
+        buttonSound.play();
+        pomodoroPause();
+    }
+
+    const handleNext = () => {
+        buttonSound.play();
+        next();
+    }
     
 
     return (
@@ -21,22 +40,20 @@ function PomodoroControls({
                     !isActive ?
                     (
                         <StartButton
-                            operation={() => {
-                                setIsActive(!isActive);
-                                buttonSound.play();
-                            }} 
+                            operation={handleStart} 
                             type={1}
                         />
                     )
                     :
                     (
                         <StopButton 
-                            operation={() => {
-                                setIsActive(!isActive)
-                                buttonSound.play();
-                            }}
+                            operation={handlePause}
                             type={1}></StopButton>
                     )
+                }
+                {
+                    !endSession && 
+                    <CircleButton color={'ligth-pink'} tooltip={'next'} iconName={'next'} operation={handleNext}></CircleButton>
                 }
             </div>
         </div>

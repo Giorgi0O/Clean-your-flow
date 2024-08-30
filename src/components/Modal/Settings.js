@@ -22,7 +22,7 @@ function Settings( {
   isActive,
   selectedMode,
   setSelectedMode,
-  setFlow,
+  setTimerCount
 
 }) {
 
@@ -61,7 +61,7 @@ function Settings( {
               setSelectedMode={setSelectedMode} 
               setTimeRemaning={setTimeRemaining} 
               setAutoStart={setAutoStart}
-              setFlow={setFlow}
+              setTimerCount={setTimerCount}
             />
           </div>
         }

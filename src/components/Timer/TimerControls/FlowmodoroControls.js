@@ -11,39 +11,37 @@ function FlowmodoroControls({
     isActive,
     setIsActive,
     flow,
-    setFlow,
-    timeRemaning,
+    setTimerCount,
+    timeRemaining,
     setTimeRemaining,
-    autoStart,
-    setFlowTotalTime
+    setCurrentTime,
+    handleStart,
+    handleBreath,
+    interval
   }) 
 {
 
   const buttonSound = new Audio(startFlowAudio);
 
-  const flowmodoroBreath = () => {
+  const flowmodoroPause = () => {
     buttonSound.play();
-    setFlow(false);
-    setFlowTotalTime( prev => prev + timeRemaning );
-
-    var breathTime = Math.ceil( timeRemaning/5 );
-
-    if( !autoStart ){
-      setIsActive(false);
-    }
-
-    setTimeRemaining(breathTime);
+    setIsActive(false);
   }
 
   const flowmodoroStart = () => {
     buttonSound.play();
-    setFlow(true);
     setIsActive(true);
+    handleStart();
   }
 
   const flowmodoroStartBreath = () => {
     buttonSound.play();
-    setIsActive(true);
+    setIsActive(false);
+    clearInterval(interval);
+    setTimerCount(prev => prev +1 );
+    setCurrentTime(Math.ceil(timeRemaining/5));
+    setTimeRemaining(prev => Math.ceil(prev/5));
+    handleBreath();
   }
 
   return (
@@ -51,23 +49,20 @@ function FlowmodoroControls({
       <div className='timer-controls-keys'>
         {
           !isActive ?
-            (
-              flow ?
-                <StartButton operation={flowmodoroStart} type={3} ></StartButton>
-              :
-                <StartButton operation={flowmodoroStartBreath} type={3} ></StartButton>
-            )
+            <StartButton operation={flowmodoroStart} type={3} ></StartButton>
           :
           (
-            flow ?
-            <>
-              <StopButton operation={flowmodoroBreath} type={2} ></StopButton>
-              <CircleButton iconName={'pause'} color={'ligth-green'} operation={() => {setIsActive(false); buttonSound.play();}} ></CircleButton>
-            </>
-            :
-            <>
-              <StopButton operation={() => {setIsActive(false); buttonSound.play();}} type={1} ></StopButton>
-            </>
+            (
+              flow ?            
+              <>             
+                <StopButton operation={flowmodoroStartBreath} type={2} ></StopButton>
+                <CircleButton iconName={'pause'} color={'ligth-green'} operation={flowmodoroPause} ></CircleButton>
+              </>
+              :
+              <>
+                <StopButton operation={flowmodoroStartBreath} type={1} ></StopButton>
+              </>
+            )
           )
         }
       </div>

@@ -30,7 +30,6 @@ function Title({
           <CircleButton tooltip={'End session'} iconName={'x'} color={'opacity-pink'} 
             operation={() => {
               setEndSessionRequest(true)
-              setIsActive(false);
             }} 
           ></CircleButton>
       }

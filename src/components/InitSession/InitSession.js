@@ -14,8 +14,6 @@ function InitSession({
     setPageNumber,
     selectedMode,
     setSelectedMode,
-    setAutoStart,
-    setTimeRemaining
 }) {
     
 
@@ -44,8 +42,6 @@ function InitSession({
                     setPageNumber={setPageNumber}
                     setSelectedMode={setSelectedMode}
                     setInitSession={setInitSession}
-                    setAutoStart={setAutoStart}
-                    setTimeRemaining={setTimeRemaining}
                 />
             }
         </div>

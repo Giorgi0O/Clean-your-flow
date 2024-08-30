@@ -9,13 +9,10 @@ function ModeSetting({
     setSelectedMode,
     setPageNumber,
     setInitSession,
-    setAutoStart,
-    setTimeRemaining
 }) {
 
     const handleRadioChange = (value) => {
         setSelectedMode(value);
-        setAutoStart(value === 2 ? false : true);
     }
     
     return(
@@ -104,7 +101,6 @@ function ModeSetting({
                     color={'ciano'} 
                     operation={()=> {
                         setPageNumber(0);
-                        setTimeRemaining(selectedMode === 1 ? 25*60 : 0 )
                         setInitSession(false);
                     }}
                 />
