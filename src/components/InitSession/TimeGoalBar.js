@@ -13,7 +13,7 @@ function TimeGoalBar({
         if (time < 60) {
             return (
                 <>
-                    <p> <span className="number font-number"> {time} </span> <span className="default-font">minutes</span> </p>
+                    <span className="number font-number"> {time} </span> <span className="default-font">minutes</span>
                 </>
             );
         } else {
@@ -21,7 +21,7 @@ function TimeGoalBar({
             const minutes = time % 60;
             return (
                 <>
-                    <p> <span className="number font-number"> {hours}:{minutes.toString().padStart(2, '0')} </span> <span className="default-font">hours</span> </p>
+                     <span className="number font-number"> {hours}:{minutes.toString().padStart(2, '0')} </span> <span className="default-font">hours</span>
                 </>
             );
         }

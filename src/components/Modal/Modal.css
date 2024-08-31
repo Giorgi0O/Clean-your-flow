@@ -30,12 +30,11 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
+    overflow-y: auto;
 }
 .tasks{
     width: 100%;
-    height: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,17 +50,26 @@
     display: flex;
     align-items: center;
 }
+.task-icon-content span{
+    text-align: start;
+}
 .task-content{
     width: 80%;
     padding: 8px;
 }
-.button-only-icon{
-    all: unset;
-    width: 10%;
-    display: flex;
-    justify-content: center;
+.update-task-button{
+    border: none;
+    background: none;
 }
-
+.delete-task-button{
+    background: none;
+    border: none;
+    stroke-width: 1.5px;
+    stroke: var(--dark-pink);
+}
+.delete-task-button:hover{
+    stroke: var(--pink);
+}
 
 /*TIME GOAL*/
 .time-goal-content{

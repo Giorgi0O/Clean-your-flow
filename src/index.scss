@@ -255,7 +255,8 @@ body {
 }
 .bg-none{
   border: none;
-  background: none;
+  background-color: rgba(0,0,0,0);
+  stroke-width: 4px;
   color: var(--dark-ciano );
 }
 

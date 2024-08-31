@@ -62,6 +62,31 @@ function App() {
     }
   },[ initSession, endSession, setBgLeft, setBgRigth])
 
+  /* CRUD TASK LIST */
+  const createTask = (title) => {
+    if (!title) return;
+
+    setTaskList(prevList => [
+      { id: Date.now(), action: title, completed: false },
+      ...prevList
+    ]);
+  };
+
+  const updateTask = ( id ) => {
+    if( !id ) return ;
+
+    setTaskList(prevList => prevList.map(task =>
+      task.id === id ? { ...task, completed: !task.completed } : task
+    ));
+  }
+
+  const deleteTask = (id) => {
+    if (!id) return;
+
+    setTaskList(prevList => prevList.filter(task => task.id !== id));
+  };
+
+
   return (
     <div className="app bg-moving">
       <button onClick={() => setTimeGoal} style={{display:'none'}}></button>
@@ -81,7 +106,6 @@ function App() {
         (
           <InitSession 
             taskList={taskList}
-            setTaskList={setTaskList}
             timeGoal={timeGoal}
             setTimeGoal={setTimeGoal}
             setInitSession={setInitSession}
@@ -89,6 +113,9 @@ function App() {
             setPageNumber={setPageNumber}
             selectedMode={selectedMode}
             setSelectedMode={setSelectedMode}
+            createTask={createTask}
+            deleteTask={deleteTask}
+            updateTask={updateTask}
           />
         )
         :
@@ -105,6 +132,9 @@ function App() {
             setBgLeft={setBgLeft}
             endSession={endSession}
             setEndSessionRequest={setEndSessionRequest}
+            createTask={createTask}
+            deleteTask={deleteTask}
+            updateTask={updateTask}
             restart = {restart}
           />
         )

@@ -11,6 +11,9 @@ function TaskList( {
     setTaskList,
     timeGoal,
     flowTotalTime,
+    createTask,
+    deleteTask,
+    updateTask
 }) {
 
     const [actionType, setActionType] = useState('action')
@@ -50,14 +53,17 @@ function TaskList( {
                                 taskList.map((task, index) => (
                                     <div className='tasks' key={index}>
                                         <Task 
-                                            key={index}
-                                            id={index}
+                                            id={task.id}
                                             action={task.action} 
                                             completed={task.completed}
-                                            setTaskList={setTaskList}
-                                            isCompleted={true}
+                                            update={true}
+                                            deleteTask={deleteTask}
+                                            updateTask={updateTask}
                                         />
-                                        <DivisorOrizontal></DivisorOrizontal>
+                                        {
+                                            index !== taskList.length-1 &&
+                                            <DivisorOrizontal></DivisorOrizontal>
+                                        }
                                     </div>
                                 ))
                             )

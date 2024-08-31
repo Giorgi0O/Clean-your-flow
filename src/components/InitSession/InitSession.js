@@ -7,13 +7,15 @@ import ModeSetting from './ModeSetting';
 function InitSession({
     setInitSession, 
     taskList, 
-    setTaskList,
     timeGoal,
     setTimeGoal,
     pageNumber,
     setPageNumber,
     selectedMode,
     setSelectedMode,
+    createTask,
+    deleteTask,
+    updateTask
 }) {
     
 
@@ -23,8 +25,10 @@ function InitSession({
                 pageNumber === 0 && 
                 <CreateAction
                     setPageNumber={setPageNumber}
-                    setTaskList={setTaskList}
                     taskList = {taskList}
+                    createTask={createTask}
+                    deleteTask={deleteTask}
+                    updateTask={updateTask}
                 />
             }
             {

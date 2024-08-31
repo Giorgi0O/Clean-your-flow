@@ -6,17 +6,15 @@ import './InitSession.css';
 
 function CreateAction({
     taskList,
-    setTaskList,
-    setPageNumber
+    setPageNumber,
+    createTask,
+    deleteTask,
 }){
 
     const handleSave = (event) => {
         const value = event.target.value.trim();
         if (value) { 
-            setTaskList(prev => {
-                const newTask = { id: taskList.length, action: value, completed: false };
-                return [...prev, newTask]; 
-            });
+            createTask(value);
             event.target.value = ''; 
         }
     }
@@ -64,8 +62,9 @@ function CreateAction({
                                             id={task.id}
                                             action={task.action}       
                                             completed={task.completed}
-                                            setTaskList={setTaskList}
-                                            isCompleted={false}
+                                            update={false}
+                                            createTask={createTask}
+                                            deleteTask={deleteTask}
                                         />
                                         <DivisorOrizontal/>
                                     </div>

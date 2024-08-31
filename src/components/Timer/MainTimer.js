@@ -22,6 +22,9 @@ function MainTimer({
     setBgLeft,
     endSession,
     setEndSessionRequest,
+    createTask,
+    deleteTask,
+    updateTask,
     restart
 }){
 
@@ -322,7 +325,9 @@ function MainTimer({
                                 <TaskList
                                     taskList={taskList}
                                     timeGoal={timeGoal}
-                                    setTaskList={setTaskList}
+                                    createTask={createTask}
+                                    deleteTask={deleteTask}
+                                    updateTask={updateTask}
                                     flowTime={flowTime}
                                     flowTotalTime={flowTotalTime}
                                     endSession={endSession}
@@ -338,7 +343,9 @@ function MainTimer({
                         <TaskList
                             taskList={taskList}
                             timeGoal={timeGoal}
-                            setTaskList={setTaskList}
+                            createTask={createTask}
+                            deleteTask={deleteTask}
+                            updateTask={updateTask}
                             flowTime={flowTime}
                             flowTotalTime={flowTotalTime}
                             endSession={endSession}
