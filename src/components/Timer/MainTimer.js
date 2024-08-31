@@ -14,7 +14,6 @@ function MainTimer({
     selectedMode,
     setSelectedMode,
     taskList,
-    setTaskList,
     timeGoal,
     bgRigth,
     bgLeft,
@@ -270,11 +269,13 @@ function MainTimer({
         if( flow ) {
             remaningTime = tempFlowTime - (flowTime - timeRemaining);
         }
-        if ( timerCount%7 === 0 ) {
-            remaningTime = tempLongRestTime - (longRestTime - timeRemaining);
-        }
-        if( !flow ) {
-            remaningTime = tempRestTime - (restTime - timeRemaining);
+        else {
+            if ( timerCount%7 === 0 ) {
+                remaningTime = tempLongRestTime - (longRestTime - timeRemaining);
+            }
+            else{
+                remaningTime = tempRestTime - (restTime - timeRemaining);
+            }
         }
 
         remaningTime = Math.max(0,remaningTime);

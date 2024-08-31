@@ -124,7 +124,6 @@ function App() {
             selectedMode={selectedMode}
             setSelectedMode={setSelectedMode}
             taskList={taskList}
-            setTaskList={setTaskList}
             timeGoal={timeGoal}
             bgRigth={bgRigth}
             bgLeft={bgLeft}
