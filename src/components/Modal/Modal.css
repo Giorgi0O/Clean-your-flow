@@ -1,6 +1,6 @@
 .modal-card-dim{
     width: 60%;
-    height: 80%;
+    height: 90%;
 }
 
 .modal-card-setting{
@@ -22,6 +22,10 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+.setting-allert{
+    margin-bottom: 8px;
+    text-align: center;
 }
 
 /*TASK*/

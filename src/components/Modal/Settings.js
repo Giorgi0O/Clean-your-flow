@@ -22,6 +22,8 @@ function Settings( {
 
 }) {
 
+  const notifyAccetpetd = Notification.permission === "granted";
+
   return (
     <div className="card modal-card-dim modal-card-setting">
       {
@@ -38,6 +40,12 @@ function Settings( {
       }
       
       <div className='setting-list'>
+        {
+          !notifyAccetpetd &&
+          <div className='list-component setting-allert'>
+            <p className='default-font color-dark-pink'> Notifications are currently disabled. Please enable them to receive an alert when the timer ends. </p>
+          </div>
+        }
         <div className='list-component'>
           <span className='default-font'> Auto start </span>
           <AutoStart autoStart={autoStart} setAutoStart={setAutoStart}></AutoStart>
