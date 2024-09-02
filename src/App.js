@@ -42,6 +42,7 @@ function App() {
 
   const [bgLeft, setBgLeft] = useState( 50 );
   const [bgRigth, setBgRigth] = useState( 50 );
+  const bgAnimation = initSession || endSession ? 'bg-opacity-animation' : 'bg-start-rigth-animation' ;
   const [endSessionRequest, setEndSessionRequest] = useState(false);
 
   useEffect( () => {
@@ -95,14 +96,13 @@ function App() {
 
   return (
     <div className="app bg-moving">
-      <button onClick={() => setTimeGoal} style={{display:'none'}}></button>
       <div className='bg-moving-blur'></div>
       <div 
-        className={`bg-moving-rigth  bg-color-pink`}
+        className={`bg-moving-left  bg-color-pink ${bgAnimation} `}
         style={{width: `${bgLeft}%` }}
       ></div>
       <div 
-        className={`bg-moving-left ${selectedMode === 1 ? 'bg-color-ciano' : 'bg-color-green'}`}
+        className={`bg-moving-rigth ${selectedMode === 1 ? 'bg-color-ciano' : 'bg-color-green'} ${bgAnimation} `}
         style={{width: `${bgRigth}%` }}
       ></div>
 

@@ -312,6 +312,18 @@ body {
   gap: 13px;
   overflow: hidden;
   box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.062);
+  animation-duration: 0.2s;
+  animation-name: card-opacity;
+  animation-direction: alternate;
+}
+
+@keyframes card-opacity {
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
 }
 
 .task-input::placeholder {
