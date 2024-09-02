@@ -313,10 +313,8 @@ function MainTimer({
     }
 
     useEffect(() => {
-        if ('Notification' in window) {
-            if(Notification.permission !== "granted" ){
-                Notification.requestPermission();
-            }
+        if( isActive && 'Notification' in window ){
+            Notification.requestPermission();
         }
     }, [isActive]);
 
