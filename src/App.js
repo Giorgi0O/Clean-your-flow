@@ -62,11 +62,6 @@ function App() {
     }
   },[ initSession, endSession, setBgLeft, setBgRigth])
 
-  useEffect(() => {
-    if ('Notification' in window) {
-      Notification.requestPermission();
-    }
-  }, []);
 
   /* CRUD TASK LIST */
   const createTask = (title) => {

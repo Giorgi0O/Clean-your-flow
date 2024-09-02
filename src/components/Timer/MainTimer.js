@@ -312,6 +312,14 @@ function MainTimer({
         setCurrentTime(flow ? tempFlowTime : (timerCount % 7 === 0 ? tempLongRestTime : tempRestTime));
     }
 
+    useEffect(() => {
+        if ('Notification' in window) {
+            if(Notification.permission !== "granted" ){
+                Notification.requestPermission();
+            }
+        }
+    }, [isActive]);
+
     return (
         <div className={ 'timer' } >
             {
