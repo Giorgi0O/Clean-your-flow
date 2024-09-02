@@ -39,7 +39,7 @@ function MainTimer({
       }
     )
     
-    const [flowTime, setFlowTime] = useState(25);
+    const [flowTime, setFlowTime] = useState(25*60);
     const [restTime, setRestTime] = useState(5*60);
     const [longRestTime, setLongRestTime] = useState(15*60); 
 
