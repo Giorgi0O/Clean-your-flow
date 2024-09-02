@@ -344,6 +344,7 @@ function MainTimer({
                                     restTime= {restTime}
                                     longRestTime= {longRestTime}
                                     timeRemaining  = {timeRemaining} 
+                                    setTimeRemaining={setTimeRemaining}
                                     autoStart={autoStart}
                                     setAutoStart  = {setAutoStart} 
                                     setFlowTime   = {setFlowTime} 
