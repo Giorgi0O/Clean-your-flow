@@ -39,7 +39,7 @@ function MainTimer({
       }
     )
     
-    const [flowTime, setFlowTime] = useState(25*60);
+    const [flowTime, setFlowTime] = useState(25);
     const [restTime, setRestTime] = useState(5*60);
     const [longRestTime, setLongRestTime] = useState(15*60); 
 
@@ -62,6 +62,7 @@ function MainTimer({
     const [modalTask, setModalTask] = useState(false);
 
     const isMobile = useState(window.innerWidth < 1000);
+    const requestNotify = useRef(0);
 
     const startTimeRef = useRef(null);
     const endTimeRef = useRef(null);
@@ -71,6 +72,32 @@ function MainTimer({
         localStorage.setItem('autoStart', JSON.stringify(autoStart));
         localStorage.setItem('flowTotalTime', JSON.stringify(flowTotalTime));
     }, [autoStart,flowTotalTime] ) 
+
+    const notify = useCallback( () =>{
+        if (document.visibilityState === 'visible') {
+            const startSound = new Audio(startFlowSound);
+            startSound.play();
+
+            return ;
+        }
+        if (Notification.permission === "granted") {
+            const startSound = new Audio(startFlowSound);
+            startSound.play();
+        }
+        else{
+            if(requestNotify.current === 0){
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        const startSound = new Audio(startFlowSound);
+                        startSound.play();
+                    }
+
+                });
+
+                requestNotify.current = 1;
+            }
+        }
+    },[]);
 
     /* POMODORO TIMER */
     const handleTimerCompletion = useCallback( () =>{
@@ -117,13 +144,12 @@ function MainTimer({
             setBgLeft(prev => flow ? Math.min(100, prev+bgMoving) : Math.max(15, prev-bgMoving) );
         
             if (remainingTime <= 0) {
-                const startSound = new Audio(startFlowSound);
-                startSound.play();
+                notify();
                 handleTimerCompletion();
             }
 
         }, 1000);
-    }, [currentTime, flow, handleTimerCompletion,setBgRigth, setBgLeft]);
+    }, [currentTime, flow, handleTimerCompletion, notify,setBgRigth, setBgLeft ]);
 
     const pomodoroPause = () => {
         setIsActive(false);
@@ -201,8 +227,7 @@ function MainTimer({
                 setBgLeft(prev => Math.max(15, prev-bgMoving) );
             
                 if (remainingTime <= 0) {
-                    const startSound = new Audio(startFlowSound);
-                    startSound.play();
+                    notify();
 
                     clearInterval(interval.current);
 
