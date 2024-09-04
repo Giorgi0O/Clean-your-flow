@@ -139,9 +139,12 @@ function MainTimer({
             const remainingTime = Math.max(0, Math.round((endTimeRef.current - now) / 1000));
             setTimeRemaining(remainingTime);
 
-            let bgMoving = (75/currentTime);
-            setBgRigth(prev => flow ? Math.max(15, prev-bgMoving) : Math.min(100, prev+bgMoving) );
-            setBgLeft(prev => flow ? Math.min(100, prev+bgMoving) : Math.max(15, prev-bgMoving) );
+            let workingTime = (currentTime - remainingTime);
+            let flowComplete = (workingTime/currentTime)*100;
+            let breathComplete = 100 - flowComplete;
+
+            setBgLeft(flow ? Math.max( bgLeft, flowComplete ) : Math.min( bgLeft, breathComplete) );
+            setBgRigth(flow ? Math.min( bgRigth, breathComplete) : Math.max( bgRigth, flowComplete));
         
             if (remainingTime <= 0) {
                 notify();
@@ -149,7 +152,7 @@ function MainTimer({
             }
 
         }, 1000);
-    }, [currentTime, flow, handleTimerCompletion, notify,setBgRigth, setBgLeft ]);
+    }, [currentTime, flow, handleTimerCompletion, bgLeft, bgRigth, notify,setBgRigth, setBgLeft ]);
 
     const pomodoroPause = () => {
         setIsActive(false);
@@ -164,83 +167,83 @@ function MainTimer({
 
 
     /* FLOWMODORO TIMER */
-        const flowmodoroStart = useCallback( () =>{
-            setIsActive(true);
-            setFlowmoFlow(true);
+    const flowmodoroStart = useCallback( () =>{
+        setIsActive(true);
+        setFlowmoFlow(true);
 
-            setModalSetting(false);
-            setModalTask(false);
-            setBgRigth(100);
-            setBgLeft(15);
+        setModalSetting(false);
+        setModalTask(false);
+        setBgRigth(100);
+        setBgLeft(15);
 
-            startTimeRef.current = Date.now();
-            if( timeRemaining > 0 ) startTimeRef.current = startTimeRef.current - timeRemaining *1000
+        startTimeRef.current = Date.now();
+        if( timeRemaining > 0 ) startTimeRef.current = startTimeRef.current - timeRemaining *1000
+        
+        if( interval ) clearInterval(interval);
+
+        interval.current = setInterval( () => {
+
+            let now = Date.now();
+            const elapsed = Math.round((now - startTimeRef.current)/1000);
+
+            var bgMoving = (85/(25*60));
+            setBgRigth(prev => Math.min(100, prev+bgMoving) );
+            setBgLeft(prev => Math.max(15, prev-bgMoving) );
             
-            if( interval ) clearInterval(interval);
+            setTimeRemaining(elapsed);
+        },1000)
+    }, [ setBgRigth, setBgLeft, timeRemaining ]);
 
-            interval.current = setInterval( () => {
+    const flowmodoroPause = () => {
+        setIsActive(false);
+        clearInterval(interval.current);
+    }
 
-                let now = Date.now();
-                const elapsed = Math.round((now - startTimeRef.current)/1000);
+    const flowmodoroBreath = () =>{
+        setIsActive(true);
+        setFlowmoFlow(false);
+        
+        setModalSetting(false);
+        setModalTask(false);
+        setBgRigth(15);
+        setBgLeft(100);
 
-                var bgMoving = (85/(25*60));
-                setBgRigth(prev => Math.min(100, prev+bgMoving) );
-                setBgLeft(prev => Math.max(15, prev-bgMoving) );
-                
-                setTimeRemaining(elapsed);
-            },1000)
-        }, [ setBgRigth, setBgLeft, timeRemaining ]);
+        setFlowTotalTime(prev => prev + timeRemaining);
 
-        const flowmodoroPause = () => {
-            setIsActive(false);
-            clearInterval(interval.current);
-        }
+        var breathTime = Math.ceil(timeRemaining/5);
+        setTimeRemaining(breathTime);
 
-        const flowmodoroBreath = () =>{
-            setIsActive(true);
-            setFlowmoFlow(false);
-            
-            setModalSetting(false);
-            setModalTask(false);
-            setBgRigth(15);
-            setBgLeft(100);
+        startTimeRef.current = Date.now();
+        endTimeRef.current = startTimeRef.current + breathTime * 1000;
 
-            setFlowTotalTime(prev => prev + timeRemaining);
+        if (interval.current) clearInterval(interval.current);
+        
+        interval.current = setInterval(() => {
 
-            var breathTime = Math.ceil(timeRemaining/5);
-            setTimeRemaining(breathTime);
+            const now = Date.now();
+            const remainingTime = Math.max(0, Math.round((endTimeRef.current - now) / 1000));
 
-            startTimeRef.current = Date.now();
-            endTimeRef.current = startTimeRef.current + breathTime * 1000;
+            setTimeRemaining(remainingTime);
 
-            if (interval.current) clearInterval(interval.current);
-            
-            interval.current = setInterval(() => {
+            var bgMoving = (85/breathTime);
+            setBgRigth(prev => Math.min( 100, prev+bgMoving ) );
+            setBgLeft(prev => Math.max(15, prev-bgMoving) );
+        
+            if (remainingTime <= 0) {
+                notify();
 
-                const now = Date.now();
-                const remainingTime = Math.max(0, Math.round((endTimeRef.current - now) / 1000));
+                clearInterval(interval.current);
 
-                setTimeRemaining(remainingTime);
-
-                var bgMoving = (85/breathTime);
-                setBgRigth(prev => Math.min( 100, prev+bgMoving ) );
-                setBgLeft(prev => Math.max(15, prev-bgMoving) );
-            
-                if (remainingTime <= 0) {
-                    notify();
-
-                    clearInterval(interval.current);
-
-                    if(!autoStart){
-                        setIsActive(false);
-                    }
-                    else{
-                        setStartAutomation(true);
-                    }
+                if(!autoStart){
+                    setIsActive(false);
                 }
+                else{
+                    setStartAutomation(true);
+                }
+            }
 
-            }, 1000);
-        }
+        }, 1000);
+    }
     /* END */
 
     useEffect(()=>{

@@ -40,8 +40,8 @@ function App() {
     }
   );
 
-  const [bgLeft, setBgLeft] = useState( 50 );
-  const [bgRigth, setBgRigth] = useState( 50 );
+  const [bgLeft, setBgLeft] = useState( 15 );
+  const [bgRigth, setBgRigth] = useState( 100 );
   const bgAnimation = initSession || endSession ? 'bg-opacity-animation' : 'bg-start-rigth-animation' ;
   const [endSessionRequest, setEndSessionRequest] = useState(false);
 
@@ -55,10 +55,10 @@ function App() {
   }, [taskList,timeGoal,pageNumber,initSession, selectedMode,endSession] ) 
 
   useEffect(() => { 
-    if(!initSession) {
+    if( !initSession || !endSession ){
       setBgLeft(15); setBgRigth(100);
     }
-    if(endSession){
+    if(endSession || initSession){
       setBgLeft(50); setBgRigth(50);
     }
   },[ initSession, endSession, setBgLeft, setBgRigth])
