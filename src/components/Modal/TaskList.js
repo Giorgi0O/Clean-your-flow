@@ -81,7 +81,7 @@ function TaskList( {
                         <span className='font-number color-green number-size'> { formatTime( timeGoal/60 )} </span>
                     </div>
                     <Progress
-                        flowTime={flowTotalTime/60}
+                        flowTime={flowTotalTime}
                         timeGoal={timeGoal}
                     ></Progress>
                 </div>
