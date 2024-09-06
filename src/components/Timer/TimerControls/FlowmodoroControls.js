@@ -46,7 +46,6 @@ function FlowmodoroControls({
               flow ?            
               <>             
                 <StopButton operation={handleBreath} type={2} ></StopButton>
-                <CircleButton iconName={'pause'} color={'ligth-green'} operation={handlePause} ></CircleButton>
               </>
               :
               <>

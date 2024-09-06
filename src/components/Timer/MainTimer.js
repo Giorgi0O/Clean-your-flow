@@ -188,6 +188,9 @@ function MainTimer({
     }, [ setBgRigth, setBgLeft, timeRemaining ]);
 
     const flowmodoroPause = () => {
+        const buttonSound = new Audio(clicksound);
+        buttonSound.play();
+
         setIsActive(false);
         clearInterval(interval.current);
     }
@@ -273,6 +276,9 @@ function MainTimer({
     }
 
     const next = () => {
+        const buttonSound = new Audio(clicksound);
+        buttonSound.play();
+
         if (interval.current) {
             clearInterval(interval.current);
             interval.current = null;
@@ -410,59 +416,6 @@ function MainTimer({
                 <div className='start-stop-buttons'>
                     {
                         !endSession &&
-                        <>
-                            {
-                            !isActive &&
-                            <CircleButton color={'ligth-green'} tooltip={'settings'} iconName={'settings'} active={modalSetting} activeColor={'green'}
-                                operation={() => {
-                                setModalSetting(!modalSetting);
-                                setModalTask(false);
-                                }} 
-                                activeOperation={() => {
-                                setModalSetting(!modalSetting);
-                                setModalTask(false);
-                                }} 
-                            />
-                            }
-                            <CircleButton color={'ligth-ciano'} tooltip={'View your task'} iconName={'task-list'} active={modalTask} activeColor={'ciano'}
-                            operation={() => {
-                                setModalTask(!modalTask)
-                                setModalSetting(false);
-                            }} 
-                            activeOperation={() => {
-                                setModalTask(!modalTask)
-                                setModalSetting(false);
-                            }} 
-                            />
-                        </>
-                    }
-                    {
-                        endSession ?
-                        (
-                            <StartButton operation={restart} type={2} ></StartButton>
-                        )
-                        :
-                        (
-                            selectedMode === 1 ?
-                            <PomodoroControls
-                                isActive={isActive}
-                                endSession={endSession}
-                                pomodoroStart={pomodoroStart}
-                                pomodoroPause={pomodoroPause}
-                                next={next}
-                            />
-                            :
-                            <FlowmodoroControls
-                                isActive={isActive}
-                                flow={flowmoFlow}
-                                flowmodoroStart={flowmodoroStart}
-                                flowmodoroBreath={flowmodoroBreath}
-                                flowmodoroPause={flowmodoroPause}
-                            />
-                        )
-                    }
-                    {
-                        !endSession &&
                         <CircleButton tooltip={'End session'} 
                             iconName={'x'} 
                             color={'ligth-pink'} 
@@ -470,9 +423,78 @@ function MainTimer({
                                 setEndSessionRequest(true)
                             }} 
                             activeColor={'pink'}
-                        ></CircleButton>
+                        />
+                    }
+                    {
+                        !endSession &&
+                        <>
+                            {
+                                !isActive &&
+                                <CircleButton color={'ligth-green'} tooltip={'settings'} iconName={'settings'} active={modalSetting} activeColor={'green'}
+                                    operation={() => {
+                                    setModalSetting(!modalSetting);
+                                    setModalTask(false);
+                                    }} 
+                                    activeOperation={() => {
+                                    setModalSetting(!modalSetting);
+                                    setModalTask(false);
+                                    }} 
+                                />
+                            }
+
+                            <CircleButton color={'ligth-ciano'} tooltip={'View your task'} iconName={'task-list'} active={modalTask} activeColor={'ciano'}
+                                operation={() => {
+                                    setModalTask(!modalTask)
+                                    setModalSetting(false);
+                                }} 
+                                activeOperation={() => {
+                                    setModalTask(!modalTask)
+                                    setModalSetting(false);
+                                }} 
+                            />
+                        </>
+                    }
+                    {
+                        !endSession && selectedMode == 1 &&
+                        <CircleButton color={'ligth-pink'} tooltip={'next'} iconName={'next'} operation={next}></CircleButton>
+                    }
+                    {
+                        isActive && selectedMode == 2 && flowmoFlow &&
+                        (
+                            selectedMode == 2 && flowmoFlow &&
+                            <CircleButton 
+                                iconName={'pause'} 
+                                color={'ligth-green'}
+                                operation={flowmodoroPause} 
+                            />
+                        )
                     }
                 </div>
+                {
+                    endSession ?
+                    (
+                        <StartButton operation={restart} type={2} ></StartButton>
+                    )
+                    :
+                    (
+                        selectedMode === 1 ?
+                        <PomodoroControls
+                            isActive={isActive}
+                            endSession={endSession}
+                            pomodoroStart={pomodoroStart}
+                            pomodoroPause={pomodoroPause}
+                            next={next}
+                        />
+                        :
+                        <FlowmodoroControls
+                            isActive={isActive}
+                            flow={flowmoFlow}
+                            flowmodoroStart={flowmodoroStart}
+                            flowmodoroBreath={flowmodoroBreath}
+                            flowmodoroPause={flowmodoroPause}
+                        />
+                    )
+                }
             </div>
         </div>
     );

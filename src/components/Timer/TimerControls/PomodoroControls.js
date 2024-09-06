@@ -11,7 +11,6 @@ function PomodoroControls({
     endSession,
     pomodoroStart,
     pomodoroPause,
-    next,
   }) 
 {
 
@@ -25,11 +24,6 @@ function PomodoroControls({
     const handlePause = () => {
         buttonSound.play();
         pomodoroPause();
-    }
-
-    const handleNext = () => {
-        buttonSound.play();
-        next();
     }
     
 
@@ -50,10 +44,6 @@ function PomodoroControls({
                             operation={handlePause}
                             type={1}></StopButton>
                     )
-                }
-                {
-                    !endSession && 
-                    <CircleButton color={'ligth-pink'} tooltip={'next'} iconName={'next'} operation={handleNext}></CircleButton>
                 }
             </div>
         </div>
