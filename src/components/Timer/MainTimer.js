@@ -1,3 +1,4 @@
+import './Timer.css';
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import CountDown from "./CountDown/CountDown";
 import Settings from "../Modal/Settings";
@@ -8,7 +9,6 @@ import PomodoroControls from './TimerControls/PomodoroControls';
 import FlowmodoroControls from "./TimerControls/FlowmodoroControls";
 import startFlowSound from '../../assets/sounds/start-flow.wav';
 import clicksound from '../../assets/sounds/start-click.wav';
-import './Timer.css';
 
 function MainTimer({
     selectedMode,
@@ -67,6 +67,8 @@ function MainTimer({
     const startTimeRef = useRef(null);
     const endTimeRef = useRef(null);
     const interval = useRef(null);
+    const savedBgRigth = useRef(0);
+    const savedBgLeft = useRef(0);
 
     useEffect( () => {
         localStorage.setItem('autoStart', JSON.stringify(autoStart));
@@ -129,7 +131,6 @@ function MainTimer({
 
         startTimeRef.current = Date.now();
         endTimeRef.current = startTimeRef.current + currentTime * 1000;
-
         
         if (interval.current) clearInterval(interval.current);
         
@@ -137,14 +138,10 @@ function MainTimer({
 
             const now = Date.now();
             const remainingTime = Math.max(0, Math.round((endTimeRef.current - now) / 1000));
+
+            movingBackground(remainingTime,true);
+
             setTimeRemaining(remainingTime);
-
-            let workingTime = (currentTime - remainingTime);
-            let flowComplete = (workingTime/currentTime)*100;
-            let breathComplete = 100 - flowComplete;
-
-            setBgLeft(flow ? Math.max( bgLeft, flowComplete ) : Math.min( bgLeft, breathComplete) );
-            setBgRigth(flow ? Math.min( bgRigth, breathComplete) : Math.max( bgRigth, flowComplete));
         
             if (remainingTime <= 0) {
                 notify();
@@ -159,12 +156,14 @@ function MainTimer({
 
         clearInterval(interval.current);
 
+        savedBgLeft.current = bgLeft;
+        savedBgRigth.current =bgRigth;
+
         const remainingTime = currentTime - (currentTime - timeRemaining);
         setCurrentTime(remainingTime);
         setTimeRemaining(remainingTime);
     }
     /* END */
-
 
     /* FLOWMODORO TIMER */
     const flowmodoroStart = useCallback( () =>{
@@ -173,8 +172,6 @@ function MainTimer({
 
         setModalSetting(false);
         setModalTask(false);
-        setBgRigth(100);
-        setBgLeft(15);
 
         startTimeRef.current = Date.now();
         if( timeRemaining > 0 ) startTimeRef.current = startTimeRef.current - timeRemaining *1000
@@ -185,10 +182,6 @@ function MainTimer({
 
             let now = Date.now();
             const elapsed = Math.round((now - startTimeRef.current)/1000);
-
-            var bgMoving = (85/(25*60));
-            setBgRigth(prev => Math.min(100, prev+bgMoving) );
-            setBgLeft(prev => Math.max(15, prev-bgMoving) );
             
             setTimeRemaining(elapsed);
         },1000)
@@ -205,8 +198,6 @@ function MainTimer({
         
         setModalSetting(false);
         setModalTask(false);
-        setBgRigth(15);
-        setBgLeft(100);
 
         setFlowTotalTime(prev => prev + timeRemaining);
 
@@ -223,11 +214,9 @@ function MainTimer({
             const now = Date.now();
             const remainingTime = Math.max(0, Math.round((endTimeRef.current - now) / 1000));
 
-            setTimeRemaining(remainingTime);
+            movingBackground(remainingTime, true);
 
-            var bgMoving = (85/breathTime);
-            setBgRigth(prev => Math.min( 100, prev+bgMoving ) );
-            setBgLeft(prev => Math.max(15, prev-bgMoving) );
+            setTimeRemaining(remainingTime);
         
             if (remainingTime <= 0) {
                 notify();
@@ -258,6 +247,31 @@ function MainTimer({
         }
     },[startAutomation, selectedMode, pomodoroStart, flowmodoroStart])
 
+    const movingBackground = (remainingTime, isTimer) =>{
+        if( isTimer ){
+            let workingTime = (currentTime - remainingTime);
+            let movingToRigth = workingTime/currentTime*100 ;
+            let movingToLeft = 100 - movingToRigth; 
+
+            if( flow && movingToRigth > savedBgLeft.current ) savedBgLeft.current = 0;
+            if( flow && movingToLeft < savedBgRigth.current ) savedBgRigth.current = 0;
+
+            if( !flow && movingToLeft < savedBgLeft.current ) savedBgLeft.current = 0;
+            if( !flow && movingToRigth > savedBgRigth.current ) savedBgRigth.current = 0;
+            
+            if( savedBgLeft.current == 0  && savedBgRigth.current == 0){
+                setBgLeft(flow ?  movingToRigth : movingToLeft);
+                setBgRigth(flow ? movingToLeft : movingToRigth);
+            }
+        }
+        else{
+            let bgMoving = 0.1;
+
+            setBgLeft(prev => Math.min(100, prev+bgMoving));
+            setBgRigth(prev => Math.max(0, prev-bgMoving));
+        }
+    }
+
     const next = () => {
         if (interval.current) {
             clearInterval(interval.current);
@@ -271,10 +285,10 @@ function MainTimer({
             let newTime;
             if (nextFlow) {
                 setBgRigth(100);
-                setBgLeft(15);
+                setBgLeft(0);
                 newTime = flowTime;
             } else {
-                setBgRigth(15);
+                setBgRigth(0);
                 setBgLeft(100);
                 newTime = (newTimerCount % 7 === 0) ? longRestTime : restTime;
             }

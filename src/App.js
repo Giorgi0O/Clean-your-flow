@@ -40,9 +40,8 @@ function App() {
     }
   );
 
-  const [bgLeft, setBgLeft] = useState( 15 );
+  const [bgLeft, setBgLeft] = useState( 0 );
   const [bgRigth, setBgRigth] = useState( 100 );
-  const bgAnimation = initSession || endSession ? 'bg-opacity-animation' : 'bg-start-rigth-animation' ;
   const [endSessionRequest, setEndSessionRequest] = useState(false);
 
   useEffect( () => {
@@ -56,7 +55,7 @@ function App() {
 
   useEffect(() => { 
     if( !initSession || !endSession ){
-      setBgLeft(15); setBgRigth(100);
+      setBgLeft(0); setBgRigth(100);
     }
     if(endSession || initSession){
       setBgLeft(50); setBgRigth(50);
@@ -93,11 +92,11 @@ function App() {
     <div className="app bg-moving">
       <div className='bg-moving-blur'></div>
       <div 
-        className={`bg-moving-left  bg-color-pink ${bgAnimation} `}
+        className={`bg-moving-all bg-moving-left  bg-color-pink `}
         style={{width: `${bgLeft}%` }}
       ></div>
       <div 
-        className={`bg-moving-rigth ${selectedMode === 1 ? 'bg-color-ciano' : 'bg-color-green'} ${bgAnimation} `}
+        className={`bg-moving-all bg-moving-rigth ${selectedMode === 1 ? 'bg-color-ciano' : 'bg-color-green'}`}
         style={{width: `${bgRigth}%` }}
       ></div>
 
