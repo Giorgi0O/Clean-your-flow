@@ -71,6 +71,16 @@ body {
   font-size: 13px;
 }
 
+/* FONT */
+.font-number{
+  @include font-number();
+}
+.titolo-font{
+  @include font-titolo2();
+}
+.titolo3-font{
+  @include font-titolo3();
+}
 .font-corpo2{
   @include font-corpo2()
 }
@@ -80,12 +90,8 @@ body {
 .sub-font{
   @include font-sub-corpo();
 }
-.font-number{
-  @include font-number();
-}
-.titolo-font{
-  @include font-titolo2();
-}
+
+
 
 /* box-shadow */
 .box-shadow-button{
@@ -271,14 +277,23 @@ body {
 .color-ligth-pink{
   color: var(--ligth-pink) ;
 }
-.color-dark-ciano{
-  color: var(--dark-ciano) ;
+.color-ligth-ciano{
+  color: var(--ligth-ciano);
+}
+.color-ligth-green{
+  color: var(--ligth-green);
 }
 .color-dark-pink{
   color: var(--dark-pink) ;
 }
+.color-dark-ciano{
+  color: var(--dark-ciano) ;
+}
 .color-dark-green{
   color: var(--dark-green) ;
+}
+.color-pink{
+  color: var(--pink) ;
 }
 .color-ciano{
   color: var(--ciano) ;
@@ -286,14 +301,8 @@ body {
 .color-green{
   color: var(--green) ;
 }
-.color-pink{
-  color: var(--pink) ;
-}
 .color-white{
   color: white;
-}
-.color-ligth-ciano{
-  color: var(--ligth-ciano);
 }
 .color-gray{
   color: gray;

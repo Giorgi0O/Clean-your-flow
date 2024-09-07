@@ -1,75 +1,74 @@
-.card-container{
+.init-session-container{
     z-index: 100;
     width: 100%;
-    height: 80%;
+    height: 75%;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
+.is-left, .is-rigth {
+    z-index: 100;
+    flex-basis: 45%;
+    flex-grow: 1; 
+    height: 100%;
+}
+.is-left{
+    display: flex; justify-content: center; align-items: center;
+}
+.is-rigth{
+    display: flex; justify-content: center; align-items: center;
+}
+.is-controls{
+    z-index: 100;
+    width: 100%;
+    height:12%;
+    display: flex; justify-content: center; align-items: center;
+}
+.is-controls .default-button{
+    width: 180px;
+    height: 50px;
+    margin: 8px;
+}
+
+/* Componenti che creano gli obbiettivi */
 .card-dim{
-    width: 50%;
+    width: 80%;
     height: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    border: 1.5px solid var(--dark-ciano);
-}
-
-/* COMMON */
-.subject{
-    margin: 8px;
-    color: var(--ciano);
-
 }
 
 /* TASK CREATOR */
-.task-creator-title{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.task-creator{
-    width: 100%;
-    height: 50%;
-    display: flex;
-    flex-direction: column;
+.task-card{
     justify-content: start;
-    align-items: center;
+    border: 1.5px solid var(--ciano);
 }
 .creator{
     width: 90%;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    margin: 0 0 8px 0;
+    display: flex; justify-content: center; align-items: center;
+    margin: 16px;
 }
-.task-input{
-    border: none;
+.creator input{
+    width: 80%;
+    border: 1px solid var(--dark-ciano);
+    border-radius: 30px;
+    padding: 12px;
+    margin: 0 8px 0 8px;
     box-shadow: none;
-    height: 20px;
-    vertical-align: center;
-    width: 100%;
-    margin-left: 4px;
     text-align: start;
     font-size: 18px;
 }
-.task-input:focus{
-    border: none;
-    outline: none;
+.creator .circle-button img{
+    rotate: 45deg;
 }
 .task-list{
+    padding: 8px;
     width: 90%;
-    height: 300px;
+    height: 90%;
     overflow-y: auto;
     overflow-x: hidden;
-    margin-top: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: start;
 }
 .task-empty{
     width: 100%;
@@ -79,19 +78,14 @@
     align-items: center;
 }
 .action-content{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
+    margin: 30px;
 }
 
 /*TIME GOAL*/
 .time-goal-set{
-    width: 100%;
+    width: 500px;
     height: 40%;
-    justify-content: center;
-    align-items: center;
+    display: flex; justify-content: center; align-items: center;
 }
 .time-goal-buttons{
     width: 100%;
@@ -146,13 +140,21 @@
     justify-content: space-evenly;
     align-items: center;
 }
-.radio{
-    width: 30%;
-    height: 70%;
+.radio-inputs .radio-mode-selector input {
+    display: none;
+}
+.radio-mode-selector{
+    border-radius: 100px;
+    padding: 32px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
+}
+.radio-choice{
+    width: 45%;
+    height: 100%;
+    display: flex; flex-direction: column; justify-content: space-evenly; align-items: center;
 }
 
 

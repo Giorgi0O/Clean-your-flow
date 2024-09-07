@@ -24,11 +24,6 @@ function App() {
     return initSession ? JSON.parse(initSession) : true;
     }
   );
-  const[pageNumber, setPageNumber] = useState(() => {
-      const pageNumber = localStorage.getItem('pageNumber');
-      return pageNumber ? JSON.parse(pageNumber) : 0;
-    }
-  );
   const [taskList, setTaskList] = useState(() => {
       const savedTasks = localStorage.getItem('taskList');
       return savedTasks ? JSON.parse(savedTasks) : [];
@@ -48,16 +43,15 @@ function App() {
     localStorage.setItem('taskList', JSON.stringify(taskList));
     localStorage.setItem('timeGoal', JSON.stringify(timeGoal));
     localStorage.setItem('initSession', JSON.stringify(initSession));
-    localStorage.setItem('pageNumber', JSON.stringify(pageNumber));
     localStorage.setItem('selectedMode', JSON.stringify(selectedMode));
     localStorage.setItem('endSession', JSON.stringify(endSession));
-  }, [taskList,timeGoal,pageNumber,initSession, selectedMode,endSession] ) 
+  }, [taskList,timeGoal,initSession, selectedMode,endSession] ) 
 
   useEffect(() => { 
     if( !initSession || !endSession ){
       setBgLeft(0); setBgRigth(100);
     }
-    if(endSession || initSession){
+    if(endSession){
       setBgLeft(50); setBgRigth(50);
     }
   },[ initSession, endSession, setBgLeft, setBgRigth])
@@ -90,15 +84,20 @@ function App() {
 
   return (
     <div className="app bg-moving">
-      <div className='bg-moving-blur'></div>
-      <div 
-        className={`bg-moving-all bg-moving-left  bg-color-pink `}
-        style={{width: `${bgLeft}%` }}
-      ></div>
-      <div 
-        className={`bg-moving-all bg-moving-rigth ${selectedMode === 1 ? 'bg-color-ciano' : 'bg-color-green'}`}
-        style={{width: `${bgRigth}%` }}
-      ></div>
+      {
+        !initSession &&
+        <>
+          <div className='bg-moving-blur'></div>
+          <div 
+            className={`bg-moving-all bg-moving-left  bg-color-pink `}
+            style={{width: `${bgLeft}%` }}
+          ></div>
+          <div 
+            className={`bg-moving-all bg-moving-rigth ${selectedMode === 1 ? 'bg-color-ciano' : 'bg-color-green'}`}
+            style={{width: `${bgRigth}%` }}
+          ></div>
+        </>
+      }
 
       <Title />
       {
@@ -109,8 +108,6 @@ function App() {
             timeGoal={timeGoal}
             setTimeGoal={setTimeGoal}
             setInitSession={setInitSession}
-            pageNumber={pageNumber}
-            setPageNumber={setPageNumber}
             selectedMode={selectedMode}
             setSelectedMode={setSelectedMode}
             createTask={createTask}

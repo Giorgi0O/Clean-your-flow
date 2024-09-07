@@ -1,21 +1,28 @@
-import React from "react";
-import Button from '../Buttons/Button';
+import './InitSession.css';
+import React, { useState } from "react";
 import Task from '../Modal/Task';
 import DivisorOrizontal from '../Divisor/DivisorOrizontal';
-import './InitSession.css';
+import CircleButton from '../Buttons/CircleButton'
 
 function CreateAction({
     taskList,
-    setPageNumber,
     createTask,
     deleteTask,
 }){
 
-    const handleSave = (event) => {
-        const value = event.target.value.trim();
-        if (value) { 
-            createTask(value);
-            event.target.value = ''; 
+    const [tempValue , setTempValue] = useState('');
+
+    const handleTempSave = (event) =>{
+        const value = event.target.value;
+        if (value.trim) { 
+            setTempValue(value);
+        }
+    }
+
+    const handleSave = () => {
+        if (tempValue) { 
+            createTask(tempValue);
+            setTempValue('');
         }
     }
 
@@ -26,32 +33,23 @@ function CreateAction({
     };
 
     return(
-        <div className='card card-dim'>
-            <div className="task-creator-title">
-                <h2 className='titolo-font color-dark-ciano'> Before starting, set your action </h2>
-                <p className='subject default-font' > To stay focused, break down larger tasks into smaller, manageable steps. </p>
-                <p className='subject default-font' >  This makes tracking progress easier and keeps you motivated </p>
-                <DivisorOrizontal></DivisorOrizontal>
-            </div>
-
-
-            <div className='task-creator'>
+        <div className='card card-dim task-card'>
                 <div className='creator'>
-                    <label htmlFor="creator" className='color-ligth-ciano'>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="0.5" y="0.5" width="23" height="23" rx="11.5" stroke="#A6ECEE"/>
-                            <circle cx="12" cy="12" r="6.5" stroke="#A6ECEE"/>
-                        </svg>
-                    </label>
                     <input
                         id="creator"
                         className='task-input color-dark-ciano font-corpo1'
-                        onBlur={handleSave}
+                        value={tempValue}
+                        onChange={handleTempSave}
                         onKeyDown={handleKeyPress} 
-                        placeholder={'Write your task and press enter'}
+                        placeholder={'Write your task here'}
+                    />
+                    <CircleButton
+                        iconName={'x'}
+                        color={'ligth-ciano'}
+                        tooltip={'add task'}
+                        operation={handleSave}
                     />
                 </div>
-                <DivisorOrizontal></DivisorOrizontal>
                 <div className='task-list'>
                     {
                         taskList.length > 0 ? 
@@ -76,15 +74,6 @@ function CreateAction({
                             )
                     }
                 </div>
-            </div>
-
-            {
-                taskList.length > 0 ? 
-                    <Button text={'Next'} iconName={'next-white'} color={'ciano'} operation={()=> setPageNumber(prev => prev+1)}></Button>
-                :
-                    <Button text={'Next'} iconName={'next-white'} color={'gray'}></Button>
-            }
-
         </div>
     );
 

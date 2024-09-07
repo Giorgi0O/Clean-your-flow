@@ -1,14 +1,10 @@
 import '../Switch/Switch.css'
 import './InitSession.css'
 import React from "react";
-import Button from '../Buttons/Button';
-import DivisorOrizontal from '../Divisor/DivisorOrizontal';
 
 function ModeSetting({
     selectedMode,
     setSelectedMode,
-    setPageNumber,
-    setInitSession,
 }) {
 
     const handleRadioChange = (value) => {
@@ -16,15 +12,9 @@ function ModeSetting({
     }
     
     return(
-        <div className='card card-dim'>
-            <h2 className='titolo-font color-dark-ciano'> Pomodoro or Flowmodoro </h2>
-            <span className='subject default-font' > Pomodoro uses short work intervals with breaks, while </span>
-            <span className='subject default-font' >  Flomodoro adapts to your natural focus flow, allowing longer work periods. </span>
-
-            <DivisorOrizontal></DivisorOrizontal>
-
-            <div className='mode-setting radio-inputs'>
-                <label className={`radio ${selectedMode === 1 ? 'bg-ciano' : 'bg-opacity-ciano'}`}>
+        <div className='card card-dim mode-setting radio-inputs'>
+            <div className='radio-choice'>
+                <label className={`radio-mode-selector ${selectedMode === 1 ? 'bg-ciano' : 'bg-opacity-ciano'}`}>
                     <input 
                         type="radio"
                         name="radio"
@@ -46,10 +36,11 @@ function ModeSetting({
                         <path d="M33.51 62.5455V72H31.5111V64.4428H31.4557L29.2905 65.8001V64.0273L31.6311 62.5455H33.51ZM39.2102 72.1293C38.5577 72.1293 37.976 72.0092 37.4652 71.7692C36.9573 71.5291 36.5542 71.1983 36.2556 70.7766C35.9571 70.355 35.8017 69.8718 35.7894 69.3271H37.7283C37.7498 69.6933 37.9037 69.9903 38.1899 70.218C38.4762 70.4458 38.8162 70.5597 39.2102 70.5597C39.5241 70.5597 39.8011 70.4904 40.0411 70.3519C40.2843 70.2103 40.4736 70.0149 40.609 69.7656C40.7475 69.5133 40.8167 69.224 40.8167 68.8977C40.8167 68.5653 40.7459 68.273 40.6044 68.0206C40.4659 67.7682 40.2735 67.5713 40.0273 67.4297C39.7811 67.2881 39.4995 67.2158 39.1825 67.2127C38.9055 67.2127 38.6362 67.2696 38.3746 67.3835C38.1161 67.4974 37.9145 67.6528 37.7698 67.8498L35.9925 67.5312L36.4403 62.5455H42.2201V64.1797H38.0884L37.8437 66.5479H37.8991C38.0653 66.314 38.3161 66.1201 38.6516 65.9663C38.9871 65.8124 39.3625 65.7354 39.778 65.7354C40.3474 65.7354 40.8552 65.8693 41.3014 66.1371C41.7477 66.4048 42.1001 66.7726 42.3586 67.2404C42.6171 67.7051 42.7449 68.2406 42.7418 68.8469C42.7449 69.484 42.5971 70.0503 42.2986 70.5458C42.0032 71.0382 41.5892 71.426 41.0568 71.7092C40.5274 71.9892 39.9119 72.1293 39.2102 72.1293Z" fill="#0D5355"/>
                         <path d="M35.2929 56.7071C35.6834 57.0976 36.3166 57.0976 36.7071 56.7071L43.0711 50.3431C43.4616 49.9526 43.4616 49.3195 43.0711 48.9289C42.6805 48.5384 42.0474 48.5384 41.6569 48.9289L36 54.5858L30.3431 48.9289C29.9526 48.5384 29.3195 48.5384 28.9289 48.9289C28.5384 49.3195 28.5384 49.9526 28.9289 50.3431L35.2929 56.7071ZM35 45V56H37V45H35Z" fill="#A6ECEE"/>
                     </svg>
-
-                    <span className={`default-font ${selectedMode === 1 ? 'color-dark-ciano' : 'color-ligth-ciano'}`} > Pomodoro </span>
                 </label>
-                <label className={`radio ${selectedMode === 2 ? 'bg-green' : 'bg-opacity-green'}`}>
+                <span className={`default-font ${selectedMode === 1 ? 'color-dark-ciano' : 'color-ligth-ciano'}`} > Pomodoro </span>
+            </div>
+            <div className='radio-choice'>
+                <label className={` radio-mode-selector ${selectedMode === 2 ? 'bg-green' : 'bg-opacity-green'}`}>
                     <input 
                         type="radio"
                         name="radio"
@@ -87,24 +78,10 @@ function ModeSetting({
                         </clipPath>
                         </defs>
                     </svg>
-
-                    <span className={`default-font ${selectedMode === 2 ? 'color-dark-green' : 'color-ligth-green'}`} > Flowmodoro </span>
                 </label>
+                <span className={`default-font ${selectedMode === 2 ? 'color-dark-green' : 'color-ligth-green'}`} > Flowmodoro </span>
             </div>
-
-            <div className="time-goal-buttons">
-                <Button text={'Prev'} iconName={'prev'} color={'ligth-pink'} operation={()=> setPageNumber(prev => prev-1)}></Button>
-                <Button 
-                    text={'Start'} 
-                    iconName={'play-end'} 
-                    color={'ciano'} 
-                    operation={()=> {
-                        setPageNumber(0);
-                        setInitSession(false);
-                    }}
-                />
-            </div>
-      </div>
+    </div>
     );
 }
 
