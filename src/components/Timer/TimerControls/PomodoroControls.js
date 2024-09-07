@@ -4,11 +4,9 @@ import React from 'react';
 import StopButton from '../../Buttons/StopButton'
 import StartButton from '../../Buttons/StartButton'
 import clicksound from '../../../assets/sounds/start-click.wav'
-import CircleButton from '../../Buttons/CircleButton';
 
 function PomodoroControls({ 
     isActive,
-    endSession,
     pomodoroStart,
     pomodoroPause,
   }) 

@@ -3,7 +3,6 @@ import './TimerControls.css'
 import React from 'react';
 import StopButton from '../../Buttons/StopButton'
 import StartButton from '../../Buttons/StartButton'
-import CircleButton from '../../Buttons/CircleButton'
 import startFlowAudio from '../../../assets/sounds/start-click.wav'
 
 

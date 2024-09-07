@@ -33,7 +33,7 @@ function InitSession({
         <>
             <BgLeftGradient/>
             <div className="init-session-container background" >
-                <div className='is-left'>
+                <div className={`is-left`}>
                     {
                         pageNumber === 0 &&
                             <ContentBox

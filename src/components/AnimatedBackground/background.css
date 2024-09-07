@@ -6,11 +6,12 @@
     overflow: hidden;
 }
 .background-blob {
-    filter: blur(40px);
+    filter: blur(30px);
     position: absolute;
     border-radius: 100px;
     width: 45%;
     height: 50%;
+    animation: bg-left-gradient-enter 3s ease forwards;
 }
 .is-background-pink {
     background-color: var(--opacity-pink);
@@ -29,4 +30,14 @@
     top: 70%;
     left: -15%;
     transform: rotate(-20deg);
+}
+
+@keyframes bg-left-gradient-enter {
+    from {
+        opacity: 0;
+        transform: rotate(-90deg);
+    }
+    to {
+        opacity: 1;
+    }
 }

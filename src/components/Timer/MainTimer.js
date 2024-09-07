@@ -101,6 +101,31 @@ function MainTimer({
         }
     },[]);
 
+    const movingBackground = useCallback( (remainingTime, isTimer) =>{
+        if( isTimer ){
+            let workingTime = (currentTime - remainingTime);
+            let movingToRigth = workingTime/currentTime*100 ;
+            let movingToLeft = 100 - movingToRigth; 
+
+            if( flow && movingToRigth > savedBgLeft.current ) savedBgLeft.current = 0;
+            if( flow && movingToLeft < savedBgRigth.current ) savedBgRigth.current = 0;
+
+            if( !flow && movingToLeft < savedBgLeft.current ) savedBgLeft.current = 0;
+            if( !flow && movingToRigth > savedBgRigth.current ) savedBgRigth.current = 0;
+            
+            if( savedBgLeft.current === 0  && savedBgRigth.current === 0){
+                setBgLeft(flow ?  movingToRigth : movingToLeft);
+                setBgRigth(flow ? movingToLeft : movingToRigth);
+            }
+        }
+        else{
+            let bgMoving = 0.1;
+
+            setBgLeft(prev => Math.min(100, prev+bgMoving));
+            setBgRigth(prev => Math.max(0, prev-bgMoving));
+        }
+    }, [setBgLeft,setBgRigth,currentTime,flow]);
+
     /* POMODORO TIMER */
     const handleTimerCompletion = useCallback( () =>{
         const newTimerCount = (timerCount + 1) % 8;
@@ -149,7 +174,7 @@ function MainTimer({
             }
 
         }, 1000);
-    }, [currentTime, flow, handleTimerCompletion, bgLeft, bgRigth, notify,setBgRigth, setBgLeft ]);
+    }, [currentTime, handleTimerCompletion, movingBackground, notify ]);
 
     const pomodoroPause = () => {
         setIsActive(false);
@@ -185,7 +210,7 @@ function MainTimer({
             
             setTimeRemaining(elapsed);
         },1000)
-    }, [ setBgRigth, setBgLeft, timeRemaining ]);
+    }, [timeRemaining ]);
 
     const flowmodoroPause = () => {
         const buttonSound = new Audio(clicksound);
@@ -240,40 +265,17 @@ function MainTimer({
 
     useEffect(()=>{
         if(startAutomation){
-            if(selectedMode === 1 ) pomodoroStart();
-            if(selectedMode === 2 ) flowmodoroStart();
-
-            const buttonSound = new Audio(clicksound);
-            buttonSound.play();
-
-            setStartAutomation(false);
+            setTimeout(() => {
+                if(selectedMode === 1 ) pomodoroStart();
+                if(selectedMode === 2 ) flowmodoroStart();
+    
+                const buttonSound = new Audio(clicksound);
+                buttonSound.play();
+    
+                setStartAutomation(false);
+            }, 3000);
         }
     },[startAutomation, selectedMode, pomodoroStart, flowmodoroStart])
-
-    const movingBackground = (remainingTime, isTimer) =>{
-        if( isTimer ){
-            let workingTime = (currentTime - remainingTime);
-            let movingToRigth = workingTime/currentTime*100 ;
-            let movingToLeft = 100 - movingToRigth; 
-
-            if( flow && movingToRigth > savedBgLeft.current ) savedBgLeft.current = 0;
-            if( flow && movingToLeft < savedBgRigth.current ) savedBgRigth.current = 0;
-
-            if( !flow && movingToLeft < savedBgLeft.current ) savedBgLeft.current = 0;
-            if( !flow && movingToRigth > savedBgRigth.current ) savedBgRigth.current = 0;
-            
-            if( savedBgLeft.current == 0  && savedBgRigth.current == 0){
-                setBgLeft(flow ?  movingToRigth : movingToLeft);
-                setBgRigth(flow ? movingToLeft : movingToRigth);
-            }
-        }
-        else{
-            let bgMoving = 0.1;
-
-            setBgLeft(prev => Math.min(100, prev+bgMoving));
-            setBgRigth(prev => Math.max(0, prev-bgMoving));
-        }
-    }
 
     const next = () => {
         const buttonSound = new Audio(clicksound);
@@ -455,13 +457,13 @@ function MainTimer({
                         </>
                     }
                     {
-                        !endSession && selectedMode == 1 &&
+                        !endSession && selectedMode === 1 &&
                         <CircleButton color={'ligth-pink'} tooltip={'next'} iconName={'next'} operation={next}></CircleButton>
                     }
                     {
-                        isActive && selectedMode == 2 && flowmoFlow &&
+                        isActive && selectedMode === 2 && flowmoFlow &&
                         (
-                            selectedMode == 2 && flowmoFlow &&
+                            selectedMode === 2 && flowmoFlow &&
                             <CircleButton 
                                 iconName={'pause'} 
                                 color={'ligth-green'}

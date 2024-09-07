@@ -36,7 +36,7 @@ function App() {
   );
 
   const [bgLeft, setBgLeft] = useState( 0 );
-  const [bgRigth, setBgRigth] = useState( 100 );
+  const [bgRigth, setBgRigth] = useState( 0 );
   const [endSessionRequest, setEndSessionRequest] = useState(false);
 
   useEffect( () => {

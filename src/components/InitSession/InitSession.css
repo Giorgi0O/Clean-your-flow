@@ -11,6 +11,8 @@
     flex-basis: 45%;
     flex-grow: 1; 
     height: 100%;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    opacity: 1;
 }
 .is-left{
     display: flex; justify-content: center; align-items: center;
@@ -18,6 +20,7 @@
 .is-rigth{
     display: flex; justify-content: center; align-items: center;
 }
+
 .is-controls{
     z-index: 100;
     width: 100%;
@@ -30,6 +33,24 @@
     margin: 8px;
 }
 
+@keyframes  is-anim-left {
+    from {
+        opacity: 0;
+        transform: translate(-100px)
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes  is-anim-rigth {
+    from {
+        opacity: 0;
+        transform: translate(100px)
+    }
+    to {
+        opacity: 1;
+    }
+}
 /* Componenti che creano gli obbiettivi */
 .card-dim{
     width: 80%;
