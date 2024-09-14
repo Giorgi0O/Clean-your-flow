@@ -145,7 +145,9 @@ function MainTimer({
             clearInterval(interval.current);
         }
         else{
-            setStartAutomation(true);
+            setTimeout( () =>{
+                setStartAutomation(true);
+            }, 3000)
         }
     }, [timerCount,autoStart, flow, flowTime, longRestTime, restTime]);
 
@@ -169,6 +171,7 @@ function MainTimer({
             setTimeRemaining(remainingTime);
         
             if (remainingTime <= 0) {
+                clearInterval(interval.current);
                 notify();
                 handleTimerCompletion();
             }
@@ -265,15 +268,13 @@ function MainTimer({
 
     useEffect(()=>{
         if(startAutomation){
-            setTimeout(() => {
-                if(selectedMode === 1 ) pomodoroStart();
-                if(selectedMode === 2 ) flowmodoroStart();
-    
-                const buttonSound = new Audio(clicksound);
-                buttonSound.play();
-    
-                setStartAutomation(false);
-            }, 3000);
+            if(selectedMode === 1 ) pomodoroStart();
+            if(selectedMode === 2 ) flowmodoroStart();
+
+            const buttonSound = new Audio(clicksound);
+            buttonSound.play();
+
+            setStartAutomation(false);
         }
     },[startAutomation, selectedMode, pomodoroStart, flowmodoroStart])
 
