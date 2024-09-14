@@ -9,6 +9,7 @@ import PomodoroControls from './TimerControls/PomodoroControls';
 import FlowmodoroControls from "./TimerControls/FlowmodoroControls";
 import startFlowSound from '../../assets/sounds/start-flow.wav';
 import clicksound from '../../assets/sounds/start-click.wav';
+import Nosleep from 'nosleep.js';
 
 function MainTimer({
     selectedMode,
@@ -69,6 +70,27 @@ function MainTimer({
     const interval = useRef(null);
     const savedBgRigth = useRef(0);
     const savedBgLeft = useRef(0);
+
+    useEffect(() => {
+        if(isActive){
+            let isEnableNoSleep = false;
+            const noSleep = new Nosleep();
+            document.addEventListener(
+                `click`,
+                function enableNoSleep() {
+                    document.removeEventListener(`click`, enableNoSleep, false);
+                    noSleep.enable();
+                    isEnableNoSleep = true;
+                },
+                false
+            );
+            return () => {
+                if (isEnableNoSleep) {
+                noSleep.disable();
+                }
+            };  
+        }
+    }, [isActive]);
 
     useEffect( () => {
         localStorage.setItem('autoStart', JSON.stringify(autoStart));
@@ -145,7 +167,9 @@ function MainTimer({
             clearInterval(interval.current);
         }
         else{
-            setStartAutomation(true);
+            setTimeout( () =>{
+                setStartAutomation(true);
+            }, 3000)
         }
     }, [timerCount,autoStart, flow, flowTime, longRestTime, restTime]);
 
@@ -169,6 +193,7 @@ function MainTimer({
             setTimeRemaining(remainingTime);
         
             if (remainingTime <= 0) {
+                clearInterval(interval.current);
                 notify();
                 handleTimerCompletion();
             }
@@ -265,15 +290,13 @@ function MainTimer({
 
     useEffect(()=>{
         if(startAutomation){
-            setTimeout(() => {
-                if(selectedMode === 1 ) pomodoroStart();
-                if(selectedMode === 2 ) flowmodoroStart();
-    
-                const buttonSound = new Audio(clicksound);
-                buttonSound.play();
-    
-                setStartAutomation(false);
-            }, 3000);
+            if(selectedMode === 1 ) pomodoroStart();
+            if(selectedMode === 2 ) flowmodoroStart();
+
+            const buttonSound = new Audio(clicksound);
+            buttonSound.play();
+
+            setStartAutomation(false);
         }
     },[startAutomation, selectedMode, pomodoroStart, flowmodoroStart])
 
@@ -334,7 +357,7 @@ function MainTimer({
         setRestTime(tempRestTime);
         setLongRestTime(tempLongRestTime);
         setTimeRemaining(remaningTime);
-        setCurrentTime(flow ? tempFlowTime : (timerCount % 7 === 0 ? tempLongRestTime : tempRestTime));
+        setCurrentTime(remaningTime);
     }
 
     useEffect(() => {
