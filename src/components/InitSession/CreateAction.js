@@ -50,28 +50,24 @@ function CreateAction({
                         operation={handleSave}
                     />
                 </div>
-                <div className='task-list'>
+                <div className={`${ taskList.length > 0 ? 'task-list' :'task-empty' }`}>
                     {
-                        taskList.length > 0 ? 
-                            (
-                                taskList.map((task, index) => (
-                                    <div className="action-content" key={index}>
-                                        <Task 
-                                            id={task.id}
-                                            action={task.action}       
-                                            completed={task.completed}
-                                            update={false}
-                                            createTask={createTask}
-                                            deleteTask={deleteTask}
-                                        />
-                                        <DivisorOrizontal/>
-                                    </div>
-                                ))
-                            )
-                        :
-                            (
-                                <div className="task-empty"> <p className="sub-font"> Action list is empty </p> </div>
-                            )
+                        taskList.length > 0 &&
+                        (
+                            taskList.map((task, index) => (
+                                <div className="action-content" key={index}>
+                                    <Task 
+                                        id={task.id}
+                                        action={task.action}       
+                                        completed={task.completed}
+                                        update={false}
+                                        createTask={createTask}
+                                        deleteTask={deleteTask}
+                                    />
+                                    <DivisorOrizontal/>
+                                </div>
+                            ))
+                        )
                     }
                 </div>
         </div>
