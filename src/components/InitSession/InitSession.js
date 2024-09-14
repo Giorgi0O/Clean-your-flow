@@ -127,7 +127,7 @@ function InitSession({
                     pageNumber === 2 && 
                     <>
                         <Button text={'Prev'} iconName={'prev'} color={'ligth-pink'} operation={()=> setPageNumber(prev => prev-1)}></Button>
-                        <Button text={'Start'} iconName={'play-end'} color={selectedMode == 1 ? 'ciano' : 'green'} operation={()=> {setPageNumber(0); setInitSession(false);}}/>
+                        <Button text={'Start'} iconName={'play-end'} color={selectedMode === 1 ? 'ciano' : 'green'} operation={()=> {setPageNumber(0); setInitSession(false);}}/>
                     </>
                 }
             </div>
