@@ -334,7 +334,7 @@ function MainTimer({
         setRestTime(tempRestTime);
         setLongRestTime(tempLongRestTime);
         setTimeRemaining(remaningTime);
-        setCurrentTime(flow ? tempFlowTime : (timerCount % 7 === 0 ? tempLongRestTime : tempRestTime));
+        setCurrentTime(remaningTime);
     }
 
     useEffect(() => {
