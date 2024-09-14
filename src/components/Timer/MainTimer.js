@@ -9,6 +9,7 @@ import PomodoroControls from './TimerControls/PomodoroControls';
 import FlowmodoroControls from "./TimerControls/FlowmodoroControls";
 import startFlowSound from '../../assets/sounds/start-flow.wav';
 import clicksound from '../../assets/sounds/start-click.wav';
+import Nosleep from 'nosleep.js';
 
 function MainTimer({
     selectedMode,
@@ -69,6 +70,27 @@ function MainTimer({
     const interval = useRef(null);
     const savedBgRigth = useRef(0);
     const savedBgLeft = useRef(0);
+
+    useEffect(() => {
+        if(isActive){
+            let isEnableNoSleep = false;
+            const noSleep = new Nosleep();
+            document.addEventListener(
+                `click`,
+                function enableNoSleep() {
+                    document.removeEventListener(`click`, enableNoSleep, false);
+                    noSleep.enable();
+                    isEnableNoSleep = true;
+                },
+                false
+            );
+            return () => {
+                if (isEnableNoSleep) {
+                noSleep.disable();
+                }
+            };  
+        }
+    }, [isActive]);
 
     useEffect( () => {
         localStorage.setItem('autoStart', JSON.stringify(autoStart));
