@@ -80,8 +80,7 @@ function InitSession({
                                 taskList={taskList}
                                 createTask={createTask}
                                 deleteTask={deleteTask}
-                            ></CreateAction>
-                          
+                            />
                     }
                     {
                         pageNumber === 1 &&

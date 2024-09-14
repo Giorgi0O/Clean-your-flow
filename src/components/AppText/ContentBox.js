@@ -10,7 +10,7 @@ function ContentBox({
     return (
         <div className='box-text-container'>
             <p className='titolo-font color-dark-ciano'> {title} </p>
-            <span className='font-corpo2 color-dark-ciano'> {body} </span>
+            <span className='sub-title font-corpo2 color-dark-ciano'> {body} </span>
         </div>
     );
 }
