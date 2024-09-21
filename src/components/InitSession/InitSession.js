@@ -32,25 +32,25 @@ function InitSession({
         localStorage.setItem('pageNumber', JSON.stringify(pageNumber));
     }, [pageNumber] ) 
 
-    const bodyClass = 'font-corpo2 color-dark-ciano'
-    const titleClass = 'titolo-font color-dark-ciano'
+    const bodyClass = 'font-corpo text-lg mt-6 text-ciano-dark'
+    const titleClass = 'font-titolo font-bold text-3xl text-ciano-dark'
 
     return (
         <>
             <BgLeftGradient/>
-            <div className="init-session-container background" >
+            <div className="init-session-container" >
                 <div className={`is-left`}>
                     {
                         pageNumber === 0 &&
                             <ContentBox
                                 title={
                                     <>
-                                        <span className='marker-title'>Before starting</span> set your task
+                                        <span className='bg-ciano-light rounded-full pl-0.5'> Before starting </span> set your task
                                     </>
                                 } 
                                 body={
                                     <>
-                                        To stay focused, break down larger tasks  <br/> into <span className='marker-pink'> smaller </span>, manageable steps.<br/> This makes tracking progress  <br/> <span className='marker-green'> easier </span> and keeps you motivated
+                                        To stay focused, break down larger tasks  <br/> into <span className='bg-rosa-light'> smaller </span>, manageable steps.<br/> This makes tracking progress  <br/> <span className='bg-verde-light'> easier </span> and keeps you motivated
                                     
                                     </>
                                 }
@@ -70,12 +70,12 @@ function InitSession({
                             <ContentBox
                                 title={
                                     <>
-                                        Pomodoro or Flowmodoro <span className='marker-title'> ? </span> 
+                                        Pomodoro or Flowmodoro <span className='bg-ciano-light rounded-full pl-0.5'> ? </span> 
                                     </>
                                 } 
                                 body={
                                     <>
-                                        Pomodoro uses short <span className='marker-green'> work intervals </span> with breaks, <br/> while Flowmodoro adapts to your natural <br/> <span className='marker-pink'> endpoint </span> flow, allowing longer work periods.                                    
+                                        Pomodoro uses short <span className='bg-verde-light'> work intervals </span> with breaks, <br/> while Flowmodoro adapts to your natural <br/> <span className='bg-rosa-light'> endpoint </span> flow, allowing longer work periods.                                    
                                     </>
                                 }
                                 titleClass={titleClass}
@@ -97,12 +97,12 @@ function InitSession({
                             <ContentBox
                                 title={
                                     <>
-                                        <span className='marker-title'>Set time goal</span> 
+                                        <span className='bg-ciano-light rounded-full pl-0.5'>Set time goal</span> 
                                     </>
                                 } 
                                 body={
                                     <>
-                                        Set a time goal to stay on track. <br/> Having a clear  <span className='marker-pink'> endpoint </span> helps you maintain <br/> <span className='marker-green'> focus </span> and boosts your productivity.
+                                        Set a time goal to stay on track. <br/> Having a clear  <span className='bg-rosa-light'> endpoint </span> helps you maintain <br/> <span className='bg-verde-light'> focus </span> and boosts your productivity.
                                     
                                     </>
                                 }
@@ -125,16 +125,17 @@ function InitSession({
                     <>
                         <CircleButton tooltip={'End session'} 
                             iconName={'x'} 
-                            color={'ligth-pink'} 
+                            color={'rosa'} 
                             operation={() => {
                                 setEndSessionRequest(true);
                                 setReturnHome(true);
                             }} 
-                            activeColor={'pink'}
+                            activeColor={'rosa-dark'}
                         />
-                        <Button text={'Next'} iconName={'next-white'} color={ taskList.length > 0 ? 'ciano': 'gray' } 
+                        <Button text={'Next'} iconName={'next-white'} color={ 'ciano' } 
+                            disab={taskList.length === 0}
                             operation={()=> 
-                                taskList.length > 0 ? setPageNumber(prev => prev+1) : '' 
+                                setPageNumber(prev => prev+1) 
                             }
                         />
                     </>
@@ -142,15 +143,15 @@ function InitSession({
                 {
                     pageNumber === 1 && 
                     <>
-                        <Button text={'Prev'} iconName={'prev'} color={'ligth-pink'} operation={()=> setPageNumber(prev => prev-1)}></Button>
+                        <Button text={'Prev'} iconName={'prev'} color={'rosa-light'} disab={false} operation={()=> setPageNumber(prev => prev-1)}></Button>
                         <Button text={'Next'} iconName={'next-white'} color={'ciano'} operation={()=> setPageNumber(prev => prev+1)}></Button>
                     </>
                 }
                 {
                     pageNumber === 2 && 
                     <>
-                        <Button text={'Prev'} iconName={'prev'} color={'ligth-pink'} operation={()=> setPageNumber(prev => prev-1)}></Button>
-                        <Button text={'Start'} iconName={'play-end'} color={selectedMode === 1 ? 'ciano' : 'green'} operation={()=> {setPageNumber(0); setInitSession(false);}}/>
+                        <Button text={'Prev'} iconName={'prev'} color={'rosa-light'} operation={()=> setPageNumber(prev => prev-1)}></Button>
+                        <Button text={'Start'} iconName={'play-end'} color={selectedMode === 1 ? 'ciano' : 'verde'} operation={()=> {setPageNumber(0); setInitSession(false);}}/>
                     </>
                 }
             </div>

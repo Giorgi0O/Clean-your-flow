@@ -14,19 +14,16 @@
     animation: bg-left-gradient-enter 3s ease forwards;
 }
 .is-background-pink {
-    background-color: var(--opacity-pink);
     top: -10%;
     left: -15%;
     transform: rotate(20deg);
 }
 .is-background-green {
-    background-color: var(--opacity-green);
     top: 35%;
     left: 0;
     width: 20%;
 }
 .is-background-ciano {
-    background-color: var(--opacity-ciano);
     top: 70%;
     left: -15%;
     transform: rotate(-20deg);

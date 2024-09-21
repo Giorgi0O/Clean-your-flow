@@ -36,7 +36,7 @@ function EndModal( {
                             <Button 
                                 text={'End'} 
                                 iconName={'x-circle'} 
-                                color={'pink'} 
+                                color={'rosa-light'} 
                                 fixedWidth={50} 
                                 operation={restartReturnHome}
                             ></Button>
@@ -44,7 +44,7 @@ function EndModal( {
                             <Button 
                                 text={'End'} 
                                 iconName={'x-circle'} 
-                                color={'pink'} 
+                                color={'rosa-light'} 
                                 fixedWidth={50} 
                                 operation={() =>{ setEndSession(true); setEndSessionRequest(false); }}
                             ></Button>

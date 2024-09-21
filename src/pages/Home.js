@@ -17,18 +17,17 @@ function Home() {
               <ContentBox
                   body={
                       <>
-                        Our <span className='marker-green'> goal</span> is for you to achieve  <br/>
-                        your goals in the <span className='marker-pink'> cleanest </span> <br/>
+                        Our <span className='bg-verde-light'> goal</span> is for you to achieve  <br/>
+                        your goals in the <span className='bg-rosa-light'> cleanest </span> <br/>
                         way possible.                  
                        </>
                   }
-                  bodyClass={'titolo-font color-dark-ciano'}
+                  bodyClass={'font-corpo text-xl font-bold text-ciano-dark'}
               />
             </div>
             <div className='home-rigth'>
                 <SessionStart />
             </div>
-
         </div>
     </div>
   );

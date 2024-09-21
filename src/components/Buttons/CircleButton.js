@@ -1,4 +1,4 @@
-import '../Timer/Timer.css';
+import '../../styles/Button.css'
 import React from 'react';
 import {hexToFilter} from '../../utils/Common'
 
@@ -21,7 +21,7 @@ function CircleButton({
             {
                 active ?
                 (
-                    <button className={`circle-button bg-${activeColor} ${isShadow}`} onClick={activeOperation}>
+                    <button className={`rounded-full bg-${color}-light border-${color}-dark border-2 p-2 shadow-md  `} onClick={activeOperation}>
                         <img 
                             src={iconUrl}
                             alt={iconName}
@@ -35,15 +35,13 @@ function CircleButton({
                 )
                 :
                 (
-                    <button className={`circle-button bg-${color} ${isShadow}`} onClick={operation} title={tooltip}>
+                    <button className={`rounded-full bg-${color}-light border-${color}-dark border-2 p-2 `} onClick={operation} title={tooltip}>
                         <img 
                             src={iconUrl}
                             alt={iconName}
                             width="24"
                             height="24"
-                            style={{
-                                filter: color === 'ciano' ? hexToFilter('0D5355') : hexToFilter('7A335E')
-                            }}
+                            className={`text-${color}-dark`}
                         />
                     </button> 
                 )

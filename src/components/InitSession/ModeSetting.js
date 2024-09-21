@@ -14,7 +14,7 @@ function ModeSetting({
     return(
         <div className='card card-dim mode-setting radio-inputs'>
             <div className='radio-choice'>
-                <label className={`radio-mode-selector ${selectedMode === 1 ? 'bg-ciano' : 'bg-opacity-ciano'}`}>
+                <label className={`radio-mode-selector ${selectedMode === 1 ? 'bg-ciano' : 'bg-ciano-opacity'}`}>
                     <input 
                         type="radio"
                         name="radio"
@@ -37,10 +37,10 @@ function ModeSetting({
                         <path d="M35.2929 56.7071C35.6834 57.0976 36.3166 57.0976 36.7071 56.7071L43.0711 50.3431C43.4616 49.9526 43.4616 49.3195 43.0711 48.9289C42.6805 48.5384 42.0474 48.5384 41.6569 48.9289L36 54.5858L30.3431 48.9289C29.9526 48.5384 29.3195 48.5384 28.9289 48.9289C28.5384 49.3195 28.5384 49.9526 28.9289 50.3431L35.2929 56.7071ZM35 45V56H37V45H35Z" fill="#A6ECEE"/>
                     </svg>
                 </label>
-                <span className={`default-font ${selectedMode === 1 ? 'color-dark-ciano' : 'color-ligth-ciano'}`} > Pomodoro </span>
+                <span className={`default-font ${selectedMode === 1 ? 'text-ciano-dark' : 'text-ciano-light'}`} > Pomodoro </span>
             </div>
             <div className='radio-choice'>
-                <label className={` radio-mode-selector ${selectedMode === 2 ? 'bg-green' : 'bg-opacity-green'}`}>
+                <label className={` radio-mode-selector ${selectedMode === 2 ? 'bg-verde' : 'bg-verde-opacity'}`}>
                     <input 
                         type="radio"
                         name="radio"

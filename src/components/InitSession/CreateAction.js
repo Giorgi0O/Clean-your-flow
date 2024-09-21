@@ -34,18 +34,18 @@ function CreateAction({
 
     return(
         <div className='card card-dim task-card'>
-                <div className='creator'>
+                <div className='flex justify-evenly m-16px w-5/6'>
                     <input
                         id="creator"
-                        className='task-input color-dark-ciano font-corpo1'
+                        className=' w-5/6 rounded-full border-2 p-2 border-ciano text-ciano-dark font-corpo'
                         value={tempValue}
                         onChange={handleTempSave}
                         onKeyDown={handleKeyPress} 
                         placeholder={'Write your task here'}
                     />
                     <CircleButton
-                        iconName={'x'}
-                        color={'ligth-ciano'}
+                        iconName={'plus'}
+                        color={'ciano'}
                         tooltip={'add task'}
                         operation={handleSave}
                     />

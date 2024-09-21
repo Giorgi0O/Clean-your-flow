@@ -1,0 +1,47 @@
+.default-button img{
+    width: 24px;
+    height: 24px;
+}
+.bg-gray{
+    background-color: lightgray;
+}
+.circle-button{
+    padding: 8px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center ;
+    color: white;
+    margin: 4px;
+}
+.circle-button img{
+    height: 24px;
+    width: 24px;
+}
+.primary-button{
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 45px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center ;
+    justify-content: center;
+    margin: 8px
+}
+.primary-button svg{
+    margin-right: 8px;
+}
+
+.session-button-container{
+    width: 600px;
+    height: 600px;
+    display: flex; justify-content: center; align-items: center;
+}
+
+.session-button{
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    width: 300px;
+    height: 300px;
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.15);
+}

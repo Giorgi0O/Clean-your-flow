@@ -70,10 +70,6 @@
     background: none;
     border: none;
     stroke-width: 1.5px;
-    stroke: var(--dark-pink);
-}
-.delete-task-button:hover{
-    stroke: var(--pink);
 }
 
 /*TIME GOAL*/
@@ -124,9 +120,8 @@
     position: absolute;
     left: 50%;
     top: 50%;
+    width: 50%;
     transform: translate(-50%, -50%);
-    width: 350px;
-    max-height: 80%;
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
     display: flex;

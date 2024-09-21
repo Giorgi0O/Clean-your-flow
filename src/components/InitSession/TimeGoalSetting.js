@@ -1,18 +1,58 @@
-import React from "react";
-import TimeGoalBar from "./TimeGoalBar";
+import React, {useState} from "react";
+import "./InitSession.css";
+
 
 function TimeGoalSetting({
     timeGoal,
     setTimeGoal
 }) {
 
+    const [value, setValue] = useState(timeGoal/60);
+
+    const formatTime = (time) => {
+        if (time < 60) {
+            return (
+                <>
+                    <span className="number font-number"> {time} </span> <span className="default-font">minutes</span>
+                </>
+            );
+        } else {
+            const hours = Math.floor(time / 60);
+            const minutes = time % 60;
+            return (
+                <>
+                     <span className="number font-number"> {hours}:{minutes.toString().padStart(2, '0')} </span> <span className="default-font">hours</span>
+                </>
+            );
+        }
+    }
+
+    const HandleChange = (event) => {
+        setValue(+event.target.value);
+    }
+
+    const HandleSave = () =>{
+        setTimeGoal(value*60);
+    }
+
     return(
         <div className='card time-goal-card'>
-            <div className='task-creator time-goal-set'>
-                <TimeGoalBar
-                    timeGoal={timeGoal}
-                    setTimeGoal={setTimeGoal}
-                ></TimeGoalBar>
+            <div className='task-creator time-goal-set bg'>
+                <div className="PB-range-slider-div">
+                    <p className="text-verde font-number text-2xl font-bold">
+                        {formatTime(value)}
+                    </p>
+                    <input
+                        type="range"
+                        min="0"
+                        max="300"
+                        value={value}
+                        onChange={HandleChange}
+                        onBlur={HandleSave}
+                        className="range range-secondary"
+                        id="myRange"
+                    />
+                </div>
             </div>
       </div>
     );
