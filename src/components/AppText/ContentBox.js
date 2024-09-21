@@ -3,14 +3,16 @@ import './appText.css'
 
 function ContentBox({
     title,
-    body
+    body,
+    titleClass,
+    bodyClass
 }) {
     
 
     return (
         <div className='box-text-container'>
-            <p className='titolo-font color-dark-ciano'> {title} </p>
-            <span className='sub-title font-corpo2 color-dark-ciano'> {body} </span>
+            <p className={titleClass}> {title} </p>
+            <span className={bodyClass}> {body} </span>
         </div>
     );
 }

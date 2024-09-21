@@ -10,6 +10,7 @@ import FlowmodoroControls from "./TimerControls/FlowmodoroControls";
 import startFlowSound from '../../assets/sounds/start-flow.wav';
 import clicksound from '../../assets/sounds/start-click.wav';
 import Nosleep from 'nosleep.js';
+import { restart } from '../../utils/Common';
 
 function MainTimer({
     selectedMode,
@@ -25,7 +26,6 @@ function MainTimer({
     createTask,
     deleteTask,
     updateTask,
-    restart
 }){
 
     const [autoStart, setAutoStart] = useState( () => {

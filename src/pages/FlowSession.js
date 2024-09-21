@@ -4,7 +4,6 @@ import {useEffect, useState} from 'react';
 import InitSession from '../components/InitSession/InitSession';
 import EndModal from '../components/Modal/EndModal';
 import MainTimer from '../components/Timer/MainTimer';
-import { restart } from '../utils/Common';
 
 function FlowSession() {
 
@@ -38,6 +37,7 @@ function FlowSession() {
   const [bgLeft, setBgLeft] = useState( 0 );
   const [bgRigth, setBgRigth] = useState( 0 );
   const [endSessionRequest, setEndSessionRequest] = useState(false);
+  const [returnHome, setReturnHome] = useState(false);
 
   useEffect( () => {
     localStorage.setItem('taskList', JSON.stringify(taskList));
@@ -113,6 +113,8 @@ function FlowSession() {
             createTask={createTask}
             deleteTask={deleteTask}
             updateTask={updateTask}
+            setEndSessionRequest={setEndSessionRequest}
+            setReturnHome={setReturnHome}
           />
         )
         :
@@ -131,7 +133,6 @@ function FlowSession() {
             createTask={createTask}
             deleteTask={deleteTask}
             updateTask={updateTask}
-            restart = {restart}
           />
         )
       }
@@ -139,6 +140,7 @@ function FlowSession() {
         endSessionRequest={endSessionRequest} 
         setEndSessionRequest={setEndSessionRequest} 
         setEndSession={setEndSession} 
+        returnHome={returnHome}
       />
     </div>  );
 }

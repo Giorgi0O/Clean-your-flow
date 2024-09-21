@@ -1,10 +1,11 @@
 import './App.scss';
-import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import FlowSession from './pages/FlowSession';
 
-export default function App() {
+
+function App() {
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -17,5 +18,4 @@ export default function App() {
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+export default App

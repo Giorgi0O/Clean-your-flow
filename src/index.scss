@@ -148,6 +148,24 @@ body {
 .primary-button svg{
   margin-right: 8px;
 }
+.session-button-container{
+  width: 600px;
+  height: 600px;
+  border-radius: 100%; border:  5px solid var(--dark-ciano);
+  display: flex; justify-content: center; align-items: center;
+  background-color: var(--opacity-ciano);
+}
+.session-button{
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  width: 300px;
+  height: 300px;
+  border-radius: 100%; border:  5px solid var(--dark-ciano);
+  background-color: var(--ligth-ciano);
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.15);
+}
+.session-button span{
+  margin-top: 8px;
+}
 
 /*background*/
 .bg-start{

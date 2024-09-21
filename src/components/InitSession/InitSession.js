@@ -6,6 +6,7 @@ import ModeSetting from './ModeSetting';
 import BgLeftGradient from '../AnimatedBackground/BgLeftGradient';
 import Button from '../Buttons/Button';
 import ContentBox from '../AppText/ContentBox';
+import CircleButton from '../Buttons/CircleButton';
 
 function InitSession({
     setInitSession, 
@@ -16,7 +17,9 @@ function InitSession({
     setSelectedMode,
     createTask,
     deleteTask,
-    updateTask
+    updateTask,
+    setEndSessionRequest,
+    setReturnHome
 }) {
 
     const[pageNumber, setPageNumber] = useState(() => {
@@ -28,6 +31,9 @@ function InitSession({
     useEffect( () => {
         localStorage.setItem('pageNumber', JSON.stringify(pageNumber));
     }, [pageNumber] ) 
+
+    const bodyClass = 'font-corpo2 color-dark-ciano'
+    const titleClass = 'titolo-font color-dark-ciano'
 
     return (
         <>
@@ -48,6 +54,8 @@ function InitSession({
                                     
                                     </>
                                 }
+                                titleClass={titleClass}
+                                bodyClass={bodyClass}
                             />
                     }
                     {
@@ -70,6 +78,8 @@ function InitSession({
                                         Pomodoro uses short <span className='marker-green'> work intervals </span> with breaks, <br/> while Flowmodoro adapts to your natural <br/> <span className='marker-pink'> endpoint </span> flow, allowing longer work periods.                                    
                                     </>
                                 }
+                                titleClass={titleClass}
+                                bodyClass={bodyClass}
                             />
                     }
                 </div>
@@ -96,6 +106,8 @@ function InitSession({
                                     
                                     </>
                                 }
+                                titleClass={titleClass}
+                                bodyClass={bodyClass}
                             />
                     }
                     {
@@ -110,11 +122,22 @@ function InitSession({
             <div className='is-controls'>
                 {
                     pageNumber === 0 &&
+                    <>
+                        <CircleButton tooltip={'End session'} 
+                            iconName={'x'} 
+                            color={'ligth-pink'} 
+                            operation={() => {
+                                setEndSessionRequest(true);
+                                setReturnHome(true);
+                            }} 
+                            activeColor={'pink'}
+                        />
                         <Button text={'Next'} iconName={'next-white'} color={ taskList.length > 0 ? 'ciano': 'gray' } 
                             operation={()=> 
                                 taskList.length > 0 ? setPageNumber(prev => prev+1) : '' 
                             }
                         />
+                    </>
                 }
                 {
                     pageNumber === 1 && 
