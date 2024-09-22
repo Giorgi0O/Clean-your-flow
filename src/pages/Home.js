@@ -1,5 +1,4 @@
 import '../App.scss';
-import './Home.css';
 import BgLeftGradient from '../components/AnimatedBackground/BgLeftGradient';
 import Title from '../components/Title/Title';
 import ContentBox from '../components/AppText/ContentBox';
@@ -12,8 +11,8 @@ function Home() {
     <div className='app'>
         <BgLeftGradient/>
         <Title/>
-        <div id='home-container' >
-            <div className='home-left titolo3-font'>
+        <div className='h-3/4 w-full flex z-[100]' >
+            <div className='center h-full w-1/2'>
               <ContentBox
                   body={
                       <>
@@ -25,7 +24,7 @@ function Home() {
                   bodyClass={'font-corpo text-xl font-bold text-ciano-dark'}
               />
             </div>
-            <div className='home-rigth'>
+            <div className='center h-full w-1/2'>
                 <SessionStart />
             </div>
         </div>

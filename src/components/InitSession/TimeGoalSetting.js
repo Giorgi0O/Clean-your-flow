@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import "./InitSession.css";
 
 
 function TimeGoalSetting({
@@ -36,8 +35,8 @@ function TimeGoalSetting({
     }
 
     return(
-        <div className='card time-goal-card'>
-            <div className='task-creator time-goal-set bg'>
+        <div className='card w-3/4 center bg-base-100 p-8 time-goal-card'>
+            <div className='card-body w-full text-center'>
                 <div className="PB-range-slider-div">
                     <p className="text-verde font-number text-2xl font-bold">
                         {formatTime(value)}
@@ -49,7 +48,7 @@ function TimeGoalSetting({
                         value={value}
                         onChange={HandleChange}
                         onBlur={HandleSave}
-                        className="range range-secondary"
+                        className="range range-md range-success"
                         id="myRange"
                     />
                 </div>

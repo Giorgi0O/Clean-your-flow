@@ -1,4 +1,3 @@
-import './InitSession.css'
 import React, {useState, useEffect} from 'react';
 import CreateAction from './CreateAction';
 import TimeGoalSetting from './TimeGoalSetting';
@@ -38,8 +37,8 @@ function InitSession({
     return (
         <>
             <BgLeftGradient/>
-            <div className="init-session-container" >
-                <div className={`is-left`}>
+            <div className="z-[100] w-full h-3/4 flex justify-evenly items-center" >
+                <div className={`w-1/2 h-full center p-8`}>
                     {
                         pageNumber === 0 &&
                             <ContentBox
@@ -83,7 +82,7 @@ function InitSession({
                             />
                     }
                 </div>
-                <div className='is-rigth'>
+                <div className='w-1/2 h-full center p-8'>
                     {
                         pageNumber === 0 &&
                             <CreateAction
@@ -94,6 +93,7 @@ function InitSession({
                     }
                     {
                         pageNumber === 1 &&
+                        <div className='text-right'>
                             <ContentBox
                                 title={
                                     <>
@@ -102,13 +102,14 @@ function InitSession({
                                 } 
                                 body={
                                     <>
-                                        Set a time goal to stay on track. <br/> Having a clear  <span className='bg-rosa-light'> endpoint </span> helps you maintain <br/> <span className='bg-verde-light'> focus </span> and boosts your productivity.
+                                        Set a time goal to stay on track. <br/> Having a clear  <span className='bg-rosa-light'> endpoint <br/> </span> helps you maintain <span className='bg-verde-light'> focus </span> and boosts your productivity.
                                     
                                     </>
                                 }
                                 titleClass={titleClass}
                                 bodyClass={bodyClass}
                             />
+                        </div>
                     }
                     {
                          pageNumber === 2 &&
@@ -119,20 +120,19 @@ function InitSession({
                     }
                 </div>
             </div>
-            <div className='is-controls'>
+            <div className='z-[100] w-full h-[12%] center'>
                 {
                     pageNumber === 0 &&
                     <>
                         <CircleButton tooltip={'End session'} 
                             iconName={'x'} 
-                            color={'rosa'} 
+                            color={'secondary'} 
                             operation={() => {
                                 setEndSessionRequest(true);
                                 setReturnHome(true);
                             }} 
-                            activeColor={'rosa-dark'}
                         />
-                        <Button text={'Next'} iconName={'next-white'} color={ 'ciano' } 
+                        <Button text={'Next'} iconName={'next'} color={ 'ciano' } 
                             disab={taskList.length === 0}
                             operation={()=> 
                                 setPageNumber(prev => prev+1) 
@@ -143,15 +143,23 @@ function InitSession({
                 {
                     pageNumber === 1 && 
                     <>
-                        <Button text={'Prev'} iconName={'prev'} color={'rosa-light'} disab={false} operation={()=> setPageNumber(prev => prev-1)}></Button>
-                        <Button text={'Next'} iconName={'next-white'} color={'ciano'} operation={()=> setPageNumber(prev => prev+1)}></Button>
+                        <CircleButton tooltip={'End session'} 
+                            iconName={'prev'} 
+                            color={'secondary'} 
+                            operation={()=> setPageNumber(prev => prev-1)}
+                        />
+                        <Button text={'Next'} iconName={'next'} color={'ciano'} operation={()=> setPageNumber(prev => prev+1)}></Button>
                     </>
                 }
                 {
                     pageNumber === 2 && 
                     <>
-                        <Button text={'Prev'} iconName={'prev'} color={'rosa-light'} operation={()=> setPageNumber(prev => prev-1)}></Button>
-                        <Button text={'Start'} iconName={'play-end'} color={selectedMode === 1 ? 'ciano' : 'verde'} operation={()=> {setPageNumber(0); setInitSession(false);}}/>
+                        <CircleButton tooltip={'End session'} 
+                            iconName={'prev'} 
+                            color={'secondary'} 
+                            operation={()=> setPageNumber(prev => prev-1)}
+                        />
+                        <Button text={'Start'} iconName={'play-end'} color={selectedMode === 1 ? 'primary' : 'neutral'} operation={()=> {setPageNumber(0); setInitSession(false);}}/>
                     </>
                 }
             </div>

@@ -1,4 +1,3 @@
-import './Modal.css';
 import React from 'react';
 import Button from '../Buttons/Button'
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +26,7 @@ function EndModal( {
                     <Button 
                         text={'Continue'}
                         iconName={'play-end'} 
-                        color={'ciano'} 
+                        color={'primary'} 
                         operation={() => setEndSessionRequest(false)} 
                         fixedWidth={50}
                     ></Button>
@@ -36,7 +35,7 @@ function EndModal( {
                             <Button 
                                 text={'End'} 
                                 iconName={'x-circle'} 
-                                color={'rosa-light'} 
+                                color={'secondary'} 
                                 fixedWidth={50} 
                                 operation={restartReturnHome}
                             ></Button>
@@ -44,7 +43,7 @@ function EndModal( {
                             <Button 
                                 text={'End'} 
                                 iconName={'x-circle'} 
-                                color={'rosa-light'} 
+                                color={'secondary'} 
                                 fixedWidth={50} 
                                 operation={() =>{ setEndSession(true); setEndSessionRequest(false); }}
                             ></Button>

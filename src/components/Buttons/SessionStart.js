@@ -1,4 +1,3 @@
-import '../../styles/Button.css';
 import React from 'react';
 import { Link } from "react-router-dom";
 
@@ -6,9 +5,9 @@ function Button( ) {
 
 
     return (
-        <div className='rounded-full session-button-container bg-ciano-opacity border-4 border-ciano-dark'>
+        <div className='rounded-full w-[600px] h-[600px] center hover:bg-ciano-opacity bg-ciano-opacity border-4 border-ciano-dark'>
             <Link to="/FlowSession" style={{ textDecoration: 'none', color: 'inherit' }}>
-                <button className={` rounded-full session-button bg-ciano border-4 border-ciano-dark `}>
+                <button className={` btn btn-circle w-[300px] h-[300px] flex flex-col session-button hover:bg-ciano hover:shadow-xl hover:border-ciano-dark bg-ciano border-4 border-ciano-dark `}>
                     <svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clipPath="url(#clip0_38_617)">
                         <path d="M17.9763 3.91217L17.5244 4.10185C16.8312 4.39195 16.4212 4.76991 16.0683 5.15206C16.3919 5.30269 16.7029 5.49516 16.9986 5.72528C17.6583 6.26224 18.1032 6.84244 18.4519 7.61231L18.9763 8.76294L17.7211 8.60813C16.8215 8.49934 16.219 8.70018 15.6346 8.89404C15.3961 8.97493 15.152 9.05582 14.8968 9.11161C14.9135 9.21761 14.9261 9.325 14.9344 9.431C14.9902 10.067 14.9052 10.7127 14.6848 11.3501C14.3905 12.1493 13.9888 12.7574 13.3738 13.3376L12.9596 13.7267L12.4895 13.4087C11.7908 12.9331 11.2957 12.3961 10.8842 11.6667C10.6095 11.1535 10.4324 10.629 10.357 10.0907C10.0697 10.1409 9.78522 10.1507 9.50628 10.1618C8.89261 10.1855 8.25662 10.2092 7.45467 10.6304L6.33473 11.2204L6.41702 9.9582C6.47141 9.1158 6.68201 8.41705 7.10321 7.69181C7.35844 7.27061 7.6583 6.9052 8.00418 6.59836C7.92469 6.52863 7.84658 6.4561 7.76987 6.38497C7.31799 5.96796 6.85077 5.5356 5.98466 5.26642L4.77545 4.88986L5.51604 4.23853C1.33473 5.49794 0 9.17577 0 13.3041C0 19.0865 5.37239 23.7741 12 23.7741C18.6262 23.7741 24 19.0865 24 13.3041C24 9.04188 22.4616 4.99306 17.9763 3.91217Z" fill="#0D5355"/>

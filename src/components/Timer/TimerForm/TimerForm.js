@@ -1,4 +1,3 @@
-import './TimerForm.css';
 import React, {useState} from 'react';
 
 function TimerForm({ 
@@ -48,36 +47,36 @@ function TimerForm({
     }
     
     return(
-        <form className='form-input'>
-            <div className='slot'>
-                <label htmlFor="flow-time" className='color-dark-ciano default-font' >Flow</label>
+        <form className='flex w-full justify-evenly items-center p-[20px]'>
+            <div className='flex flex-col justify-center items-center w-1/4'>
+                <label htmlFor="flow-time" className='text-ciano-dark font-corpo text-lg font-semibold' >Flow</label>
                 <input
                     id="flow-time"
-                    className='bg-opacity-ciano'
+                    className='text-center text-xl w-14 h-14 rounded-md text-ciano-dark bg-ciano-light font-number font-semibold'
                     value={tempFlowTime/60}
                     onChange={handleFlowTimeChange}
                     onBlur={handleSave}
                     placeholder={tempFlowTime/60}
                 />
             </div>
-            <div className='slot'>
+            <div className='flex flex-col justify-center items-center w-1/4'>
 
-                <label htmlFor="rest-time" className='color-dark-pink default-font'>Breath</label>
+                <label htmlFor="rest-time" className='text-rosa-dark font-corpo text-lg font-semibold'>Breath</label>
                 <input
                     id="rest-time"
                     value={tempRestTime/60}
-                    className='bg-opacity-pink'
+                    className='text-center text-xl w-14 h-14 rounded-md text-rosa-dark bg-rosa-light font-number font-semibold'
                     onChange={handleRestTimeChange}
                     onBlur={handleSave}
                     placeholder={tempRestTime/60}
                 />
             </div>
-            <div className='slot'>
-                <label htmlFor="long-rest-time" className='color-dark-green default-font'>Break</label>
+            <div className='flex flex-col justify-center items-center w-1/4'>
+                <label htmlFor="long-rest-time" className='text-verde-dark font-corpo text-lg font-semibold'>Break</label>
                 <input
                     id="long-rest-time"
                     value={tempLongRestTime/60}
-                    className='bg-opacity-green'
+                    className='text-center text-xl w-14 h-14 rounded-md text-verde-dark bg-verde-light font-number font-semibold'
                     onChange={handleLongRestTimeChange}
                     onBlur={handleSave}
                     placeholder={tempLongRestTime/60}

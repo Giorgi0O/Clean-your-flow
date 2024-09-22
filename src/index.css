@@ -7,48 +7,54 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 
+@layer components{
+  .list-component{
+    @apply w-5/6 mb-2 flex justify-between items-center font-corpo font-semibold text-lg
+  }
 
-/* box-shadow */
-.box-shadow-button{
-  box-shadow: 15px 25px 40px rgba(0, 0, 0, 0.05);
-}
-.box-shadow-button:hover{
-  box-shadow: 0 25px 30px rgba(0, 0, 0, 0.10);
-}
+  .background-left-3-colors{
+    @apply blur-2xl absolute rounded-[100px] w-1/2 h-1/2 animate-bg-left-gradient-enter
+  }
 
-/* MODAL */
-.card {
-  background-color: rgb(255, 255, 255);
-  border-radius: 8px;
+  .center{
+    @apply flex justify-center items-center
+  }
+} 
+
+.modal-space{
+  width: 55%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
-  padding: 20px 30px;
-  gap: 13px;
-  overflow: hidden;
-  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.062);
-  animation-duration: 0.2s;
-  animation-name: card-opacity;
-  animation-direction: alternate;
-}
-
-@keyframes card-opacity {
-  from{
-    opacity: 0;
-  }
-  to{
-    opacity: 1;
-  }
 }
 
 /*SMARTPHONE VIEW*/
-@media only screen and (max-width: 600px) {
-
-  .font-number{
-    @include font-number-sm();
+@media only screen and (max-width: 1000px) {
+  .modal-space-none{
+     display: none;
   }
-
+  .modal-space{
+      width: 100%;
+  }
+  .hide-timer{
+      display: none;
+  }
+  .show-timer{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  .time-count-down{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  .timer-end .modal-card-dim{
+      width: 100%;
+  }
 }
 
 @media only screen and (min-width: 600px) {

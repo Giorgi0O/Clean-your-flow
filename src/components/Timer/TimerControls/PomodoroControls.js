@@ -1,5 +1,3 @@
-import '../Timer.css';
-import './TimerControls.css'
 import React from 'react';
 import StopButton from '../../Buttons/StopButton'
 import StartButton from '../../Buttons/StartButton'
@@ -26,24 +24,22 @@ function PomodoroControls({
     
 
     return (
-        <div className='timer-controls-container'>
-            <div className='timer-controls-keys'>
-                {
-                    !isActive ?
-                    (
-                        <StartButton
-                            operation={handleStart} 
-                            type={1}
-                        />
-                    )
-                    :
-                    (
-                        <StopButton 
-                            operation={handlePause}
-                            type={1}></StopButton>
-                    )
-                }
-            </div>
+        <div className='w-5/6 text-center'>
+            {
+                !isActive ?
+                (
+                    <StartButton
+                        operation={handleStart} 
+                        type={1}
+                    />
+                )
+                :
+                (
+                    <StopButton 
+                        operation={handlePause}
+                        type={1}></StopButton>
+                )
+            }
         </div>
     );
     

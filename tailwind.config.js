@@ -30,6 +30,15 @@ module.exports = {
           opacity: 'rgba(193,222,186,0.4)',
         },
       },
+      animation: {
+        'bg-left-gradient-enter': 'bg-left-gradient-enter 3s ease forwards',
+      },
+      keyframes: {
+        'bg-left-gradient-enter': {
+         '0%': { opacity: 0, transform: 'rotate(-90deg)' }, 
+          '100%': { opacity: 1, transform: 'rotate(0deg)' } 
+        },
+      },
     },
   },
   plugins: [
@@ -40,10 +49,11 @@ module.exports = {
       {
         ligth: {
           ...require("daisyui/src/theming/themes")["light"],
-          "primary": "rgba(30, 186, 192, 1)",
-          "secondary": "rgba(100, 172, 82, 1)",
-          "accent": "rgba(219, 91, 169, 1)",
-          "neutral": "rgba(166, 236, 238, 1)",
+          "primary": "rgba(30, 186, 192, 1)", //ciano
+          "secondary": "rgba(251,209,235)", //rosa chiaro
+          "accent": "rgba(219, 91, 169, 1)", //rosa
+          "neutral": "rgba(100, 172, 82, 1)", //verde
+          "success": "rgba(100, 172, 82, 1)", //verde
         },
       }
     ]

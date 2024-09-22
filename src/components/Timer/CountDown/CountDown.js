@@ -1,4 +1,3 @@
-import '../Timer.css';
 import React, { useEffect, useState } from 'react';
 import {formatTime} from "../../../utils/Common"
 
@@ -14,19 +13,17 @@ function CountDown({
 
     useEffect(() => {
         if( selectedMode === 1 ){
-            if( bgRigth > 50 ) setColor('color-dark-ciano');
-            if( bgLeft > 50 ) setColor('color-dark-pink');
+            if( bgRigth > 50 ) setColor('text-ciano-dark');
+            if( bgLeft > 50 ) setColor('text-rosa-dark');
         }
         else{
-            setColor('color-dark-green');
+            setColor('text-verde-dark');
         }
     }, [timeRemaining,selectedMode,bgLeft, bgRigth]);
 
 
     return (
-        <div className='time-count-down'>
-            <p className={`font-number ${color}`}>{formatTime(timeRemaining)}</p>
-        </div>
+        <p className={`font-number font-bold md:text-9xl text-8xl ${color} `}>{formatTime(timeRemaining)}</p>
     );
 }
 

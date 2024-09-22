@@ -89,11 +89,11 @@ function FlowSession() {
         <>
           <div className='bg-moving-blur'></div>
           <div 
-            className={`bg-moving-all bg-moving-left  bg-color-pink `}
+            className={`bg-moving-all bg-moving-left  bg-rosa-light `}
             style={{width: `${bgLeft}%` }}
           ></div>
           <div 
-            className={`bg-moving-all bg-moving-rigth ${selectedMode === 1 ? 'bg-color-ciano' : 'bg-color-green'}`}
+            className={`bg-moving-all bg-moving-rigth ${selectedMode === 1 ? 'bg-ciano-light' : 'bg-verde-light'}`}
             style={{width: `${bgRigth}%` }}
           ></div>
         </>

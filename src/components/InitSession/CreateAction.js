@@ -1,4 +1,3 @@
-import './InitSession.css';
 import React, { useState } from "react";
 import Task from '../Modal/Task';
 import DivisorOrizontal from '../Divisor/DivisorOrizontal';
@@ -33,8 +32,8 @@ function CreateAction({
     };
 
     return(
-        <div className='card card-dim task-card'>
-                <div className='flex justify-evenly m-16px w-5/6'>
+        <div className='card w-full h-full justify-center task-card'>
+                <div className='flex justify-evenly m-4 w-5/6'>
                     <input
                         id="creator"
                         className=' w-5/6 rounded-full border-2 p-2 border-ciano text-ciano-dark font-corpo'
@@ -45,17 +44,17 @@ function CreateAction({
                     />
                     <CircleButton
                         iconName={'plus'}
-                        color={'ciano'}
+                        color={'primary'}
                         tooltip={'add task'}
                         operation={handleSave}
                     />
                 </div>
-                <div className={`${ taskList.length > 0 ? 'task-list' :'task-empty' }`}>
+                <div className={`${ taskList.length > 0 ? 'p-2 h-3/4 overflow-y-auto' :'hidden' }`}>
                     {
                         taskList.length > 0 &&
                         (
                             taskList.map((task, index) => (
-                                <div className="action-content" key={index}>
+                                <div className="m-4" key={index}>
                                     <Task 
                                         id={task.id}
                                         action={task.action}       
