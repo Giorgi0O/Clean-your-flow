@@ -4,7 +4,7 @@ function StartButton({ operation, type }) {
 
 
     return (
-        <button className={`btn w-52 m-4 border-ciano-dark  ${type === 1 || type === 2 ? 'bg-ciano-light hover:bg-ciano-light' : 'bg-verde-light hover:bg-verde-light'}`} onClick={operation}>
+        <button className={`btn w-52 m-4 border-ciano-dark  ${type === 1 || type === 2 ? 'bg-ciano-light hover:bg-ciano-light hover:border-ciano-light' : 'bg-verde-light hover:bg-verde-light hover:border-verde-light'}`} onClick={operation}>
             {
                 (type === 1 || type === 3) &&
                 (

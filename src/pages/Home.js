@@ -12,7 +12,7 @@ function Home() {
         <BgLeftGradient/>
         <Title/>
         <div className='h-3/4 w-full flex z-[100]' >
-            <div className='center h-full w-1/2'>
+            <div className='text-center center h-full w-1/2'>
               <ContentBox
                   body={
                       <>
@@ -21,7 +21,7 @@ function Home() {
                         way possible.                  
                        </>
                   }
-                  bodyClass={'font-corpo text-xl font-bold text-ciano-dark'}
+                  bodyClass={'font-titolo text-2xl font-bold text-ciano-dark'}
               />
             </div>
             <div className='center h-full w-1/2'>

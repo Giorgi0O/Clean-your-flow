@@ -4,7 +4,7 @@ function StopButton({operation, type}) {
 
 
     return (
-        <button className={`btn w-52 m-4 border-rosa-dark hover:bg-rosa-light btn-secondary bg-stop`} onClick={operation}>
+        <button className={`btn w-52 m-4 border-rosa-dark hover:bg-rosa-light hover:border-rosa-light btn-secondary bg-stop`} onClick={operation}>
             {
                 type === 2 ?
                 (

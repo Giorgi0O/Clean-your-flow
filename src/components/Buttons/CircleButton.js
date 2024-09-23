@@ -12,10 +12,9 @@ function CircleButton({
     const iconUrl = require(`../../assets/Icons/${iconName}.svg`);
 
     const colorClasses = {
-        primary: active ? 'bg-ciano border-ciano-dark hover:bg-ciano':'bg-ciano-light border-ciano-dark hover:bg-ciano-light',
-        secondary: active ? 'bg-rosa border-rosa-dark hover:bg-rosa': 'bg-rosa-light border-rosa-dark hover:bg-rosa-light',
-        neutral: active ? 'bg-verde border-verde-dark hover:bg-verde': 'bg-verde-light border-verde-dark hover:bg-verde-light',
-        none : 'bg-white shadow-none border-none'
+        primary: active ? 'bg-ciano border-ciano-dark hover:bg-ciano hover:border-ciano':'bg-ciano-light border-ciano-dark hover:bg-ciano-light hover:border-ciano-light',
+        secondary: active ? 'bg-rosa border-rosa-dark hover:bg-rosa hover:border-rosa': 'bg-rosa-light border-rosa-dark hover:bg-rosa-light hover:border-rosa-light',
+        neutral: active ? 'bg-verde border-verde-dark hover:bg-verde hover:border-verde': 'bg-verde-light border-verde-dark hover:bg-verde-light hover:border-verde-light'
     };
 
     const buttonColorClass = colorClasses[color] || colorClasses.primary;

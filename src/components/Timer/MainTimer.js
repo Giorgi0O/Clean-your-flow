@@ -491,7 +491,7 @@ function MainTimer({
                         <CircleButton 
                             color={'secondary'} 
                             tooltip={'next'} 
-                            iconName={'next'} 
+                            iconName={flow ? 'next' : 'prev-light'} 
                             operation={next}
                         />
                     }

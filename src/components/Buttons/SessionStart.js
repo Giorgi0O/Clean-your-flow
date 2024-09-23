@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 function Button( ) {
 
+    const localStorageState = localStorage.length === 0;
+
 
     return (
         <div className='rounded-full w-[600px] h-[600px] center hover:bg-ciano-opacity bg-ciano-opacity border-4 border-ciano-dark'>
@@ -19,7 +21,7 @@ function Button( ) {
                         </clipPath>
                         </defs>
                     </svg>
-                    <p className=' font-titolo text-2xl font-bold text-ciano-dark mt-6'> Start session </p>
+                    <p className=' font-titolo text-2xl font-bold text-ciano-dark mt-6'> { localStorageState ? 'Start session' : 'Continue Session'} </p>
                 </button>
             </Link>
         </div>
