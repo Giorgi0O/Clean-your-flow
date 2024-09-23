@@ -136,12 +136,16 @@ function FlowSession() {
           />
         )
       }
-      <EndModal 
-        endSessionRequest={endSessionRequest} 
-        setEndSessionRequest={setEndSessionRequest} 
-        setEndSession={setEndSession} 
-        returnHome={returnHome}
-      />
+      {
+        endSessionRequest &&
+      
+        <EndModal 
+          endSessionRequest={endSessionRequest} 
+          setEndSessionRequest={setEndSessionRequest} 
+          setEndSession={setEndSession} 
+          returnHome={returnHome}
+        />
+      }
     </div>  );
 }
 

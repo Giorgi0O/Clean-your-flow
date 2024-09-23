@@ -14,7 +14,8 @@ function CircleButton({
     const colorClasses = {
         primary: active ? 'bg-ciano border-ciano-dark hover:bg-ciano':'bg-ciano-light border-ciano-dark hover:bg-ciano-light',
         secondary: active ? 'bg-rosa border-rosa-dark hover:bg-rosa': 'bg-rosa-light border-rosa-dark hover:bg-rosa-light',
-        neutral: active ? 'bg-verde border-verde-dark hover:bg-verde': 'bg-verde-light border-verde-dark hover:bg-verde-light'
+        neutral: active ? 'bg-verde border-verde-dark hover:bg-verde': 'bg-verde-light border-verde-dark hover:bg-verde-light',
+        none : 'bg-white shadow-none border-none'
     };
 
     const buttonColorClass = colorClasses[color] || colorClasses.primary;
