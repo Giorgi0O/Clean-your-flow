@@ -300,7 +300,7 @@ function MainTimer({
         }
     },[startAutomation, selectedMode, pomodoroStart, flowmodoroStart])
 
-    const next = () => {
+    const next = useCallback( () => {
         const buttonSound = new Audio(clicksound);
         buttonSound.play();
 
@@ -330,7 +330,7 @@ function MainTimer({
             
             return newTimerCount;
         });
-    };
+    },[flowTime, longRestTime, restTime ,setBgLeft, setBgRigth]);
 
     const saveTimerForm = (tempFlowTime, tempRestTime, tempLongRestTime) => {
         if( interval.current ){
