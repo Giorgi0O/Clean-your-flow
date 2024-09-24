@@ -13,7 +13,7 @@ function ModeSetting({
         <div className='card w-full h-full flex justify-evenly'>
             <div className='flex justify-evenly items-center'>
                 <div className='flex flex-col justify-center items-center'>
-                    <label className={`p-8 mb-2 rounded-full flex items-center border-[1px] border-ciano-dark ${selectedMode === 1 ? 'bg-ciano' : 'bg-ciano-opacity'}`} >
+                    <label className={`p-3 sm:p-8 mb-2 rounded-full flex items-center border-[1px] border-ciano-dark ${selectedMode === 1 ? 'bg-ciano' : 'bg-ciano-opacity'}`} >
                         <input 
                             className="hidden "
                             type="radio"
@@ -40,7 +40,7 @@ function ModeSetting({
                     <span className={`default-font ${selectedMode === 1 ? 'text-ciano-dark' : 'text-ciano-light'}`} > Pomodoro </span>
                 </div>
                 <div className='flex flex-col justify-center items-center'>
-                    <label className={`p-8 mb-2 rounded-full flex items-center  border-[1px] border-verde-dark  ${selectedMode === 2 ? 'bg-verde' : 'bg-verde-opacity'}`}>
+                    <label className={`p-3 sm:p-8 mb-2 rounded-full flex items-center  border-[1px] border-verde-dark  ${selectedMode === 2 ? 'bg-verde' : 'bg-verde-opacity'}`}>
                         <input 
                             className='hidden'
                             type="radio"

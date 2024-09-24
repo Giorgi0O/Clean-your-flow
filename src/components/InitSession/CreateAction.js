@@ -32,29 +32,31 @@ function CreateAction({
     };
 
     return(
-        <div className='card w-full h-full justify-center task-card'>
-                <div className='flex justify-evenly m-4 w-5/6'>
-                    <input
-                        id="creator"
-                        className=' w-5/6 rounded-full border-2 p-2 border-ciano text-ciano-dark font-corpo'
-                        value={tempValue}
-                        onChange={handleTempSave}
-                        onKeyDown={handleKeyPress} 
-                        placeholder={'Write your task here'}
-                    />
-                    <CircleButton
-                        iconName={'plus'}
-                        color={'primary'}
-                        tooltip={'add task'}
-                        operation={handleSave}
-                    />
-                </div>
-                <div className={`${ taskList.length > 0 ? 'p-2 h-3/4 overflow-y-auto' :'hidden' }`}>
+        <div className='card w-full h-full flex items-center'>
+            <div className='flex justify-evenly m-4 w-5/6'>
+                <input
+                    id="creator"
+                    className=' w-5/6 rounded-full border-2 p-2 border-ciano text-ciano-dark font-corpo'
+                    value={tempValue}
+                    onChange={handleTempSave}
+                    onKeyDown={handleKeyPress} 
+                    placeholder={'Write your task here'}
+                />
+                <CircleButton
+                    iconName={'plus'}
+                    color={'primary'}
+                    tooltip={'add task'}
+                    operation={handleSave}
+                />
+            </div>
+            <div className={`${ taskList.length > 0 ? 'w-full p-2 h-3/4 overflow-y-auto' :'hidden' }`}>
+                <table className="table">
                     {
                         taskList.length > 0 &&
                         (
                             taskList.map((task, index) => (
-                                <div className="m-4" key={index}>
+                                <>
+                                <tr>
                                     <Task 
                                         id={task.id}
                                         action={task.action}       
@@ -63,12 +65,16 @@ function CreateAction({
                                         createTask={createTask}
                                         deleteTask={deleteTask}
                                     />
-                                    <DivisorOrizontal/>
-                                </div>
+                                </tr>
+                                <tr className="center">
+                                    <DivisorOrizontal></DivisorOrizontal>
+                                </tr>
+                                </>
                             ))
                         )
                     }
-                </div>
+                </table>
+            </div>
         </div>
     );
 

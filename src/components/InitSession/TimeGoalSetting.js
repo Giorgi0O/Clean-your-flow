@@ -35,7 +35,7 @@ function TimeGoalSetting({
     }
 
     return(
-        <div className='card w-3/4 center bg-base-100 p-8 time-goal-card'>
+        <div className='card w-full center bg-base-100 p-8 time-goal-card'>
             <div className='card-body w-full text-center'>
                 <div className="PB-range-slider-div">
                     <p className="text-verde font-number text-2xl font-bold">
@@ -48,7 +48,7 @@ function TimeGoalSetting({
                         value={value}
                         onChange={HandleChange}
                         onBlur={HandleSave}
-                        className="range range-md range-success"
+                        className="range range-lg mt-2 lg:range-md range-success"
                         id="myRange"
                     />
                 </div>

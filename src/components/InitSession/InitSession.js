@@ -31,16 +31,24 @@ function InitSession({
         localStorage.setItem('pageNumber', JSON.stringify(pageNumber));
     }, [pageNumber] ) 
 
-    const bodyClass = 'font-corpo text-lg mt-6 text-ciano-dark'
-    const titleClass = 'font-titolo font-bold text-3xl text-ciano-dark'
+    const bodyClass = 'font-corpo text-sm lg:text-lg mt-2 lg:mt-6 text-ciano-dark'
+    const titleClass = 'font-titolo font-bold text-lg md:text-3xl text-ciano-dark'
 
     return (
         <>
             <BgLeftGradient/>
-            <div className="z-[100] w-full h-3/4 flex justify-evenly items-center" >
-                <div className={`w-1/2 h-full center p-8`}>
+            <div className="
+                z-[100] flex flex-col w-full h-3/4  justify-evenly items-center overflow-hidden
+                lg:flex-row 
+            ">
+                <div className={`
+                    w-full h-auto center p-8
+                    lg:w-1/2 lg:h-full
+                `}>
                     {
                         pageNumber === 0 &&
+                        <div className='center text-center lg:text-left'>
+
                             <ContentBox
                                 title={
                                     <>
@@ -49,13 +57,14 @@ function InitSession({
                                 } 
                                 body={
                                     <>
-                                        To stay focused, break down larger tasks  <br/> into <span className='bg-rosa-light'> smaller </span>, manageable steps.<br/> This makes tracking progress  <br/> <span className='bg-verde-light'> easier </span> and keeps you motivated
+                                        To stay focused, break down larger tasks into <span className='bg-rosa-light'> smaller </span>, manageable steps. This makes tracking progress <span className='bg-verde-light'> easier </span> and keeps you motivated
                                     
                                     </>
                                 }
                                 titleClass={titleClass}
                                 bodyClass={bodyClass}
                             />
+                        </div>
                     }
                     {
                         pageNumber === 1 &&
@@ -65,7 +74,8 @@ function InitSession({
                             />
                     }
                     {
-                         pageNumber === 2 &&
+                        pageNumber === 2 &&
+                        <div className='center text-center lg:text-left'>
                             <ContentBox
                                 title={
                                     <>
@@ -74,15 +84,19 @@ function InitSession({
                                 } 
                                 body={
                                     <>
-                                        Pomodoro uses short <span className='bg-verde-light'> work intervals </span> with breaks, <br/> while Flowmodoro adapts to your natural <br/> <span className='bg-rosa-light'> endpoint </span> flow, allowing longer work periods.                                    
+                                        Pomodoro uses short <span className='bg-verde-light'> work intervals </span> with breaks, while Flowmodoro adapts to your natural <span className='bg-rosa-light'> endpoint </span> flow, allowing longer work periods.                                    
                                     </>
                                 }
                                 titleClass={titleClass}
                                 bodyClass={bodyClass}
                             />
+                        </div>
                     }
                 </div>
-                <div className='w-1/2 h-full center p-8'>
+                <div className='
+                    center w-full h-3/4 center p-8
+                    lg:w-1/2 lg:h-full
+                '>
                     {
                         pageNumber === 0 &&
                             <CreateAction
@@ -93,7 +107,7 @@ function InitSession({
                     }
                     {
                         pageNumber === 1 &&
-                        <div className='text-right'>
+                        <div className='center text-center lg:text-right'>
                             <ContentBox
                                 title={
                                     <>
@@ -102,7 +116,7 @@ function InitSession({
                                 } 
                                 body={
                                     <>
-                                        Set a time goal to stay on track. <br/> Having a clear  <span className='bg-rosa-light'> endpoint <br/> </span> helps you maintain <span className='bg-verde-light'> focus </span> and boosts your productivity.
+                                        Set a time goal to stay on track. Having a clear  <span className='bg-rosa-light'> endpoint </span> helps you maintain <span className='bg-verde-light'> focus </span> and boosts your productivity.
                                     
                                     </>
                                 }
