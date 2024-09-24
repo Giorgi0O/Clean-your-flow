@@ -28,35 +28,3 @@
   justify-content: center;
   align-items: center;
 }
-
-/*SMARTPHONE VIEW*/
-@media only screen and (max-width: 1000px) {
-  .modal-space-none{
-     display: none;
-  }
-  .modal-space{
-      width: 100%;
-  }
-  .hide-timer{
-      display: none;
-  }
-  .show-timer{
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  }
-  .time-count-down{
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  }
-  .timer-end .modal-card-dim{
-      width: 100%;
-  }
-}
-
-@media only screen and (min-width: 600px) {
-
-}

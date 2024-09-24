@@ -372,7 +372,10 @@ function MainTimer({
                 !endSession ?
                 (
                     <div className={`flex items-center justify-between w-full h-3/4`}>
-                        <div className={`${isMobile && ( modalSetting || modalTask ) ? 'hide-timer' : 'show-timer' } `}>
+                        <div className={`
+                            ${ modalSetting || modalTask ? 'hidden lg:center' : 'center' }
+                            w-full h-full lg:w-1/3 
+                        `}>
                             <CountDown 
                                 timeRemaining = {timeRemaining}
                                 bgRigth = {bgRigth}
@@ -380,7 +383,10 @@ function MainTimer({
                                 selectedMode={selectedMode}
                             />
                         </div>
-                        <div className={` ${ (isMobile && (modalSetting || modalTask)) ? 'modal-space' : 'modal-space-none' }`}>
+                        <div className={`
+                            ${ modalSetting || modalTask ? 'center lg:justify-end' : 'hidden lg:center' }
+                            w-full h-full lg:w-2/3 
+                        `}>
                             {
                             modalSetting && !isActive && !modalTask &&
                             (
