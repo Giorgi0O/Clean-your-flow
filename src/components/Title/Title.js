@@ -2,7 +2,7 @@ import React from 'react';
 
 function Title() {
   return (
-    <div className=' z-[100] w-3/4 h-[10%] center p-2'>
+    <div className='z-[100] w-full h-[10%] center p-2'>
 
       <div>
         <svg width="240" height="40" viewBox="0 0 267 50" fill="none" xmlns="http://www.w3.org/2000/svg">

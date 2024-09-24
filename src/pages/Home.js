@@ -10,9 +10,11 @@ function Home() {
   return (
     <div className='app'>
         <BgLeftGradient/>
-        <Title/>
-        <div className='h-3/4 w-full flex z-[100]' >
-            <div className='text-center center h-full w-1/2'>
+        <div className='center flex-col w-full h-full z-[100] lg:w-full lg:flex-row ' >
+            <div className='flex-col text-center center h-full w-1/2'>
+              <div className='fixed top-4'>
+                <Title />
+              </div>
               <ContentBox
                   body={
                       <>
@@ -24,7 +26,10 @@ function Home() {
                   bodyClass={'font-titolo text-2xl font-bold text-ciano-dark'}
               />
             </div>
-            <div className='center h-full w-1/2'>
+            <div className='
+              w-5/6 bg-ciano-opacity center p-4 rounded-full shadow-xl mb-2
+              lg:rounded-none lg:m-0 lg:center lg:h-full lg:w-1/2'
+            >
                 <SessionStart />
             </div>
         </div>
