@@ -9,7 +9,7 @@
 
 @layer components{
   .list-component{
-    @apply w-5/6 mb-2 flex justify-between items-center font-corpo font-semibold text-lg
+    @apply w-5/6 mb-2 flex flex-col sm:flex-row justify-between items-center font-corpo font-semibold text-sm sm:text-lg
   }
 
   .background-left-3-colors{
@@ -21,10 +21,3 @@
   }
 } 
 
-.modal-space{
-  width: 55%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}

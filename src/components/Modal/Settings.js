@@ -24,7 +24,7 @@ function Settings( {
   const notifyAccetpetd = Notification.permission === "granted";
 
   return (
-    <div className="card bg-base-100 w-5/6 h-5/6 p-8 ">
+    <div className="card bg-base-100 w-5/6 h-5/6 p-4 sm:p-8">
       {
         selectedMode === 1 &&
         <>
