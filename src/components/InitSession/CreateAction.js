@@ -51,28 +51,30 @@ function CreateAction({
             </div>
             <div className={`${ taskList.length > 0 ? 'w-full p-2 h-3/4 overflow-y-auto' :'hidden' }`}>
                 <table className="table">
-                    {
-                        taskList.length > 0 &&
-                        (
-                            taskList.map((task, index) => (
-                                <>
-                                <tr>
-                                    <Task 
-                                        id={task.id}
-                                        action={task.action}       
-                                        completed={task.completed}
-                                        update={false}
-                                        createTask={createTask}
-                                        deleteTask={deleteTask}
-                                    />
-                                </tr>
-                                <tr className="center">
-                                    <DivisorOrizontal></DivisorOrizontal>
-                                </tr>
-                                </>
-                            ))
-                        )
-                    }
+                    <tbody>
+                        {
+                            taskList.length > 0 &&
+                            (
+                                taskList.map((task, index) => (
+                                    <>
+                                    <tr>
+                                        <Task 
+                                            id={task.id}
+                                            action={task.action}       
+                                            completed={task.completed}
+                                            update={false}
+                                            createTask={createTask}
+                                            deleteTask={deleteTask}
+                                        />
+                                    </tr>
+                                    <tr className="center">
+                                        <DivisorOrizontal></DivisorOrizontal>
+                                    </tr>
+                                    </>
+                                ))
+                            )
+                        }
+                    </tbody>
                 </table>
             </div>
         </div>

@@ -37,7 +37,7 @@ function Task( {
         <div 
             onMouseEnter={ () => setIsHover(true)} 
             onMouseLeave={ () => setIsHover(false)} 
-            className='flex center p-2'
+            className='flex w-full center p-2'
         >
             <div className='flex items-center justify-start w-5/6'>
                 <div className='flex justify-center'>
@@ -64,7 +64,7 @@ function Task( {
                             </button>
                     }
                 </div>
-                <span className='text-start font-corpo text-lg text-ciano-dark ml-2' > {completed ? <s style={{ color: "gray"}}>{action}</s> : action } </span>
+                <span className='text-start font-corpo text-sm sm:text-lg text-ciano-dark ml-2' > {completed ? <s style={{ color: "gray"}}>{action}</s> : action } </span>
             </div>
             {
                 (isHover || isTouchDevice) &&

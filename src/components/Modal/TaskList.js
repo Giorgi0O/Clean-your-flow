@@ -34,7 +34,7 @@ function TaskList( {
     const toComplete = Math.ceil(flowTotalTime / timeGoal *100)
 
     return (
-        <div className="card bg-base-100 w-5/6 h-5/6 p-8">
+        <div className="card bg-base-100 w-5/6 h-5/6 p-2 sm:p-8">
 
             <div className='flex justify-center mb-4'>
                 <TaskTab 
