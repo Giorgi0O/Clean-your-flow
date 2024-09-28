@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Task from '../Modal/Task';
-import DivisorOrizontal from '../Divisor/DivisorOrizontal';
 import CircleButton from '../Buttons/CircleButton'
+import Tasks from "../ Task/Tasks";
 
 function CreateAction({
     taskList,
@@ -32,7 +31,7 @@ function CreateAction({
     };
 
     return(
-        <div className='card w-full h-full flex items-center'>
+        <div className='card center w-full h-full flex items-center'>
             <div className='flex justify-evenly m-4 w-5/6'>
                 <input
                     id="creator"
@@ -49,33 +48,17 @@ function CreateAction({
                     operation={handleSave}
                 />
             </div>
-            <div className={`${ taskList.length > 0 ? 'w-full p-2 h-3/4 overflow-y-auto' :'hidden' }`}>
-                <table className="table">
-                    <tbody>
-                        {
-                            taskList.length > 0 &&
-                            (
-                                taskList.map((task, index) => (
-                                    <>
-                                    <tr>
-                                        <Task 
-                                            id={task.id}
-                                            action={task.action}       
-                                            completed={task.completed}
-                                            update={false}
-                                            createTask={createTask}
-                                            deleteTask={deleteTask}
-                                        />
-                                    </tr>
-                                    <tr className="center">
-                                        <DivisorOrizontal></DivisorOrizontal>
-                                    </tr>
-                                    </>
-                                ))
-                            )
-                        }
-                    </tbody>
-                </table>
+            <div className={`${ taskList.length > 0 ? 'w-5/6 p-2 h-3/4 overflow-y-auto' :'hidden' }`}>
+                {
+                    taskList.length > 0 &&
+                    (
+                        <Tasks
+                            taskList={taskList}
+                            deleteTask={deleteTask}
+                            isEditable={false}
+                        />
+                    )
+                }
             </div>
         </div>
     );

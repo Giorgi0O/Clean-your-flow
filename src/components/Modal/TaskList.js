@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DivisorOrizontal from '../Divisor/DivisorOrizontal';
-import Task from './Task';
 import TaskTab from './TaskTab';
+import Tasks from '../ Task/Tasks';
 
 function TaskList( { 
     taskList,
@@ -34,7 +34,7 @@ function TaskList( {
     const toComplete = Math.ceil(flowTotalTime / timeGoal *100)
 
     return (
-        <div className="card bg-base-100 w-5/6 h-5/6 p-2 sm:p-8">
+        <div className="card overflow-x-hidden bg-base-100 w-full sm:w-5/6 h-5/6 p-2 sm:p-8">
 
             <div className='flex justify-center mb-4'>
                 <TaskTab 
@@ -45,27 +45,15 @@ function TaskList( {
             </div>
             {
                 actionType === 'action' &&
-                <div className='card-body overflow-y-auto flex flex-col items-center'>
+                <div className='card-body'>
                     {
                         taskList.length > 0 ? 
-                            (
-                                taskList.map((task, index) => (
-                                    <div className='w-full mb-2' key={index}>
-                                        <Task 
-                                            id={task.id}
-                                            action={task.action} 
-                                            completed={task.completed}
-                                            update={true}
-                                            deleteTask={deleteTask}
-                                            updateTask={updateTask}
-                                        />
-                                        {
-                                            index !== taskList.length-1 &&
-                                            <DivisorOrizontal></DivisorOrizontal>
-                                        }
-                                    </div>
-                                ))
-                            )
+                            <Tasks
+                                taskList={taskList}
+                                deleteTask={deleteTask}
+                                updateTask={updateTask}
+                                isEditable={true }
+                            />
                         :
                             <div className="task-empty"> <p className="sub-font"> Action list is empty </p> </div>
                     }

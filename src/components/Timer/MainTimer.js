@@ -62,7 +62,6 @@ function MainTimer({
     const [modalSetting, setModalSetting] = useState(false);
     const [modalTask, setModalTask] = useState(false);
 
-    const isMobile = useState(window.innerWidth < 1000);
     const requestNotify = useRef(0);
 
     const startTimeRef = useRef(null);

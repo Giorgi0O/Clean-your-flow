@@ -31,7 +31,8 @@ function TaskTab({actionType, setActionType, isTimeGoal }){
                         checked={actionType === 'time-goal'}
                         onChange={() => handleRadioChange('time-goal')} 
                     />
-                    <span className={`font-corpo text-lg font-semibold ${actionType === 'time-goal' ? 'text-ciano-dark' : 'text-ciano-light'} `}> Time goal </span>
+                    <span className={`hidden md:inline md:font-corpo md:text-lg md:font-semibold ${actionType === 'time-goal' ? 'md:text-ciano-dark' : 'md:text-ciano-light'} `}> Time goal </span>
+                    <span className={`md:hidden font-corpo text-lg font-semibold ${actionType === 'time-goal' ? 'text-ciano-dark' : 'text-ciano-light'} `}> Time </span>
                 </label>
             }
         </div>

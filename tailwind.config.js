@@ -52,7 +52,7 @@ module.exports = {
           "primary": "rgba(30, 186, 192, 1)", //ciano
           "secondary": "rgba(251,209,235)", //rosa chiaro
           "accent": "rgba(219, 91, 169, 1)", //rosa
-          "neutral": "rgba(100, 172, 82, 1)", //verde
+          //"neutral": "rgba(100, 172, 82, 1)", //verde
           "success": "rgba(100, 172, 82, 1)", //verde
         },
       }
