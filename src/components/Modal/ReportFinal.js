@@ -1,5 +1,5 @@
 import React from "react";
-import Task from "./Task";
+import Tasks from "../ Task/Tasks";
 import DivisorOrizontal from "../Divisor/DivisorOrizontal";
 
 
@@ -37,37 +37,25 @@ function ReportFinal ({
 
 
     return (
-        <div className=" w-full h-full flex justify-evenly items-center">
-            <div className='card h-full w-1/2 bg-base-100 p-8 overflow-y-auto flex flex-col items-center'>
-                <h2 class="card-title font-titolo text-xl text-ciano-dark">Action</h2>
-                <div className="card-body w-full h-full">
+        <div className="card shadow-md bg-base-100 overflow-y-auto w-full h-full flex justify-evenly items-center">
+            <div className='w-full py-8 flex flex-col items-center'>
+                <h2 class="font-titolo text-xl text-ciano-dark">Action</h2>
+                <div className='card-body w-full md:w-3/4'>
                     {
                         taskList.length > 0 ? 
-                            (
-                                taskList.map((task, index) => (
-                                    <div className='w-full mb-2' key={index}>
-                                        <Task 
-                                            id={task.id}
-                                            action={task.action} 
-                                            completed={task.completed}
-                                            update={true}
-                                            deleteTask={deleteTask}
-                                            updateTask={updateTask}
-                                        />
-                                        {
-                                            index !== taskList.length-1 &&
-                                            <DivisorOrizontal></DivisorOrizontal>
-                                        }
-                                    </div>
-                                ))
-                            )
+                            <Tasks
+                                taskList={taskList}
+                                deleteTask={deleteTask}
+                                updateTask={updateTask}
+                                isEditable={true }
+                            />
                         :
                             <div className="task-empty"> <p className="sub-font"> Action list is empty </p> </div>
                     }
                 </div>
             </div>
 
-            <div className='card h-full w-1/3 bg-base-100 p-8 overflow-hidden flex flex-col justify-center items-center'>
+            <div className='flex flex-col justify-center items-center'>
                 <h2 class="card-title font-titolo text-xl text-ciano-dark">Time goal</h2>
                 <div className="card-body w-full center"> 
                     <div className={`radial-progress ${toComplete === 100 ? "text-neutral" : "text-primary"}`}  style={{ "--value": `${toComplete}`, "--size": "15rem", "--thickness": "1rem" }} role="progressbar">
