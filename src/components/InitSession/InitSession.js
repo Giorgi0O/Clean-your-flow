@@ -173,7 +173,7 @@ function InitSession({
                             color={'secondary'} 
                             operation={()=> setPageNumber(prev => prev-1)}
                         />
-                        <Button text={'Start'} iconName={'play-end'} color={selectedMode === 1 ? 'primary' : 'neutral'} operation={()=> {setPageNumber(0); setInitSession(false);}}/>
+                        <Button text={'Start'} iconName={'play-end'} color={selectedMode === 1 ? 'primary' : 'success'} operation={()=> {setPageNumber(0); setInitSession(false);}}/>
                     </>
                 }
             </div>
