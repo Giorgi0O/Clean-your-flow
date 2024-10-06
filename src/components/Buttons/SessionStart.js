@@ -25,7 +25,7 @@ function Button( ) {
                     </clipPath>
                     </defs>
                 </svg>
-                <p className='font-titolo text-lg lg:text-2xl font-bold text-ciano-dark mt-0 md:mt-2'> { localStorageState ? 'Start session' : 'Continue Session'} </p>
+                <p className='font-titolo text-lg lg:text-2xl font-bold text-ciano-dark mt-0 lg:mt-2'> { localStorageState ? 'Start session' : 'Continue Session'} </p>
             </button>
         </Link>
     );
