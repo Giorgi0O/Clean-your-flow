@@ -1,11 +1,10 @@
-import '../Timer/Timer.css';
 import React from 'react';
 
 function StartButton({ operation, type }) {
 
 
     return (
-        <button className={`primary-button ${type === 1 || type === 2 ? 'bg-start' : 'bg-flowmodoro-start'}`} onClick={operation}>
+        <button className={`btn w-52 m-4 border-ciano-dark  ${type === 1 || type === 2 ? 'bg-ciano-light hover:bg-ciano-light hover:border-ciano-light' : 'bg-verde-light hover:bg-verde-light hover:border-verde-light'}`} onClick={operation}>
             {
                 (type === 1 || type === 3) &&
                 (
@@ -16,15 +15,18 @@ function StartButton({ operation, type }) {
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path 
+                            className={`${type === 1 ? 'stroke-ciano-dark' : 'stroke-verde-dark' }`}
                             d="M16 29.3334C23.3638 29.3334 29.3333 23.3638 29.3333 16C29.3333 8.63622 23.3638 2.66669 16 2.66669C8.63621 2.66669 2.66667 8.63622 2.66667 16C2.66667 23.3638 8.63621 29.3334 16 29.3334Z"
                             stroke="#0D5355"
-                            strokeWidth="1.5px"
+                            strokeWidth="2px"
                             strokeLinecap="round"
                             strokeLinejoin="round"
                         />
-                        <path d="M13.3333 10.6667L21.3333 16L13.3333 21.3334V10.6667Z"
+                        <path 
+                            className={`${type === 1 ? 'stroke-ciano-dark' : 'stroke-verde-dark' }`}
+                            d="M13.3333 10.6667L21.3333 16L13.3333 21.3334V10.6667Z"
                             stroke="#0D5355"
-                            strokeWidth="1.5px"
+                            strokeWidth="2px"
                             strokeLinecap="round"
                             strokeLinejoin="round"
                         />
@@ -59,7 +61,7 @@ function StartButton({ operation, type }) {
                     </svg>
                 )
             }
-            <span> { type === 1 ? "Start" : ''} { type === 2 ? "Restart" : ''} { type === 3 ? "Start" : ''} </span>
+            <span className={`font-titolo text-2xl ${type === 1 || type === 2 ? 'text-ciano-dark' : 'text-verde-dark'}`}> { type === 1 || type === 3 ? "Start" : ''} { type === 2 ? "Restart" : ''} </span>
         </button>
     );
 }

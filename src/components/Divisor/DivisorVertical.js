@@ -1,4 +1,3 @@
-import './Divisor.css';
 import React from 'react';
 
 
@@ -6,7 +5,7 @@ import React from 'react';
 function DivisorVertical() {
 
   return (
-    <div className="vertical"></div>
+    <div className="bg-gray-200 w-[1px] h-5/6"></div>
   );
 }
 

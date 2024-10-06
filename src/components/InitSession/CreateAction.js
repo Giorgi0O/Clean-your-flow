@@ -1,8 +1,6 @@
-import './InitSession.css';
 import React, { useState } from "react";
-import Task from '../Modal/Task';
-import DivisorOrizontal from '../Divisor/DivisorOrizontal';
 import CircleButton from '../Buttons/CircleButton'
+import Tasks from "../ Task/Tasks";
 
 function CreateAction({
     taskList,
@@ -33,43 +31,35 @@ function CreateAction({
     };
 
     return(
-        <div className='card card-dim task-card'>
-                <div className='creator'>
-                    <input
-                        id="creator"
-                        className='task-input color-dark-ciano font-corpo1'
-                        value={tempValue}
-                        onChange={handleTempSave}
-                        onKeyDown={handleKeyPress} 
-                        placeholder={'Write your task here'}
-                    />
-                    <CircleButton
-                        iconName={'x'}
-                        color={'ligth-ciano'}
-                        tooltip={'add task'}
-                        operation={handleSave}
-                    />
-                </div>
-                <div className={`${ taskList.length > 0 ? 'task-list' :'task-empty' }`}>
-                    {
-                        taskList.length > 0 &&
-                        (
-                            taskList.map((task, index) => (
-                                <div className="action-content" key={index}>
-                                    <Task 
-                                        id={task.id}
-                                        action={task.action}       
-                                        completed={task.completed}
-                                        update={false}
-                                        createTask={createTask}
-                                        deleteTask={deleteTask}
-                                    />
-                                    <DivisorOrizontal/>
-                                </div>
-                            ))
-                        )
-                    }
-                </div>
+        <div className='card center w-full h-full flex items-center'>
+            <div className='flex justify-evenly m-4 w-5/6'>
+                <input
+                    id="creator"
+                    className=' w-5/6 rounded-full border-2 p-2 border-ciano text-ciano-dark font-corpo'
+                    value={tempValue}
+                    onChange={handleTempSave}
+                    onKeyDown={handleKeyPress} 
+                    placeholder={'Write your task here'}
+                />
+                <CircleButton
+                    iconName={'plus'}
+                    color={'primary'}
+                    tooltip={'add task'}
+                    operation={handleSave}
+                />
+            </div>
+            <div className={`${ taskList.length > 0 ? 'w-5/6 p-2 h-3/4 overflow-y-auto' :'hidden' }`}>
+                {
+                    taskList.length > 0 &&
+                    (
+                        <Tasks
+                            taskList={taskList}
+                            deleteTask={deleteTask}
+                            isEditable={false}
+                        />
+                    )
+                }
+            </div>
         </div>
     );
 

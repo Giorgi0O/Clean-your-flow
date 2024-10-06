@@ -1,49 +1,46 @@
-import '../Timer/Timer.css';
 import React from 'react';
-import {hexToFilter} from '../../utils/Common'
 
 function CircleButton({ 
     tooltip,
     iconName,
-    color,
-    shadow, 
+    color = 'primary', 
     operation,
     active,
-    activeColor,
     activeOperation
 }) {
 
-    const isShadow = shadow ? 'box-shadow-button' : ''
     const iconUrl = require(`../../assets/Icons/${iconName}.svg`);
+
+    const colorClasses = {
+        primary: active ? 'bg-ciano border-ciano-dark hover:bg-ciano hover:border-ciano':'bg-ciano-light border-ciano-dark hover:bg-ciano-light hover:border-ciano-light',
+        secondary: active ? 'bg-rosa border-rosa-dark hover:bg-rosa hover:border-rosa': 'bg-rosa-light border-rosa-dark hover:bg-rosa-light hover:border-rosa-light',
+        neutral: active ? 'bg-verde border-verde-dark hover:bg-verde hover:border-verde': 'bg-verde-light border-verde-dark hover:bg-verde-light hover:border-verde-light'
+    };
+
+    const buttonColorClass = colorClasses[color] || colorClasses.primary;
 
     return (
         <>
             {
                 active ?
                 (
-                    <button className={`circle-button bg-${activeColor} ${isShadow}`} onClick={activeOperation}>
+                    <button className={`btn btn-circle m-1 ${buttonColorClass}`} onClick={activeOperation}>
                         <img 
                             src={iconUrl}
                             alt={iconName}
                             width="24"
                             height="24"
-                            style={{
-                                filter: activeColor === 'ciano' ? hexToFilter('0D5355') : hexToFilter('7A335E')
-                            }}
                         />
                     </button>   
                 )
                 :
                 (
-                    <button className={`circle-button bg-${color} ${isShadow}`} onClick={operation} title={tooltip}>
+                    <button className={`btn btn-circle m-1 ${buttonColorClass}`} onClick={operation} title={tooltip}>
                         <img 
                             src={iconUrl}
                             alt={iconName}
                             width="24"
                             height="24"
-                            style={{
-                                filter: color === 'ciano' ? hexToFilter('0D5355') : hexToFilter('7A335E')
-                            }}
                         />
                     </button> 
                 )

@@ -1,5 +1,4 @@
 import React from "react";
-import './TaskTab.css'
 
 function TaskTab({actionType, setActionType, isTimeGoal }){
 
@@ -9,30 +8,31 @@ function TaskTab({actionType, setActionType, isTimeGoal }){
     };
 
     return (
-        <div className='tt-inputs'>
-            <label className={`tt-radio`}>
+        <div role="tablist" className='tabs w-2/3'>
+            <label role="tab" className={`tab ${actionType === 'action' ? 'tab-active' : ''}`}>
                 <input 
+                    className="hidden"
                     type="radio"
                     name="radio"
                     value='pomodoro'
                     checked={actionType === 'action'}
                     onChange={() => handleRadioChange('action')} 
                 />
-                <span className={`name font-corpo2 ${actionType === 'action' ? 'underline' : 'not-selected'} `}> Action </span>
-
+                <span className={`font-corpo text-lg font-semibold ${actionType === 'action' ? 'text-cian-dark' : 'text-ciano-light'} `}> Action </span>
             </label>
             {
                 isTimeGoal && 
-                <label className={`tt-radio`}>
+                <label role="tab" className={`tab ${actionType === 'time-goal' ? 'tab-active' : ''}`}>
                     <input 
+                        className="hidden"
                         type="radio"
                         name="radio"
                         value='flowmodoro'
                         checked={actionType === 'time-goal'}
                         onChange={() => handleRadioChange('time-goal')} 
                     />
-                    <span className={`name font-corpo2 ${actionType === 'time-goal' ? 'underline' : 'not-selected'} `}> Time goal </span>
-
+                    <span className={`hidden md:inline md:font-corpo md:text-lg md:font-semibold ${actionType === 'time-goal' ? 'md:text-ciano-dark' : 'md:text-ciano-light'} `}> Time goal </span>
+                    <span className={`md:hidden font-corpo text-lg font-semibold ${actionType === 'time-goal' ? 'text-ciano-dark' : 'text-ciano-light'} `}> Time </span>
                 </label>
             }
         </div>

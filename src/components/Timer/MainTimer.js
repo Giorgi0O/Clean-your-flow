@@ -1,4 +1,3 @@
-import './Timer.css';
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import CountDown from "./CountDown/CountDown";
 import Settings from "../Modal/Settings";
@@ -10,6 +9,8 @@ import FlowmodoroControls from "./TimerControls/FlowmodoroControls";
 import startFlowSound from '../../assets/sounds/start-flow.wav';
 import clicksound from '../../assets/sounds/start-click.wav';
 import Nosleep from 'nosleep.js';
+import { restart } from '../../utils/Common';
+import ReportFinal from '../Modal/ReportFinal';
 
 function MainTimer({
     selectedMode,
@@ -25,7 +26,6 @@ function MainTimer({
     createTask,
     deleteTask,
     updateTask,
-    restart
 }){
 
     const [autoStart, setAutoStart] = useState( () => {
@@ -62,7 +62,6 @@ function MainTimer({
     const [modalSetting, setModalSetting] = useState(false);
     const [modalTask, setModalTask] = useState(false);
 
-    const isMobile = useState(window.innerWidth < 1000);
     const requestNotify = useRef(0);
 
     const startTimeRef = useRef(null);
@@ -300,7 +299,7 @@ function MainTimer({
         }
     },[startAutomation, selectedMode, pomodoroStart, flowmodoroStart])
 
-    const next = () => {
+    const next = useCallback( () => {
         const buttonSound = new Audio(clicksound);
         buttonSound.play();
 
@@ -330,7 +329,7 @@ function MainTimer({
             
             return newTimerCount;
         });
-    };
+    },[flowTime, longRestTime, restTime ,setBgLeft, setBgRigth]);
 
     const saveTimerForm = (tempFlowTime, tempRestTime, tempLongRestTime) => {
         if( interval.current ){
@@ -367,12 +366,15 @@ function MainTimer({
     }, [isActive]);
 
     return (
-        <div className={ 'timer' } >
+        <div className={ 'z-[100] flex flex-col items-center justify-evenly w-5/6 h-[85%]' } >
             {
                 !endSession ?
                 (
-                    <div className={`timer-center`}>
-                        <div className={`${isMobile && ( modalSetting || modalTask ) ? 'hide-timer' : 'show-timer' } `}>
+                    <div className={`flex items-center justify-between w-full h-3/4`}>
+                        <div className={`
+                            ${ modalSetting || modalTask ? 'hidden lg:center' : 'center' }
+                            w-full h-full lg:w-1/3 
+                        `}>
                             <CountDown 
                                 timeRemaining = {timeRemaining}
                                 bgRigth = {bgRigth}
@@ -380,7 +382,10 @@ function MainTimer({
                                 selectedMode={selectedMode}
                             />
                         </div>
-                        <div className={` ${ (isMobile && (modalSetting || modalTask)) ? 'modal-space' : 'modal-space-none' }`}>
+                        <div className={`
+                            ${ modalSetting || modalTask ? 'center lg:justify-end' : 'hidden lg:center' }
+                            w-full h-full lg:w-2/3 
+                        `}>
                             {
                             modalSetting && !isActive && !modalTask &&
                             (
@@ -420,8 +425,8 @@ function MainTimer({
                 )
                 :
                 (
-                    <div className='timer-end'>
-                        <TaskList
+                    <div className='w-full h-3/4'>
+                        <ReportFinal
                             taskList={taskList}
                             timeGoal={timeGoal}
                             createTask={createTask}
@@ -434,20 +439,19 @@ function MainTimer({
                     </div>
                 )
             }
-            <div className='timer-controls'>
+            <div className='w-full h-1/3 flex flex-col justify-center items-center'>
                 {   selectedMode === 1 &&
-                    <p className='default-font count-flow color-ligth-pink count-flow'> #{Math.ceil(flowTotalTime/flowTime)} </p>
+                    <p className='font-number text-rosa-light m-1'> #{Math.ceil(flowTotalTime/flowTime)} </p>
                 }
-                <div className='start-stop-buttons'>
+                <div className='w-full center '>
                     {
                         !endSession &&
                         <CircleButton tooltip={'End session'} 
                             iconName={'x'} 
-                            color={'ligth-pink'} 
+                            color={'secondary'} 
                             operation={() => {
                                 setEndSessionRequest(true)
                             }} 
-                            activeColor={'pink'}
                         />
                     }
                     {
@@ -455,19 +459,27 @@ function MainTimer({
                         <>
                             {
                                 !isActive &&
-                                <CircleButton color={'ligth-green'} tooltip={'settings'} iconName={'settings'} active={modalSetting} activeColor={'green'}
+                                <CircleButton 
+                                    color={'neutral'} 
+                                    tooltip={'settings'} 
+                                    iconName={'settings'} 
+                                    active={modalSetting} 
                                     operation={() => {
-                                    setModalSetting(!modalSetting);
-                                    setModalTask(false);
+                                        setModalSetting(!modalSetting);
+                                        setModalTask(false);
                                     }} 
                                     activeOperation={() => {
-                                    setModalSetting(!modalSetting);
-                                    setModalTask(false);
+                                        setModalSetting(!modalSetting);
+                                        setModalTask(false);
                                     }} 
                                 />
                             }
 
-                            <CircleButton color={'ligth-ciano'} tooltip={'View your task'} iconName={'task-list'} active={modalTask} activeColor={'ciano'}
+                            <CircleButton 
+                                color={'primary'} 
+                                tooltip={'View your task'} 
+                                iconName={'task-list'} 
+                                active={modalTask} 
                                 operation={() => {
                                     setModalTask(!modalTask)
                                     setModalSetting(false);
@@ -481,7 +493,12 @@ function MainTimer({
                     }
                     {
                         !endSession && selectedMode === 1 &&
-                        <CircleButton color={'ligth-pink'} tooltip={'next'} iconName={'next'} operation={next}></CircleButton>
+                        <CircleButton 
+                            color={'secondary'} 
+                            tooltip={'next'} 
+                            iconName={flow ? 'next' : 'prev-light'} 
+                            operation={next}
+                        />
                     }
                     {
                         isActive && selectedMode === 2 && flowmoFlow &&
@@ -489,7 +506,7 @@ function MainTimer({
                             selectedMode === 2 && flowmoFlow &&
                             <CircleButton 
                                 iconName={'pause'} 
-                                color={'ligth-green'}
+                                color={'neutral'}
                                 operation={flowmodoroPause} 
                             />
                         )
