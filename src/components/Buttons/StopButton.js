@@ -1,11 +1,10 @@
-import '../Timer/Timer.css';
 import React from 'react';
 
-function StopButton({ iconName, operation, type}) {
+function StopButton({operation, type}) {
 
 
     return (
-        <button className={`primary-button bg-stop`} onClick={operation}>
+        <button className={`btn w-52 m-4 border-rosa-dark hover:bg-rosa-light hover:border-rosa-light btn-secondary bg-stop`} onClick={operation}>
             {
                 type === 2 ?
                 (
@@ -35,7 +34,7 @@ function StopButton({ iconName, operation, type}) {
                 )
             }
 
-            <span>{type === 2 ? 'Breath' : 'Stop' }</span>
+            <span className='font-titolo text-2xl text-rosa-dark font-bold'>{type === 2 ? 'Breath' : 'Stop' }</span>
         </button>
     );
 }

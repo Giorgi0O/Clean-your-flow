@@ -1,7 +1,6 @@
-import './Modal.css';
 import React from 'react';
 import TimerForm from '../Timer/TimerForm/TimerForm'
-import AutoStart from '../Timer/AutoStartToggle/AutoStartToggle'
+import Toggle from '../Timer/Toggle/Toggle'
 import DivisorOrizontal from '../Divisor/DivisorOrizontal';
 import Switch from '../Switch/Switch'
 
@@ -25,7 +24,7 @@ function Settings( {
   const notifyAccetpetd = Notification.permission === "granted";
 
   return (
-    <div className="card modal-card-dim modal-card-setting">
+    <div className="card bg-base-100 w-5/6 h-5/6 p-4 sm:p-8">
       {
         selectedMode === 1 &&
         <>
@@ -35,25 +34,27 @@ function Settings( {
               longRestTime= {longRestTime}
               saveForm={saveForm}
           ></TimerForm>
-          <DivisorOrizontal></DivisorOrizontal>
+          <div className='flex justify-center'>
+            <DivisorOrizontal></DivisorOrizontal>
+          </div>
         </>
       }
       
-      <div className='setting-list'>
+      <div className='card-body flex flex-col items-center'>
         {
           !notifyAccetpetd &&
-          <div className='list-component setting-allert'>
-            <p className='default-font color-dark-pink'> Notifications are currently disabled. Please enable them to receive an alert when the timer ends. </p>
+          <div className='list-component mb-2 text-center'>
+            <p className='font-corpo text-lg text-rosa-dark'> Notifications are currently disabled. Please enable them to receive an alert when the timer ends. </p>
           </div>
         }
         <div className='list-component'>
-          <span className='default-font'> Auto start </span>
-          <AutoStart autoStart={autoStart} setAutoStart={setAutoStart}></AutoStart>
+          <span> Auto start </span>
+          <Toggle prop={autoStart} setProp={setAutoStart}></Toggle>
         </div>
         {
           !isActive && ( (selectedMode === 1 && timeRemaining === flowTime) || (selectedMode === 2 && timeRemaining === 0) ) &&
           <div className='list-component'>
-            <span className='default-font'> Mode </span>
+            <span> Mode </span>
             <Switch 
               selectedMode={selectedMode} 
               setSelectedMode={setSelectedMode} 

@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+@layer components{
+  .list-component{
+    @apply w-5/6 mb-2 flex flex-col sm:flex-row justify-between items-center font-corpo font-semibold text-sm sm:text-lg
+  }
+
+  .background-left-3-colors{
+    @apply blur-2xl absolute rounded-[100px] w-1/2 h-1/2 animate-bg-left-gradient-enter
+  }
+
+  .center{
+    @apply flex justify-center items-center
+  }
+} 
+

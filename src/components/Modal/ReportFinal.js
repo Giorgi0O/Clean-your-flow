@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
-import DivisorOrizontal from '../Divisor/DivisorOrizontal';
-import TaskTab from './TaskTab';
-import Tasks from '../ Task/Tasks';
+import React from "react";
+import Tasks from "../ Task/Tasks";
+import DivisorOrizontal from "../Divisor/DivisorOrizontal";
 
-function TaskList( { 
+
+
+function ReportFinal ({
     taskList,
     timeGoal,
-    flowTotalTime,
+    createTask,
     deleteTask,
-    updateTask
+    updateTask,
+    flowTime,
+    flowTotalTime,
+    endSession
 }) {
-
-    const [actionType, setActionType] = useState('action')
 
     const formatTime = (time) => {
         if (time < 60) {
@@ -33,19 +35,12 @@ function TaskList( {
 
     const toComplete = Math.ceil(flowTotalTime / timeGoal *100)
 
-    return (
-        <div className="card overflow-x-hidden bg-base-100 w-full sm:w-5/6 h-5/6 p-2 sm:p-8">
 
-            <div className='flex justify-center mb-4'>
-                <TaskTab 
-                    actionType={actionType} 
-                    setActionType={setActionType}
-                    isTimeGoal={timeGoal !== 0}
-                />
-            </div>
-            {
-                actionType === 'action' &&
-                <div className='card-body'>
+    return (
+        <div className="card shadow-md bg-base-100 overflow-y-auto w-full h-full flex justify-evenly items-center">
+            <div className='w-full py-8 flex flex-col items-center'>
+                <h2 class="font-titolo text-xl text-ciano-dark">Action</h2>
+                <div className='card-body w-full md:w-3/4'>
                     {
                         taskList.length > 0 ? 
                             <Tasks
@@ -58,12 +53,12 @@ function TaskList( {
                             <div className="task-empty"> <p className="sub-font"> Action list is empty </p> </div>
                     }
                 </div>
-            }
-            {
-                actionType === 'time-goal' &&
-                <div className=' h-full flex flex-col justify-center items-center overflow-auto'>
+            </div>
 
-                    <div className={`radial-progress ${toComplete === 100 ? "text-verde" : "text-primary"}`}  style={{ "--value": `${toComplete}`, "--size": "15rem", "--thickness": "1rem" }} role="progressbar">
+            <div className='flex flex-col justify-center items-center'>
+                <h2 class="card-title font-titolo text-xl text-ciano-dark">Time goal</h2>
+                <div className="card-body w-full center"> 
+                    <div className={`radial-progress ${toComplete === 100 ? "text-neutral" : "text-primary"}`}  style={{ "--value": `${toComplete}`, "--size": "15rem", "--thickness": "1rem" }} role="progressbar">
                         <div className='flex flex-col items-center justify-center'>
                             <span className='font-number font-bold text-2xl text-ciano'> { formatTime( Math.ceil(flowTotalTime/60)) } </span>
                             <DivisorOrizontal/>
@@ -71,9 +66,9 @@ function TaskList( {
                         </div>                    
                     </div>
                 </div>
-            }
+            </div>
         </div>
     );
 }
 
-export default TaskList;
+export default ReportFinal

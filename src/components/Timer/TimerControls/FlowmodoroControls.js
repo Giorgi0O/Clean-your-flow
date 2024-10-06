@@ -1,5 +1,4 @@
-import '../Timer.css';
-import './TimerControls.css'
+
 import React from 'react';
 import StopButton from '../../Buttons/StopButton'
 import StartButton from '../../Buttons/StartButton'
@@ -34,8 +33,7 @@ function FlowmodoroControls({
   }
 
   return (
-    <div className='timer-controls-container'>
-      <div className='timer-controls-keys'>
+    <div className='w-5/6 text-center'>
         {
           !isActive ?
             <StartButton operation={handleStart} type={3} ></StartButton>
@@ -53,7 +51,6 @@ function FlowmodoroControls({
             )
           )
         }
-      </div>
     </div>
   );
     

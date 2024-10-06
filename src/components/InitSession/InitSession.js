@@ -1,4 +1,3 @@
-import './InitSession.css'
 import React, {useState, useEffect} from 'react';
 import CreateAction from './CreateAction';
 import TimeGoalSetting from './TimeGoalSetting';
@@ -6,6 +5,7 @@ import ModeSetting from './ModeSetting';
 import BgLeftGradient from '../AnimatedBackground/BgLeftGradient';
 import Button from '../Buttons/Button';
 import ContentBox from '../AppText/ContentBox';
+import CircleButton from '../Buttons/CircleButton';
 
 function InitSession({
     setInitSession, 
@@ -16,7 +16,9 @@ function InitSession({
     setSelectedMode,
     createTask,
     deleteTask,
-    updateTask
+    updateTask,
+    setEndSessionRequest,
+    setReturnHome
 }) {
 
     const[pageNumber, setPageNumber] = useState(() => {
@@ -29,26 +31,40 @@ function InitSession({
         localStorage.setItem('pageNumber', JSON.stringify(pageNumber));
     }, [pageNumber] ) 
 
+    const bodyClass = 'font-corpo text-sm lg:text-lg mt-2 lg:mt-6 text-ciano-dark'
+    const titleClass = 'font-titolo font-bold text-lg md:text-3xl text-ciano-dark'
+
     return (
         <>
             <BgLeftGradient/>
-            <div className="init-session-container background" >
-                <div className={`is-left`}>
+            <div className="
+                z-[100] flex flex-col w-full h-3/4  justify-evenly items-center overflow-hidden
+                lg:flex-row 
+            ">
+                <div className={`
+                    w-full h-auto center p-8
+                    lg:w-1/2 lg:h-full
+                `}>
                     {
                         pageNumber === 0 &&
+                        <div className='center text-center lg:text-left'>
+
                             <ContentBox
                                 title={
                                     <>
-                                        <span className='marker-title'>Before starting</span> set your task
+                                        <span className='bg-ciano-light rounded-full pl-0.5'> Before starting </span> set your task
                                     </>
                                 } 
                                 body={
                                     <>
-                                        To stay focused, break down larger tasks  <br/> into <span className='marker-pink'> smaller </span>, manageable steps.<br/> This makes tracking progress  <br/> <span className='marker-green'> easier </span> and keeps you motivated
+                                        To stay focused, break down larger tasks into <span className='bg-rosa-light'> smaller </span>, manageable steps. This makes tracking progress <span className='bg-verde-light'> easier </span> and keeps you motivated
                                     
                                     </>
                                 }
+                                titleClass={titleClass}
+                                bodyClass={bodyClass}
                             />
+                        </div>
                     }
                     {
                         pageNumber === 1 &&
@@ -58,22 +74,29 @@ function InitSession({
                             />
                     }
                     {
-                         pageNumber === 2 &&
+                        pageNumber === 2 &&
+                        <div className='center text-center lg:text-left'>
                             <ContentBox
                                 title={
                                     <>
-                                        Pomodoro or Flowmodoro <span className='marker-title'> ? </span> 
+                                        Pomodoro or Flowmodoro <span className='bg-ciano-light rounded-full pl-0.5'> ? </span> 
                                     </>
                                 } 
                                 body={
                                     <>
-                                        Pomodoro uses short <span className='marker-green'> work intervals </span> with breaks, <br/> while Flowmodoro adapts to your natural <br/> <span className='marker-pink'> endpoint </span> flow, allowing longer work periods.                                    
+                                        Pomodoro uses short <span className='bg-verde-light'> work intervals </span> with breaks, while Flowmodoro adapts to your natural <span className='bg-rosa-light'> endpoint </span> flow, allowing longer work periods.                                    
                                     </>
                                 }
+                                titleClass={titleClass}
+                                bodyClass={bodyClass}
                             />
+                        </div>
                     }
                 </div>
-                <div className='is-rigth'>
+                <div className='
+                    center w-full h-3/4 center p-8
+                    lg:w-1/2 lg:h-full
+                '>
                     {
                         pageNumber === 0 &&
                             <CreateAction
@@ -84,19 +107,23 @@ function InitSession({
                     }
                     {
                         pageNumber === 1 &&
+                        <div className='center text-center lg:text-right'>
                             <ContentBox
                                 title={
                                     <>
-                                        <span className='marker-title'>Set time goal</span> 
+                                        <span className='bg-ciano-light rounded-full pl-0.5'>Set time goal</span> 
                                     </>
                                 } 
                                 body={
                                     <>
-                                        Set a time goal to stay on track. <br/> Having a clear  <span className='marker-pink'> endpoint </span> helps you maintain <br/> <span className='marker-green'> focus </span> and boosts your productivity.
+                                        Set a time goal to stay on track. Having a clear  <span className='bg-rosa-light'> endpoint </span> helps you maintain <span className='bg-verde-light'> focus </span> and boosts your productivity.
                                     
                                     </>
                                 }
+                                titleClass={titleClass}
+                                bodyClass={bodyClass}
                             />
+                        </div>
                     }
                     {
                          pageNumber === 2 &&
@@ -107,27 +134,46 @@ function InitSession({
                     }
                 </div>
             </div>
-            <div className='is-controls'>
+            <div className='z-[100] w-full h-[12%] center'>
                 {
                     pageNumber === 0 &&
-                        <Button text={'Next'} iconName={'next-white'} color={ taskList.length > 0 ? 'ciano': 'gray' } 
+                    <>
+                        <CircleButton tooltip={'End session'} 
+                            iconName={'x'} 
+                            color={'secondary'} 
+                            operation={() => {
+                                setEndSessionRequest(true);
+                                setReturnHome(true);
+                            }} 
+                        />
+                        <Button text={'Next'} iconName={'next'} color={ 'ciano' } 
+                            disab={taskList.length === 0}
                             operation={()=> 
-                                taskList.length > 0 ? setPageNumber(prev => prev+1) : '' 
+                                setPageNumber(prev => prev+1) 
                             }
                         />
+                    </>
                 }
                 {
                     pageNumber === 1 && 
                     <>
-                        <Button text={'Prev'} iconName={'prev'} color={'ligth-pink'} operation={()=> setPageNumber(prev => prev-1)}></Button>
-                        <Button text={'Next'} iconName={'next-white'} color={'ciano'} operation={()=> setPageNumber(prev => prev+1)}></Button>
+                        <CircleButton tooltip={'End session'} 
+                            iconName={'prev'} 
+                            color={'secondary'} 
+                            operation={()=> setPageNumber(prev => prev-1)}
+                        />
+                        <Button text={'Next'} iconName={'next'} color={'ciano'} operation={()=> setPageNumber(prev => prev+1)}></Button>
                     </>
                 }
                 {
                     pageNumber === 2 && 
                     <>
-                        <Button text={'Prev'} iconName={'prev'} color={'ligth-pink'} operation={()=> setPageNumber(prev => prev-1)}></Button>
-                        <Button text={'Start'} iconName={'play-end'} color={selectedMode === 1 ? 'ciano' : 'green'} operation={()=> {setPageNumber(0); setInitSession(false);}}/>
+                        <CircleButton tooltip={'End session'} 
+                            iconName={'prev'} 
+                            color={'secondary'} 
+                            operation={()=> setPageNumber(prev => prev-1)}
+                        />
+                        <Button text={'Start'} iconName={'play-end'} color={selectedMode === 1 ? 'primary' : 'success'} operation={()=> {setPageNumber(0); setInitSession(false);}}/>
                     </>
                 }
             </div>

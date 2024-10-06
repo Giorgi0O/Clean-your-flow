@@ -14,7 +14,6 @@ export function formatTime(milliseconds)
 export function restart(){
     localStorage.clear();
     window.location.reload();
-    //navigate(0);
 }
 
 export function hexToFilter(hex)
