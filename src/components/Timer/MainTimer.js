@@ -158,7 +158,6 @@ function MainTimer({
 
         setCurrentTime(newTime);
         setTimeRemaining(newTime);
-        if(flow) setFlowTotalTime(prev => prev + flowTime);
         setTimerCount(newTimerCount);
 
         if (!autoStart) {
@@ -170,7 +169,7 @@ function MainTimer({
                 setStartAutomation(true);
             }, 3000)
         }
-    }, [timerCount,autoStart, flow, flowTime, longRestTime, restTime]);
+    }, [timerCount,autoStart, flowTime, longRestTime, restTime]);
 
     const pomodoroStart = useCallback(() => {
         setIsActive(true);
@@ -190,6 +189,8 @@ function MainTimer({
             movingBackground(remainingTime,true);
 
             setTimeRemaining(remainingTime);
+
+            if(flow) setFlowTotalTime(prev => prev + 1);
         
             if (remainingTime <= 0) {
                 clearInterval(interval.current);
@@ -198,7 +199,7 @@ function MainTimer({
             }
 
         }, 1000);
-    }, [currentTime, handleTimerCompletion, movingBackground, notify ]);
+    }, [currentTime, flow, handleTimerCompletion, movingBackground, notify ]);
 
     const pomodoroPause = () => {
         setIsActive(false);
@@ -206,7 +207,7 @@ function MainTimer({
         clearInterval(interval.current);
 
         savedBgLeft.current = bgLeft;
-        savedBgRigth.current =bgRigth;
+        savedBgRigth.current = bgRigth;
 
         const remainingTime = currentTime - (currentTime - timeRemaining);
         setCurrentTime(remainingTime);
@@ -231,6 +232,8 @@ function MainTimer({
 
             let now = Date.now();
             const elapsed = Math.round((now - startTimeRef.current)/1000);
+
+            setFlowTotalTime(prev => prev + 1);
             
             setTimeRemaining(elapsed);
         },1000)
@@ -250,8 +253,6 @@ function MainTimer({
         
         setModalSetting(false);
         setModalTask(false);
-
-        setFlowTotalTime(prev => prev + timeRemaining);
 
         var breathTime = Math.ceil(timeRemaining/5);
         setTimeRemaining(breathTime);

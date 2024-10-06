@@ -63,9 +63,9 @@ function TaskList( {
                 actionType === 'time-goal' &&
                 <div className=' h-full flex flex-col justify-center items-center overflow-auto'>
 
-                    <div className={`radial-progress ${toComplete === 100 ? "text-verde" : "text-primary"}`}  style={{ "--value": `${toComplete}`, "--size": "15rem", "--thickness": "1rem" }} role="progressbar">
+                    <div className={`radial-progress ${toComplete >= 100 ? "text-verde" : "text-primary"}`}  style={{ "--value": `${toComplete > 100 ? 100 : toComplete}`, "--size": "15rem", "--thickness": "1rem" }} role="progressbar">
                         <div className='flex flex-col items-center justify-center'>
-                            <span className='font-number font-bold text-2xl text-ciano'> { formatTime( Math.ceil(flowTotalTime/60)) } </span>
+                            <span className='font-number font-bold text-2xl text-ciano'> { formatTime( Math.floor(flowTotalTime/60)) } </span>
                             <DivisorOrizontal/>
                             <span className='font-number font-bold text-2xl text-verde'> { formatTime( timeGoal/60 )} </span>
                         </div>                    
