@@ -1,7 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 function TaskTab({actionType, setActionType, isTimeGoal }){
 
+    const {t} = useTranslation();
 
     const handleRadioChange = (value) => {
       setActionType(value);
@@ -18,7 +20,7 @@ function TaskTab({actionType, setActionType, isTimeGoal }){
                     checked={actionType === 'action'}
                     onChange={() => handleRadioChange('action')} 
                 />
-                <span className={`font-corpo text-lg font-semibold ${actionType === 'action' ? 'text-cian-dark' : 'text-ciano-light'} `}> Action </span>
+                <span className={`font-corpo text-lg font-semibold ${actionType === 'action' ? 'text-cian-dark' : 'text-ciano-light'} `}> {t('common.task')} </span>
             </label>
             {
                 isTimeGoal && 
@@ -31,8 +33,8 @@ function TaskTab({actionType, setActionType, isTimeGoal }){
                         checked={actionType === 'time-goal'}
                         onChange={() => handleRadioChange('time-goal')} 
                     />
-                    <span className={`hidden md:inline md:font-corpo md:text-lg md:font-semibold ${actionType === 'time-goal' ? 'md:text-ciano-dark' : 'md:text-ciano-light'} `}> Time goal </span>
-                    <span className={`md:hidden font-corpo text-lg font-semibold ${actionType === 'time-goal' ? 'text-ciano-dark' : 'text-ciano-light'} `}> Time </span>
+                    <span className={`hidden md:inline md:font-corpo md:text-lg md:font-semibold ${actionType === 'time-goal' ? 'md:text-ciano-dark' : 'md:text-ciano-light'} `}> {t('common.time-goal')} </span>
+                    <span className={`md:hidden font-corpo text-lg font-semibold ${actionType === 'time-goal' ? 'text-ciano-dark' : 'text-ciano-light'} `}> ${t('common.time')} </span>
                 </label>
             }
         </div>

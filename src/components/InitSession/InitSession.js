@@ -6,6 +6,7 @@ import BgLeftGradient from '../AnimatedBackground/BgLeftGradient';
 import Button from '../Buttons/Button';
 import ContentBox from '../AppText/ContentBox';
 import CircleButton from '../Buttons/CircleButton';
+import { useTranslation } from 'react-i18next';
 
 function InitSession({
     setInitSession, 
@@ -20,6 +21,8 @@ function InitSession({
     setEndSessionRequest,
     setReturnHome
 }) {
+
+    const {t} = useTranslation();
 
     const[pageNumber, setPageNumber] = useState(() => {
         const pageNumber = localStorage.getItem('pageNumber');
@@ -52,13 +55,12 @@ function InitSession({
                             <ContentBox
                                 title={
                                     <>
-                                        <span className='bg-ciano-light rounded-full pl-0.5'> Before starting </span> set your task
+                                        {t('flow-session.init-session.create-tasks.title')}
                                     </>
                                 } 
                                 body={
                                     <>
-                                        To stay focused, break down larger tasks into <span className='bg-rosa-light'> smaller </span>, manageable steps. This makes tracking progress <span className='bg-verde-light'> easier </span> and keeps you motivated
-                                    
+                                        {t('flow-session.init-session.create-tasks.body')}                                    
                                     </>
                                 }
                                 titleClass={titleClass}
@@ -79,12 +81,12 @@ function InitSession({
                             <ContentBox
                                 title={
                                     <>
-                                        Pomodoro or Flowmodoro <span className='bg-ciano-light rounded-full pl-0.5'> ? </span> 
+                                        {t('flow-session.init-session.set-mode.title')}
                                     </>
                                 } 
                                 body={
                                     <>
-                                        Pomodoro uses short <span className='bg-verde-light'> work intervals </span> with breaks, while Flowmodoro adapts to your natural <span className='bg-rosa-light'> endpoint </span> flow, allowing longer work periods.                                    
+                                        {t('flow-session.init-session.set-mode.body')}
                                     </>
                                 }
                                 titleClass={titleClass}
@@ -111,13 +113,12 @@ function InitSession({
                             <ContentBox
                                 title={
                                     <>
-                                        <span className='bg-ciano-light rounded-full pl-0.5'>Set time goal</span> 
+                                        {t('flow-session.init-session.set-time-goal.title')}
                                     </>
                                 } 
                                 body={
                                     <>
-                                        Set a time goal to stay on track. Having a clear  <span className='bg-rosa-light'> endpoint </span> helps you maintain <span className='bg-verde-light'> focus </span> and boosts your productivity.
-                                    
+                                        {t('flow-session.init-session.set-time-goal.body')}
                                     </>
                                 }
                                 titleClass={titleClass}
@@ -146,7 +147,7 @@ function InitSession({
                                 setReturnHome(true);
                             }} 
                         />
-                        <Button text={'Next'} iconName={'next'} color={ 'ciano' } 
+                        <Button text={t('common.button.next')} iconName={'next'} color={ 'ciano' } 
                             disab={taskList.length === 0}
                             operation={()=> 
                                 setPageNumber(prev => prev+1) 
@@ -162,7 +163,7 @@ function InitSession({
                             color={'secondary'} 
                             operation={()=> setPageNumber(prev => prev-1)}
                         />
-                        <Button text={'Next'} iconName={'next'} color={'ciano'} operation={()=> setPageNumber(prev => prev+1)}></Button>
+                        <Button text={t('common.button.next')} iconName={'next'} color={'ciano'} operation={()=> setPageNumber(prev => prev+1)}></Button>
                     </>
                 }
                 {
@@ -173,7 +174,7 @@ function InitSession({
                             color={'secondary'} 
                             operation={()=> setPageNumber(prev => prev-1)}
                         />
-                        <Button text={'Start'} iconName={'play-end'} color={selectedMode === 1 ? 'primary' : 'success'} operation={()=> {setPageNumber(0); setInitSession(false);}}/>
+                        <Button text={t('common.button.start')} iconName={'play-end'} color={selectedMode === 1 ? 'primary' : 'success'} operation={()=> {setPageNumber(0); setInitSession(false);}}/>
                     </>
                 }
             </div>

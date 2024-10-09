@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { useTranslation } from "react-i18next";
 
 
 function TimeGoalSetting({
@@ -6,13 +7,14 @@ function TimeGoalSetting({
     setTimeGoal
 }) {
 
+    const {t} = useTranslation();
     const [value, setValue] = useState(timeGoal/60);
 
     const formatTime = (time) => {
         if (time < 60) {
             return (
                 <>
-                    <span className="number font-number"> {time} </span> <span className="default-font">minutes</span>
+                    <span className="number font-number"> {time} </span> <span className="default-font"> {t('common.time-unit-s')}</span>
                 </>
             );
         } else {
@@ -20,7 +22,7 @@ function TimeGoalSetting({
             const minutes = time % 60;
             return (
                 <>
-                     <span className="number font-number"> {hours}:{minutes.toString().padStart(2, '0')} </span> <span className="default-font">hours</span>
+                    <span className="number font-number"> {hours}:{minutes.toString().padStart(2, '0')} </span> <span className="default-font">{t('common.time-unit-h')}</span>
                 </>
             );
         }

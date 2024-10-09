@@ -1,6 +1,59 @@
-
 {
-    "main":{
-        "header": "Ciao mondo !!!"
-    } 
+    "common":{
+        "button":{
+            "next":"Next",
+            "start": "Start",
+            "start-session":"Inizia sessione",
+            "continue-session":"Continua la sessione",
+            "stop":"Stop",
+            "end-session":"Termina sessione",
+            "restart": "Ricomincia",
+            "delete": "Elimina",
+            "breath": "Respira"
+        },
+        "flow" : "Flow",
+        "breath": "Respiro",
+        "break" : "Pausa",
+        "task" : "Task",
+        "time-goal" : "Time goal",
+        "time" : "Time",
+        "time-unit-s": "Minuti",
+        "time-unit-h": "Ore"
+    },
+    "home":{
+        "ours_objective": "Our goal is for you to achieve your goals in the cleanest way possible."
+    } ,
+    "flow-session":{
+        "init-session": {
+            "create-tasks":{
+                "title":"Before starting set your task",
+                "body":"To stay focused, break down larger tasks into smaller , manageable steps. This makes tracking progress easier and keeps you motivated",
+                "input": "Write your tasks here"
+            },
+            "set-time-goal":{
+                "title":"Imposta il time goal di questa sessione",
+                "body":"Set a time goal to stay on track. Having a clear endpoint helps you maintain focus and boosts your productivity."
+            },
+            "set-mode":{
+                "title":"Pomodoro or Flowmodoro ?",
+                "body":"Pomodoro uses short work intervals with breaks, while Flowmodoro adapts to your natural endpoint flow, allowing longer work periods."
+            }
+        },
+        "session":{
+            "tooltip":{
+                "end": "Termina sessione",
+                "settings": "Impostazione",
+                "task": "Task",
+                "next": "Successivo",
+                "pause": "Pausa"
+            },
+            "settings":{
+                "auto-start": "Auto start",
+                "mode": "Modalità"
+            }
+        },
+        "end-session":{
+            "body":"Sei sicuro di voler terminare la sessione ?"
+        }
+    }
 }

@@ -11,6 +11,7 @@ import clicksound from '../../assets/sounds/start-click.wav';
 import Nosleep from 'nosleep.js';
 import { restart } from '../../utils/Common';
 import ReportFinal from '../Modal/ReportFinal';
+import { useTranslation } from "react-i18next";
 
 function MainTimer({
     selectedMode,
@@ -27,7 +28,7 @@ function MainTimer({
     deleteTask,
     updateTask,
 }){
-
+    const {t} = useTranslation();
     const [autoStart, setAutoStart] = useState( () => {
         const autoStart = localStorage.getItem('autoStart');
         return autoStart ? JSON.parse(autoStart) : 0;
@@ -447,7 +448,8 @@ function MainTimer({
                 <div className='w-full center '>
                     {
                         !endSession &&
-                        <CircleButton tooltip={'End session'} 
+                        <CircleButton 
+                            tooltip={t('flow-session.session.tooltip.end')} 
                             iconName={'x'} 
                             color={'secondary'} 
                             operation={() => {
@@ -462,7 +464,7 @@ function MainTimer({
                                 !isActive &&
                                 <CircleButton 
                                     color={'neutral'} 
-                                    tooltip={'settings'} 
+                                    tooltip={t('flow-session.session.tooltip.settings') }
                                     iconName={'settings'} 
                                     active={modalSetting} 
                                     operation={() => {
@@ -478,7 +480,7 @@ function MainTimer({
 
                             <CircleButton 
                                 color={'primary'} 
-                                tooltip={'View your task'} 
+                                tooltip={t('flow-session.session.tooltip.task')}
                                 iconName={'task-list'} 
                                 active={modalTask} 
                                 operation={() => {
@@ -496,7 +498,7 @@ function MainTimer({
                         !endSession && selectedMode === 1 &&
                         <CircleButton 
                             color={'secondary'} 
-                            tooltip={'next'} 
+                            tooltip={t('flow-session.session.tooltip.next')}
                             iconName={flow ? 'next' : 'prev-light'} 
                             operation={next}
                         />
@@ -506,6 +508,7 @@ function MainTimer({
                         (
                             selectedMode === 2 && flowmoFlow &&
                             <CircleButton 
+                                tooltip={t('flow-session.session.tooltip.pause')}
                                 iconName={'pause'} 
                                 color={'neutral'}
                                 operation={flowmodoroPause} 

@@ -3,6 +3,7 @@ import TimerForm from '../Timer/TimerForm/TimerForm'
 import Toggle from '../Timer/Toggle/Toggle'
 import DivisorOrizontal from '../Divisor/DivisorOrizontal';
 import Switch from '../Switch/Switch'
+import { useTranslation } from 'react-i18next';
 
 
 function Settings( { 
@@ -21,6 +22,7 @@ function Settings( {
 
 }) {
 
+  const {t} = useTranslation();
   const notifyAccetpetd = Notification.permission === "granted";
 
   return (
@@ -48,13 +50,13 @@ function Settings( {
           </div>
         }
         <div className='list-component'>
-          <span> Auto start </span>
+          <span> {t('flow-session.session.settings.auto-start')} </span>
           <Toggle prop={autoStart} setProp={setAutoStart}></Toggle>
         </div>
         {
           !isActive && ( (selectedMode === 1 && timeRemaining === flowTime) || (selectedMode === 2 && timeRemaining === 0) ) &&
           <div className='list-component'>
-            <span> Mode </span>
+            <span> {t('flow-session.session.settings.mode')}  </span>
             <Switch 
               selectedMode={selectedMode} 
               setSelectedMode={setSelectedMode} 

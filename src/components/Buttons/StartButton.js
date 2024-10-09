@@ -1,7 +1,12 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 function StartButton({ operation, type }) {
 
+    const {t}= useTranslation();
+
+    const start = t('common.button.start');
+    const restart = t('common.button.restart');
 
     return (
         <button className={`btn w-52 m-4 border-ciano-dark  ${type === 1 || type === 2 ? 'bg-ciano-light hover:bg-ciano-light hover:border-ciano-light' : 'bg-verde-light hover:bg-verde-light hover:border-verde-light'}`} onClick={operation}>
@@ -61,7 +66,7 @@ function StartButton({ operation, type }) {
                     </svg>
                 )
             }
-            <span className={`font-titolo text-2xl ${type === 1 || type === 2 ? 'text-ciano-dark' : 'text-verde-dark'}`}> { type === 1 || type === 3 ? "Start" : ''} { type === 2 ? "Restart" : ''} </span>
+            <span className={`font-titolo text-2xl ${type === 1 || type === 2 ? 'text-ciano-dark' : 'text-verde-dark'}`}> { type === 1 || type === 3 ? start : ''} { type === 2 ? restart : ''} </span>
         </button>
     );
 }

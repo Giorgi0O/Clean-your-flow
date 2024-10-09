@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import CircleButton from '../Buttons/CircleButton'
 import Tasks from "../ Task/Tasks";
+import { useTranslation } from "react-i18next";
 
 function CreateAction({
     taskList,
     createTask,
     deleteTask,
 }){
-
+    const {t} = useTranslation();
     const [tempValue , setTempValue] = useState('');
 
     const handleTempSave = (event) =>{
@@ -39,7 +40,7 @@ function CreateAction({
                     value={tempValue}
                     onChange={handleTempSave}
                     onKeyDown={handleKeyPress} 
-                    placeholder={'Write your task here'}
+                    placeholder={t('flow-session.init-session.create-tasks.input')}
                 />
                 <CircleButton
                     iconName={'plus'}

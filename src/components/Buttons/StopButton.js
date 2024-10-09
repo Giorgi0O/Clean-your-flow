@@ -1,7 +1,12 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 function StopButton({operation, type}) {
 
+    const {t} = useTranslation();
+
+    const breath = t('common.button.breath')
+    const stop = t('common.button.stop')
 
     return (
         <button className={`btn w-52 m-4 border-rosa-dark hover:bg-rosa-light hover:border-rosa-light btn-secondary bg-stop`} onClick={operation}>
@@ -34,7 +39,7 @@ function StopButton({operation, type}) {
                 )
             }
 
-            <span className='font-titolo text-2xl text-rosa-dark font-bold'>{type === 2 ? 'Breath' : 'Stop' }</span>
+            <span className='font-titolo text-2xl text-rosa-dark font-bold'>{type === 2 ? breath : stop }</span>
         </button>
     );
 }

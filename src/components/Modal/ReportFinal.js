@@ -1,6 +1,7 @@
 import React from "react";
 import Tasks from "../ Task/Tasks";
 import DivisorOrizontal from "../Divisor/DivisorOrizontal";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -15,11 +16,13 @@ function ReportFinal ({
     endSession
 }) {
 
+    const {t} = useTranslation();
+
     const formatTime = (time) => {
         if (time < 60) {
             return (
                 <>
-                    {time} <span className='sub-font'>minutes</span>
+                    {time} <span className='sub-font'>{t('common.time-unit-s')}</span>
                 </>
             );
         } else {
@@ -27,7 +30,7 @@ function ReportFinal ({
             const minutes = time % 60;
             return (
                 <>
-                    {hours}:{minutes.toString().padStart(2, '0')} <span className='sub-font'>hours</span>
+                    {hours}:{minutes.toString().padStart(2, '0')} <span className='sub-font'>{t('common.time-unit-h')}</span>
                 </>
             );
         }
@@ -39,7 +42,7 @@ function ReportFinal ({
     return (
         <div className="card shadow-md bg-base-100 overflow-y-auto w-full h-full flex justify-evenly items-center">
             <div className='w-full py-8 flex flex-col items-center'>
-                <h2 class="font-titolo text-xl text-ciano-dark">Action</h2>
+                <h2 class="font-titolo font-bold text-xl text-ciano-dark">{t('common.task')}</h2>
                 <div className='card-body w-full md:w-3/4'>
                     {
                         taskList.length > 0 ? 
@@ -55,8 +58,8 @@ function ReportFinal ({
                 </div>
             </div>
 
-            <div className='flex flex-col justify-center items-center'>
-                <h2 class="card-title font-titolo text-xl text-ciano-dark">Time goal</h2>
+            <div className='flex flex-col font-bold justify-center items-center'>
+                <h2 class="card-title font-titolo text-xl text-ciano-dark">{t('common.time-goal')}</h2>
                 <div className="card-body w-full center"> 
                 <div className={`radial-progress ${toComplete >= 100 ? "text-verde" : "text-primary"}`}  style={{ "--value": `${toComplete > 100 ? 100 : toComplete}`, "--size": "15rem", "--thickness": "1rem" }} role="progressbar">
                     <div className='flex flex-col items-center justify-center'>

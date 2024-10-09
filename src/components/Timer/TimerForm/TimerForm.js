@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useTranslation } from 'react-i18next';
 
 function TimerForm({ 
         flowTime, 
@@ -7,6 +8,7 @@ function TimerForm({
         saveForm
     })
 {
+    const {t} = useTranslation();
 
     const [tempFlowTime, setTempFlowTime] = useState(flowTime);
     const [tempRestTime, setTempRestTime] = useState(restTime);
@@ -49,7 +51,7 @@ function TimerForm({
     return(
         <form className='flex w-full justify-evenly items-center p-[20px]'>
             <div className='flex flex-col justify-center items-center overflow-hidden w-1/4 '>
-                <label htmlFor="flow-time" className='text-ciano-dark font-corpo text-sm sm:text-lg font-bold sm:font-semibold' >Flow</label>
+                <label htmlFor="flow-time" className='text-ciano-dark font-corpo text-sm sm:text-lg font-bold sm:font-semibold' >{t('common.flow')}</label>
                 <input
                     id="flow-time"
                     className='text-center text-xl w-full h-14 rounded-md text-ciano-dark bg-ciano-light font-number font-semibold'
@@ -61,7 +63,7 @@ function TimerForm({
             </div>
             <div className='flex flex-col justify-center items-center overflow-hidden w-1/4'>
 
-                <label htmlFor="rest-time" className='text-rosa-dark font-corpo text-sm sm:text-lg font-bold sm:font-semibold'>Breath</label>
+                <label htmlFor="rest-time" className='text-rosa-dark font-corpo text-sm sm:text-lg font-bold sm:font-semibold'>{t('common.breath')}</label>
                 <input
                     id="rest-time"
                     value={tempRestTime/60}
@@ -72,7 +74,7 @@ function TimerForm({
                 />
             </div>
             <div className='flex flex-col justify-center items-center overflow-hidden w-1/4'>
-                <label htmlFor="long-rest-time" className='text-verde-dark font-corpo text-sm sm:text-lg font-semibold'>Break</label>
+                <label htmlFor="long-rest-time" className='text-verde-dark font-corpo text-sm sm:text-lg font-semibold'>{t('common.break')}</label>
                 <input
                     id="long-rest-time"
                     value={tempLongRestTime/60}
