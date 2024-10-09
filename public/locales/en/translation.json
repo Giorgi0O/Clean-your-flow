@@ -4,6 +4,8 @@
         "button":{
             "next":"Next",
             "start": "Start",
+            "start-session":"Start session",
+            "continue-session":"Continue session",
             "stop":"Stop",
             "end-session":"End session",
             "restart": "Restart",
@@ -18,11 +20,7 @@
         "time-unit-h": "Hours"
     },
     "home":{
-        "ours_objective": "Our goal is for you to achieve your goals in the cleanest way possible.",
-        "session-button":{
-            "continue": "Continue session",
-            "start": "Start start session"
-        }
+        "ours_objective": "Our goal is for you to achieve your goals in the cleanest way possible."
     } ,
     "flow-session":{
         "init-session": {

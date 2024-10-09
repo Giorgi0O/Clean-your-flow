@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 function Button( ) {
+
+    const { t } = useTranslation();
 
     const localStorageState = localStorage.length === 0;
 
@@ -25,7 +28,8 @@ function Button( ) {
                     </clipPath>
                     </defs>
                 </svg>
-                <p className='font-titolo text-lg lg:text-2xl font-bold text-ciano-dark mt-0 lg:mt-2'> { localStorageState ? 'Start session' : 'Continue Session'} </p>
+                
+                <p className='font-titolo text-lg lg:text-2xl font-bold text-ciano-dark mt-0 lg:mt-2'> { localStorageState ? t('common.button.start-session') : t('common.button.continue-session')} </p>
             </button>
         </Link>
     );
