@@ -4,8 +4,18 @@
         "button":{
             "next":"Next",
             "start": "Start",
-            "stop":"Stop"
-        }
+            "stop":"Stop",
+            "end-session":"End session",
+            "restart": "Restart",
+            "delete": "Delete"
+        },
+        "flow" : "Flow",
+        "breath": "Breath",
+        "break" : "Break",
+        "task" : "Task",
+        "time-goal" : "Time goal",
+        "time-unit-s": "Minutes",
+        "time-unit-h": "Hours"
     },
     "home":{
         "ours_objective": "Our goal is for you to achieve your goals in the cleanest way possible.",
@@ -23,14 +33,27 @@
             },
             "set-time-goal":{
                 "title":"Set time goal",
-                "body":"Set a time goal to stay on track. Having a clear endpoint helps you maintain focus and boosts your productivity.",
-                "time-unit-s": "Minutes",
-                "time-unit-h": "Hours"
+                "body":"Set a time goal to stay on track. Having a clear endpoint helps you maintain focus and boosts your productivity."
             },
             "set-mode":{
                 "title":"Pomodoro or Flowmodoro ?",
                 "body":"Pomodoro uses short work intervals with breaks, while Flowmodoro adapts to your natural endpoint flow, allowing longer work periods."
             }
+        },
+        "session":{
+            "tooltip":{
+                "end": "End session",
+                "settings": "Settings",
+                "task": "Task",
+                "next": "Next"
+            },
+            "settings":{
+                "auto-start": "Auto start",
+                "Mode": "Modalità"
+            }
+        },
+        "end-session":{
+            "body":"Are you sure you want to end the session ?"
         }
     }
 }
