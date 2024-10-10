@@ -1,7 +1,7 @@
 {
     "common":{
         "button":{
-            "next":"Next",
+            "next":"Avanti",
             "start": "Start",
             "start-session":"Inizia sessione",
             "continue-session":"Continua la sessione",
@@ -21,17 +21,17 @@
         "time-unit-h": "Ore"
     },
     "home":{
-        "ours_objective": "Our goal is for you to achieve your goals in the cleanest way possible."
+        "ours_objective": "Il nostro obiettivo è aiutarti a raggiungere i tuoi traguardi nel modo più semplice ed efficiente possibile"
     } ,
     "flow-session":{
         "init-session": {
             "create-tasks":{
-                "title":"Before starting set your task",
-                "body":"To stay focused, break down larger tasks into smaller , manageable steps. This makes tracking progress easier and keeps you motivated",
-                "input": "Write your tasks here"
+                "title":"Prima di iniziare, scrivi i task della sessione",
+                "body":"Dividi i compiti più grandi in piccoli step, così rimani concentrato e porti a termine il lavoro più facilmente.",
+                "input": "Scrivi quì"
             },
             "set-time-goal":{
-                "title":"Imposta il time goal di questa sessione",
+                "title":"Quanto tempo vuoi dedidicare alla sessione ?",
                 "body":"Set a time goal to stay on track. Having a clear endpoint helps you maintain focus and boosts your productivity."
             },
             "set-mode":{
