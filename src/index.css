@@ -24,6 +24,10 @@
     @apply z-[100] rounded-lg flex flex-col w-[350px] h-[400px] items-center mb-4 lg:mb-0
   }
 
+  .card-mirror{
+    @apply bg-gradient-to-tl from-white/0 to-white/70
+  }
+
   .card-mirror-ciano{
     @apply p-4 bg-gradient-to-tl from-ciano-opacity/0 to-ciano-light/70 card-wp
   }
@@ -38,6 +42,10 @@
 
   .gradiente-bg{
     @apply bg-gradient-to-tl from-verde-light via-ciano-light to-rosa-light
+  }
+
+  .underline-wave{
+    @apply underline-offset-8 underline decoration-wavy
   }
 } 
 

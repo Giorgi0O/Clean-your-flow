@@ -18,22 +18,36 @@
         "time-goal" : "Time goal",
         "time" : "Time",
         "time-unit-s": "Minuti",
-        "time-unit-h": "Ore"
+        "time-unit-h": "Ore",
+        "mode-explain":{
+            "pomodoro":{
+                "step1": "Imposta il timer per 25 minuti.",
+                "step2": "Lavora sull'attività finché il timer non suona.",
+                "step3": "Quando suona, fai una pausa di 5 minuti.",
+                "step4": "Dopo ogni 4 cicli (pomodori), prendi una pausa più lunga."
+            },
+            "flowmodoro":{
+                "step1": "Avvia il cronometro e inizia a lavorare.",
+                "step2": "Quando ti senti stanco, ferma il cronometro.",
+                "step3": "Dividi il tempo di lavoro per 5.",
+                "step4": "Prendi una pausa della durata calcolata, poi riprendi a lavorare."
+            }
+        }
     },
     "home":{
-        "main1": "Questo non è altro che un sempliccissimo timer.",
-        "main2": "Sii tu a farne uno strumento di produttività.",
+        "main1": "Questo non è altro che un <1>sempliccissimo</1> timer.",
+        "main2": "Sii tu a farne uno strumento di <1>produttività.</1>",
         "card1":{
-            "title":"Concentrati sulla creazione dei task",
+            "title":"Concentrati sulla creazione dei <1>task</1>",
             "body":"Non creare task generici, siediti e pensa bene agli obiettivi che vuoi raggiungere durante la sessione."
         },
         "card2":{
-            "title":"Imposta un limite di tempo",
+            "title":"Imposta un limite di <1>tempo</1>",
             "body":"Definisci una durata precisa per la tua sessione. Il time goal ti aiuta a mantenere il focus e a completare i task con maggiore efficienza."
         },
         "card3":{
-            "title":"Scegli la modalità che fa per te",
-            "body":"Potrai scegliere tra la tecnica del pomodoro e quella flowmodoro. Se non conosci la differenza clicca quì."
+            "title":"Scegli la <1>modalità</1> che fa per te",
+            "body":"Potrai scegliere tra la tecnica del pomodoro e quella flowmodoro. Se non conosci la differenza <1>clicca quì</1>."
         },
         "scroll1":"Scorri solo se sei davvero pronto ad iniziare.",
         "scroll2":"Inizia la sessione",

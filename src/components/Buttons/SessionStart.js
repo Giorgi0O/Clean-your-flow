@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { motion, useMotionValue, useTransform, useAnimation } from 'framer-motion';
 import { ReactComponent as LogoSvg } from '../../assets/Icons/logo-faggiolo.svg';
@@ -9,7 +9,6 @@ function Button( ) {
 
     const { t } = useTranslation();
 
-    const localStorageState = localStorage.length === 0;
     const containerRef = useRef(null);
     const buttonRef = useRef(null);
     const x = useMotionValue(6);
