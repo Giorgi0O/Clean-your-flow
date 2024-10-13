@@ -19,5 +19,25 @@
   .center{
     @apply flex justify-center items-center
   }
+
+  .card-wp{
+    @apply z-[100] rounded-lg flex flex-col w-[350px] h-[400px] items-center mb-4 lg:mb-0
+  }
+
+  .card-mirror-ciano{
+    @apply p-4 bg-gradient-to-tl from-ciano-opacity/0 to-ciano-light/70 card-wp
+  }
+
+  .card-mirror-verde{
+    @apply p-4 bg-gradient-to-tl from-verde-opacity/0 to-verde-light/70 z-[100] card-wp
+  }
+
+  .card-mirror-rosa{
+    @apply p-4 bg-gradient-to-tl from-rosa-opacity/0 to-rosa-light/70 z-[100] card-wp
+  }
+
+  .gradiente-bg{
+    @apply bg-gradient-to-tl from-verde-light via-ciano-light to-rosa-light
+  }
 } 
 

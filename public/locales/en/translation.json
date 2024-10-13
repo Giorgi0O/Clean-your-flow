@@ -1,37 +1,53 @@
 {
     "common":{
         "button":{
-            "next":"Next",
+            "next":"Avanti",
             "start": "Start",
-            "start-session":"Start session",
-            "continue-session":"Continue session",
+            "start-session":"Inizia sessione",
+            "continue-session":"Continua la sessione",
             "stop":"Stop",
-            "end-session":"End session",
-            "restart": "Restart",
-            "delete": "Delete",
-            "breath": "Breath"
+            "end-session":"Termina sessione",
+            "restart": "Ricomincia",
+            "delete": "Elimina",
+            "breath": "Respira"
         },
         "flow" : "Flow",
-        "breath": "Breath",
-        "break" : "Break",
+        "breath": "Respiro",
+        "break" : "Pausa",
         "task" : "Task",
         "time-goal" : "Time goal",
         "time" : "Time",
-        "time-unit-s": "Minutes",
-        "time-unit-h": "Hours"
+        "time-unit-s": "Minuti",
+        "time-unit-h": "Ore"
     },
     "home":{
-        "ours_objective": "Our goal is for you to achieve your goals in the cleanest way possible."
+        "main1": "Questo non è altro che un sempliccissimo timer.",
+        "main2": "Sii tu a farne uno strumento di produttività.",
+        "card1":{
+            "title":"Concentrati sulla creazione dei task",
+            "body":"Non creare task generici, siediti e pensa bene agli obiettivi che vuoi raggiungere durante la sessione."
+        },
+        "card2":{
+            "title":"Imposta un limite di tempo",
+            "body":"Definisci una durata precisa per la tua sessione. Il time goal ti aiuta a mantenere il focus e a completare i task con maggiore efficienza."
+        },
+        "card3":{
+            "title":"Scegli la modalità che fa per te",
+            "body":"Potrai scegliere tra la tecnica del pomodoro e quella flowmodoro. Se non conosci la differenza clicca quì."
+        },
+        "scroll1":"Scorri solo se sei davvero pronto ad iniziare.",
+        "scroll2":"Inizia la sessione",
+        "start-session":"Nuova sessione"
     } ,
     "flow-session":{
         "init-session": {
             "create-tasks":{
-                "title":"Before starting set your task",
-                "body":"To stay focused, break down larger tasks into smaller , manageable steps. This makes tracking progress easier and keeps you motivated",
-                "input": "Write your tasks here"
+                "title":"Prima di iniziare, scrivi i task della sessione",
+                "body":"Dividi i compiti più grandi in piccoli step, così rimani concentrato e porti a termine il lavoro più facilmente.",
+                "input": "Scrivi quì"
             },
             "set-time-goal":{
-                "title":"Set time goal",
+                "title":"Quanto tempo vuoi dedidicare alla sessione ?",
                 "body":"Set a time goal to stay on track. Having a clear endpoint helps you maintain focus and boosts your productivity."
             },
             "set-mode":{
@@ -41,19 +57,19 @@
         },
         "session":{
             "tooltip":{
-                "end": "End session",
-                "settings": "Settings",
+                "end": "Termina sessione",
+                "settings": "Impostazione",
                 "task": "Task",
-                "next": "Next",
-                "pause": "Pause"
+                "next": "Successivo",
+                "pause": "Pausa"
             },
             "settings":{
                 "auto-start": "Auto start",
-                "mode": "Mode"
+                "mode": "Modalità"
             }
         },
         "end-session":{
-            "body":"Are you sure you want to end the session ?"
+            "body":"Sei sicuro di voler terminare la sessione ?"
         }
     }
 }

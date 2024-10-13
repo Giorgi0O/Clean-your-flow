@@ -21,7 +21,23 @@
         "time-unit-h": "Ore"
     },
     "home":{
-        "ours_objective": "Il nostro obiettivo è aiutarti a raggiungere i tuoi traguardi nel modo più semplice ed efficiente possibile"
+        "main1": "Questo non è altro che un sempliccissimo timer.",
+        "main2": "Sii tu a farne uno strumento di produttività.",
+        "card1":{
+            "title":"Concentrati sulla creazione dei task",
+            "body":"Non creare task generici, siediti e pensa bene agli obiettivi che vuoi raggiungere durante la sessione."
+        },
+        "card2":{
+            "title":"Imposta un limite di tempo",
+            "body":"Definisci una durata precisa per la tua sessione. Il time goal ti aiuta a mantenere il focus e a completare i task con maggiore efficienza."
+        },
+        "card3":{
+            "title":"Scegli la modalità che fa per te",
+            "body":"Potrai scegliere tra la tecnica del pomodoro e quella flowmodoro. Se non conosci la differenza clicca quì."
+        },
+        "scroll1":"Scorri solo se sei davvero pronto ad iniziare.",
+        "scroll2":"Inizia la sessione",
+        "start-session":"Nuova sessione"
     } ,
     "flow-session":{
         "init-session": {
