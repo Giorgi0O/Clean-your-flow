@@ -4,9 +4,12 @@ import TimeGoalSetting from './TimeGoalSetting';
 import ModeSetting from './ModeSetting';
 import BgLeftGradient from '../AnimatedBackground/BgLeftGradient';
 import Button from '../Buttons/Button';
-import ContentBox from '../AppText/ContentBox';
 import CircleButton from '../Buttons/CircleButton';
 import { useTranslation } from 'react-i18next';
+
+//svg
+import {ReactComponent as IconCorrect } from '../../assets/Icons/advice-correct.svg'
+import {ReactComponent as IconWrong } from '../../assets/Icons/advice-wrong.svg'
 
 function InitSession({
     setInitSession, 
@@ -30,12 +33,18 @@ function InitSession({
       }
     );
 
-    useEffect( () => {
-        localStorage.setItem('pageNumber', JSON.stringify(pageNumber));
-    }, [pageNumber] ) 
+    const [adviceNumber, setAdviceNumber] = useState(0);
 
-    const bodyClass = 'font-corpo text-sm lg:text-lg mt-2 lg:mt-6 text-ciano-dark'
-    const titleClass = 'font-titolo font-bold text-lg md:text-3xl text-ciano-dark'
+    useEffect(() => {
+        const isMobile = window.matchMedia("(max-width:400px)").matches;
+        const interval = setInterval(() => {
+            if( !isMobile ){
+                setAdviceNumber((prevNumber) => (prevNumber + 1) % 3);
+            }
+        }, 5000);
+    
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <>
@@ -44,28 +53,37 @@ function InitSession({
                 z-[100] flex flex-col w-full h-3/4  justify-evenly items-center overflow-hidden
                 lg:flex-row 
             ">
-                <div className={`
+                <div className={` 
                     w-full h-auto center p-8
-                    lg:w-1/2 lg:h-full
+                    lg:w-auto lg:h-full
                 `}>
                     {
                         pageNumber === 0 &&
-                        <div className='center text-center lg:text-left'>
+                        <div className='card-mirror center flex-col items-start w-[390px] h-auto lg:h-[400px] rounded-md p-8 lg:p-6'>
+                            <p className='font-titolo text-2xl text-ciano-dark font-bold  text-center lg:text-start'>
+                                {t('flow-session.init-session.create-tasks.title')}
+                            </p>
+                            <p className='hidden mt-2 lg:block lg:font-bold md:text-start md:font-corpo md:text-ciano'>
+                                    {t('flow-session.init-session.create-tasks.body1')}
+                            </p>
+                            <div className='hidden lg:mt-4 lg:flex lg:justify-center lg:items-start lg:flex-col lg:w-full lg:h-1/3'>
+                                <div className='flex w-fullitems-center'>
+                                    <IconWrong/>
+                                    <p className='flex ml-2 font-corpo font-bold text-rosa'>
+                                        {t(`flow-session.init-session.create-tasks.advice.wrong${adviceNumber}`)}
+                                    </p>
+                                </div>
 
-                            <ContentBox
-                                title={
-                                    <>
-                                        {t('flow-session.init-session.create-tasks.title')}
-                                    </>
-                                } 
-                                body={
-                                    <>
-                                        {t('flow-session.init-session.create-tasks.body')}                                    
-                                    </>
-                                }
-                                titleClass={titleClass}
-                                bodyClass={bodyClass}
-                            />
+                                <div className='flex w-full lg:mt-2 lg:items-center '>
+                                    <IconCorrect/>
+                                    <p className='w-5/6 text-md flex ml-2 font-corpo text-verde font-bold '>
+                                        {t(`flow-session.init-session.create-tasks.advice.correct${adviceNumber}`)}
+                                    </p>
+                                </div>
+                            </div>
+                            <p className='hidden lg:inline lg: mt-4 lg:text-ciano lg:text-sm'>
+                                {t('flow-session.init-session.create-tasks.footer')}
+                            </p>
                         </div>
                     }
                     {
@@ -78,20 +96,7 @@ function InitSession({
                     {
                         pageNumber === 2 &&
                         <div className='center text-center lg:text-left'>
-                            <ContentBox
-                                title={
-                                    <>
-                                        {t('flow-session.init-session.set-mode.title')}
-                                    </>
-                                } 
-                                body={
-                                    <>
-                                        {t('flow-session.init-session.set-mode.body')}
-                                    </>
-                                }
-                                titleClass={titleClass}
-                                bodyClass={bodyClass}
-                            />
+
                         </div>
                     }
                 </div>
@@ -110,20 +115,7 @@ function InitSession({
                     {
                         pageNumber === 1 &&
                         <div className='center text-center lg:text-right'>
-                            <ContentBox
-                                title={
-                                    <>
-                                        {t('flow-session.init-session.set-time-goal.title')}
-                                    </>
-                                } 
-                                body={
-                                    <>
-                                        {t('flow-session.init-session.set-time-goal.body')}
-                                    </>
-                                }
-                                titleClass={titleClass}
-                                bodyClass={bodyClass}
-                            />
+
                         </div>
                     }
                     {
@@ -147,7 +139,7 @@ function InitSession({
                                 setReturnHome(true);
                             }} 
                         />
-                        <Button text={t('common.button.next')} iconName={'next'} color={ 'ciano' } 
+                        <Button text={t('flow-session.init-session.create-tasks.button')} iconName={'next'} color={ 'ciano' } 
                             disab={taskList.length === 0}
                             operation={()=> 
                                 setPageNumber(prev => prev+1) 

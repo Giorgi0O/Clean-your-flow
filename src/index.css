@@ -25,7 +25,7 @@
   }
 
   .card-mirror{
-    @apply bg-gradient-to-tl from-white/0 to-white/70
+    @apply bg-gradient-to-tl from-white/0 to-white/70 card-wp
   }
 
   .card-mirror-ciano{

@@ -33,10 +33,10 @@ function CreateAction({
 
     return(
         <div className='card center w-full h-full flex items-center'>
-            <div className='flex justify-evenly m-4 w-5/6'>
+            <div className='flex justify-evenly items-center m-4 w-5/6'>
                 <input
                     id="creator"
-                    className=' w-5/6 rounded-full border-2 p-2 border-ciano text-ciano-dark font-corpo'
+                    className=' w-5/6 h-[45px] rounded-full border-2 px-3 border-ciano text-ciano-dark font-corpo'
                     value={tempValue}
                     onChange={handleTempSave}
                     onKeyDown={handleKeyPress} 

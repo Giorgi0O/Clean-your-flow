@@ -56,9 +56,19 @@
     "flow-session":{
         "init-session": {
             "create-tasks":{
-                "title":"Prima di iniziare, scrivi i task della sessione",
-                "body":"Dividi i compiti più grandi in piccoli step, così rimani concentrato e porti a termine il lavoro più facilmente.",
-                "input": "Scrivi quì"
+                "title":"Elenca i task della sessione",
+                "body1":"Esempi pratici:",
+                "advice":{
+                    "wrong0":"Studiare capitolo 3.",
+                    "correct0": "Leggere paragrafo 3-4 del capitolo 3.",
+                    "wrong1":"Scrivere relazione",
+                    "correct1": "Scrivere la sezione 1 della relazione.",
+                    "wrong2":"Completare mockup",
+                    "correct2": "Creare il mockup della homepage includendo header, footer, e sezione 'Chi siamo' utilizzando Figma."
+                },
+                "footer":"Nota: Una volta iniziata la sessione, i task non saranno più modificabili.",
+                "input": "Scrivi quì",
+                "button": "Conferma task"
             },
             "set-time-goal":{
                 "title":"Quanto tempo vuoi dedidicare alla sessione ?",
