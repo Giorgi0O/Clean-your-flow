@@ -56,7 +56,7 @@
     "flow-session":{
         "init-session": {
             "create-tasks":{
-                "title":"Elenca i task della sessione",
+                "title":"Elenca i <1>task</1> della sessione",
                 "body1":"Esempi pratici:",
                 "advice":{
                     "wrong0":"Studiare capitolo 3.",
@@ -71,12 +71,12 @@
                 "button": "Conferma task"
             },
             "set-time-goal":{
-                "title":"Quanto tempo vuoi dedidicare alla sessione ?",
-                "body":"Set a time goal to stay on track. Having a clear endpoint helps you maintain focus and boosts your productivity."
+                "title":"Quanto <1>tempo</1> vuoi dedidicare <2></2> alla sessione ?",
+                "button": "Conferma"
             },
             "set-mode":{
-                "title":"Pomodoro or Flowmodoro ?",
-                "body":"Pomodoro uses short work intervals with breaks, while Flowmodoro adapts to your natural endpoint flow, allowing longer work periods."
+                "title":"Pomodoro o Flowmodoro ?",
+                "body":"Se non conosci la differenza, <1>clicca quì</1>"
             }
         },
         "session":{

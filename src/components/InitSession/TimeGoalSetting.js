@@ -37,23 +37,21 @@ function TimeGoalSetting({
     }
 
     return(
-        <div className='card w-full center bg-base-100 p-8 time-goal-card'>
-            <div className='card-body w-full text-center'>
-                <div className="PB-range-slider-div">
-                    <p className="text-verde font-number text-2xl font-bold">
-                        {formatTime(value)}
-                    </p>
-                    <input
-                        type="range"
-                        min="0"
-                        max="300"
-                        value={value}
-                        onChange={HandleChange}
-                        onBlur={HandleSave}
-                        className="range range-lg mt-2 lg:range-md range-success"
-                        id="myRange"
-                    />
-                </div>
+        <div className='w-full center p-8 time-goal-card'>
+            <div className="PB-range-slider-div w-5/6 text-center">
+                <p className="text-verde font-number text-2xl font-bold">
+                    {formatTime(value)}
+                </p>
+                <input
+                    type="range"
+                    min="0"
+                    max="300"
+                    value={value}
+                    onChange={HandleChange}
+                    onBlur={HandleSave}
+                    className="range range-lg mt-2 lg:range-md range-success"
+                    id="myRange"
+                />
             </div>
       </div>
     );

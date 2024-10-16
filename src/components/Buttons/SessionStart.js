@@ -63,7 +63,7 @@ function Button( ) {
                 dragMomentum={false}
                 onDragEnd={handleDragEnd}
                 animate={controls}
-                className="center border-2 border-rosa-dark w-[50px] h-[50px] rounded-full gradiente-bg"
+                className="center border-2 border-verde-dark w-[50px] h-[50px] rounded-full gradiente-bg"
                 style={{ x }}
             >
                 <LogoSvg></LogoSvg>

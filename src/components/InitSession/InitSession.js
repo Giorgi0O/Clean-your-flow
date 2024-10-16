@@ -5,11 +5,12 @@ import ModeSetting from './ModeSetting';
 import BgLeftGradient from '../AnimatedBackground/BgLeftGradient';
 import Button from '../Buttons/Button';
 import CircleButton from '../Buttons/CircleButton';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 //svg
 import {ReactComponent as IconCorrect } from '../../assets/Icons/advice-correct.svg'
 import {ReactComponent as IconWrong } from '../../assets/Icons/advice-wrong.svg'
+import ModeExplain from '../Modal/ModExplain';
 
 function InitSession({
     setInitSession, 
@@ -49,11 +50,26 @@ function InitSession({
     return (
         <>
             <BgLeftGradient/>
+
+            <dialog id="my_modal_3" className="modal">
+                <div className="modal-box w-screen">
+                    <form method="dialog">
+                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
+
+                    <ModeExplain/> 
+                </div>
+
+                <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
+
             <div className="
-                z-[100] flex flex-col w-full h-3/4  justify-evenly items-center overflow-hidden
+                z-[100] flex flex-col w-full h-3/4 justify-evenly items-center overflow-hidden
                 lg:flex-row 
             ">
-                <div className={` 
+                <div className={`${pageNumber === 0 ? '' : 'hidden'}
                     w-full h-auto center p-8
                     lg:w-auto lg:h-full
                 `}>
@@ -61,7 +77,9 @@ function InitSession({
                         pageNumber === 0 &&
                         <div className='card-mirror center flex-col items-start w-[390px] h-auto lg:h-[400px] rounded-md p-8 lg:p-6'>
                             <p className='font-titolo text-2xl text-ciano-dark font-bold  text-center lg:text-start'>
-                                {t('flow-session.init-session.create-tasks.title')}
+                                <Trans i18nKey={'flow-session.init-session.create-tasks.title'}>
+                                    Elenca i <span className='underline-wave decoration-ciano'>task</span> della sessione
+                                </Trans>
                             </p>
                             <p className='hidden mt-2 lg:block lg:font-bold md:text-start md:font-corpo md:text-ciano'>
                                     {t('flow-session.init-session.create-tasks.body1')}
@@ -86,19 +104,6 @@ function InitSession({
                             </p>
                         </div>
                     }
-                    {
-                        pageNumber === 1 &&
-                            <TimeGoalSetting 
-                                timeGoal={timeGoal}
-                                setTimeGoal={setTimeGoal}
-                            />
-                    }
-                    {
-                        pageNumber === 2 &&
-                        <div className='center text-center lg:text-left'>
-
-                        </div>
-                    }
                 </div>
                 <div className='
                     center w-full h-3/4 center p-8
@@ -114,16 +119,37 @@ function InitSession({
                     }
                     {
                         pageNumber === 1 &&
-                        <div className='center text-center lg:text-right'>
-
+                        <div className='w-full h-full card-mirror rounded-lg center flex-col'>
+                            <h1 className='font-titolo font-bold text-2xl m-8 text-center text-verde-dark'> 
+                                <Trans i18nKey={'flow-session.init-session.set-time-goal.title'}>
+                                    Quanto <span className='underline-wave decoration-verde'>tempo</span> vuoi dedidicare <br/> alla sessione ?
+                                </Trans>
+                            </h1>
+                            <TimeGoalSetting 
+                                timeGoal={timeGoal}
+                                setTimeGoal={setTimeGoal}
+                            />
                         </div>
                     }
                     {
                          pageNumber === 2 &&
+                         <div className={`w-full h-full ${selectedMode === 1 ? 'card-mirror-ciano': 'card-mirror-verde'} rounded-lg center flex-col`}>
+                            <h1 className={`font-titolo font-bold text-2xl m-8 ${selectedMode === 1 ? 'text-ciano-dark': 'text-verde-dark'} text-center text-ciano-dark`}> 
+                                <Trans i18nKey={'flow-session.init-session.set-mode.title'}>
+                                    Quanto <span className='underline-wave decoration-verde'>tempo</span> vuoi dedidicare <br/> alla sessione ?
+                                </Trans>
+                            </h1>
+                            <p className={`font-corpo text-md ${selectedMode === 1 ? 'text-ciano': 'text-verde'}`}>
+                                <Trans i18nKey={'flow-session.init-session.set-mode.body'}>
+                                    Se non conosci la differenza <button onClick={()=>document.getElementById('my_modal_3').showModal()} className={`font-bold ${selectedMode === 1 ? 'text-ciano': 'text-verde'} hover:underline`}>clicca quì</button>
+                                </Trans>
+                            </p>
                             <ModeSetting
                                 selectedMode={selectedMode}
                                 setSelectedMode={setSelectedMode}
                             />
+                        </div>
+
                     }
                 </div>
             </div>
@@ -155,7 +181,7 @@ function InitSession({
                             color={'secondary'} 
                             operation={()=> setPageNumber(prev => prev-1)}
                         />
-                        <Button text={t('common.button.next')} iconName={'next'} color={'ciano'} operation={()=> setPageNumber(prev => prev+1)}></Button>
+                        <Button text={t('flow-session.init-session.set-time-goal.button')} iconName={'next'} color={'ciano'} operation={()=> setPageNumber(prev => prev+1)}></Button>
                     </>
                 }
                 {
