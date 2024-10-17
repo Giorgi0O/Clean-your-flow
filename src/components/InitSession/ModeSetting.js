@@ -39,6 +39,7 @@ function ModeSetting({
                         checked={selectedMode === 2}
                         onChange={() => handleRadioChange(2)} 
                     />
+                    
                     <IconFlowmodoro className="w-[32px] h-[32px] md:w-[54px] md:h-[54px]"></IconFlowmodoro>
                 </label>
                 <span className={`font-corpo ${selectedMode === 2 ? 'text-verde-dark' : 'text-verde-light'}`} > Flowmodoro </span>

@@ -1,7 +1,11 @@
+
 import React from 'react';
 import StopButton from '../../Buttons/StopButton'
 import StartButton from '../../Buttons/StartButton'
-import clicksound from '../../../assets/sounds/start-click.wav'
+
+//file statici
+const clicksound = '/sounds/start-click.wav';
+
 
 function PomodoroControls({ 
     isActive,

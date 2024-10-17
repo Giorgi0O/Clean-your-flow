@@ -6,12 +6,14 @@ import CircleButton from "../Buttons/CircleButton";
 import StartButton from "../Buttons/StartButton";
 import PomodoroControls from './TimerControls/PomodoroControls';
 import FlowmodoroControls from "./TimerControls/FlowmodoroControls";
-import startFlowSound from '../../assets/sounds/start-flow.wav';
-import clicksound from '../../assets/sounds/start-click.wav';
 import Nosleep from 'nosleep.js';
 import { restart } from '../../utils/Common';
 import ReportFinal from '../Modal/ReportFinal';
 import { useTranslation } from "react-i18next";
+
+//file statici
+const clicksound = '/sounds/start-click.wav';
+const startFlowSound = '/sounds/start-flow.wav';
 
 function MainTimer({
     selectedMode,
@@ -28,6 +30,8 @@ function MainTimer({
     deleteTask,
     updateTask,
 }){
+
+
     const {t} = useTranslation();
     const [autoStart, setAutoStart] = useState( () => {
         const autoStart = localStorage.getItem('autoStart');

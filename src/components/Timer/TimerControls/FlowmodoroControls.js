@@ -1,9 +1,9 @@
-
 import React from 'react';
 import StopButton from '../../Buttons/StopButton'
 import StartButton from '../../Buttons/StartButton'
-import startFlowAudio from '../../../assets/sounds/start-click.wav'
 
+//file statici
+const startFlowAudio = '/sounds/start-click.wav'
 
 function FlowmodoroControls({ 
     isActive,
