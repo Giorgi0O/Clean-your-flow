@@ -1,12 +1,36 @@
 import React, {useState} from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 
-function TimeGoal({
+function ISTime({
     timeGoal,
     setTimeGoal
 }) {
 
+    return(
+        <div className='
+            center w-full h-3/4 center p-8
+            lg:w-1/2 lg:h-full
+        '>
+            <div className='w-full h-full card-mirror rounded-lg center flex-col'>
+                <h1 className='font-titolo font-bold text-2xl m-8 text-center text-verde-dark'> 
+                    <Trans i18nKey={'flow-session.init-session.set-time-goal.title'}>
+                        Quanto <span className='underline-wave decoration-verde'>tempo</span> vuoi dedidicare <br/> alla sessione ?
+                    </Trans>
+                </h1>
+                <InputRange 
+                    timeGoal={timeGoal}
+                    setTimeGoal={setTimeGoal}
+                />
+            </div>
+        </div>
+    );
+}
+
+function InputRange({
+    timeGoal,
+    setTimeGoal
+}){
     const {t} = useTranslation();
     const [value, setValue] = useState(timeGoal/60);
 
@@ -36,7 +60,7 @@ function TimeGoal({
         setTimeGoal(value*60);
     }
 
-    return(
+    return (
         <div className='w-full center p-8 time-goal-card'>
             <div className="PB-range-slider-div w-5/6 text-center">
                 <p className="text-verde font-number text-2xl font-bold">
@@ -53,8 +77,8 @@ function TimeGoal({
                     id="myRange"
                 />
             </div>
-      </div>
+        </div>
     );
 }
 
-export default TimeGoal
+export default ISTime

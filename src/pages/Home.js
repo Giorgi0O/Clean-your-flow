@@ -55,7 +55,7 @@ function Home() {
         <div id='second-section' className='mb-[100px] lg:mb-0 center flex-col lg:flex-row w-screen h-[130vh] lg:h-screen justify-between lg:p-16'>
           <Card iconNumber={1} titleId={'home.card1.title'} bodyId={'home.card1.body'} />
           <Card iconNumber={2} titleId={'home.card2.title'} bodyId={'home.card2.body'} />
-          <Card iconNumber={3} titleId={'home.card2.title'} bodyId={'home.card3.body'} />
+          <Card iconNumber={3} titleId={'home.card3.title'} bodyId={'home.card3.body'} />
         </div>
         
       </div>

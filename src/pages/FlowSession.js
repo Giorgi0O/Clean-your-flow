@@ -4,31 +4,20 @@ import CreateSession from '../components/FlowSession/CreateSession/Create';
 import EndModal from '../components/Common/MEnd';
 import PFSession from '../components/FlowSession/Session/PFSession';
 import AnimatedBg2 from '../components/Common/AnimatedBg2'
-
-//function
-import {getLocalStorageItem} from '../utils/localStorageManager'
+import {useLocalStorage} from '../utils/useLocalStorage'
 
 function FlowSession() {
 
-  /*STATE che rimangono*/
-  const [selectedMode, setSelectedMode] = useState( getLocalStorageItem('selectedMode', 1));
-  const [endSession, setEndSession] = useState( getLocalStorageItem('endSession',false));
-  const [isCreation, setIsCreation] = useState( getLocalStorageItem('isCreation',true));
-  const [taskList, setTaskList] = useState( getLocalStorageItem('taskList',[] ));
-  const [timeGoal, setTimeGoal] = useState( getLocalStorageItem('timeGoal',0));
+  const [selectedMode, setSelectedMode] = useLocalStorage('selectedMode', 1);
+  const [endSession, setEndSession] = useLocalStorage('endSession',false);
+  const [isCreation, setIsCreation] = useLocalStorage('isCreation',true);
+  const [taskList, setTaskList] = useLocalStorage('taskList',[]);
+  const [timeGoal, setTimeGoal] = useLocalStorage('timeGoal',0);
 
   const [bgLeft, setBgLeft] = useState( 0 );
   const [bgRigth, setBgRigth] = useState( 0 );
   const [endSessionRequest, setEndSessionRequest] = useState(false);
   const [returnHome, setReturnHome] = useState(false);
-
-  useEffect( () => {
-    localStorage.setItem('taskList', JSON.stringify(taskList));
-    localStorage.setItem('timeGoal', JSON.stringify(timeGoal));
-    localStorage.setItem('isCreation', JSON.stringify(isCreation));
-    localStorage.setItem('selectedMode', JSON.stringify(selectedMode));
-    localStorage.setItem('endSession', JSON.stringify(endSession));
-  }, [taskList,timeGoal,isCreation, selectedMode,endSession] ) 
 
   useEffect(() => { 
     if( !isCreation || !endSession ){

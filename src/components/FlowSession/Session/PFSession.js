@@ -33,7 +33,7 @@ function PFSession({
     updateTask,
 }){
 
-
+    //##riordinare in base all'utilizzo
     const {t} = useTranslation();
     const [autoStart, setAutoStart] = useState( () => {
         const autoStart = localStorage.getItem('autoStart');
@@ -77,6 +77,7 @@ function PFSession({
     const savedBgRigth = useRef(0);
     const savedBgLeft = useRef(0);
 
+    //## Capire come gestire tutta la logica forse conviene in un file separato.
     useEffect(() => {
         if(isActive){
             let isEnableNoSleep = false;
@@ -373,6 +374,8 @@ function PFSession({
         }
     }, [isActive]);
 
+
+    //## Trovare componenti comuni e creare un solo componente per ognuno di essi
     return (
         <div className={ 'z-[100] flex flex-col items-center justify-evenly w-5/6 h-[85%]' } >
             {

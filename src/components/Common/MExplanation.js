@@ -17,7 +17,7 @@ function MExplanation() {
 
             <TabControlsTitle tab1={'Pomodoro'} tab2={'Flowmodoro'} active={mode} setActive={setMode}></TabControlsTitle>
             {
-                mode === 'pomodoro' ?
+                mode === 'Pomodoro' ?
                 <div className='center flex-col p-8 '>
                     <div className='w-[150px] h-[150px] m-4 center rounded-full bg-ciano border-2 border-ciano-dark p-4'>
                         <PomodoroExplain></PomodoroExplain>
