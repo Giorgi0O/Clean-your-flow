@@ -1,38 +1,21 @@
-import '../App.scss';
-import Title from '../components/Title/Title';
+import Header from '../components/Common/Header';
 import {useEffect, useState} from 'react';
-import InitSession from '../components/InitSession/InitSession';
-import EndModal from '../components/Modal/EndModal';
-import MainTimer from '../components/Timer/MainTimer';
+import CreateSession from '../components/FlowSession/CreateSession/Create';
+import EndModal from '../components/Common/MEnd';
+import PFSession from '../components/FlowSession/Session/PFSession';
+import AnimatedBg2 from '../components/Common/AnimatedBg2'
+
+//function
+import {getLocalStorageItem} from '../utils/localStorageManager'
 
 function FlowSession() {
 
   /*STATE che rimangono*/
-  const [selectedMode, setSelectedMode] = useState(() => {
-      const mode = localStorage.getItem('selectedMode');
-      return mode ? JSON.parse(mode) : 1;
-    }
-  );
-  const [endSession, setEndSession] = useState( () => {
-      const endSession = localStorage.getItem('endSession');
-      return endSession ? JSON.parse(endSession) : false;
-    }
-  );
-  const[initSession, setInitSession] = useState(() => {
-    const initSession = localStorage.getItem('initSession');
-    return initSession ? JSON.parse(initSession) : true;
-    }
-  );
-  const [taskList, setTaskList] = useState(() => {
-      const savedTasks = localStorage.getItem('taskList');
-      return savedTasks ? JSON.parse(savedTasks) : [];
-    }
-  );
-  const [timeGoal, setTimeGoal] = useState(() => {
-      const timeGoal = localStorage.getItem('timeGoal');
-      return timeGoal ? JSON.parse(timeGoal) : 0;
-    }
-  );
+  const [selectedMode, setSelectedMode] = useState( getLocalStorageItem('selectedMode', 1));
+  const [endSession, setEndSession] = useState( getLocalStorageItem('endSession',false));
+  const [isCreation, setIsCreation] = useState( getLocalStorageItem('isCreation',true));
+  const [taskList, setTaskList] = useState( getLocalStorageItem('taskList',[] ));
+  const [timeGoal, setTimeGoal] = useState( getLocalStorageItem('timeGoal',0));
 
   const [bgLeft, setBgLeft] = useState( 0 );
   const [bgRigth, setBgRigth] = useState( 0 );
@@ -42,23 +25,22 @@ function FlowSession() {
   useEffect( () => {
     localStorage.setItem('taskList', JSON.stringify(taskList));
     localStorage.setItem('timeGoal', JSON.stringify(timeGoal));
-    localStorage.setItem('initSession', JSON.stringify(initSession));
+    localStorage.setItem('isCreation', JSON.stringify(isCreation));
     localStorage.setItem('selectedMode', JSON.stringify(selectedMode));
     localStorage.setItem('endSession', JSON.stringify(endSession));
-  }, [taskList,timeGoal,initSession, selectedMode,endSession] ) 
+  }, [taskList,timeGoal,isCreation, selectedMode,endSession] ) 
 
   useEffect(() => { 
-    if( !initSession || !endSession ){
+    if( !isCreation || !endSession ){
       setBgLeft(0); setBgRigth(100);
     }
     if(endSession){
       setBgLeft(50); setBgRigth(50);
     }
-  },[ initSession, endSession, setBgLeft, setBgRigth])
-
+  },[ isCreation, endSession, setBgLeft, setBgRigth])
 
   /* CRUD TASK LIST */
-  const createTask = (title) => {
+  const createTask = (title) => { 
     if (!title) return;
 
     setTaskList(prevList => [
@@ -83,68 +65,27 @@ function FlowSession() {
 
 
   return (
-    <div className="app bg-moving">
+    <div className="flex flex-col w-screen h-screen items-center overflow-hidden">
       {
-        !initSession &&
-        <>
-          <div className='bg-moving-blur'></div>
-          <div 
-            className={`bg-moving-all bg-moving-left  bg-rosa-light `}
-            style={{width: `${bgLeft}%` }}
-          ></div>
-          <div 
-            className={`bg-moving-all bg-moving-rigth ${selectedMode === 1 ? 'bg-ciano-light' : 'bg-verde-light'}`}
-            style={{width: `${bgRigth}%` }}
-          ></div>
-        </>
+        !isCreation && <AnimatedBg2 bgLeft={bgLeft} bgRigth={bgRigth} selectedMode={selectedMode} />
       }
 
-      <Title />
+      <Header />
       {
-        initSession ?
-        (
-          <InitSession 
-            taskList={taskList}
-            timeGoal={timeGoal}
-            setTimeGoal={setTimeGoal}
-            setInitSession={setInitSession}
-            selectedMode={selectedMode}
-            setSelectedMode={setSelectedMode}
-            createTask={createTask}
-            deleteTask={deleteTask}
-            updateTask={updateTask}
-            setEndSessionRequest={setEndSessionRequest}
-            setReturnHome={setReturnHome}
+        isCreation ?
+          <CreateSession
+            {...{ taskList, timeGoal, setTimeGoal, setIsCreation, selectedMode, setSelectedMode, createTask, deleteTask, updateTask, setEndSessionRequest, setReturnHome }}
           />
-        )
         :
-        (
-          <MainTimer
-            selectedMode={selectedMode}
-            setSelectedMode={setSelectedMode}
-            taskList={taskList}
-            timeGoal={timeGoal}
-            bgRigth={bgRigth}
-            bgLeft={bgLeft}
-            setBgRigth={setBgRigth}
-            setBgLeft={setBgLeft}
-            endSession={endSession}
-            setEndSessionRequest={setEndSessionRequest}
-            createTask={createTask}
-            deleteTask={deleteTask}
-            updateTask={updateTask}
+          <PFSession
+            {...{selectedMode, setSelectedMode, taskList, timeGoal, bgRigth, bgLeft, setBgRigth, setBgLeft, endSession, setEndSessionRequest, createTask, deleteTask, updateTask }}
           />
-        )
       }
       {
         endSessionRequest &&
-      
-        <EndModal 
-          endSessionRequest={endSessionRequest} 
-          setEndSessionRequest={setEndSessionRequest} 
-          setEndSession={setEndSession} 
-          returnHome={returnHome}
-        />
+          <EndModal 
+            { ...{endSessionRequest,setEndSessionRequest,setEndSession,returnHome}}
+          />
       }
     </div>  );
 }

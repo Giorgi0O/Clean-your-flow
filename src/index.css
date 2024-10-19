@@ -47,5 +47,9 @@
   .underline-wave{
     @apply underline-offset-8 underline decoration-wavy
   }
+
+  .bg-moving{
+    @apply h-[40%] absolute z-[0] transition-all ease-in-out duration-1000 opacity-100
+  }
 } 
 
