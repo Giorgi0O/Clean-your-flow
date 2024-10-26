@@ -3,17 +3,11 @@ import TaskList from "../../Common/TaskList";
 import DividerO from "../../Common/DividerO";
 import { useTranslation } from "react-i18next";
 
-
-
 function REndSession ({
     taskList,
+    setTaskList,
     timeGoal,
-    createTask,
-    deleteTask,
-    updateTask,
-    flowTime,
     flowTotalTime,
-    endSession
 }) {
 
     const {t} = useTranslation();
@@ -46,12 +40,7 @@ function REndSession ({
                 <div className='card-body w-full md:w-3/4'>
                     {
                         taskList.length > 0 ? 
-                            <TaskList
-                                taskList={taskList}
-                                deleteTask={deleteTask}
-                                updateTask={updateTask}
-                                isEditable={true }
-                            />
+                            <TaskList taskList={taskList} setTaskList={setTaskList} isEditable={false} />
                         :
                             <div className="task-empty"> <p className="sub-font"> Action list is empty </p> </div>
                     }

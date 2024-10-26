@@ -32,7 +32,7 @@ function TabControls({actionType, setActionType, isTimeGoal }){
                         onChange={() => handleRadioChange('time-goal')} 
                     />
                     <span className={`hidden md:inline md:font-corpo md:text-lg md:font-semibold ${actionType === 'time-goal' ? 'md:text-ciano-dark' : 'md:text-ciano-light'} `}> {t('common.time-goal')} </span>
-                    <span className={`md:hidden font-corpo text-lg font-semibold ${actionType === 'time-goal' ? 'text-ciano-dark' : 'text-ciano-light'} `}> ${t('common.time')} </span>
+                    <span className={`md:hidden font-corpo text-lg font-semibold ${actionType === 'time-goal' ? 'text-ciano-dark' : 'text-ciano-light'} `}> {t('common.time')} </span>
                 </label>
             }
         </div>

@@ -1,59 +1,52 @@
 import React from 'react';
 import BStop from '../../Common/BStop'
 import BStart from '../../Common/BStart'
+import { playSound } from '../../../utils/common';
 
-//file statici
-const startFlowAudio = '/sounds/start-click.wav'
-
-function FControls({ 
-    isActive,
-    flow,
-    flowmodoroStart,
-    flowmodoroBreath,
-    flowmodoroPause,
-
-  }) 
-{
-
-  const buttonSound = new Audio(startFlowAudio);
-
+function FControls({
+  isActive,
+  flow,
+  flowmodoroStart,
+  flowmodoroBreath,
+  flowmodoroPause,
+}) {
   const handleStart = () => {
-    buttonSound.play();
+    playSound('click');
     flowmodoroStart();
   }
 
   const handleBreath = () => {
-    buttonSound.play();
+    playSound('start-flow');
     flowmodoroBreath();
   }
 
   const handlePause = () => {
-    buttonSound.play();
+    playSound('click');
     flowmodoroPause();
   }
 
   return (
     <div className='w-5/6 text-center'>
-        {
-          !isActive ?
-            <BStart operation={handleStart} type={3} ></BStart>
+      {
+        !isActive ?
+          <BStart operation={handleStart} type={3} ></BStart>
           :
           (
             (
-              flow ?            
-              <>             
-                <BStop operation={handleBreath} type={2} ></BStop>
-              </>
-              :
-              <>
-                <BStop operation={handlePause} type={1} ></BStop>
-              </>
+              flow ?
+                <>
+                  <BStop operation={handleBreath} type={2} ></BStop>
+                </>
+                :
+                <>
+                  <BStop operation={handlePause} type={1} ></BStop>
+                </>
             )
           )
-        }
+      }
     </div>
   );
-    
+
 }
 
 export default FControls

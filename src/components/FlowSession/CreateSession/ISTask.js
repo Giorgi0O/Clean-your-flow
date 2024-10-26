@@ -7,11 +7,11 @@ import { Trans } from "react-i18next";
 //icon
 import {ReactComponent as IconCorrect } from '../../../assets/Icons/advice-correct.svg';
 import {ReactComponent as IconWrong } from '../../../assets/Icons/advice-wrong.svg';
+import useTaskList from "../../../hooks/useTaskList";
 
 function ISTask({
     taskList,
-    createTask,
-    deleteTask,
+    setTaskList
 }){
 
     return(
@@ -26,11 +26,7 @@ function ISTask({
                 center w-full h-3/4 center p-8
                 lg:w-1/2 lg:h-full
             '>
-                <CreateTask
-                    taskList={taskList}
-                    createTask={createTask}
-                    deleteTask={deleteTask}
-                />
+                <CreateTask taskList={taskList} setTaskList={setTaskList} />
             </div>
         </>
     );
@@ -86,12 +82,12 @@ function CardAdvice(){
 
 function CreateTask({
     taskList,
-    createTask,
-    deleteTask,
+    setTaskList
 })
 {
     const {t} = useTranslation();
     const [tempValue , setTempValue] = useState('');
+    const {createT} = useTaskList(setTaskList);
 
     const handleTempSave = (event) =>{
         const value = event.target.value;
@@ -102,7 +98,7 @@ function CreateTask({
 
     const handleSave = () => {
         if (tempValue) { 
-            createTask(tempValue);
+            createT(tempValue);
             setTempValue('');
         }
     }
@@ -137,7 +133,7 @@ function CreateTask({
                     (
                         <Tasks
                             taskList={taskList}
-                            deleteTask={deleteTask}
+                            setTaskList={setTaskList}
                             isEditable={false}
                         />
                     )

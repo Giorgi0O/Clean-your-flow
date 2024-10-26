@@ -1,13 +1,15 @@
 import React from 'react';
 import Task from './Task';
+import useTaskList from '../../hooks/useTaskList';
 
 
 function TaskList( { 
     taskList,
-    deleteTask,
-    updateTask,
+    setTaskList,
     isEditable
 }) {
+
+    const {deleteT, updateT} = useTaskList(setTaskList);
 
     return (
         <>
@@ -21,8 +23,8 @@ function TaskList( {
                                     action={task.action}       
                                     completed={task.completed}
                                     editCompleted={isEditable}
-                                    deleteTask={deleteTask}
-                                    updateTask={updateTask}
+                                    deleteTask={deleteT}
+                                    updateTask={updateT}
                                 /> 
                             </div>
                             <div className='w-full h-[1px] bg-ciano-opacity my-2'></div>

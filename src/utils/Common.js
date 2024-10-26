@@ -1,30 +1,28 @@
 
-export function formatTime(milliseconds)
-{
+export function formatTime(milliseconds) {
     const minutes = Math.floor(milliseconds / 60);
     const seconds = milliseconds % 60;
-    
+
     // Aggiungi uno zero iniziale se i secondi sono meno di 10
     const formattedMinutes = minutes.toString().padStart(2, '0');
     const formattedSeconds = seconds.toString().padStart(2, '0');
-    
+
     return `${formattedMinutes}:${formattedSeconds}`;
 };
 
-export function restart(){
+export function restart() {
     localStorage.clear();
     window.location.reload();
 }
 
-export function hexToFilter(hex)
-{
+export function hexToFilter(hex) {
     hex = hex.replace('#', '');
-    
+
     // Converti in RGB
     const r = parseInt(hex.substring(0, 2), 16);
     const g = parseInt(hex.substring(2, 4), 16);
     const b = parseInt(hex.substring(4, 6), 16);
-    
+
     // Calcola i valori per il filtro
     const brightness = (r * 299 + g * 587 + b * 114) / 1000 / 255;
     const saturate = Math.max(r, g, b) / 255 * 100;
@@ -34,3 +32,20 @@ export function hexToFilter(hex)
 };
 
 
+
+export function playSound(type) {
+    const sounds = {
+        'click': '/sounds/start-click.wav',
+        'start-flow': '/sounds/start-flow.wav',
+        // Aggiungi altri tipi di suoni qui
+    };
+
+    const soundPath = sounds[type];
+    
+    if (soundPath) {
+        const audio = new Audio(soundPath);
+        audio.play();
+    } else {
+        console.warn(`Sound type "${type}" not found.`);
+    }
+}

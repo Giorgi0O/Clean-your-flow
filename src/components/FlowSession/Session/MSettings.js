@@ -42,7 +42,7 @@ function MSettings( {
         </>
       }
       
-      <div className='card-body flex flex-col items-center'>
+      <div className={`card-body flex flex-col items-center ${selectedMode === 2 ? 'justify-center': ''}`}>
         {
           !notifyAccetpetd &&
           <div className='list-component mb-2 text-center'>
