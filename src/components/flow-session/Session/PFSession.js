@@ -4,7 +4,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import CountDown from "./CountDown";
 import MSettings from "./MSettings";
 import MGoals from "./MGoals";
-import REndSession from '../Report/REndSession';
+import REndSession from '../report/REndSession';
 import usePomodoroTimer from '../../../hooks/usePomodoroTimer';
 import useFlowmodoroTimer from '../../../hooks/useFlowmodoroTimer';
 import BManager from './BManager';
