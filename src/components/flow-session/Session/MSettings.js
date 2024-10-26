@@ -1,8 +1,8 @@
 import React from 'react';
 import TimerConfigurator from './TimerConfigurator'
-import Toggle from '../../Common/Toggle'
-import DividerO from '../../Common/DividerO';
-import Switch from '../../Common/Switch'
+import Toggle from '../../shared/Toggle'
+import DividerO from '../../shared/DividerO';
+import Switch from '../../shared/Switch'
 import { useTranslation } from 'react-i18next';
 
 

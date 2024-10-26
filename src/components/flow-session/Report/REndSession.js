@@ -1,6 +1,6 @@
 import React from "react";
-import TaskList from "../../Common/TaskList";
-import DividerO from "../../Common/DividerO";
+import TaskList from "../../shared/TaskList";
+import DividerO from "../../shared/DividerO";
 import { useTranslation } from "react-i18next";
 
 function REndSession ({

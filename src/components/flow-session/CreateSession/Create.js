@@ -2,9 +2,9 @@ import React from 'react';
 import ISTask from './ISTask';
 import ISTime from './ISTime';
 import ISMode from './ISMode';
-import AnimatedBg from '../../Common/AnimatedBg';
-import BPrimary from '../../Common/BPrimary';
-import BCircle from '../../Common/BCircle';
+import AnimatedBg from '../../shared/AnimatedBg';
+import BPrimary from '../../shared/BPrimary';
+import BCircle from '../../shared/BCircle';
 import { useTranslation } from 'react-i18next';
 import { useLocalStorage } from '../../../hooks/useLocalStorage'
 

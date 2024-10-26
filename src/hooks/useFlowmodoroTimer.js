@@ -1,7 +1,7 @@
 import { useCallback, useState, useRef } from "react";
 import useNotifications from "./useNotifications";
 import useBackgroundAnimation from "./useBackgroundAnimation";
-import { playSound } from "../utils/common";
+import { playSound } from "../utils/utils";
 
 
 export default function useFlowmodoroTimer({

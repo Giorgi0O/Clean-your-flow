@@ -1,7 +1,7 @@
 import React from "react";
-import { restart } from "../../../utils/common";
-import BCircle from "../../Common/BCircle";
-import BStart from "../../Common/BStart";
+import { restart } from "../../../utils/utils";
+import BCircle from "../../shared/BCircle";
+import BStart from "../../shared/BStart";
 import PControls from './PControls';
 import FControls from "./FControls";
 import { useTranslation } from "react-i18next";

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import DividerO from '../../Common/DividerO';
-import TabControls from '../../Common/TabControls';
-import TaskList from '../../Common/TaskList';
+import DividerO from '../../shared/DividerO';
+import TabControls from '../../shared/TabControls';
+import TaskList from '../../shared/TaskList';
 
 function MGoals({
     taskList,

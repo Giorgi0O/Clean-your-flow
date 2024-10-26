@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import CircleButton from '../../Common/BCircle'
-import Tasks from "../../Common/TaskList";
+import CircleButton from '../../shared/BCircle'
+import Tasks from "../../shared/TaskList";
 import { useTranslation } from "react-i18next";
 import { Trans } from "react-i18next";
 

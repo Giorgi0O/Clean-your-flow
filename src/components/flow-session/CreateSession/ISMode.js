@@ -1,7 +1,7 @@
 import React from "react";
 import { Trans } from "react-i18next";
-import MExplanation from '../../Common/MExplanation';
-import Modal from '../../Common/Modal'
+import MExplanation from '../../shared/MExplanation';
+import Modal from '../../shared/Modal'
 
 //Icon
 import {ReactComponent as IconPomodoro } from '../../../assets/Icons/pomodoro.svg'

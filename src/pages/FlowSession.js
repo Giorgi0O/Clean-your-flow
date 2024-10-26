@@ -1,9 +1,9 @@
-import Header from '../components/Common/Header';
+import Header from '../components/shared/Header';
 import { useEffect, useState } from 'react';
-import CreateSession from '../components/FlowSession/CreateSession/Create';
-import EndModal from '../components/Common/MEnd';
-import PFSession from '../components/FlowSession/Session/PFSession';
-import AnimatedBg2 from '../components/Common/AnimatedBg2'
+import CreateSession from '../components/flow-session/CreateSession/Create';
+import EndModal from '../components/shared/MEnd';
+import PFSession from '../components/flow-session/Session/PFSession';
+import AnimatedBg2 from '../components/shared/AnimatedBg2'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
 function FlowSession() {

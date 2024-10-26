@@ -8,7 +8,7 @@ import REndSession from '../Report/REndSession';
 import usePomodoroTimer from '../../../hooks/usePomodoroTimer';
 import useFlowmodoroTimer from '../../../hooks/useFlowmodoroTimer';
 import BManager from './BManager';
-import { playSound } from '../../../utils/common';
+import { playSound } from '../../../utils/utils';
 
 function PFSession({
     taskList,

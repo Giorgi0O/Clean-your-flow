@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { formatTime } from '../../../utils/common';
+import { formatTime } from '../../../utils/utils';
 
 
 function CountDown({

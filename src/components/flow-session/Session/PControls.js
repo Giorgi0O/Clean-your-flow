@@ -1,7 +1,7 @@
 import React from 'react';
-import BStop from '../../Common/BStop'
-import BStart from '../../Common/BStart'
-import { playSound } from '../../../utils/common';
+import BStop from '../../shared/BStop'
+import BStart from '../../shared/BStart'
+import { playSound } from '../../../utils/utils';
 
 function PControls({
     isActive,
