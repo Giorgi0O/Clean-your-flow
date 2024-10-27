@@ -13,7 +13,7 @@ function BStop({operation, type}) {
 
     return (
         <button className={`btn w-52 m-4 border-rosa-dark hover:bg-rosa-light hover:border-rosa-light btn-secondary bg-stop`} onClick={operation}>
-            <IconStop></IconStop>
+            <IconStop className='icon-start-stop stroke-rosa-dark'></IconStop>
 
             <span className='font-titolo text-2xl text-rosa-dark font-bold'>{type === 2 ? breath : stop }</span>
         </button>

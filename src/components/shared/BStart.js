@@ -17,13 +17,13 @@ function BStart({ operation, type, disabled = false }) {
             {
                 (type === 1 || type === 3) &&
                 (
-                    <IconStart className={`${type === 1 ? 'stroke-ciano-dark' : 'stroke-verde-dark' }`}></IconStart>
+                    <IconStart className={`icon-start-stop ${type === 1 ? 'stroke-ciano-dark' : 'stroke-verde-dark' }`}></IconStart>
                 )
             }
             {
                 type === 2 &&
                 (
-                    <IconRestart></IconRestart>
+                    <IconRestart className='icon-primary stroke-ciano-dark'></IconRestart>
                 )
             }
             <span className={`font-titolo text-2xl ${type === 1 || type === 2 ? 'text-ciano-dark' : 'text-verde-dark'}`}> { type === 1 || type === 3 ? start : ''} { type === 2 ? restart : ''} </span>

@@ -59,5 +59,9 @@
   .icon-primary{
     @apply w-[26px] h-[26px] stroke-[1.5px]
   }
+
+  .icon-start-stop{
+    @apply w-[32px] h-[32px] stroke-[1px]
+  }
 } 
 
