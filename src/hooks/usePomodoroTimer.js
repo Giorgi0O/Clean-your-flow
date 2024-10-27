@@ -60,11 +60,12 @@ export default function usePomodoroTimer({
 
             const now = Date.now();
             const remainingTime = Math.max(0, Math.round((endTimeRef.current - now) / 1000));
+            const pastTime = timeRemaining - remainingTime;
 
             movingBackground(remainingTime, true);
             setTimeRemaining(remainingTime);
 
-            if (flow) setFlowTotalTime(prev => prev + 1);
+            if (flow) setFlowTotalTime(prev => prev + pastTime);
 
             if (remainingTime <= 0) {
                 clearInterval(interval.current);
@@ -73,7 +74,7 @@ export default function usePomodoroTimer({
             }
 
         }, 1000);
-    }, [currentTime, flow, handleTimerCompletion, movingBackground, notify, setFlowTotalTime, setIsActive]);
+    }, [currentTime, timeRemaining, flow, handleTimerCompletion, movingBackground, notify, setFlowTotalTime, setIsActive]);
 
     const pause = useCallback(() => {
         setIsActive(false);
