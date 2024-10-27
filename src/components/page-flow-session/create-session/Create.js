@@ -7,6 +7,11 @@ import BPrimary from '../../shared/BPrimary';
 import BCircle from '../../shared/BCircle';
 import { useTranslation } from 'react-i18next';
 import { useLocalStorage } from '../../../hooks/useLocalStorage'
+import { ReactComponent as IconX } from '../../../assets/Icons/x.svg';
+import { ReactComponent as IconNext } from '../../../assets/Icons/next.svg';
+import { ReactComponent as IconPrev } from '../../../assets/Icons/prev.svg';
+import { ReactComponent as IconPlay } from '../../../assets/Icons/play-end.svg';
+
 
 function CreateSession({
     taskList,
@@ -46,22 +51,34 @@ function CreateSession({
                 {
                     pageNumber === 0 &&
                     <>
-                        <BCircle tooltip={t('common.end-session')} iconName={'x'} color={'secondary'} operation={() => { setEndSessionRequest(true); setReturnHome(true); }} />
-                        <BPrimary text={t('flow-session.init-session.create-tasks.button')} iconName={'next'} color={'ciano'} disab={taskList.length === 0} operation={() => setPageNumber(prev => prev + 1)} />
+                        <BCircle tooltip={t('common.end-session')} iconName={'x'} color={'secondary'} operation={() => { setEndSessionRequest(true); setReturnHome(true); }} >
+                            <IconX className="icon-standard stroke-rosa-dark"></IconX>
+                        </BCircle>
+                        <BPrimary text={t('flow-session.init-session.create-tasks.button')} iconName={'next'} color={'ciano'} disab={taskList.length === 0} operation={() => setPageNumber(prev => prev + 1)} >
+                            <IconNext className='icon-primary stroke-ciano-dark'></IconNext>
+                        </BPrimary>
                     </>
                 }
                 {
                     pageNumber === 1 &&
                     <>
-                        <BCircle tooltip={t('common.button.prev')} iconName={'prev'} color={'secondary'} operation={() => setPageNumber(prev => prev - 1)} />
-                        <BPrimary text={t('flow-session.init-session.set-time-goal.button')} iconName={'next'} color={'ciano'} operation={() => setPageNumber(prev => prev + 1)}></BPrimary>
+                        <BCircle tooltip={t('common.button.prev')} iconName={'prev'} color={'secondary'} operation={() => setPageNumber(prev => prev - 1)} >
+                            <IconPrev className="icon-standard stroke-rosa-dark"></IconPrev>
+                        </BCircle>
+                        <BPrimary text={t('flow-session.init-session.set-time-goal.button')} iconName={'next'} color={'ciano'} operation={() => setPageNumber(prev => prev + 1)}>
+                            <IconNext className='icon-primary stroke-ciano-dark'></IconNext>
+                        </BPrimary>
                     </>
                 }
                 {
                     pageNumber === 2 &&
                     <>
-                        <BCircle tooltip={t('common.button.prev')} iconName={'prev'} color={'secondary'} operation={() => setPageNumber(prev => prev - 1)} />
-                        <BPrimary text={t('common.button.start')} iconName={'play-end'} color={selectedMode === 1 ? 'primary' : 'success'} operation={() => { setPageNumber(0); setIsCreation(false); }} />
+                        <BCircle tooltip={t('common.button.prev')} iconName={'prev'} color={'secondary'} operation={() => setPageNumber(prev => prev - 1)} >
+                            <IconPrev className="icon-standard stroke-rosa-dark"></IconPrev>
+                        </BCircle>
+                        <BPrimary text={t('common.button.start')} color={selectedMode === 1 ? 'primary' : 'success'} operation={() => { setPageNumber(0); setIsCreation(false); }} >
+                            <IconPlay className='icon-primary stroke-ciano-dark' ></IconPlay>
+                        </BPrimary>
                     </>
                 }
             </div>
