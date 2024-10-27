@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { motion, useMotionValue, useTransform, useAnimation } from 'framer-motion';
 import { ReactComponent as LogoSvg } from '../../assets/Icons/logo-faggiolo.svg';
 
-
 function BSlider( ) {
 
     const { t } = useTranslation();
