@@ -5,6 +5,7 @@ import { ReactComponent as IconPomodoro } from '../../assets/Icons/pomodoro.svg'
 import { ReactComponent as IconFlowmodoro } from '../../assets/Icons/flowmodoro.svg'
 
 function Switch({
+    flowTime,
     selectedMode,
     setSelectedMode,
     setTimeRemaning,
@@ -14,10 +15,8 @@ function Switch({
 
     const handleRadioChange = (value) => {
         setSelectedMode(value);
-        setTimeRemaning(value === 1 ? 25 * 60 : 0)
-        if (value === 2) {
-            setAutoStart(false);
-        }
+        setTimeRemaning(value === 1 ? flowTime : 0)
+        setAutoStart(false);
         setTimerCount(0);
     };
 

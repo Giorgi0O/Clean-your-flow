@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import CircleButton from '../../shared/BCircle'
+import useTaskList from "../../../hooks/useTaskList";
+import BCircle from "../../shared/BCircle";
 import Tasks from "../../shared/TaskList";
 import { useTranslation } from "react-i18next";
 import { Trans } from "react-i18next";
-
-//icon
 import {ReactComponent as IconCorrect } from '../../../assets/Icons/advice-correct.svg';
 import {ReactComponent as IconWrong } from '../../../assets/Icons/advice-wrong.svg';
-import useTaskList from "../../../hooks/useTaskList";
+import {ReactComponent as IconPlus } from '../../../assets/Icons/plus.svg';
+
 
 function ISTask({
     taskList,
@@ -120,12 +120,13 @@ function CreateTask({
                     onKeyDown={handleKeyPress} 
                     placeholder={t('flow-session.init-session.create-tasks.input')}
                 />
-                <CircleButton
-                    iconName={'plus'}
+                <BCircle
                     color={'primary'}
                     tooltip={'add task'}
                     operation={handleSave}
-                />
+                >
+                    <IconPlus className="icon-standard stroke-ciano-dark"></IconPlus>
+                </BCircle>
             </div>
             <div className={`${ taskList.length > 0 ? 'w-5/6 p-2 h-3/4 overflow-y-auto' :'hidden' }`}>
                 {

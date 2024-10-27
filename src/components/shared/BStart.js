@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import {ReactComponent as IconStart} from '../../assets/Icons/play.svg'
 import {ReactComponent as IconRestart} from '../../assets/Icons/refresh.svg'
 
-function BStart({ operation, type }) {
+function BStart({ operation, type, disabled = false }) {
 
     const {t}= useTranslation();
 
@@ -13,7 +13,7 @@ function BStart({ operation, type }) {
     const restart = t('common.button.restart');
 
     return (
-        <button className={`btn w-52 m-4 border-ciano-dark  ${type === 1 || type === 2 ? 'bg-ciano-light hover:bg-ciano-light hover:border-ciano-light' : 'bg-verde-light hover:bg-verde-light hover:border-verde-light'}`} onClick={operation}>
+        <button disabled={disabled} className={`btn w-52 m-4 border-ciano-dark  ${type === 1 || type === 2 ? 'bg-ciano-light hover:bg-ciano-light hover:border-ciano-light' : 'bg-verde-light hover:bg-verde-light hover:border-verde-light'}`} onClick={operation}>
             {
                 (type === 1 || type === 3) &&
                 (

@@ -1,4 +1,5 @@
 import './App.scss';
+import './config.js'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import FlowSession from './pages/FlowSession';

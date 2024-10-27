@@ -28,21 +28,10 @@ function FControls({
   return (
     <div className='w-5/6 text-center'>
       {
-        !isActive ?
-          <BStart operation={handleStart} type={3} ></BStart>
+        !flow ?
+          <BStart operation={handleStart} type={3} disabled={isActive} ></BStart>
           :
-          (
-            (
-              flow ?
-                <>
-                  <BStop operation={handleBreath} type={2} ></BStop>
-                </>
-                :
-                <>
-                  <BStop operation={handlePause} type={1} ></BStop>
-                </>
-            )
-          )
+          <BStop operation={handleBreath} type={2} ></BStop>
       }
     </div>
   );

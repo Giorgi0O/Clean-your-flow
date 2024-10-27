@@ -51,5 +51,13 @@
   .bg-moving{
     @apply h-[40%] absolute z-[0] transition-all ease-in-out duration-1000 opacity-100
   }
+
+  .icon-standard{
+    @apply w-[22px] h-[22px] stroke-[1px]
+  }
+
+  .icon-primary{
+    @apply w-[26px] h-[26px] stroke-[1.5px]
+  }
 } 
 

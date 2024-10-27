@@ -1,8 +1,7 @@
 import React from 'react';
 
-function BPrimary({ text, iconName, color, shadow, operation, disab = false , endSession = false}) {
+function BPrimary({ text, color, operation, disab = false, children}) {
 
-    const iconUrl = require(`../../assets/Icons/${iconName}.svg`);
 
     const colorClasses = {
         primary: 'bg-ciano-light border-ciano-dark hover:bg-ciano-light',
@@ -28,12 +27,7 @@ function BPrimary({ text, iconName, color, shadow, operation, disab = false , en
             `}
             disabled={disab} onClick={operation}>
             <div className='center'>
-                <img 
-                    src={iconUrl}
-                    alt={`${text} icon`}
-                    width="24"
-                    height="24"
-                />
+                {children}
                 <span className={`${buttonColorText} ml-1`} >{text}</span>
             </div>
         </button>
