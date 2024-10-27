@@ -1,6 +1,6 @@
 import AnimatedBg from '../components/shared/AnimatedBg';
 import Header from '../components/shared/Header';
-import BSlider from '../components/home/BSlider'
+import BSlider from '../components/home/BSlider';
 import { useTranslation } from 'react-i18next';
 import { Trans } from 'react-i18next';
 import MExplanation from '../components/shared/MExplanation';
