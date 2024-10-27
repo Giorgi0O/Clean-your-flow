@@ -58,6 +58,7 @@ function MSettings( {
           <div className='list-component'>
             <span> {t('flow-session.session.settings.mode')}  </span>
             <Switch 
+              flowTime={flowTime}
               selectedMode={selectedMode} 
               setSelectedMode={setSelectedMode} 
               setTimeRemaning={setTimeRemaining} 
