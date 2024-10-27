@@ -1,40 +1,100 @@
-import '../App.scss';
-import BgLeftGradient from '../components/AnimatedBackground/BgLeftGradient';
-import Title from '../components/Title/Title';
-import ContentBox from '../components/AppText/ContentBox';
-import SessionStart from '../components/Buttons/SessionStart'
+import AnimatedBg from '../components/shared/AnimatedBg';
+import Header from '../components/shared/Header';
+import BSlider from '../components/home/BSlider'
+import { useTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next';
+import MExplanation from '../components/shared/MExplanation';
+import Modal from '../components/shared/Modal'
+
+//svg
+import {ReactComponent as ModalIcon1} from '../assets/Icons/task_modal_icon.svg';
+import {ReactComponent as ModalIcon2} from '../assets/Icons/time_selector.svg';
+import {ReactComponent as ModalIcon3} from '../assets/Icons/mode_selector.svg';
+import {ReactComponent as Arrow} from '../assets/Icons/arrow.svg';
 
 
 function Home() {
 
+  const { t } = useTranslation();
+
   return (
-    <div className='app'>
-        <BgLeftGradient/>
-        <div className='lg:fixed lg:left-0 center flex-col w-full h-full z-[100] lg:w-1/2 lg:flex-row ' >
-            <div className='flex-col text-center center h-full w-1/2'>
-              <div className='fixed top-4'>
-                <Title />
-              </div>
-              <ContentBox
-                  body={
-                      <>
-                        Our <span className='bg-verde-light'> goal</span> is for you to achieve  <br/>
-                        your goals in the <span className='bg-rosa-light'> cleanest </span> <br/>
-                        way possible.                  
-                       </>
-                  }
-                  bodyClass={'font-titolo text-2xl font-bold text-ciano-dark'}
-              />
-            </div>
-            <div className=' fixed bottom-0 lg:right-0
-              w-5/6 bg-ciano-opacity center p-4 rounded-full shadow-sm mb-2
-              lg:rounded-none lg:m-0 lg:center lg:h-full lg:w-1/2'
-            >
-                <SessionStart />
-            </div>
+    <div className='h-screen'>
+      <AnimatedBg/>
+
+      <Modal id="mode-explain" onClose={() => document.getElementById('mode-explain').close()}>
+        <MExplanation/> 
+      </Modal>
+
+      <div className='z-[101] w-full fixed top-2 left-2/4 translate-x-[-50%]'>
+        <Header/>
+      </div>
+
+      <div className='z-[101] fixed bottom-4 left-2/4 translate-x-[-50%]'>
+        <BSlider/>
+        <p className='text-center z-[100] font-body font-bold text-sm mt-2 text-ciano-dark'> 
+          {t('home.scroll1')} 
+        </p>
+      </div>
+
+      <div className='relative top-[9%] lg:top-0 z-[100] w-screen h-5/6 lg:h-full overflow-y-scroll overflow-x-hidden'>
+        
+        <div className=' w-screen h-screen p-8 center flex-col text-center'>
+          <p className='font-titolo font-bold text-2xl text-ciano-dark'> 
+            <Trans i18nKey="home.main1" >
+              * <span className='underline-wave decoration-verde'> * </span> *
+            </Trans>
+          </p>
+          <p className='mt-2 font-titolo font-bold text-2xl text-ciano-dark mb-8'> 
+            <Trans i18nKey="home.main2" >
+              * <span className='underline-wave decoration-rosa'> * </span>
+            </Trans>  
+          </p>
+          <Arrow onClick={() => document.getElementById('second-section').scrollIntoView({ behavior: 'smooth' })} />
         </div>
+        
+        <div id='second-section' className='mb-[100px] lg:mb-0 center flex-col lg:flex-row w-screen h-[130vh] lg:h-screen justify-between lg:p-16'>
+          <Card iconNumber={1} titleId={'home.card1.title'} bodyId={'home.card1.body'} />
+          <Card iconNumber={2} titleId={'home.card2.title'} bodyId={'home.card2.body'} />
+          <Card iconNumber={3} titleId={'home.card3.title'} bodyId={'home.card3.body'} />
+        </div>
+        
+      </div>
     </div>
   );
 }
+
+
+const Card = ({ iconNumber, titleId, bodyId }) => {
+
+  const getColor = () =>{
+    return iconNumber === 1 ? 'ciano' : iconNumber === 2 ? 'verde' : 'rosa';
+  }
+
+  return (
+    <div className={`card-mirror-${getColor()}`}> 
+      <div className='h-1/2 w-full center m-8'>
+        {iconNumber === 1 ? <ModalIcon1 /> : iconNumber === 2 ? <ModalIcon2/> : <ModalIcon3 />}
+      </div>
+      <h1 className={`font-titolo font-bold text-3xl text-${getColor()}-dark`}>
+        <Trans i18nKey={titleId} >
+          * <span className={`underline-wave decoration-${getColor()}`}>*</span> *
+        </Trans>
+      </h1>
+      <span className={`mt-2 font-body text-sm text-${getColor()}`}> 
+        {
+          iconNumber === 3 ?
+          <Trans i18nKey={bodyId}>
+            *  <button onClick={()=>document.getElementById('mode-explain').showModal()} className='font-bold text-rosa hover:underline'>*</button>.
+          </Trans>
+          :
+          <Trans i18nKey={bodyId}> 
+          </Trans>
+        }
+      </span>
+    </div>
+  );
+}
+
+
 
 export default Home;
