@@ -1,6 +1,5 @@
 import { useCallback, useState, useRef } from "react";
 import useNotifications from "./useNotifications";
-import useBackgroundAnimation from "./useBackgroundAnimation";
 import { playSound } from "../utils/utils";
 
 
@@ -42,7 +41,7 @@ export default function useFlowmodoroTimer({
 
             setTimeRemaining(elapsed);
         }, 1000)
-    }, [timeRemaining, setFlowTotalTime, setIsActive]);
+    }, [timeRemaining, setBgLeft, setBgRigth, setFlowTotalTime, setIsActive]);
 
     const pause = useCallback(() => {
         playSound('click');
@@ -78,7 +77,7 @@ export default function useFlowmodoroTimer({
             }
 
         }, 1000);
-    }, [autoStart, notify, onTimerComplete, setIsActive, timeRemaining]);
+    }, [autoStart, notify, setBgLeft, setBgRigth, onTimerComplete, setIsActive, timeRemaining]);
 
     return {
         timeRemaining,

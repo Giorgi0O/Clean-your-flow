@@ -16,9 +16,7 @@ function Switch({
     const handleRadioChange = (value) => {
         setSelectedMode(value);
         setTimeRemaning(value === 1 ? flowTime : 0)
-        if (value === 2) {
-            setAutoStart(false);
-        }
+        setAutoStart(false);
         setTimerCount(0);
     };
 
