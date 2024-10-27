@@ -82,5 +82,4 @@ function BSlider( ) {
     );
 }
 
-
 export default BSlider
