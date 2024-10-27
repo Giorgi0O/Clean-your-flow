@@ -21,11 +21,12 @@ export default function useFlowmodoroTimer({
     const endTimeRef = useRef(null);
 
     const { notify } = useNotifications();
-    const movingBackground = useBackgroundAnimation(timeRemaining, flowmoFlow, setBgLeft, setBgRigth);
 
     const start = useCallback(() => {
         setIsActive(true);
         setFlowmoFlow(true);
+        setBgRigth(100);
+        setBgLeft(0);
 
         startTimeRef.current = Date.now();
         if (timeRemaining > 0) startTimeRef.current = startTimeRef.current - timeRemaining * 1000
@@ -37,7 +38,7 @@ export default function useFlowmodoroTimer({
             let now = Date.now();
             const elapsed = Math.round((now - startTimeRef.current) / 1000);
 
-            setFlowTotalTime(prev => prev + 1);
+            setFlowTotalTime(prev => prev + elapsed);
 
             setTimeRemaining(elapsed);
         }, 1000)
@@ -53,6 +54,8 @@ export default function useFlowmodoroTimer({
     const breath = useCallback(() => {
         setIsActive(true);
         setFlowmoFlow(false);
+        setBgRigth(0);
+        setBgLeft(100);
 
         var breathTime = Math.ceil(timeRemaining / 5);
         setTimeRemaining(breathTime);
@@ -66,7 +69,6 @@ export default function useFlowmodoroTimer({
             const now = Date.now();
             const remainingTime = Math.max(0, Math.round((endTimeRef.current - now) / 1000));
 
-            movingBackground(remainingTime, true);
             setTimeRemaining(remainingTime);
 
             if (remainingTime <= 0) {
@@ -76,7 +78,7 @@ export default function useFlowmodoroTimer({
             }
 
         }, 1000);
-    }, [autoStart, movingBackground, notify, onTimerComplete, setIsActive, timeRemaining]);
+    }, [autoStart, notify, onTimerComplete, setIsActive, timeRemaining]);
 
     return {
         timeRemaining,

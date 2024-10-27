@@ -62,7 +62,7 @@ export default function usePomodoroTimer({
             const remainingTime = Math.max(0, Math.round((endTimeRef.current - now) / 1000));
             const pastTime = timeRemaining - remainingTime;
 
-            movingBackground(remainingTime, true);
+            movingBackground(remainingTime);
             setTimeRemaining(remainingTime);
 
             if (flow) setFlowTotalTime(prev => prev + pastTime);

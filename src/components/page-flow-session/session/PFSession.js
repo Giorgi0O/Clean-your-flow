@@ -137,7 +137,7 @@ function PFSession({
                                             flowTime={pomodoroTimer.flowTime}
                                             restTime={pomodoroTimer.restTime}
                                             longRestTime={pomodoroTimer.longRestTime}
-                                            timeRemaining={pomodoroTimer.timeRemaining}
+                                            timeRemaining={ selectedMode === 1 ? pomodoroTimer.timeRemaining : flowmodoroTimer.timeRemaining}
                                             autoStart={autoStart}
                                             setTimeRemaining={pomodoroTimer.setTimeRemaining}
                                             setAutoStart={setAutoStart}
