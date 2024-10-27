@@ -40,7 +40,7 @@ export default function useFlowmodoroTimer({
 
             setTimeRemaining(elapsed);
         }, 1000)
-    }, [timeRemaining, setBgLeft, setBgRigth, setFlowTotalTime, setIsActive]);
+    }, [setBgLeft, setBgRigth, setFlowTotalTime, setIsActive]);
 
     const breath = useCallback(() => {
         setIsActive(true);

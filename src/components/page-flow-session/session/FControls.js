@@ -20,11 +20,6 @@ function FControls({
     flowmodoroBreath();
   }
 
-  const handlePause = () => {
-    playSound('click');
-    flowmodoroPause();
-  }
-
   return (
     <div className='w-5/6 text-center'>
       {
