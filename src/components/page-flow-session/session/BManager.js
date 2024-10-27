@@ -34,17 +34,16 @@ function BManager({
                             color={'secondary'}
                             operation={() => { setEndSessionRequest(true); }}
                         />
-                        {
-                            !isActive &&
-                            <BCircle
-                                color={'neutral'}
-                                tooltip={t('flow-session.session.tooltip.settings')}
-                                iconName={'settings'}
-                                active={modalSetting}
-                                operation={() => { setModalSetting(!modalSetting); setModalTask(false); }}
-                                activeOperation={() => { setModalSetting(!modalSetting); setModalTask(false); }}
-                            />
-                        }
+
+                        <BCircle
+                            color={'neutral'}
+                            tooltip={t('flow-session.session.tooltip.settings')}
+                            iconName={'settings'}
+                            active={modalSetting}
+                            operation={() => { setModalSetting(!modalSetting); setModalTask(false); }}
+                            activeOperation={() => { setModalSetting(!modalSetting); setModalTask(false); }}
+                            disabled={isActive}
+                        />
 
                         <BCircle
                             color={'primary'}
@@ -64,12 +63,13 @@ function BManager({
                             />
                         }
                         {
-                            isActive && selectedMode === 2 && flowmodoroTimer.flowmoFlow &&
+                            selectedMode === 2 &&
                             <BCircle
                                 tooltip={t('flow-session.session.tooltip.pause')}
-                                iconName={'pause'}
+                                iconName={'prev-light'}
                                 color={'neutral'}
-                                operation={flowmodoroTimer.pause}
+                                operation={flowmodoroTimer.next}
+                                disabled={flowmodoroTimer.flowmoFlow || !isActive}
                             />
                         }
                     </>

@@ -6,7 +6,8 @@ function BCircle({
     color = 'primary', 
     operation,
     active,
-    activeOperation
+    activeOperation,
+    disabled = false
 }) {
 
     const iconUrl = require(`../../assets/Icons/${iconName}.svg`);
@@ -24,7 +25,7 @@ function BCircle({
             {
                 active ?
                 (
-                    <button className={`btn btn-circle m-1 ${buttonColorClass}`} onClick={activeOperation}>
+                    <button className={`btn btn-circle m-1 ${buttonColorClass}`} disabled={disabled} onClick={activeOperation}>
                         <img 
                             src={iconUrl}
                             alt={iconName}
@@ -35,7 +36,7 @@ function BCircle({
                 )
                 :
                 (
-                    <button className={`btn btn-circle m-1 ${buttonColorClass}`} onClick={operation} title={tooltip}>
+                    <button className={`btn btn-circle m-1 ${buttonColorClass}`} disabled={disabled} onClick={operation} title={tooltip}>
                         <img 
                             src={iconUrl}
                             alt={iconName}

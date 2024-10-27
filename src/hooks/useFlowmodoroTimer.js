@@ -28,7 +28,6 @@ export default function useFlowmodoroTimer({
         setBgLeft(0);
 
         startTimeRef.current = Date.now();
-        if (timeRemaining > 0) startTimeRef.current = startTimeRef.current - timeRemaining * 1000
 
         if (interval) clearInterval(interval);
 
@@ -42,13 +41,6 @@ export default function useFlowmodoroTimer({
             setTimeRemaining(elapsed);
         }, 1000)
     }, [timeRemaining, setBgLeft, setBgRigth, setFlowTotalTime, setIsActive]);
-
-    const pause = useCallback(() => {
-        playSound('click');
-
-        setIsActive(false);
-        clearInterval(interval.current);
-    }, [setIsActive]);
 
     const breath = useCallback(() => {
         setIsActive(true);
@@ -79,11 +71,25 @@ export default function useFlowmodoroTimer({
         }, 1000);
     }, [autoStart, notify, setBgLeft, setBgRigth, onTimerComplete, setIsActive, timeRemaining]);
 
+    const next = useCallback(() => {
+        playSound('click');
+
+        if (interval.current) {
+            clearInterval(interval.current);
+            interval.current = null;
+        }
+
+        setTimeRemaining(0);
+        setIsActive(false);
+        setBgRigth(100);
+        setBgLeft(0);
+    }, [setTimeRemaining, setIsActive, setBgLeft, setBgRigth]);
+
     return {
         timeRemaining,
         flowmoFlow,
         start,
         breath,
-        pause
+        next
     }
 }
