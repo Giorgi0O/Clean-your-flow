@@ -41,7 +41,7 @@ function PFSession({
         }
     }, []);
 
-    /* POMODORO TIMER */
+    // POMODORO TIMER
     const pomodoroTimer = usePomodoroTimer({
         setIsActive,
         initialFlowTime: 25 * 60,
@@ -54,7 +54,7 @@ function PFSession({
         onTimerComplete: handleTimerComplete
     });
 
-    /* FLOWMODORO TIMER */
+    // FLOWMODORO TIMER
     const flowmodoroTimer = useFlowmodoroTimer({
         setIsActive,
         setBgLeft,
@@ -107,9 +107,6 @@ function PFSession({
             setStartAutomation(false);
         }
     }, [startAutomation, pomodoroTimer, flowmodoroTimer, selectedMode])
-
-    //## CAPIRE COME GESTIRE QUESTO
-
 
     return (
         <div className={'z-[100] flex flex-col items-center justify-evenly w-5/6 h-[85%]'} >
