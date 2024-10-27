@@ -1,8 +1,8 @@
 import Header from '../components/shared/Header';
 import { useEffect, useState } from 'react';
 import CreateSession from '../components/page-flow-session/create-session/Create';
-import EndModal from '../components/shared/MEnd';
 import PFSession from '../components/page-flow-session/session/PFSession';
+import EndModal from '../components/shared/MEnd';
 import AnimatedBg2 from '../components/shared/AnimatedBg2'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 

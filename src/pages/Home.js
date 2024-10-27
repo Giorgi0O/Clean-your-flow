@@ -1,10 +1,10 @@
 import AnimatedBg from '../components/shared/AnimatedBg';
-import Header from '../components/shared/Header';
 import { useTranslation } from 'react-i18next';
 import { Trans } from 'react-i18next';
+import Header from '../components/shared/Header';
+import BSlider from '../components/page-home/BSlider';
 import MExplanation from '../components/shared/MExplanation';
 import Modal from '../components/shared/Modal'
-import BSlider from '../components/page-home/BSlider';
 import {ReactComponent as ModalIcon1} from '../assets/Icons/task_modal_icon.svg';
 import {ReactComponent as ModalIcon2} from '../assets/Icons/time_selector.svg';
 import {ReactComponent as ModalIcon3} from '../assets/Icons/mode_selector.svg';
