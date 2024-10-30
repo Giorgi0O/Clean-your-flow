@@ -28,6 +28,22 @@ function FlowSession() {
     }
   }, [isCreation, endSession, setBgLeft, setBgRigth])
 
+  useEffect(() => {
+    if (endSession || taskList.length === 0) return;
+
+    const handleEventBeforeUnload = (event) => {
+      event.preventDefault();
+
+      return (event.returnValue = '')
+    }
+
+    window.addEventListener('beforeunload', handleEventBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleEventBeforeUnload);
+    }
+  }, [])
+
   return (
     <div className="flex flex-col w-screen h-screen items-center overflow-hidden">
       {
