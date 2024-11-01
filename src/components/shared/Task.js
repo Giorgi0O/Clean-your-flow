@@ -36,7 +36,7 @@ function Task( {
                     :
                         <button className='' onClick={HandleUpdate}>
                             {
-                                completed ? <IconTaskCompleted /> :  <IconTask />
+                                completed ? <IconTaskCompleted className="stroke-verde"/> :  <IconTask />
                             }
                         </button>
                 }
