@@ -1,7 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-
-//Icons
 import {ReactComponent as IconStart} from '../../assets/Icons/play.svg'
 import {ReactComponent as IconRestart} from '../../assets/Icons/refresh.svg'
 

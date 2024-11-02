@@ -8,7 +8,6 @@ function FControls({
   flow,
   flowmodoroStart,
   flowmodoroBreath,
-  flowmodoroPause,
 }) {
   const handleStart = () => {
     playSound('click');

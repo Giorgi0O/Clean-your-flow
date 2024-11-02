@@ -3,6 +3,7 @@ import BPrimary from './BPrimary'
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as IconXcircle } from '../../assets/Icons/x-circle.svg';
+import { clearLocalStorage } from '../../utils/utils';
 
 
 function MEnd({
@@ -17,7 +18,8 @@ function MEnd({
 
     const terminate = () => {
         if (returnHome) {
-            restartReturnHome();
+            clearLocalStorage();
+            navigator('/');
         }
         else {
             setEndSession(true);
@@ -25,13 +27,8 @@ function MEnd({
         }
     }
 
-    const restartReturnHome = () => {
-        localStorage.clear();
-        navigator('/');
-    }
-
     return (
-        <div className={`${endSessionRequest ? 'center w-screen h-screen z-[110] fixed bg-opacity-50 bg-black' : 'hidden'}`} style={{ display: `${endSessionRequest ? '' : 'none'}` }} >
+        <div className={`${endSessionRequest ? 'center w-screen h-screen z-[110] fixed bg-opacity-50 bg-black p-8' : 'hidden'}`} style={{ display: `${endSessionRequest ? '' : 'none'}` }} >
 
             <div className='card bg-base-100 center  w-[350px] overflow-hidden center  p-8 z-[101]'>
                 <button onClick={() => setEndSessionRequest(false)} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>

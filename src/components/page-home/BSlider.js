@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { motion, useMotionValue, useTransform, useAnimation } from 'framer-motion';
 import { ReactComponent as LogoSvg } from '../../assets/Icons/logo-faggiolo.svg';
+import { clearLocalStorage } from '../../utils/utils'
 
-function BSlider( ) {
+function BSlider() {
 
     const { t } = useTranslation();
 
@@ -17,13 +18,13 @@ function BSlider( ) {
 
     useEffect(() => {
         if (containerRef.current && buttonRef.current) {
-          const containerWidth = containerRef.current.offsetWidth;
-          const buttonWidth = buttonRef.current.offsetWidth;
-          setDragConstraints({ left: 0, right: containerWidth - buttonWidth });
+            const containerWidth = containerRef.current.offsetWidth;
+            const buttonWidth = buttonRef.current.offsetWidth;
+            setDragConstraints({ left: 0, right: containerWidth - buttonWidth });
         }
     }, []);
 
-  
+
     const background = useTransform(
         x,
         [0, dragConstraints.right],
@@ -35,26 +36,27 @@ function BSlider( ) {
         [0, 50],
         ["1", "0"]
     );
-  
+
     const handleDragEnd = (event, info) => {
         const dragThreshold = dragConstraints.right - 10;
-      
+
         if (info.offset.x > dragThreshold) {
-          controls.start({ x: dragConstraints.right });
-          navigate('/FlowSession');
+            controls.start({ x: dragConstraints.right });
+            clearLocalStorage();
+            navigate('/FlowSession');
         } else {
-          controls.start({ x: 6 });
+            controls.start({ x: 6 });
         }
     };
 
     return (
-        <motion.div 
+        <motion.div
             ref={containerRef}
             className="flex items-center w-[350px] h-[60px] rounded-full border-2 border-verde-dark overflow-hidden"
             style={{ background }}
         >
 
-            <motion.div 
+            <motion.div
                 ref={buttonRef}
                 drag="x"
                 dragConstraints={dragConstraints}
@@ -68,11 +70,11 @@ function BSlider( ) {
                 <LogoSvg></LogoSvg>
             </motion.div>
 
-            <motion.div 
+            <motion.div
                 className="w-5/6 center"
                 style={{ opacity }}
             >
-                <span className='font-body text-sm text-gray-400'> 
+                <span className='font-body text-sm text-gray-400'>
                     {t('home.scroll2')}
                 </span>
 
