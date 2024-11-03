@@ -91,11 +91,13 @@
             },
             "settings":{
                 "auto-start": "Auto start",
-                "mode": "Modalità"
+                "mode": "Modalità",
+                "completed-request" : "Avvisa al completamento dei task"
             }
         },
         "end-session":{
-            "body":"Sei sicuro di voler terminare la sessione ?"
+            "body-end":"Sei sicuro di voler terminare la sessione ?",
+            "body-task-completed":"Hai raggiunto i tuoi obiettivi. <1></1> Vuoi terminare la sessione ?"
         }
     }
 }

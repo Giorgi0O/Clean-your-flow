@@ -10,28 +10,9 @@ export function formatTime(milliseconds) {
     return `${formattedMinutes}:${formattedSeconds}`;
 };
 
-export function restart() {
+export function clearLocalStorage() {
     localStorage.clear();
-    window.location.reload();
 }
-
-export function hexToFilter(hex) {
-    hex = hex.replace('#', '');
-
-    // Converti in RGB
-    const r = parseInt(hex.substring(0, 2), 16);
-    const g = parseInt(hex.substring(2, 4), 16);
-    const b = parseInt(hex.substring(4, 6), 16);
-
-    // Calcola i valori per il filtro
-    const brightness = (r * 299 + g * 587 + b * 114) / 1000 / 255;
-    const saturate = Math.max(r, g, b) / 255 * 100;
-    const hueRotate = Math.atan2(Math.sqrt(3) * (g - b), 2 * r - g - b) * 180 / Math.PI;
-
-    return `brightness(0) saturate(100%) invert(${brightness}) sepia(1) saturate(${saturate}%) hue-rotate(${hueRotate}deg)`;
-};
-
-
 
 export function playSound(type) {
     const sounds = {
@@ -41,7 +22,7 @@ export function playSound(type) {
     };
 
     const soundPath = sounds[type];
-    
+
     if (soundPath) {
         const audio = new Audio(soundPath);
         audio.play();

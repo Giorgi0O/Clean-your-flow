@@ -1,7 +1,5 @@
 import React from "react";
-import { restart } from "../../../utils/utils";
 import BCircle from "../../shared/BCircle";
-import BStart from "../../shared/BStart";
 import PControls from './PControls';
 import FControls from "./FControls";
 import { useTranslation } from "react-i18next";
@@ -13,7 +11,6 @@ import { ReactComponent as IconPrev } from '../../../assets/Icons/prev.svg';
 
 
 function BManager({
-    endSession,
     isActive,
     selectedMode,
     setEndSessionRequest,
@@ -29,92 +26,78 @@ function BManager({
     return (
         <>
             <div className='w-full center '>
-                {
-                    //circle button griglia principale
-                    !endSession &&
-                    <>
+                <>
+                    <BCircle
+                        tooltip={t('flow-session.session.tooltip.end')}
+                        color={'secondary'}
+                        operation={() => { setEndSessionRequest(true); }}
+                    >
+                        <IconX className="icon-standard stroke-rosa-dark"></IconX>
+                    </BCircle>
+
+                    <BCircle
+                        color={'neutral'}
+                        tooltip={t('flow-session.session.tooltip.settings')}
+                        active={modalSetting}
+                        operation={() => { setModalSetting(!modalSetting); setModalTask(false); }}
+                        activeOperation={() => { setModalSetting(!modalSetting); setModalTask(false); }}
+                        disabled={isActive}
+                    >
+                        <IconSettings className={`icon-standard ${isActive ? 'stroke-gray-400' : 'stroke-verde-dark'}`}></IconSettings>
+                    </BCircle>
+
+                    <BCircle
+                        color={'primary'}
+                        tooltip={t('flow-session.session.tooltip.task')}
+                        active={modalTask}
+                        operation={() => { setModalTask(!modalTask); setModalSetting(false); }}
+                        activeOperation={() => { setModalTask(!modalTask); setModalSetting(false); }}
+                    >
+                        <IconTaskList className="icon-standard stroke-ciano-dark"></IconTaskList>
+                    </BCircle>
+                    {
+                        selectedMode === 1 &&
                         <BCircle
-                            tooltip={t('flow-session.session.tooltip.end')}
                             color={'secondary'}
-                            operation={() => { setEndSessionRequest(true); }}
+                            tooltip={t('flow-session.session.tooltip.next')}
+                            iconName={pomodoroTimer.flow ? 'next' : 'prev-light'}
+                            operation={pomodoroTimer.next}
                         >
-                            <IconX className="icon-standard stroke-rosa-dark"></IconX>
+                            {
+                                pomodoroTimer.flow ?
+                                    <IconNext className="icon-standard stroke-rosa-dark"></IconNext>
+                                    :
+                                    <IconPrev className="icon-standard stroke-rosa-dark"></IconPrev>
+                            }
                         </BCircle>
-
+                    }
+                    {
+                        selectedMode === 2 &&
                         <BCircle
+                            tooltip={t('flow-session.session.tooltip.pause')}
                             color={'neutral'}
-                            tooltip={t('flow-session.session.tooltip.settings')}
-                            active={modalSetting}
-                            operation={() => { setModalSetting(!modalSetting); setModalTask(false); }}
-                            activeOperation={() => { setModalSetting(!modalSetting); setModalTask(false); }}
-                            disabled={isActive}
+                            operation={flowmodoroTimer.next}
+                            disabled={flowmodoroTimer.flowmoFlow || !isActive}
                         >
-                            <IconSettings className={`icon-standard ${isActive ? 'stroke-gray-400' : 'stroke-verde-dark'}`}></IconSettings>
+                            <IconPrev className={`icon-standard ${flowmodoroTimer.flowmoFlow || !isActive ? 'stroke-gray-400' : 'stroke-verde-dark'}`}></IconPrev>
                         </BCircle>
-
-                        <BCircle
-                            color={'primary'}
-                            tooltip={t('flow-session.session.tooltip.task')}
-                            active={modalTask}
-                            operation={() => { setModalTask(!modalTask); setModalSetting(false); }}
-                            activeOperation={() => { setModalTask(!modalTask); setModalSetting(false); }}
-                        >
-                            <IconTaskList className="icon-standard stroke-ciano-dark"></IconTaskList>
-                        </BCircle>
-                        {
-                            selectedMode === 1 &&
-                            <BCircle
-                                color={'secondary'}
-                                tooltip={t('flow-session.session.tooltip.next')}
-                                iconName={pomodoroTimer.flow ? 'next' : 'prev-light'}
-                                operation={pomodoroTimer.next}
-                            >
-                                {
-                                    pomodoroTimer.flow ?
-                                        <IconNext className="icon-standard stroke-rosa-dark"></IconNext>
-                                        :
-                                        <IconPrev className="icon-standard stroke-rosa-dark"></IconPrev>
-                                }
-                            </BCircle>
-                        }
-                        {
-                            selectedMode === 2 &&
-                            <BCircle
-                                tooltip={t('flow-session.session.tooltip.pause')}
-                                color={'neutral'}
-                                operation={flowmodoroTimer.next}
-                                disabled={flowmodoroTimer.flowmoFlow || !isActive}
-                            >
-                                <IconPrev className={`icon-standard ${flowmodoroTimer.flowmoFlow || !isActive ? 'stroke-gray-400' : 'stroke-verde-dark'}`}></IconPrev>
-                            </BCircle>
-                        }
-                    </>
-                }
+                    }
+                </>
             </div>
             {
-                endSession ?
-                    (
-                        <BStart operation={restart} type={2} ></BStart>
-                    )
+                selectedMode === 1 ?
+                    <PControls
+                        isActive={isActive}
+                        pomodoroStart={pomodoroTimer.start}
+                        pomodoroPause={pomodoroTimer.pause}
+                    />
                     :
-                    (
-                        selectedMode === 1 ?
-                            <PControls
-                                isActive={isActive}
-                                endSession={endSession}
-                                pomodoroStart={pomodoroTimer.start}
-                                pomodoroPause={pomodoroTimer.pause}
-                                next={pomodoroTimer.next}
-                            />
-                            :
-                            <FControls
-                                isActive={isActive}
-                                flow={flowmodoroTimer.flowmoFlow}
-                                flowmodoroStart={flowmodoroTimer.start}
-                                flowmodoroBreath={flowmodoroTimer.breath}
-                                flowmodoroPause={flowmodoroTimer.pause}
-                            />
-                    )
+                    <FControls
+                        isActive={isActive}
+                        flow={flowmodoroTimer.flowmoFlow}
+                        flowmodoroStart={flowmodoroTimer.start}
+                        flowmodoroBreath={flowmodoroTimer.breath}
+                    />
             }
         </>
     );

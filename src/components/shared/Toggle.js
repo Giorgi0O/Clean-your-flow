@@ -7,7 +7,11 @@ function Toggle({ prop, setProp }) {
         <>
             <input 
                 type='checkbox' 
-                className="toggle toggle-primary toggle-lg border-rosa-light bg-rosa-light [--tglbg:white] hover:bg-rosa" 
+                className="toggle toggle-lg 
+                        border-rosa-light checked:border-ciano hover:border-ciano-dark
+                        bg-rosa checked:bg-ciano hover:bg-rosa-dark hover:checked:bg-ciano-dark
+                        [--tglbg:theme(colors.rosa.light)] checked:[--tglbg:theme(colors.ciano.light)]
+                "
                 checked={prop} 
                 onChange={() => setProp(!prop)} 
             />

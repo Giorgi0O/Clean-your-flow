@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import DividerO from '../../shared/DividerO';
-import TabControls from '../../shared/TabControls';
-import TaskList from '../../shared/TaskList';
+import React from "react";
+import DividerO from "../../shared/DividerO";
+import TaskList from "../../shared/TaskList";
+import { useTranslation } from "react-i18next";
 
-function MGoals({
+function REndSession({
     taskList,
     setTaskList,
     timeGoal,
     flowTotalTime,
 }) {
 
-    const [actionType, setActionType] = useState('action');
+    const { t } = useTranslation();
 
     const formatTime = (time) => {
         if (time < 60) {
             return (
                 <>
-                    {time} <span className='sub-font'>minutes</span>
+                    {time} <span className='sub-font'>{t('common.time-unit-s')}</span>
                 </>
             );
         } else {
@@ -24,7 +24,7 @@ function MGoals({
             const minutes = time % 60;
             return (
                 <>
-                    {hours}:{minutes.toString().padStart(2, '0')} <span className='sub-font'>hours</span>
+                    {hours}:{minutes.toString().padStart(2, '0')} <span className='sub-font'>{t('common.time-unit-h')}</span>
                 </>
             );
         }
@@ -32,26 +32,21 @@ function MGoals({
 
     const toComplete = Math.ceil(flowTotalTime / timeGoal * 100)
 
-    return (
-        <div className="card-mirror overflow-x-hidden w-full sm:w-5/6 h-5/6 p-2 sm:p-8">
 
-            <div className='w-5/6 flex justify-center mb-4'>
-                <TabControls actionType={actionType} setActionType={setActionType} isTimeGoal={timeGoal !== 0}  />
-            </div>
-            {
-                actionType === 'action' &&
-                <div className='w-5/6'>
+    return (
+        <div className="w-5/6 h-5/6 center flex-col lg:flex-row justify-evenly" >
+            <Card titleId={'common.task'}>
+                <div className='center flex-col w-full'>
                     {
                         taskList.length > 0 ?
-                            <TaskList taskList={taskList} setTaskList={setTaskList} isEditable={true} />
+                            <TaskList taskList={taskList} setTaskList={setTaskList} isEditable={false} />
                             :
                             <div className="task-empty"> <p className="sub-font"> Action list is empty </p> </div>
                     }
                 </div>
-            }
-            {
-                actionType === 'time-goal' &&
-                <div className=' h-full flex flex-col justify-center items-center overflow-auto'>
+            </Card>
+            <Card titleId={'common.time-goal'}>
+                <div className="card-body w-full center">
                     <div className={`radial-progress ${toComplete >= 100 ? "text-verde" : "text-primary"}`} style={{ "--value": `${toComplete > 100 ? 100 : toComplete}`, "--size": "15rem", "--thickness": "1rem" }} role="progressbar">
                         <div className='flex flex-col items-center justify-center'>
                             <span className='font-number font-bold text-2xl text-ciano'> {formatTime(Math.floor(flowTotalTime / 60))} </span>
@@ -60,9 +55,25 @@ function MGoals({
                         </div>
                     </div>
                 </div>
-            }
+            </Card>
         </div>
     );
 }
 
-export default MGoals;
+function Card({
+    titleId,
+    children
+}) {
+
+    const { t } = useTranslation();
+
+    return (
+        <div className='card-mirror p-8 w-[350px] md:w-[450px]'>
+            <h2 className="card-title font-titolo text-2xl text-ciano-dark">{t(titleId)}</h2>
+            {children}
+        </div>
+    );
+
+}
+
+export default REndSession
