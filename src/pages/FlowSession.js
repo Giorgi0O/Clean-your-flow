@@ -2,9 +2,10 @@ import Header from '../components/shared/Header';
 import { useEffect, useState } from 'react';
 import CreateSession from '../components/page-flow-session/create-session/Create';
 import PFSession from '../components/page-flow-session/session/PFSession';
-import EndModal from '../components/shared/MEnd';
 import AnimatedBg2 from '../components/shared/AnimatedBg2'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import MEnd from '../components/shared/MEnd';
+import MEndTaskCompleted from '../components/shared/MEndTaskCompleted';
 import EndSession from '../components/page-flow-session/end-session/EndSession';
 
 function FlowSession() {
@@ -19,6 +20,8 @@ function FlowSession() {
   const [bgLeft, setBgLeft] = useState(100);
   const [bgRigth, setBgRigth] = useState(0);
   const [endSessionRequest, setEndSessionRequest] = useState(false);
+  const [endTaskCompletedRequest, setEndTaskCompletedRequest] = useState(false);
+  const [awaitEndResponse, setAwaitEndResponse] = useState(false);
   const [returnHome, setReturnHome] = useState(false);
 
   const handleRestart = () => {
@@ -41,13 +44,22 @@ function FlowSession() {
     }
   }, [isCreation, endSession, setBgLeft, setBgRigth])
 
+  useEffect(() => {
+    if (endTaskCompletedRequest) setAwaitEndResponse(true);
+    else setAwaitEndResponse(false);
+
+  }, [endSessionRequest, endTaskCompletedRequest, setAwaitEndResponse])
+
   return (
     <div className="flex flex-col w-screen h-screen items-center overflow-hidden">
       {
         !isCreation && <AnimatedBg2 bgLeft={bgLeft} bgRigth={bgRigth} selectedMode={selectedMode} />
       }
       {
-        endSessionRequest && <EndModal {...{ endSessionRequest, setEndSessionRequest, setEndSession, returnHome }} />
+        <MEnd {...{ endSessionRequest, setEndSessionRequest, setEndSession, returnHome }} />
+      }
+      {
+        endTaskCompletedRequest && <MEndTaskCompleted {...{ endTaskCompletedRequest, setEndTaskCompletedRequest, setEndSession }} />
       }
 
       <Header />
@@ -57,7 +69,7 @@ function FlowSession() {
       }
       {
         !isCreation && !endSession &&
-        <PFSession {...{ taskList, setTaskList, selectedMode, setSelectedMode, timeGoal, bgRigth, bgLeft, setBgRigth, setBgLeft, setEndSessionRequest, flowTotalTime, setFlowTotalTime }} />
+        <PFSession {...{ taskList, setTaskList, selectedMode, setSelectedMode, timeGoal, bgRigth, bgLeft, setBgRigth, setBgLeft, setEndSessionRequest, flowTotalTime, setFlowTotalTime, awaitEndResponse, setEndTaskCompletedRequest }} />
       }
       {
         endSession &&

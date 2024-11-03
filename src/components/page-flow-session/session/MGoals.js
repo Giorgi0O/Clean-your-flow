@@ -33,25 +33,17 @@ function MGoals({
     const toComplete = Math.ceil(flowTotalTime / timeGoal * 100)
 
     return (
-        <div className="card overflow-x-hidden bg-base-100 w-full sm:w-5/6 h-5/6 p-2 sm:p-8">
+        <div className="card-mirror overflow-x-hidden w-full sm:w-5/6 h-5/6 p-2 sm:p-8">
 
-            <div className='flex justify-center mb-4'>
-                <TabControls
-                    actionType={actionType}
-                    setActionType={setActionType}
-                    isTimeGoal={timeGoal !== 0}
-                />
+            <div className='w-5/6 flex justify-center mb-4'>
+                <TabControls actionType={actionType} setActionType={setActionType} isTimeGoal={timeGoal !== 0}  />
             </div>
             {
                 actionType === 'action' &&
-                <div className='card-body'>
+                <div className='w-5/6'>
                     {
                         taskList.length > 0 ?
-                            <TaskList
-                                taskList={taskList}
-                                setTaskList={setTaskList}
-                                isEditable={true}
-                            />
+                            <TaskList taskList={taskList} setTaskList={setTaskList} isEditable={true} />
                             :
                             <div className="task-empty"> <p className="sub-font"> Action list is empty </p> </div>
                     }

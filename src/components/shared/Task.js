@@ -1,14 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import DropDownMenu from "./DropDownMenu";
-
-//icons
-import {ReactComponent as IconTask } from '../../assets/Icons/task.svg'
-import {ReactComponent as IconTaskCompleted } from '../../assets/Icons/task-completed.svg' 
-import {ReactComponent as IconTrash } from '../../assets/Icons/trash.svg'
+import { ReactComponent as IconTask } from '../../assets/Icons/task.svg'
+import { ReactComponent as IconTaskCompleted } from '../../assets/Icons/task-completed.svg'
+import { ReactComponent as IconTrash } from '../../assets/Icons/trash.svg'
 
 
-function Task( { 
+function Task({
     id,
     action,
     completed,
@@ -17,15 +15,10 @@ function Task( {
     updateTask
 }) {
 
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
-    const HandleDelete = () =>{
-        deleteTask(id);
-    }
-
-    const HandleUpdate = () =>{
-        updateTask(id);
-    }
+    const HandleDelete = () => { deleteTask(id); }
+    const HandleUpdate = () => { updateTask(id); }
 
     return (
         <>
@@ -33,15 +26,15 @@ function Task( {
                 {
                     !editCompleted ?
                         <IconTask />
-                    :
+                        :
                         <button className='' onClick={HandleUpdate}>
                             {
-                                completed ? <IconTaskCompleted className="stroke-verde"/> :  <IconTask />
+                                completed ? <IconTaskCompleted className="stroke-verde" /> : <IconTask />
                             }
                         </button>
                 }
                 <span className='w-5/6 font-corpo ml-2 text-md'>
-                    {completed ? <s style={{ color: "gray"}}>{action}</s> : action }
+                    {completed ? <s className="line-through decoration-verde">{action}</s> : action}
                 </span>
             </div>
 
@@ -51,7 +44,7 @@ function Task( {
                     <span className='text-rosa-dark font-corpo font-bold'> {t('common.button.delete')} </span>
                 </div>
             </DropDownMenu>
-        </> 
+        </>
     );
 }
 

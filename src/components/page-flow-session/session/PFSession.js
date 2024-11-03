@@ -21,10 +21,13 @@ function PFSession({
     setBgLeft,
     setEndSessionRequest,
     flowTotalTime,
-    setFlowTotalTime
+    setFlowTotalTime,
+    setEndTaskCompletedRequest,
+    awaitEndResponse
 }) {
 
     const [autoStart, setAutoStart] = useLocalStorage('autoStart', 0);
+    const [requestCompleted, setRequestCompleted] = useLocalStorage('requestCompleted', false);
     const [isActive, setIsActive] = useState(false);
     const [startAutomation, setStartAutomation] = useState(false);
     const [modalSetting, setModalSetting] = useState(false);
@@ -33,9 +36,8 @@ function PFSession({
     useActiveSession(isActive, setModalSetting, setModalTask);
 
     const handleTimerComplete = useCallback((autoStart) => {
-        if (!autoStart) {
-            setIsActive(false);
-        } else {
+        setIsActive(false);
+        if (autoStart) {
             setTimeout(() => {
                 setStartAutomation(true);
             }, 3000);
@@ -65,9 +67,25 @@ function PFSession({
         onTimerComplete: handleTimerComplete
     });
 
-    // autoStart automation
     useEffect(() => {
-        if (startAutomation) {
+        //invio richiesta di chiusura
+        const handleCheckGoals = () => {
+            const timeAchieved = flowTotalTime >= timeGoal;
+            const taskCompleted = taskList.length === taskList.filter(task => task.completed).length;
+
+            if (timeAchieved || taskCompleted) return true;
+
+            return false;
+        };
+
+        if (requestCompleted && !isActive && handleCheckGoals()) {
+            console.log('ciao')
+            setEndTaskCompletedRequest(true);
+            setRequestCompleted(false);
+        }
+
+        // autoStart automation
+        if (startAutomation && !awaitEndResponse) {
             if (selectedMode === 1) pomodoroTimer.start();
             if (selectedMode === 2) flowmodoroTimer.start();
 
@@ -75,7 +93,7 @@ function PFSession({
 
             setStartAutomation(false);
         }
-    }, [startAutomation, pomodoroTimer, flowmodoroTimer, selectedMode])
+    }, [isActive, requestCompleted, awaitEndResponse, setRequestCompleted, flowTotalTime, setAutoStart, timeGoal, taskList, setEndTaskCompletedRequest, startAutomation, pomodoroTimer, flowmodoroTimer, selectedMode])
 
     return (
         <div className={'z-[100] flex flex-col items-center justify-evenly w-5/6 h-[85%]'} >
@@ -110,6 +128,8 @@ function PFSession({
                                 selectedMode={selectedMode}
                                 setSelectedMode={setSelectedMode}
                                 setTimerCount={pomodoroTimer.setTimerCount}
+                                requestCompleted={requestCompleted}
+                                setRequestCompleted={setRequestCompleted}
                             />
                         )
                     }
