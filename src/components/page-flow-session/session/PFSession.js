@@ -79,7 +79,6 @@ function PFSession({
         };
 
         if (requestCompleted && !isActive && handleCheckGoals()) {
-            console.log('ciao')
             setEndTaskCompletedRequest(true);
             setRequestCompleted(false);
         }
