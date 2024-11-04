@@ -4,22 +4,26 @@ import { formatTime } from '../../../utils/utils';
 
 function CountDown({
     timeRemaining,
-    bgRigth,
-    bgLeft,
+    flow,
     selectedMode
 }) {
 
     const [color, setColor] = useState('');
 
     useEffect(() => {
-        if( selectedMode === 1 ){
-            if( bgRigth > 50 ) setColor('text-ciano-dark');
-            if( bgLeft > 50 ) setColor('text-rosa-dark');
+        if (!flow) {
+            setColor('text-rosa-dark')
+            return;
         }
-        else{
+        if (selectedMode === 1) {
+            setColor('text-ciano-dark');
+            return;
+        }
+        if (selectedMode === 2) {
             setColor('text-verde-dark');
+            return;
         }
-    }, [timeRemaining,selectedMode,bgLeft, bgRigth]);
+    }, [timeRemaining, selectedMode, flow]);
 
 
     return (

@@ -69,7 +69,7 @@ function FlowSession() {
       }
       {
         !isCreation && !endSession &&
-        <PFSession {...{ taskList, setTaskList, selectedMode, setSelectedMode, timeGoal, bgRigth, bgLeft, setBgRigth, setBgLeft, setEndSessionRequest, flowTotalTime, setFlowTotalTime, awaitEndResponse, setEndTaskCompletedRequest }} />
+        <PFSession {...{ taskList, setTaskList, selectedMode, setSelectedMode, timeGoal, setBgRigth, setBgLeft, setEndSessionRequest, flowTotalTime, setFlowTotalTime, awaitEndResponse, setEndTaskCompletedRequest }} />
       }
       {
         endSession &&

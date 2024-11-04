@@ -8,6 +8,7 @@ function MGoals({
     setTaskList,
     timeGoal,
     flowTotalTime,
+    settingToogle
 }) {
 
     const [actionType, setActionType] = useState('action');
@@ -36,14 +37,14 @@ function MGoals({
         <div className="card-mirror overflow-x-hidden w-full sm:w-5/6 h-5/6 p-2 sm:p-8">
 
             <div className='w-5/6 flex justify-center mb-4'>
-                <TabControls actionType={actionType} setActionType={setActionType} isTimeGoal={timeGoal !== 0}  />
+                <TabControls actionType={actionType} setActionType={setActionType} isTimeGoal={timeGoal !== 0} />
             </div>
             {
                 actionType === 'action' &&
                 <div className='w-5/6'>
                     {
                         taskList.length > 0 ?
-                            <TaskList taskList={taskList} setTaskList={setTaskList} isEditable={true} />
+                            <TaskList taskList={taskList} setTaskList={setTaskList} isEditable={true} viewCompletedTask={settingToogle.viewCompletedTask}  />
                             :
                             <div className="task-empty"> <p className="sub-font"> Action list is empty </p> </div>
                     }

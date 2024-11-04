@@ -13,7 +13,7 @@ export default function useFlowmodoroTimer({
 }) {
 
     const [timeRemaining, setTimeRemaining] = useState(0);
-    const [flowmoFlow, setFlowmoFlow] = useState(false);
+    const [flow, setFlow] = useState(false);
 
     const interval = useRef(null);
     const startTimeRef = useRef(null);
@@ -23,7 +23,7 @@ export default function useFlowmodoroTimer({
 
     const start = useCallback(() => {
         setIsActive(true);
-        setFlowmoFlow(true);
+        setFlow(true);
         setBgRigth(100);
         setBgLeft(0);
 
@@ -44,7 +44,7 @@ export default function useFlowmodoroTimer({
 
     const breath = useCallback(() => {
         setIsActive(true);
-        setFlowmoFlow(false);
+        setFlow(false);
         setBgRigth(0);
         setBgLeft(100);
 
@@ -87,7 +87,8 @@ export default function useFlowmodoroTimer({
 
     return {
         timeRemaining,
-        flowmoFlow,
+        flow,
+        setTimeRemaining,
         start,
         breath,
         next

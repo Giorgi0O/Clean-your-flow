@@ -1,4 +1,3 @@
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { useActiveSession } from '../../../hooks/useActiveSession';
 import React, { useEffect, useState, useCallback } from "react";
 import CountDown from "./CountDown";
@@ -8,6 +7,7 @@ import usePomodoroTimer from '../../../hooks/usePomodoroTimer';
 import useFlowmodoroTimer from '../../../hooks/useFlowmodoroTimer';
 import BManager from './BManager';
 import { playSound } from '../../../utils/utils';
+import { useSettingToogle } from '../../../hooks/useSettingToogle';
 
 function PFSession({
     taskList,
@@ -15,8 +15,6 @@ function PFSession({
     selectedMode,
     setSelectedMode,
     timeGoal,
-    bgRigth,
-    bgLeft,
     setBgRigth,
     setBgLeft,
     setEndSessionRequest,
@@ -26,23 +24,22 @@ function PFSession({
     awaitEndResponse
 }) {
 
-    const [autoStart, setAutoStart] = useLocalStorage('autoStart', 0);
-    const [requestCompleted, setRequestCompleted] = useLocalStorage('requestCompleted', false);
     const [isActive, setIsActive] = useState(false);
     const [startAutomation, setStartAutomation] = useState(false);
     const [modalSetting, setModalSetting] = useState(false);
     const [modalTask, setModalTask] = useState(false);
 
+    const settingToogle = useSettingToogle();
     useActiveSession(isActive, setModalSetting, setModalTask);
 
-    const handleTimerComplete = useCallback((autoStart) => {
+    const handleTimerComplete = useCallback(() => {
         setIsActive(false);
-        if (autoStart) {
+        if (settingToogle.autoStart) {
             setTimeout(() => {
                 setStartAutomation(true);
             }, 3000);
         }
-    }, []);
+    }, [settingToogle]);
 
     // POMODORO TIMER
     const pomodoroTimer = usePomodoroTimer({
@@ -50,7 +47,7 @@ function PFSession({
         initialFlowTime: 25 * 60,
         initialRestTime: 5 * 60,
         initialLongRestTime: 15 * 60,
-        autoStart,
+        autoStart: settingToogle.autoStart,
         setFlowTotalTime,
         setBgLeft,
         setBgRigth,
@@ -62,7 +59,7 @@ function PFSession({
         setIsActive,
         setBgLeft,
         setBgRigth,
-        autoStart,
+        autoStart: settingToogle.autoStart,
         setFlowTotalTime,
         onTimerComplete: handleTimerComplete
     });
@@ -78,9 +75,9 @@ function PFSession({
             return false;
         };
 
-        if (requestCompleted && !isActive && handleCheckGoals()) {
+        if (settingToogle.requestCompleted && !isActive && handleCheckGoals()) {
             setEndTaskCompletedRequest(true);
-            setRequestCompleted(false);
+            settingToogle.setRequestCompleted(false);
         }
 
         // autoStart automation
@@ -92,50 +89,38 @@ function PFSession({
 
             setStartAutomation(false);
         }
-    }, [isActive, requestCompleted, awaitEndResponse, setRequestCompleted, flowTotalTime, setAutoStart, timeGoal, taskList, setEndTaskCompletedRequest, startAutomation, pomodoroTimer, flowmodoroTimer, selectedMode])
+    }, [isActive, settingToogle, awaitEndResponse, flowTotalTime, timeGoal, taskList, setEndTaskCompletedRequest, startAutomation, pomodoroTimer, flowmodoroTimer, selectedMode])
 
     return (
         <div className={'z-[100] flex flex-col items-center justify-evenly w-5/6 h-[85%]'} >
             <div className={`flex items-center justify-between w-full h-3/4`}>
-                <div className={`
-                    ${modalSetting || modalTask ? 'hidden lg:center' : 'center'}
-                    w-full h-full lg:w-1/3 
-                `}>
+                <div className={`${modalSetting || modalTask ? 'hidden lg:center' : 'center'} w-full h-full lg:w-1/3 `}>
                     <CountDown
                         timeRemaining={selectedMode === 1 ? pomodoroTimer.timeRemaining : flowmodoroTimer.timeRemaining}
-                        bgRigth={bgRigth}
-                        bgLeft={bgLeft}
+                        flow={selectedMode === 1 ? pomodoroTimer.flow : flowmodoroTimer.flow}
                         selectedMode={selectedMode}
                     />
                 </div>
-                <div className={`
-                    ${modalSetting || modalTask ? 'center lg:justify-end' : 'hidden lg:center'}
-                    w-full h-full lg:w-2/3 
-                `}>
+                <div className={`${modalSetting || modalTask ? 'center lg:justify-end' : 'hidden lg:center'} w-full h-full lg:w-2/3`}>
                     {
                         modalSetting && !isActive && !modalTask &&
                         (
                             <MSettings
-                                saveForm={pomodoroTimer.saveTimerForm}
-                                flowTime={pomodoroTimer.flowTime}
-                                restTime={pomodoroTimer.restTime}
-                                longRestTime={pomodoroTimer.longRestTime}
+                                isActive={isActive}
+                                pomodoroSettings={pomodoroTimer}
+                                flowmodoroSetting={flowmodoroTimer}
                                 timeRemaining={selectedMode === 1 ? pomodoroTimer.timeRemaining : flowmodoroTimer.timeRemaining}
-                                autoStart={autoStart}
                                 setTimeRemaining={pomodoroTimer.setTimeRemaining}
-                                setAutoStart={setAutoStart}
                                 selectedMode={selectedMode}
                                 setSelectedMode={setSelectedMode}
-                                setTimerCount={pomodoroTimer.setTimerCount}
-                                requestCompleted={requestCompleted}
-                                setRequestCompleted={setRequestCompleted}
+                                settingToogle={settingToogle}
                             />
                         )
                     }
                     {
                         modalTask && !modalSetting &&
                         (
-                            <MGoals {... { taskList, setTaskList, timeGoal, flowTotalTime }} />
+                            <MGoals {... { taskList, setTaskList, timeGoal, flowTotalTime, settingToogle }} />
                         )
                     }
                 </div>

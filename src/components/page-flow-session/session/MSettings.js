@@ -7,20 +7,14 @@ import { useTranslation } from 'react-i18next';
 
 
 function MSettings({
-  saveForm,
-  flowTime,
-  restTime,
-  longRestTime,
-  timeRemaining,
-  autoStart,
-  setAutoStart,
-  setTimeRemaining,
   isActive,
+  pomodoroSettings,
+  flowmodoroSettings,
+  timeRemaining,
+  setTimeRemaining,
   selectedMode,
   setSelectedMode,
-  setTimerCount,
-  requestCompleted,
-  setRequestCompleted
+  settingToogle,
 }) {
 
   const { t } = useTranslation();
@@ -31,14 +25,19 @@ function MSettings({
       {
         selectedMode === 1 &&
         <>
-          <TimerConfigurator {... { flowTime, restTime, longRestTime, saveForm }} />
+          <TimerConfigurator
+            flowTime={pomodoroSettings.flowTime}
+            restTime={pomodoroSettings.restTime}
+            longRestTime={pomodoroSettings.longRestTime}
+            saveForm={pomodoroSettings.saveTimerForm} 
+          />
           <div className='w-full mb-4 flex justify-center'>
             <DividerO className="bg-base-300" />
           </div>
         </>
       }
 
-      <div className={`w-full flex flex-col items-center ${selectedMode === 2 ? 'justify-center' : ''}`}>
+      <div className={`w-full flex flex-col items-center overflow-y-auto ${selectedMode === 2 ? 'justify-center' : ''}`}>
         {
           !notifyAccetpetd &&
           <div className='list-component text-center'>
@@ -46,21 +45,22 @@ function MSettings({
           </div>
         }
         {
-          !isActive && ((selectedMode === 1 && timeRemaining === flowTime) || (selectedMode === 2 && timeRemaining === 0)) &&
+          !isActive && ((selectedMode === 1 && timeRemaining === pomodoroSettings.flowTime) || (selectedMode === 2 && timeRemaining === 0)) &&
           <div className='list-component'>
             <span> {t('flow-session.session.settings.mode')}  </span>
             <Switch
-              flowTime={flowTime}
+              flowTime={pomodoroSettings.flowTime}
               selectedMode={selectedMode}
               setSelectedMode={setSelectedMode}
               setTimeRemaning={setTimeRemaining}
-              setAutoStart={setAutoStart}
-              setTimerCount={setTimerCount}
+              setAutoStart={settingToogle.setAutoStart}
+              setTimerCount={pomodoroSettings.setTimerCount}
             />
           </div>
         }
-        <SettingToogle title={t('flow-session.session.settings.auto-start')} prop={autoStart} setProp={setAutoStart} />
-        <SettingToogle title={t('flow-session.session.settings.completed-request')} prop={requestCompleted} setProp={setRequestCompleted} />
+        <SettingToogle title={t('flow-session.session.settings.auto-start')} prop={settingToogle.autoStart} setProp={settingToogle.setAutoStart} />
+        <SettingToogle title={t('flow-session.session.settings.completed-request')} prop={settingToogle.requestCompleted} setProp={settingToogle.setRequestCompleted} />
+        <SettingToogle title={t('flow-session.session.settings.view-completed-task')} prop={settingToogle.viewCompletedTask} setProp={settingToogle.setViewCompletedTask} />
       </div>
     </div>
   );

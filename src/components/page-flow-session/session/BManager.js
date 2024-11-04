@@ -77,9 +77,9 @@ function BManager({
                             tooltip={t('flow-session.session.tooltip.pause')}
                             color={'neutral'}
                             operation={flowmodoroTimer.next}
-                            disabled={flowmodoroTimer.flowmoFlow || !isActive}
+                            disabled={flowmodoroTimer.flow || !isActive}
                         >
-                            <IconPrev className={`icon-standard ${flowmodoroTimer.flowmoFlow || !isActive ? 'stroke-gray-400' : 'stroke-verde-dark'}`}></IconPrev>
+                            <IconPrev className={`icon-standard ${flowmodoroTimer.flow || !isActive ? 'stroke-gray-400' : 'stroke-verde-dark'}`}></IconPrev>
                         </BCircle>
                     }
                 </>
@@ -94,7 +94,7 @@ function BManager({
                     :
                     <FControls
                         isActive={isActive}
-                        flow={flowmodoroTimer.flowmoFlow}
+                        flow={flowmodoroTimer.flow}
                         flowmodoroStart={flowmodoroTimer.start}
                         flowmodoroBreath={flowmodoroTimer.breath}
                     />

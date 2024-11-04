@@ -6,16 +6,20 @@ import useTaskList from '../../hooks/useTaskList';
 function TaskList( { 
     taskList,
     setTaskList,
-    isEditable
+    isEditable,
+    viewCompletedTask
 }) {
 
     const {deleteT, updateT} = useTaskList(setTaskList);
+
+    const incompleteTasks = taskList.filter(task => !task.completed);
+    const filterList = viewCompletedTask ? incompleteTasks : taskList;
 
     return (
         <>
             <div className=' flex-col w-full h-full overflow-x-hidden overflow-y-auto'>
                 {
-                    taskList.map( (task,index) => (
+                    filterList.map( (task,index) => (
                         <React.Fragment key={task.id}>
                             <div className='center mt'>
                                 <Task 
