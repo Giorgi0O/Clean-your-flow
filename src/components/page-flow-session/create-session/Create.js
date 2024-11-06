@@ -65,7 +65,7 @@ function CreateSession({
                         <BCircle tooltip={t('common.button.prev')} iconName={'prev'} color={'secondary'} operation={() => setPageNumber(prev => prev - 1)} >
                             <IconPrev className="icon-standard stroke-rosa-dark"></IconPrev>
                         </BCircle>
-                        <BPrimary text={t('flow-session.init-session.set-time-goal.button')} iconName={'next'} color={'ciano'} operation={() => setPageNumber(prev => prev + 1)}>
+                        <BPrimary text={t('flow-session.init-session.set-time-goal.button')} iconName={'next'} color={'ciano'} disab={timeGoal === 0} operation={() => setPageNumber(prev => prev + 1)}>
                             <IconNext className='icon-primary stroke-ciano-dark'></IconNext>
                         </BPrimary>
                     </>

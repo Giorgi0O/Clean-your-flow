@@ -68,7 +68,7 @@ function PFSession({
     useEffect(() => {
         //invio richiesta di chiusura
         const handleCheckGoals = () => {
-            const timeAchieved = flowTotalTime >= timeGoal;
+            const timeAchieved = flowTotalTime >= timeGoal && timeGoal !== 0;
             const taskCompleted = taskList.length === taskList.filter(task => task.completed).length;
 
             if (timeAchieved || taskCompleted) return true;
