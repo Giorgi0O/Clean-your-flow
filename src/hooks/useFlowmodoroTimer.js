@@ -1,9 +1,11 @@
 import { useCallback, useState, useRef } from "react";
 import useNotifications from "./useNotifications";
 import { playSound } from "../utils/utils";
+import { useLocalStorage } from "./useLocalStorage";
 
 
 export default function useFlowmodoroTimer({
+    initalDivisionFactor,
     setIsActive,
     setBgLeft,
     setBgRigth,
@@ -13,6 +15,7 @@ export default function useFlowmodoroTimer({
 }) {
 
     const [timeRemaining, setTimeRemaining] = useState(0);
+    const [divisionFactor, setDivisionFactor] = useLocalStorage("divisionFactor" ,initalDivisionFactor);
     const [flow, setFlow] = useState(false);
 
     const interval = useRef(null);
@@ -48,7 +51,7 @@ export default function useFlowmodoroTimer({
         setBgRigth(0);
         setBgLeft(100);
 
-        var breathTime = Math.ceil(timeRemaining / 5);
+        var breathTime = Math.ceil(timeRemaining / divisionFactor);
         setTimeRemaining(breathTime);
 
         startTimeRef.current = Date.now();
@@ -69,7 +72,7 @@ export default function useFlowmodoroTimer({
             }
 
         }, 1000);
-    }, [autoStart, notify, setBgLeft, setBgRigth, onTimerComplete, setIsActive, timeRemaining]);
+    }, [autoStart, divisionFactor, notify, setBgLeft, setBgRigth, onTimerComplete, setIsActive, timeRemaining]);
 
     const next = useCallback(() => {
         playSound('click');
@@ -85,12 +88,18 @@ export default function useFlowmodoroTimer({
         setBgLeft(0);
     }, [setTimeRemaining, setIsActive, setBgLeft, setBgRigth]);
 
+    const saveDivisionFactor = (divisionFactor) =>{
+        setDivisionFactor(divisionFactor);
+    }
+
     return {
+        divisionFactor,
         timeRemaining,
         flow,
         setTimeRemaining,
         start,
         breath,
-        next
+        next,
+        saveDivisionFactor
     }
 }

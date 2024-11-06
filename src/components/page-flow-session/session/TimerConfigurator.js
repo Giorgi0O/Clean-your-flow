@@ -38,7 +38,7 @@ function TimerConfigurator({
 
         if (!isNaN(value) && value.trim() !== '') {
             if (value !== 0) {
-                setTempLongRestTime(+event.target.value * 60);
+                setTempLongRestTime(+value * 60);
             }
         }
     };
@@ -69,8 +69,8 @@ function TimerConfigurator({
 }
 
 function TimerInput({
-    id, //long-rest-time
-    value, //longRestTime
+    id,
+    value,
     color,
     onChange,
     onBlur,

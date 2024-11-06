@@ -56,6 +56,7 @@ function PFSession({
 
     // FLOWMODORO TIMER
     const flowmodoroTimer = useFlowmodoroTimer({
+        initalDivisionFactor: 5,
         setIsActive,
         setBgLeft,
         setBgRigth,

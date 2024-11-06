@@ -4,12 +4,13 @@ import Toggle from '../../shared/Toggle'
 import DividerO from '../../shared/DividerO';
 import Switch from '../../shared/Switch'
 import { useTranslation } from 'react-i18next';
+import BreathConfigurator from './BreathConfigurator';
 
 
 function MSettings({
   isActive,
   pomodoroSettings,
-  flowmodoroSettings,
+  flowmodoroSetting,
   timeRemaining,
   setTimeRemaining,
   selectedMode,
@@ -17,27 +18,31 @@ function MSettings({
   settingToogle,
 }) {
 
+
   const { t } = useTranslation();
   const notifyAccetpetd = Notification.permission === "granted";
 
   return (
     <div className="card-mirror w-5/6 h-5/6 p-4 sm:p-8">
       {
-        selectedMode === 1 &&
-        <>
+        selectedMode === 1 ?
           <TimerConfigurator
             flowTime={pomodoroSettings.flowTime}
             restTime={pomodoroSettings.restTime}
             longRestTime={pomodoroSettings.longRestTime}
-            saveForm={pomodoroSettings.saveTimerForm} 
+            saveForm={pomodoroSettings.saveTimerForm}
           />
-          <div className='w-full mb-4 flex justify-center'>
-            <DividerO className="bg-base-300" />
-          </div>
-        </>
+          :
+          <BreathConfigurator
+            divisionFactor={flowmodoroSetting.divisionFactor}
+            saveForm={flowmodoroSetting.saveDivisionFactor}
+          />
       }
+      <div className='w-full mb-4 flex justify-center'>
+        <DividerO className="bg-base-300" />
+      </div>
 
-      <div className={`w-full flex flex-col items-center overflow-y-auto ${selectedMode === 2 ? 'justify-center' : ''}`}>
+      <div className={`w-full flex flex-col items-center overflow-y-auto`}>
         {
           !notifyAccetpetd &&
           <div className='list-component text-center'>
