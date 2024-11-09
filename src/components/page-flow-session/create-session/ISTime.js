@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 
@@ -32,7 +32,6 @@ function InputRange({
     setTimeGoal
 }){
     const {t} = useTranslation();
-    const [value, setValue] = useState(timeGoal/60);
 
     const formatTime = (time) => {
         if (time < 60) {
@@ -53,26 +52,21 @@ function InputRange({
     }
 
     const HandleChange = (event) => {
-        setValue(+event.target.value);
-    }
-
-    const HandleSave = () =>{
-        setTimeGoal(value*60);
+        setTimeGoal((+event.target.value)*60);
     }
 
     return (
         <div className='w-full center p-8 time-goal-card'>
             <div className="PB-range-slider-div w-5/6 text-center">
                 <p className="text-verde font-number text-2xl font-bold">
-                    {formatTime(value)}
+                    {formatTime(timeGoal/60)}
                 </p>
                 <input
                     type="range"
                     min="0"
                     max="300"
-                    value={value}
+                    value={timeGoal/60}
                     onChange={HandleChange}
-                    onBlur={HandleSave}
                     className="range range-lg mt-2 lg:range-md range-success"
                     id="myRange"
                 />
