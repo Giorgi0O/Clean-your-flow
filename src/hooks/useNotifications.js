@@ -1,9 +1,22 @@
-import { useRef, useCallback } from "react";
+import { useCallback, useState } from "react";
 import { playSound } from "../utils/utils";
 
 export default function useNotifications() {
 
-    const requestNotify = useRef(0);
+    const [requestNotify, setRequestNotify] = useState(0);
+
+    var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+
+    const handleNotifyRequest = useCallback(() => {
+        if (!isSafari) {
+            // Richiesta permessi per browser non Safari
+            if (requestNotify === 0 && Notification.permission !== "granted") {
+                Notification.requestPermission();
+                setRequestNotify(1);
+            }
+        }
+    }, [requestNotify, setRequestNotify, isSafari]);
+
 
     const notify = useCallback(() => {
         if (document.visibilityState === 'visible') {
@@ -13,18 +26,7 @@ export default function useNotifications() {
         if (Notification.permission === "granted") {
             playSound('start-flow');
         }
-        else {
-            if (requestNotify.current === 0) {
-                Notification.requestPermission().then(permission => {
-                    if (permission === 'granted') {
-                        playSound('start-flow');
-                    }
-                });
-
-                requestNotify.current = 1;
-            }
-        }
     }, []);
 
-    return { notify }
+    return { notify, handleNotifyRequest }
 }
