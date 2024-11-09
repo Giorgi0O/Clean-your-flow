@@ -1,24 +1,38 @@
 import React from "react";
 
 function BackgroundAnimated({
-    bgLeft,
-    bgRigth,
-    selectedMode
+  bgLeft,
+  bgRigth,
+  selectedMode
 }) {
-    
+
   return (
     <>
-      <div className='z-[1] bg-white/10 backdrop-blur-3xl absolute top-0 left-0 overflow-hidden blur-3xl w-screen h-screen '></div>
-      <div 
-        className={`bg-moving rounded-tr-3xl rounded-br-3xl top-[15%] left-0 bg-rosa-light `}
-        style={{width: `${bgLeft}%` }}
-      >
+      <div className="fixed inset-0 z-[1]">
+        <div className="absolute inset-0 bg-white/10 backdrop-blur-3xl" />
       </div>
-      <div 
-        className={`bg-moving rounded-tl-3xl rounded-bl-3xl top-[15%] right-0 ${selectedMode === 1 ? 'bg-ciano-light' : 'bg-verde-light'}`}
-        style={{width: `${bgRigth}%` }}
-      >
-      </div> 
+
+      <div
+        className={`fixed z-0 h-[50vh] transition-all duration-300 ease-in-out bg-rosa-light/75`}
+        style={{
+          width: `${bgLeft}%`,
+          top: '15%',
+          left:0,
+          WebkitBackdropFilter: 'blur(8px)',
+          backdropFilter: 'blur(8px)',
+        }}
+      />
+
+      <div
+        className={`fixed z-0 h-[50vh] transition-all duration-300 ease-in-out ${selectedMode === 1 ? 'bg-ciano-light/70' : 'bg-verde-light/70'}`}
+        style={{
+          width: `${bgRigth}%`,
+          top: '15%',
+          right: 0,
+          WebkitBackdropFilter: 'blur(8px)',
+          backdropFilter: 'blur(8px)',
+        }}
+      />
     </>
   );
 }
