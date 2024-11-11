@@ -9,11 +9,13 @@ function PControls({
     pomodoroPause,
 }) {
     const handleStart = () => {
+        playSound('start-flow', { 'muted': true });
         playSound('click');
         pomodoroStart();
     }
 
     const handlePause = () => {
+        playSound('start-flow', { 'muted': true });
         playSound('click');
         pomodoroPause();
     }

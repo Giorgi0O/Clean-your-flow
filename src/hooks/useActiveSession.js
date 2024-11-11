@@ -33,8 +33,6 @@ export const useActiveSession = (isActive, setModalSetting, setModalTask) => {
         setModalSetting(false);
         setModalTask(false);
 
-        notify.handleNotifyRequest();
-
         window.addEventListener('beforeunload', handleBeforeUnload);
 
         manageNoSleep();

@@ -17,10 +17,7 @@ function MSettings({
   setSelectedMode,
   settingToogle,
 }) {
-
-
   const { t } = useTranslation();
-  const notifyAccetpetd = Notification.permission === "granted";
 
   return (
     <div className="card-mirror w-5/6 h-5/6 p-4 sm:p-8">
@@ -43,12 +40,6 @@ function MSettings({
       </div>
 
       <div className={`w-full flex flex-col items-center overflow-y-auto`}>
-        {
-          !notifyAccetpetd &&
-          <div className='list-component text-center'>
-            <p className='font-corpo text-lg text-rosa-dark'> Notifications are currently disabled. Please enable them to receive an alert when the timer ends. </p>
-          </div>
-        }
         {
           !isActive && ((selectedMode === 1 && timeRemaining === pomodoroSettings.flowTime) || (selectedMode === 2 && timeRemaining === 0)) &&
           <div className='list-component'>

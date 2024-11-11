@@ -14,7 +14,7 @@ export function clearLocalStorage() {
     localStorage.clear();
 }
 
-export function playSound(type) {
+export function playSound(type, options = {}) {
     const sounds = {
         'click': '/sounds/start-click.wav',
         'start-flow': '/sounds/start-flow.wav',
@@ -25,6 +25,10 @@ export function playSound(type) {
 
     if (soundPath) {
         const audio = new Audio(soundPath);
+        if (options?.muted) {
+            console.log('mutatooo');
+            audio.muted = true;
+        }
         audio.play();
     } else {
         console.warn(`Sound type "${type}" not found.`);
