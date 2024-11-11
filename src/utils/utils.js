@@ -26,7 +26,6 @@ export function playSound(type, options = {}) {
     if (soundPath) {
         const audio = new Audio(soundPath);
         if (options?.muted) {
-            console.log('mutatooo');
             audio.muted = true;
         }
         audio.play();

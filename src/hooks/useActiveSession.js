@@ -29,9 +29,7 @@ export const useActiveSession = (isActive, setModalSetting, setModalTask) => {
     // Effect principale
     useEffect(() => {
         if (!isActive) return;
-
         setModalSetting(false);
-        setModalTask(false);
 
         window.addEventListener('beforeunload', handleBeforeUnload);
 
@@ -45,6 +43,6 @@ export const useActiveSession = (isActive, setModalSetting, setModalTask) => {
                 noSleep.current.disable();
             }
         };
-    }, [isActive, setModalSetting, setModalTask, isEnableNoSleep, setIsEnableNoSleep, manageNoSleep, handleBeforeUnload, notify]);
+    }, [isActive, setModalSetting, isEnableNoSleep, setIsEnableNoSleep, manageNoSleep, handleBeforeUnload, notify]);
 
 }
