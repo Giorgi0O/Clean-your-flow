@@ -13,23 +13,3 @@ export function formatTime(milliseconds) {
 export function clearLocalStorage() {
     localStorage.clear();
 }
-
-export function playSound(type, options = {}) {
-    const sounds = {
-        'click': '/sounds/start-click.wav',
-        'start-flow': '/sounds/start-flow.wav',
-        // Aggiungi altri tipi di suoni qui
-    };
-
-    const soundPath = sounds[type];
-
-    if (soundPath) {
-        const audio = new Audio(soundPath);
-        if (options?.muted) {
-            audio.muted = true;
-        }
-        audio.play();
-    } else {
-        console.warn(`Sound type "${type}" not found.`);
-    }
-}

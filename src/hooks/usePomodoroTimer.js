@@ -1,7 +1,6 @@
 import { useCallback, useState, useRef } from "react";
 import useNotifications from "./useNotifications";
 import useBackgroundAnimation from "./useBackgroundAnimation";
-import { playSound } from "../utils/utils";
 
 export default function usePomodoroTimer({
     setIsActive,
@@ -28,7 +27,7 @@ export default function usePomodoroTimer({
     const startTimeRef = useRef(null);
     const endTimeRef = useRef(null);
 
-    const { notify } = useNotifications();
+    const notify = useNotifications();
     const movingBackground = useBackgroundAnimation(currentTime, flow, setBgLeft, setBgRigth);
 
     const handleTimerCompletion = useCallback(() => {
@@ -69,12 +68,12 @@ export default function usePomodoroTimer({
 
             if (remainingTime <= 0) {
                 clearInterval(interval.current);
-                notify();
+                notify.notifyFlow();
                 handleTimerCompletion();
             }
 
         }, 1000);
-    }, [currentTime, timeRemaining, flow, handleTimerCompletion, movingBackground, notify, setFlowTotalTime, setIsActive]);
+    }, [currentTime, notify, timeRemaining, flow, handleTimerCompletion, movingBackground, setFlowTotalTime, setIsActive]);
 
     const pause = useCallback(() => {
         setIsActive(false);
@@ -87,7 +86,7 @@ export default function usePomodoroTimer({
     }, [currentTime, timeRemaining, setIsActive]);
 
     const next = useCallback(() => {
-        playSound('click');
+        notify.notifyClick();
 
         if (interval.current) {
             clearInterval(interval.current);
@@ -115,7 +114,7 @@ export default function usePomodoroTimer({
 
             return newTimerCount;
         });
-    }, [flowTime, longRestTime, restTime, setBgLeft, setBgRigth, setIsActive]);
+    }, [flowTime, notify, longRestTime, restTime, setBgLeft, setBgRigth, setIsActive]);
 
     const saveTimerForm = (tempFlowTime, tempRestTime, tempLongRestTime) => {
         if (interval.current) {

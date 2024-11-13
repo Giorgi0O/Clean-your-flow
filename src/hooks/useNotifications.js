@@ -1,13 +1,23 @@
 import { useCallback } from "react";
-import { playSound } from "../utils/utils";
+import { playSound } from "../utils/SoundManager";
 
 export default function useNotifications() {
 
-
-    const notify = useCallback(() => {
-        playSound('start-flow');
-        return;
+    const notifyFlow = useCallback((type = 'start-flow', options = {}) => {
+        playSound(type, options);
     }, []);
 
-    return { notify }
+    const notifyFlowMuted = useCallback((type = 'start-flow-muted', options = {}) => {
+        playSound(type, options);
+    }, []);
+
+    const notifyClick = useCallback((options = {}) => {
+        playSound('click', options);
+    }, []);
+
+    return { 
+        notifyFlow,
+        notifyFlowMuted,
+        notifyClick
+    }
 }

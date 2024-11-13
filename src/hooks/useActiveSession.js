@@ -1,12 +1,10 @@
 import { useEffect, useCallback, useState, useRef } from 'react';
 import NoSleep from 'nosleep.js';
-import useNotifications from './useNotifications';
 
 export const useActiveSession = (isActive, setModalSetting, setModalTask) => {
 
     const [isEnableNoSleep, setIsEnableNoSleep] = useState(false);
     const noSleep = useRef();
-    const notify = useNotifications();
 
     const handleBeforeUnload = useCallback((event) => {
         event.preventDefault();
@@ -43,6 +41,6 @@ export const useActiveSession = (isActive, setModalSetting, setModalTask) => {
                 noSleep.current.disable();
             }
         };
-    }, [isActive, setModalSetting, isEnableNoSleep, setIsEnableNoSleep, manageNoSleep, handleBeforeUnload, notify]);
+    }, [isActive, setModalSetting, isEnableNoSleep, setIsEnableNoSleep, manageNoSleep, handleBeforeUnload]);
 
 }

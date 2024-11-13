@@ -1,7 +1,7 @@
 import React from 'react';
 import BStop from '../../shared/BStop'
 import BStart from '../../shared/BStart'
-import { playSound } from '../../../utils/utils';
+import useNotifications from '../../../hooks/useNotifications'
 
 function FControls({
   isActive,
@@ -9,13 +9,18 @@ function FControls({
   flowmodoroStart,
   flowmodoroBreath,
 }) {
+
+  const notify = useNotifications();
+
   const handleStart = () => {
-    playSound('click');
+    notify.notifyFlowMuted();
+    notify.notifyClick();
     flowmodoroStart();
   }
 
   const handleBreath = () => {
-    playSound('start-flow');
+    notify.notifyFlowMuted();
+    notify.notifyClick();
     flowmodoroBreath();
   }
 

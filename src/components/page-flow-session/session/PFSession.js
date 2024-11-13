@@ -6,8 +6,9 @@ import MGoals from "./MGoals";
 import usePomodoroTimer from '../../../hooks/usePomodoroTimer';
 import useFlowmodoroTimer from '../../../hooks/useFlowmodoroTimer';
 import BManager from './BManager';
-import { playSound } from '../../../utils/utils';
 import { useSettingToogle } from '../../../hooks/useSettingToogle';
+import { initSoundManager } from '../../../utils/SoundManager';
+import useNotifications from '../../../hooks/useNotifications';
 
 function PFSession({
     taskList,
@@ -31,6 +32,11 @@ function PFSession({
 
     const settingToogle = useSettingToogle();
     useActiveSession(isActive, setModalSetting, setModalTask);
+
+    useEffect(() => {
+        initSoundManager();
+    }, []);
+    const notify = useNotifications();
 
     const handleTimerComplete = useCallback(() => {
         setIsActive(false);
@@ -86,11 +92,11 @@ function PFSession({
             if (selectedMode === 1) pomodoroTimer.start();
             if (selectedMode === 2) flowmodoroTimer.start();
 
-            playSound('click');
+            notify.notifyClick();
 
             setStartAutomation(false);
         }
-    }, [isActive, settingToogle, awaitEndResponse, flowTotalTime, timeGoal, taskList, setEndTaskCompletedRequest, startAutomation, pomodoroTimer, flowmodoroTimer, selectedMode])
+    }, [isActive, settingToogle, notify, awaitEndResponse, flowTotalTime, timeGoal, taskList, setEndTaskCompletedRequest, startAutomation, pomodoroTimer, flowmodoroTimer, selectedMode])
 
     return (
         <div className={'z-[100] flex flex-col items-center justify-evenly w-5/6 h-[85%]'} >

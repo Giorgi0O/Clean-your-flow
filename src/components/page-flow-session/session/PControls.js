@@ -1,22 +1,25 @@
 import React from 'react';
 import BStop from '../../shared/BStop'
 import BStart from '../../shared/BStart'
-import { playSound } from '../../../utils/utils';
+import useNotifications from '../../../hooks/useNotifications';
 
 function PControls({
     isActive,
     pomodoroStart,
     pomodoroPause,
 }) {
+
+    const notify = useNotifications();
+
     const handleStart = () => {
-        playSound('start-flow', { 'muted': true });
-        playSound('click');
+        notify.notifyFlowMuted();
+        notify.notifyClick();
         pomodoroStart();
     }
 
     const handlePause = () => {
-        playSound('start-flow', { 'muted': true });
-        playSound('click');
+        notify.notifyFlowMuted();
+        notify.notifyClick();
         pomodoroPause();
     }
 
