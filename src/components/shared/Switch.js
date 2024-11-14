@@ -5,21 +5,21 @@ import { ReactComponent as IconPomodoro } from '../../assets/Icons/pomodoro.svg'
 import { ReactComponent as IconFlowmodoro } from '../../assets/Icons/flowmodoro.svg'
 
 function Switch({
-    flowTime,
+    flowDuration,
     selectedMode,
     setSelectedMode,
     setTimeRemaning,
     setAutoStart,
-    setTimerCount,
+    setSessionCounter,
 }) {
 
     const handleRadioChange = (value) => {
-        const timeRemaining = value === 1 ? flowTime : 0;
+        const timeRemaining = value === 1 ? flowDuration : 0;
 
         setSelectedMode(value);
         setTimeRemaning(timeRemaining); 
         setAutoStart(false);
-        setTimerCount(0);
+        setSessionCounter(0);
     };
 
     return (

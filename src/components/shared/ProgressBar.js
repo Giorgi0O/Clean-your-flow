@@ -2,11 +2,11 @@ import React from 'react';
 
 
 function ProgressBar( { 
-    flowTime,
+    flowDuration,
     timeGoal,
 }) {
 
-    const progressPercentage = (flowTime / timeGoal) * 100;
+    const progressPercentage = (flowDuration / timeGoal) * 100;
 
     const clampValue = (value, min, max) => Math.min(Math.max(value, min), max);
 

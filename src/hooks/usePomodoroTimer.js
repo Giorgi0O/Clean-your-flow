@@ -5,7 +5,7 @@ import useLocalStorage from "./useLocalStorage";
 
 export default function usePomodoroTimer({
     setIsActive,
-    initialFlowTime,
+    initialflowDuration,
     initialRestTime,
     initialLongRestTime,
     autoStart,
@@ -15,13 +15,14 @@ export default function usePomodoroTimer({
     onTimerComplete
 }) {
 
-    const [flowTime, setFlowTime] = useLocalStorage('flowTime', initialFlowTime);
-    const [restTime, setRestTime] = useLocalStorage('restTime', initialRestTime);
-    const [longRestTime, setLongRestTime] = useLocalStorage('longRestTime', initialLongRestTime);
+    const [flowDuration, setFlowDuration] = useLocalStorage('flowDuration', initialflowDuration);
+    const [shortBreakDuration, setShortBreakDuration] = useLocalStorage('shortBreakDuration', initialRestTime);
+    const [longBreakDuration, setLongBreakDuration] = useLocalStorage('longBreakDuration', initialLongRestTime);
 
-    const [timerCount, setTimerCount] = useState(0);
-    const flow = timerCount % 2 === 0;
-    const [currentTime, setCurrentTime] = useState(flow ? flowTime : (timerCount % 7 === 0) ? longRestTime : restTime);
+    const [completedFlowSessions, setCompletedFlowSessions] = useState(0);
+    const [sessionCounter, setSessionCounter] = useState(0);
+    const isFlow = sessionCounter % 2 === 0;
+    const [currentTime, setCurrentTime] = useState(isFlow ? flowDuration : (sessionCounter % 7 === 0) ? longBreakDuration : shortBreakDuration);
     const [timeRemaining, setTimeRemaining] = useState(currentTime);
 
     const interval = useRef(null);
@@ -29,24 +30,26 @@ export default function usePomodoroTimer({
     const endTimeRef = useRef(null);
 
     const notify = useNotifications();
-    const movingBackground = useBackgroundAnimation(currentTime, flow, setBgLeft, setBgRigth);
+    const movingBackground = useBackgroundAnimation(currentTime, isFlow, setBgLeft, setBgRigth);
 
     const handleTimerCompletion = useCallback(() => {
-        const newTimerCount = (timerCount + 1) % 8;
+        const newTimerCount = (sessionCounter + 1) % 8;
         const newFlow = newTimerCount % 2 === 0;
 
         let newTime;
-        if (newFlow)
-            newTime = flowTime;
-        else
-            newTime = (newTimerCount % 7 === 0) ? longRestTime : restTime;
+        if (newFlow) {
+            newTime = flowDuration;
+        }
+        else {
+            newTime = (newTimerCount % 7 === 0) ? longBreakDuration : shortBreakDuration;
+        }
 
         setCurrentTime(newTime);
         setTimeRemaining(newTime);
-        setTimerCount(newTimerCount);
+        setSessionCounter(newTimerCount);
 
         onTimerComplete(autoStart);
-    }, [timerCount, autoStart, flowTime, longRestTime, restTime, onTimerComplete]);
+    }, [sessionCounter, autoStart, flowDuration, longBreakDuration, shortBreakDuration, onTimerComplete]);
 
     const start = useCallback(() => {
         setIsActive(true);
@@ -65,16 +68,19 @@ export default function usePomodoroTimer({
             movingBackground(remainingTime);
             setTimeRemaining(remainingTime);
 
-            if (flow) setFlowTotalTime(prev => prev + pastTime);
+            if (isFlow) setFlowTotalTime(prev => prev + pastTime);
 
             if (remainingTime <= 0) {
                 clearInterval(interval.current);
                 notify.notifyFlow();
+                if( isFlow ){
+                    setCompletedFlowSessions(prev => prev +1);
+                }
                 handleTimerCompletion();
             }
 
         }, 1000);
-    }, [currentTime, notify, timeRemaining, flow, handleTimerCompletion, movingBackground, setFlowTotalTime, setIsActive]);
+    }, [currentTime, notify, timeRemaining, isFlow, handleTimerCompletion, movingBackground, setFlowTotalTime, setIsActive]);
 
     const pause = useCallback(() => {
         setIsActive(false);
@@ -94,7 +100,7 @@ export default function usePomodoroTimer({
             interval.current = null;
         }
 
-        setTimerCount(prev => {
+        setSessionCounter(prev => {
             const newTimerCount = (prev + 1) % 8;
             const nextFlow = newTimerCount % 2 === 0;
 
@@ -102,11 +108,11 @@ export default function usePomodoroTimer({
             if (nextFlow) {
                 setBgRigth(100);
                 setBgLeft(0);
-                newTime = flowTime;
+                newTime = flowDuration;
             } else {
                 setBgRigth(0);
                 setBgLeft(100);
-                newTime = (newTimerCount % 7 === 0) ? longRestTime : restTime;
+                newTime = (newTimerCount % 7 === 0) ? longBreakDuration : shortBreakDuration;
             }
 
             setTimeRemaining(newTime);
@@ -115,46 +121,47 @@ export default function usePomodoroTimer({
 
             return newTimerCount;
         });
-    }, [flowTime, notify, longRestTime, restTime, setBgLeft, setBgRigth, setIsActive]);
+    }, [flowDuration, notify, longBreakDuration, shortBreakDuration, setBgLeft, setBgRigth, setIsActive]);
 
-    const saveTimerForm = (tempFlowTime, tempRestTime, tempLongRestTime) => {
+    const saveTimerForm = (tempflowDuration, tempRestTime, tempLongRestTime) => {
         if (interval.current) {
             clearInterval(interval.current);
             interval.current = null;
         }
 
         var remaningTime;
-        if (flow) {
-            remaningTime = tempFlowTime - (flowTime - timeRemaining);
+        if (isFlow) {
+            remaningTime = tempflowDuration - (flowDuration - timeRemaining);
         }
         else {
-            if (timerCount % 7 === 0) {
-                remaningTime = tempLongRestTime - (longRestTime - timeRemaining);
+            if (sessionCounter % 7 === 0) {
+                remaningTime = tempLongRestTime - (longBreakDuration - timeRemaining);
             }
             else {
-                remaningTime = tempRestTime - (restTime - timeRemaining);
+                remaningTime = tempRestTime - (shortBreakDuration - timeRemaining);
             }
         }
 
         remaningTime = Math.max(0, remaningTime);
 
-        setFlowTime(tempFlowTime);
-        setRestTime(tempRestTime);
-        setLongRestTime(tempLongRestTime);
+        setFlowDuration(tempflowDuration);
+        setShortBreakDuration(tempRestTime);
+        setLongBreakDuration(tempLongRestTime);
         setTimeRemaining(remaningTime);
         setCurrentTime(remaningTime);
     }
 
     return {
-        flowTime,
-        restTime,
-        longRestTime,
+        flowDuration,
+        shortBreakDuration,
+        longBreakDuration,
         currentTime,
         timeRemaining,
         setTimeRemaining,
-        flow,
-        timerCount,
-        setTimerCount,
+        isFlow,
+        sessionCounter,
+        completedFlowSessions,
+        setSessionCounter,
         start,
         pause,
         next,

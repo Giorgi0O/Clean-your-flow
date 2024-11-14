@@ -5,7 +5,7 @@ import useNotifications from '../../../hooks/useNotifications'
 
 function FControls({
   isActive,
-  flow,
+  isflow,
   flowmodoroStart,
   flowmodoroBreath,
 }) {
@@ -27,7 +27,7 @@ function FControls({
   return (
     <div className='w-5/6 text-center'>
       {
-        !flow ?
+        !isflow ?
           <BStart operation={handleStart} type={3} disabled={isActive} ></BStart>
           :
           <BStop operation={handleBreath} type={2} ></BStop>

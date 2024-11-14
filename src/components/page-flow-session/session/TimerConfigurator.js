@@ -2,23 +2,23 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 function TimerConfigurator({
-    flowTime,
-    restTime,
-    longRestTime,
+    flowDuration,
+    shortBreakDuration,
+    longBreakDuration,
     saveForm
 }) {
     const { t } = useTranslation();
 
-    const [tempFlowTime, setTempFlowTime] = useState(flowTime);
-    const [tempRestTime, setTempRestTime] = useState(restTime);
-    const [tempLongRestTime, setTempLongRestTime] = useState(longRestTime);
+    const [tempflowDuration, setTempflowDuration] = useState(flowDuration);
+    const [tempRestTime, setTempRestTime] = useState(shortBreakDuration);
+    const [tempLongRestTime, setTempLongRestTime] = useState(longBreakDuration);
 
-    const handleFlowTimeChange = (event) => {
+    const handleflowDurationChange = (event) => {
         const value = event.target.value;
 
         if (!isNaN(value) && value.trim() !== '') {
             if (value !== 0) {
-                setTempFlowTime(+event.target.value * 60);
+                setTempflowDuration(+event.target.value * 60);
             }
         }
     };
@@ -44,14 +44,14 @@ function TimerConfigurator({
     };
 
     const handleSave = () => {
-        saveForm(tempFlowTime, tempRestTime, tempLongRestTime);
+        saveForm(tempflowDuration, tempRestTime, tempLongRestTime);
     }
 
     return (
         <form className='flex w-full justify-evenly items-center p-[20px]'>
             <div className='flex flex-col justify-center items-center overflow-hidden w-1/4 '>
                 <label htmlFor="flow-time" className='text-ciano-dark font-corpo text-sm sm:text-lg font-bold sm:font-semibold' >{t('common.flow')}</label>
-                <TimerInput id={'flow-time'} color={'ciano'} value={tempFlowTime} onChange={handleFlowTimeChange} onBlur={handleSave} />
+                <TimerInput id={'flow-time'} color={'ciano'} value={tempflowDuration} onChange={handleflowDurationChange} onBlur={handleSave} />
                 
             </div>
             <div className='flex flex-col justify-center items-center overflow-hidden w-1/4'>

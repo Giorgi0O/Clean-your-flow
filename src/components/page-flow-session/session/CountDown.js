@@ -4,14 +4,14 @@ import { formatTime } from '../../../utils/utils';
 
 function CountDown({
     timeRemaining,
-    flow,
+    isflow,
     selectedMode
 }) {
 
     const [color, setColor] = useState('');
 
     useEffect(() => {
-        if (!flow) {
+        if (!isflow) {
             setColor('text-rosa-dark')
             return;
         }
@@ -23,7 +23,7 @@ function CountDown({
             setColor('text-verde-dark');
             return;
         }
-    }, [timeRemaining, selectedMode, flow]);
+    }, [timeRemaining, selectedMode, isflow]);
 
 
     return (

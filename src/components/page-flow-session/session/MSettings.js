@@ -24,9 +24,9 @@ function MSettings({
       {
         selectedMode === 1 ?
           <TimerConfigurator
-            flowTime={pomodoroSettings.flowTime}
-            restTime={pomodoroSettings.restTime}
-            longRestTime={pomodoroSettings.longRestTime}
+            flowDuration={pomodoroSettings.flowDuration}
+            shortBreakDuration={pomodoroSettings.shortBreakDuration}
+            longBreakDuration={pomodoroSettings.longBreakDuration}
             saveForm={pomodoroSettings.saveTimerForm}
           />
           :
@@ -41,16 +41,16 @@ function MSettings({
 
       <div className={`w-full flex flex-col items-center overflow-y-auto`}>
         {
-          !isActive && ((selectedMode === 1 && timeRemaining === pomodoroSettings.flowTime) || (selectedMode === 2 && timeRemaining === 0)) &&
+          !isActive && ((selectedMode === 1 && timeRemaining === pomodoroSettings.flowDuration) || (selectedMode === 2 && timeRemaining === 0)) &&
           <div className='list-component'>
             <span> {t('flow-session.session.settings.mode')}  </span>
             <Switch
-              flowTime={pomodoroSettings.flowTime}
+              flowDuration={pomodoroSettings.flowDuration}
               selectedMode={selectedMode}
               setSelectedMode={setSelectedMode}
               setTimeRemaning={setTimeRemaining}
               setAutoStart={settingToogle.setAutoStart}
-              setTimerCount={pomodoroSettings.setTimerCount}
+              setSessionCounter={pomodoroSettings.setSessionCounter}
             />
           </div>
         }

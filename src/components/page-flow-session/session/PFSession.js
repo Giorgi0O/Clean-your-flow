@@ -50,7 +50,7 @@ function PFSession({
     // POMODORO TIMER
     const pomodoroTimer = usePomodoroTimer({
         setIsActive,
-        initialFlowTime: 25 * 60,
+        initialflowDuration: 25 * 60,
         initialRestTime: 5 * 60,
         initialLongRestTime: 15 * 60,
         autoStart: settingToogle.autoStart,
@@ -104,7 +104,7 @@ function PFSession({
                 <div className={`${modalSetting || modalTask ? 'hidden lg:center' : 'center'} w-full h-full lg:w-1/3 `}>
                     <CountDown
                         timeRemaining={selectedMode === 1 ? pomodoroTimer.timeRemaining : flowmodoroTimer.timeRemaining}
-                        flow={selectedMode === 1 ? pomodoroTimer.flow : flowmodoroTimer.flow}
+                        isflow={selectedMode === 1 ? pomodoroTimer.isFlow : flowmodoroTimer.flow}
                         selectedMode={selectedMode}
                     />
                 </div>
@@ -134,7 +134,7 @@ function PFSession({
             </div>
             <div className='w-full h-1/3 flex flex-col justify-center items-center'>
                 {
-                    selectedMode === 1 && <p className='font-number text-rosa-light m-1'> #{Math.floor(flowTotalTime / pomodoroTimer.flowTime)} </p>
+                    selectedMode === 1 && <p className='font-number text-rosa-light m-1'> #{Math.floor(pomodoroTimer.completedFlowSessions)} </p>
                 }
                 <BManager {... { isActive, selectedMode, setEndSessionRequest, modalSetting, setModalSetting, modalTask, setModalTask, pomodoroTimer, flowmodoroTimer }} />
             </div>
