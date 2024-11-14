@@ -25,7 +25,7 @@ function Task({
             <div className='w-full flex items-center'>
                 {
                     !editCompleted ?
-                        <IconTask />
+                        completed ? <IconTaskCompleted className="stroke-verde" /> : <IconTask />
                         :
                         <button className='' onClick={HandleUpdate}>
                             {
