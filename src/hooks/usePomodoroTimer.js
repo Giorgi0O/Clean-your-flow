@@ -1,6 +1,7 @@
 import { useCallback, useState, useRef } from "react";
 import useNotifications from "./useNotifications";
 import useBackgroundAnimation from "./useBackgroundAnimation";
+import useLocalStorage from "./useLocalStorage";
 
 export default function usePomodoroTimer({
     setIsActive,
@@ -14,9 +15,9 @@ export default function usePomodoroTimer({
     onTimerComplete
 }) {
 
-    const [flowTime, setFlowTime] = useState(initialFlowTime);
-    const [restTime, setRestTime] = useState(initialRestTime);
-    const [longRestTime, setLongRestTime] = useState(initialLongRestTime);
+    const [flowTime, setFlowTime] = useLocalStorage('flowTime', initialFlowTime);
+    const [restTime, setRestTime] = useLocalStorage('restTime', initialRestTime);
+    const [longRestTime, setLongRestTime] = useLocalStorage('longRestTime', initialLongRestTime);
 
     const [timerCount, setTimerCount] = useState(0);
     const flow = timerCount % 2 === 0;

@@ -1,6 +1,6 @@
 import { useCallback, useState, useRef } from "react";
 import useNotifications from "./useNotifications";
-import { useLocalStorage } from "./useLocalStorage";
+import useLocalStorage from "./useLocalStorage";
 
 export default function useFlowmodoroTimer({
     initalDivisionFactor,

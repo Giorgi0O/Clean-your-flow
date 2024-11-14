@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import CreateSession from '../components/page-flow-session/create-session/Create';
 import PFSession from '../components/page-flow-session/session/PFSession';
 import AnimatedBg2 from '../components/shared/AnimatedBg2'
-import { useLocalStorage } from '../hooks/useLocalStorage'
+import useLocalStorage from '../hooks/useLocalStorage';
 import MEnd from '../components/shared/MEnd';
 import MEndTaskCompleted from '../components/shared/MEndTaskCompleted';
 import EndSession from '../components/page-flow-session/end-session/EndSession';

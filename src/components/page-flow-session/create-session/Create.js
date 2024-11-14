@@ -6,7 +6,7 @@ import AnimatedBg from '../../shared/AnimatedBg';
 import BPrimary from '../../shared/BPrimary';
 import BCircle from '../../shared/BCircle';
 import { useTranslation } from 'react-i18next';
-import { useLocalStorage } from '../../../hooks/useLocalStorage'
+import useLocalStorage from '../../../hooks/useLocalStorage';
 import { ReactComponent as IconX } from '../../../assets/Icons/x.svg';
 import { ReactComponent as IconNext } from '../../../assets/Icons/next.svg';
 import { ReactComponent as IconPrev } from '../../../assets/Icons/prev.svg';
