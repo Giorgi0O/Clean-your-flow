@@ -60,7 +60,7 @@ function BManager({
                         <BCircle
                             color={'secondary'}
                             tooltip={t('flow-session.session.tooltip.next')}
-                            iconName={pomodoroTimer.flow ? 'next' : 'prev-light'}
+                            iconName={'next'}
                             operation={pomodoroTimer.next}
                         >
                             {
