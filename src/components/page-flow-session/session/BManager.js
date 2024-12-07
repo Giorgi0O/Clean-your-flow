@@ -63,12 +63,7 @@ function BManager({
                             iconName={'next'}
                             operation={pomodoroTimer.next}
                         >
-                            {
-                                pomodoroTimer.flow ?
-                                    <IconNext className="icon-standard stroke-rosa-dark"></IconNext>
-                                    :
-                                    <IconPrev className="icon-standard stroke-rosa-dark"></IconPrev>
-                            }
+                            <IconNext className="icon-standard stroke-rosa-dark"></IconNext>
                         </BCircle>
                     }
                     {
