@@ -7,9 +7,9 @@ class SoundManager {
 
     init() {
         const soundPaths = {
-            'click': '/sounds/start-click.wav',
-            'start-flow': '/sounds/start-flow.wav',
-            'start-flow-muted': '/sounds/start-flow.wav',
+            'click': '/sounds/start-click.mp3',
+            'start-flow': '/sounds/start-flow.mp3',
+            'start-flow-muted': '/sounds/start-flow.mp3',
             // Aggiungi altri suoni qui
         };
 
