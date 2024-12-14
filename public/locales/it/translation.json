@@ -94,7 +94,7 @@
                 "auto-start": "Auto start",
                 "mode": "Modalità",
                 "completed-request" : "Avvisa al completamento delle task",
-                "view-completed-task" : "Nacondi task completati"
+                "view-completed-task" : "Nacondi task completate"
             }
         },
         "end-session":{
