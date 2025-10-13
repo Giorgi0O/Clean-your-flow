@@ -1,70 +1,147 @@
-# Getting Started with Create React App
+# Clean Your Flow - Pomodoro/Flowmodoro Timer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Clean your flow background](./public/CYF-background.png)
 
-## Available Scripts
+![React](https://img.shields.io/badge/React-18.3.1-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Netlify](https://img.shields.io/badge/deployed-Netlify-success)
 
-In the project directory, you can run:
+### [🚀 Vai all'App](https://clean-your-flow.netlify.app)
 
-### `npm start`
+## 📋 Descrizione
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Clean Your Flow** è un timer per la produttività che combina due tecniche di time management: la classica **Tecnica Pomodoro** e la **Tecnica Flowmodoro**. Il timer è stato progettato con una filosofia **"zero distrazioni"** per aiutare chi lo utilizza a mantenere il focus sui tuoi obiettivi e migliorare la sua produttività.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ✨ Caratteristiche
 
-### `npm test`
+### 🥫 Modalità Pomodoro
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+La tecnica classica: lavora per 25 minuti, pausa di 5 minuti. Dopo 4 cicli consecutivi, goditi una pausa lunga di 15-30 minuti.
 
-### `npm run build`
+### 🌸 Modalità Flowmodoro
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Una tecnica più flessibile: lavora finché sei nel flusso, poi fai una pausa proporzionale al tempo di lavoro (es. 25 minuti di lavoro = 5 minuti di pausa).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Funzionalità Principali
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- ⏱️ Timer personalizzabile per entrambe le modalità
+- 🎯 Sistema di gestione obiettivi per ogni sessione
+- 🔔 Notifiche audio al termine di ogni fase
+- 💾 Salvataggio automatico della sessione
+- 🎨 Interfaccia pulita e minimale
 
-### `npm run eject`
+## 🎬 Prova l'app
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Naviga quì: [Clean your flow](https://clean-your-flow.netlify.app)
+1. Imposta gli obiettivi che vuoi raggiungere durante la sessione
+1. Imposta il tempo da dedicare alla sessione
+1. Seleziona la modalità tra Pomodoro e Flowmodoro
+1. Inizia a lavorare e mantieni il focus!
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Preview modalità Pomodoro:**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Clean your flow preview](./public/CYF-preview.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 📦 Installazione
 
-## Learn More
+### Clone del Repository
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+git clone https://github.com/Giorgi0O/clean-your-flow.git
+cd clean-your-flow
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Installazione Dipendenze
 
-### Code Splitting
+```bash
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Avvio in Locale
 
-### Analyzing the Bundle Size
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+L'applicazione sarà disponibile su [http://localhost:3000](http://localhost:3000)
 
-### Making a Progressive Web App
+### Build per Produzione
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+npm run build
+```
 
-### Advanced Configuration
+## 🛠️ Tecnologie Utilizzate
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **React.js** 18.3.1 - Framework JavaScript per l'interfaccia utente
+- **React Hooks** - useState, useEffect e custom hooks personalizzati
+- **CSS3** - Styling moderno e responsive
+- **Web Audio API** - Per le notifiche sonore
+- **LocalStorage API** - Per il salvataggio delle sessioni
 
-### Deployment
+## 📁 Struttura del Progetto
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```
+clean-your-flow/
+├── public/              # File statici e assets pubblici
+├── src/
+│   ├── components/      # Componenti React riutilizzabili
+│   │   ├── page-flow-session/
+│   │   ├── page-home/
+│   │   └── shared/
+│   ├── hooks/           # Custom hooks (timer, sessioni)
+│   ├── pages/           # Pagine principali (Home, Sessione)
+│   ├── utils/           # Funzioni di utilità
+│   ├── App.js           # Componente principale
+│   └── index.js         # Entry point
+├── package.json         # Dipendenze e script npm
+└── README.md            # Documentazione
+```
 
-### `npm run build` fails to minify
+### Cartelle Principali
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **`components/`** - Contiene tutti i componenti React dell'applicazione, organizzati per pagina
+- **`pages/`** - Pagine principali come Home e Sessione Pomodoro/Flow
+- **`hooks/`** - Custom hooks personalizzati per gestire timer e logica delle sessioni
+- **`utils/`** - Funzioni di utilità e helper condivisi nell'applicazione
+
+## 🤝 Contribuire
+
+I contributi sono benvenuti! Se vuoi migliorare **Clean Your Flow**, segui questi passaggi:
+
+1. Fai il fork del progetto
+2. Crea un branch per la tua feature
+   ```bash
+   git switch -c feature/AmazingFeature
+   ```
+3. Commit delle modifiche
+   ```bash
+   git commit -m 'feat: add amazing feature'
+   ```
+4. Push sul branch
+   ```bash
+   git push origin feature/AmazingFeature
+   ```
+5. Apri una Pull Request
+
+### 📋 Linee Guida per i Contributi
+
+- Mantieni il codice pulito e leggibile
+- Segui i pattern e le convenzioni esistenti nel progetto
+- Testa accuratamente le modifiche prima del commit
+- Rispetta la filosofia "zero distrazioni" del progetto
+
+## 📄 Licenza
+
+Questo progetto è distribuito sotto licenza MIT. Vedi il file `LICENSE` per maggiori dettagli.
+
+## 👤 Autore
+
+Creato con ❤️ da **Giorgio**
+
+- GitHub: [@Giorgi0O](https://github.com/Giorgi0O)
+- App Live: [clean-your-flow.netlify.app](https://clean-your-flow.netlify.app)
+
+---
+
+Spero che **Clean Your Flow** ti è sia utile.
