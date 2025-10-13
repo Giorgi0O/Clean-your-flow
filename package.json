@@ -1,6 +1,7 @@
 {
-  "name": "clean_your_flow",
-  "version": "0.1.0",
+  "name": "clean-your-flow",
+  "version": "1.0.0",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
