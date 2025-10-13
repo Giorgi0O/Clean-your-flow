@@ -72,11 +72,8 @@ npm run build
 
 ## 🛠️ Tecnologie Utilizzate
 
-- **React.js** 18.3.1 - Framework JavaScript per l'interfaccia utente
-- **React Hooks** - useState, useEffect e custom hooks personalizzati
-- **CSS3** - Styling moderno e responsive
-- **Web Audio API** - Per le notifiche sonore
-- **LocalStorage API** - Per il salvataggio delle sessioni
+- **React.js**
+- **Tailwind CSS**  
 
 ## 📁 Struttura del Progetto
 
