@@ -4,9 +4,8 @@
 
 ![React](https://img.shields.io/badge/React-18.3.1-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Netlify](https://img.shields.io/badge/deployed-Netlify-success)
 
-### [🚀 Vai all'App](https://clean-your-flow.netlify.app)
+#### [🚀 Vai all'App](https://clean-your-flow.netlify.app)
 
 ## 📋 Descrizione
 
