@@ -79,19 +79,19 @@ npm run build
 
 ```
 clean-your-flow/
-├── public/              # File statici e assets pubblici
+├── public/              
 ├── src/
-│   ├── components/      # Componenti React riutilizzabili
+│   ├── components/      
 │   │   ├── page-flow-session/
 │   │   ├── page-home/
 │   │   └── shared/
-│   ├── hooks/           # Custom hooks (timer, sessioni)
-│   ├── pages/           # Pagine principali (Home, Sessione)
-│   ├── utils/           # Funzioni di utilità
-│   ├── App.js           # Componente principale
-│   └── index.js         # Entry point
-├── package.json         # Dipendenze e script npm
-└── README.md            # Documentazione
+│   ├── hooks/           
+│   ├── pages/           
+│   ├── utils/           
+│   ├── App.js           
+│   └── index.js         
+├── package.json         
+└── README.md            
 ```
 
 ### Cartelle Principali
